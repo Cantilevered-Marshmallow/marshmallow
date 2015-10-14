@@ -1,4 +1,4 @@
-# Project Name #
+# Marshmallow #
 
 <!-- 
 > This material was originally posted [here](http://www.quora.com/What-is-Amazons-approach-to-product-development-and-product-management). It is reproduced here for posterities sake.
@@ -15,30 +15,31 @@ Oh, and I also like to write press-releases in what I call "Oprah-speak" for mai
 
 Once the project moves into development, the press release can be used as a touchstone; a guiding light. The product team can ask themselves, "Are we building what is in the press release?" If they find they're spending time building things that aren't in the press release (overbuilding), they need to ask themselves why. This keeps product development focused on achieving the customer benefits and not building extraneous stuff that takes longer to build, takes resources to maintain, and doesn't provide real customer benefit (at least not enough to warrant inclusion in the press release).
  -->
- 
+
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
+A chat application that provides seamless integration with multiple sources of media.
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
+An easier and more enjoyable way to chat with your friends!
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
+  As you chat with your friends you can search for videos or find that restaurant you have been dying to go to within the application. No need to navigate outside the chat room and open another program to find what you are looking for, just type what you are looking for in the chat room.
 
 ## Problem ##
-  > Describe the problem your product solves.
+The friction and context switching required when wanting to retrieve key pieces of information from various sources on the web.
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
+Our chat application integrates with multiple sources of media like YouTube and Yelp in a way such that it minimizes the steps the user needs to take to gather information.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
+“It’s amazingly fun to use” - Daniel
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
+Simply sign in to your Facebook or Google account then search for your friends to begin chatting with them.
+
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
+“Such a fun and easy way to chat with your friends!” - Kyle Cho 
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
+Download the app from the AppStore and get chatting today!
