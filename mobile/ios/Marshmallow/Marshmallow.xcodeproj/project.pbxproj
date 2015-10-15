@@ -1,0 +1,519 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		CAFCBF751BD0279C00C9E28B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF741BD0279C00C9E28B /* main.m */; };
+		CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF771BD0279C00C9E28B /* AppDelegate.m */; };
+		CAFCBF7B1BD0279C00C9E28B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF7A1BD0279C00C9E28B /* ViewController.m */; };
+		CAFCBF7E1BD0279C00C9E28B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFCBF7C1BD0279C00C9E28B /* Main.storyboard */; };
+		CAFCBF801BD0279C00C9E28B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAFCBF7F1BD0279C00C9E28B /* Assets.xcassets */; };
+		CAFCBF831BD0279C00C9E28B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFCBF811BD0279C00C9E28B /* LaunchScreen.storyboard */; };
+		CAFCBF8E1BD0279C00C9E28B /* MarshmallowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF8D1BD0279C00C9E28B /* MarshmallowTests.m */; };
+		CAFCBF991BD0279C00C9E28B /* MarshmallowUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF981BD0279C00C9E28B /* MarshmallowUITests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CAFCBF8A1BD0279C00C9E28B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAFCBF681BD0279C00C9E28B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAFCBF6F1BD0279C00C9E28B;
+			remoteInfo = Marshmallow;
+		};
+		CAFCBF951BD0279C00C9E28B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CAFCBF681BD0279C00C9E28B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CAFCBF6F1BD0279C00C9E28B;
+			remoteInfo = Marshmallow;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		CAFCBF701BD0279C00C9E28B /* Marshmallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marshmallow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAFCBF741BD0279C00C9E28B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		CAFCBF761BD0279C00C9E28B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		CAFCBF771BD0279C00C9E28B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		CAFCBF791BD0279C00C9E28B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		CAFCBF7A1BD0279C00C9E28B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		CAFCBF7D1BD0279C00C9E28B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		CAFCBF7F1BD0279C00C9E28B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		CAFCBF821BD0279C00C9E28B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		CAFCBF841BD0279C00C9E28B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAFCBF891BD0279C00C9E28B /* MarshmallowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarshmallowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAFCBF8D1BD0279C00C9E28B /* MarshmallowTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarshmallowTests.m; sourceTree = "<group>"; };
+		CAFCBF8F1BD0279C00C9E28B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CAFCBF941BD0279C00C9E28B /* MarshmallowUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MarshmallowUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CAFCBF981BD0279C00C9E28B /* MarshmallowUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MarshmallowUITests.m; sourceTree = "<group>"; };
+		CAFCBF9A1BD0279C00C9E28B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		CAFCBF6D1BD0279C00C9E28B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAFCBF861BD0279C00C9E28B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAFCBF911BD0279C00C9E28B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		CAFCBF671BD0279C00C9E28B = {
+			isa = PBXGroup;
+			children = (
+				CAFCBF721BD0279C00C9E28B /* Marshmallow */,
+				CAFCBF8C1BD0279C00C9E28B /* MarshmallowTests */,
+				CAFCBF971BD0279C00C9E28B /* MarshmallowUITests */,
+				CAFCBF711BD0279C00C9E28B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		CAFCBF711BD0279C00C9E28B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				CAFCBF701BD0279C00C9E28B /* Marshmallow.app */,
+				CAFCBF891BD0279C00C9E28B /* MarshmallowTests.xctest */,
+				CAFCBF941BD0279C00C9E28B /* MarshmallowUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		CAFCBF721BD0279C00C9E28B /* Marshmallow */ = {
+			isa = PBXGroup;
+			children = (
+				CAFCBF761BD0279C00C9E28B /* AppDelegate.h */,
+				CAFCBF771BD0279C00C9E28B /* AppDelegate.m */,
+				CAFCBF791BD0279C00C9E28B /* ViewController.h */,
+				CAFCBF7A1BD0279C00C9E28B /* ViewController.m */,
+				CAFCBF7C1BD0279C00C9E28B /* Main.storyboard */,
+				CAFCBF7F1BD0279C00C9E28B /* Assets.xcassets */,
+				CAFCBF811BD0279C00C9E28B /* LaunchScreen.storyboard */,
+				CAFCBF841BD0279C00C9E28B /* Info.plist */,
+				CAFCBF731BD0279C00C9E28B /* Supporting Files */,
+			);
+			path = Marshmallow;
+			sourceTree = "<group>";
+		};
+		CAFCBF731BD0279C00C9E28B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CAFCBF741BD0279C00C9E28B /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		CAFCBF8C1BD0279C00C9E28B /* MarshmallowTests */ = {
+			isa = PBXGroup;
+			children = (
+				CAFCBF8D1BD0279C00C9E28B /* MarshmallowTests.m */,
+				CAFCBF8F1BD0279C00C9E28B /* Info.plist */,
+			);
+			path = MarshmallowTests;
+			sourceTree = "<group>";
+		};
+		CAFCBF971BD0279C00C9E28B /* MarshmallowUITests */ = {
+			isa = PBXGroup;
+			children = (
+				CAFCBF981BD0279C00C9E28B /* MarshmallowUITests.m */,
+				CAFCBF9A1BD0279C00C9E28B /* Info.plist */,
+			);
+			path = MarshmallowUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		CAFCBF6F1BD0279C00C9E28B /* Marshmallow */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAFCBF9D1BD0279C00C9E28B /* Build configuration list for PBXNativeTarget "Marshmallow" */;
+			buildPhases = (
+				CAFCBF6C1BD0279C00C9E28B /* Sources */,
+				CAFCBF6D1BD0279C00C9E28B /* Frameworks */,
+				CAFCBF6E1BD0279C00C9E28B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Marshmallow;
+			productName = Marshmallow;
+			productReference = CAFCBF701BD0279C00C9E28B /* Marshmallow.app */;
+			productType = "com.apple.product-type.application";
+		};
+		CAFCBF881BD0279C00C9E28B /* MarshmallowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAFCBFA01BD0279C00C9E28B /* Build configuration list for PBXNativeTarget "MarshmallowTests" */;
+			buildPhases = (
+				CAFCBF851BD0279C00C9E28B /* Sources */,
+				CAFCBF861BD0279C00C9E28B /* Frameworks */,
+				CAFCBF871BD0279C00C9E28B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAFCBF8B1BD0279C00C9E28B /* PBXTargetDependency */,
+			);
+			name = MarshmallowTests;
+			productName = MarshmallowTests;
+			productReference = CAFCBF891BD0279C00C9E28B /* MarshmallowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		CAFCBF931BD0279C00C9E28B /* MarshmallowUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CAFCBFA31BD0279C00C9E28B /* Build configuration list for PBXNativeTarget "MarshmallowUITests" */;
+			buildPhases = (
+				CAFCBF901BD0279C00C9E28B /* Sources */,
+				CAFCBF911BD0279C00C9E28B /* Frameworks */,
+				CAFCBF921BD0279C00C9E28B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CAFCBF961BD0279C00C9E28B /* PBXTargetDependency */,
+			);
+			name = MarshmallowUITests;
+			productName = MarshmallowUITests;
+			productReference = CAFCBF941BD0279C00C9E28B /* MarshmallowUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		CAFCBF681BD0279C00C9E28B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0700;
+				ORGANIZATIONNAME = "Cantilevered Marshmallow";
+				TargetAttributes = {
+					CAFCBF6F1BD0279C00C9E28B = {
+						CreatedOnToolsVersion = 7.0.1;
+					};
+					CAFCBF881BD0279C00C9E28B = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = CAFCBF6F1BD0279C00C9E28B;
+					};
+					CAFCBF931BD0279C00C9E28B = {
+						CreatedOnToolsVersion = 7.0.1;
+						TestTargetID = CAFCBF6F1BD0279C00C9E28B;
+					};
+				};
+			};
+			buildConfigurationList = CAFCBF6B1BD0279C00C9E28B /* Build configuration list for PBXProject "Marshmallow" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = CAFCBF671BD0279C00C9E28B;
+			productRefGroup = CAFCBF711BD0279C00C9E28B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				CAFCBF6F1BD0279C00C9E28B /* Marshmallow */,
+				CAFCBF881BD0279C00C9E28B /* MarshmallowTests */,
+				CAFCBF931BD0279C00C9E28B /* MarshmallowUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		CAFCBF6E1BD0279C00C9E28B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAFCBF831BD0279C00C9E28B /* LaunchScreen.storyboard in Resources */,
+				CAFCBF801BD0279C00C9E28B /* Assets.xcassets in Resources */,
+				CAFCBF7E1BD0279C00C9E28B /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAFCBF871BD0279C00C9E28B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAFCBF921BD0279C00C9E28B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		CAFCBF6C1BD0279C00C9E28B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAFCBF7B1BD0279C00C9E28B /* ViewController.m in Sources */,
+				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
+				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAFCBF851BD0279C00C9E28B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAFCBF8E1BD0279C00C9E28B /* MarshmallowTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CAFCBF901BD0279C00C9E28B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CAFCBF991BD0279C00C9E28B /* MarshmallowUITests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CAFCBF8B1BD0279C00C9E28B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAFCBF6F1BD0279C00C9E28B /* Marshmallow */;
+			targetProxy = CAFCBF8A1BD0279C00C9E28B /* PBXContainerItemProxy */;
+		};
+		CAFCBF961BD0279C00C9E28B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CAFCBF6F1BD0279C00C9E28B /* Marshmallow */;
+			targetProxy = CAFCBF951BD0279C00C9E28B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		CAFCBF7C1BD0279C00C9E28B /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAFCBF7D1BD0279C00C9E28B /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		CAFCBF811BD0279C00C9E28B /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				CAFCBF821BD0279C00C9E28B /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		CAFCBF9B1BD0279C00C9E28B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		CAFCBF9C1BD0279C00C9E28B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		CAFCBF9E1BD0279C00C9E28B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Marshmallow/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cantilevered.marshmallow.Marshmallow;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		CAFCBF9F1BD0279C00C9E28B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Marshmallow/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cantilevered.marshmallow.Marshmallow;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		CAFCBFA11BD0279C00C9E28B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MarshmallowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cantilevered.marshmallow.MarshmallowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Marshmallow.app/Marshmallow";
+			};
+			name = Debug;
+		};
+		CAFCBFA21BD0279C00C9E28B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				INFOPLIST_FILE = MarshmallowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cantilevered.marshmallow.MarshmallowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Marshmallow.app/Marshmallow";
+			};
+			name = Release;
+		};
+		CAFCBFA41BD0279C00C9E28B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MarshmallowUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cantilevered.marshmallow.MarshmallowUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Marshmallow;
+				USES_XCTRUNNER = YES;
+			};
+			name = Debug;
+		};
+		CAFCBFA51BD0279C00C9E28B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				INFOPLIST_FILE = MarshmallowUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = org.cantilevered.marshmallow.MarshmallowUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_TARGET_NAME = Marshmallow;
+				USES_XCTRUNNER = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		CAFCBF6B1BD0279C00C9E28B /* Build configuration list for PBXProject "Marshmallow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAFCBF9B1BD0279C00C9E28B /* Debug */,
+				CAFCBF9C1BD0279C00C9E28B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		CAFCBF9D1BD0279C00C9E28B /* Build configuration list for PBXNativeTarget "Marshmallow" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAFCBF9E1BD0279C00C9E28B /* Debug */,
+				CAFCBF9F1BD0279C00C9E28B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CAFCBFA01BD0279C00C9E28B /* Build configuration list for PBXNativeTarget "MarshmallowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAFCBFA11BD0279C00C9E28B /* Debug */,
+				CAFCBFA21BD0279C00C9E28B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		CAFCBFA31BD0279C00C9E28B /* Build configuration list for PBXNativeTarget "MarshmallowUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CAFCBFA41BD0279C00C9E28B /* Debug */,
+				CAFCBFA51BD0279C00C9E28B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = CAFCBF681BD0279C00C9E28B /* Project object */;
+}
