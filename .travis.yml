@@ -11,5 +11,5 @@ before_script:
   - npm install
   - cd ../
   - gulp --gulpfile server/gulpfile.js
-install:
+script:
   - xctool -workspace mobile/ios/Marshmallow/Marshmallow.xcworkspace -scheme Marshmallow build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test
