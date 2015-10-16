@@ -14,6 +14,8 @@
 
 - (id)initWithBaseUrl:(NSURL *)baseUrl;
 
-- (void)requestWithUser:(NSString *)token;
+- (void)requestWithUser:(NSString *)token httpVerb:(NSString *)verb data:(NSDictionary *)data;
+
+- (void)requestWithHttpVerb:(NSString *)verb data:(NSDictionary *)data;
 
 @end
