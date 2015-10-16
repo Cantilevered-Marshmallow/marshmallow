@@ -1,3 +1,5 @@
+[![Stories in Ready](https://badge.waffle.io/Cantilevered-Marshmallow/marshmallow.svg?label=ready&title=Ready)](http://waffle.io/Cantilevered-Marshmallow/marshmallow)
+
 # Project Name
 
 > Pithy project description

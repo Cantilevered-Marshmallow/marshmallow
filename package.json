@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/brianleungwh/marshmallow/issues"
   },
-  "homepage": "https://github.com/brianleungwh/marshmallow#readme"
+  "homepage": "https://github.com/brianleungwh/marshmallow#readme",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-jshint": "^1.11.2",
+    "jshint": "^2.8.0"
+  }
 }
