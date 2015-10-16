@@ -43,11 +43,13 @@
 
 - (void)testInitWithBaseUrlMethod {
     XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"http://marshmallow.camelcased.com"]);
+    XCTAssertTrue(_request.manager);
 }
 
 - (void)testInitMethod {
     CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
     XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"http://marshmallow.camelcased.com"]);
+    XCTAssertTrue(_request.manager);
 }
 
 @end

@@ -15,6 +15,7 @@
     
     if (self) {
         _baseUrl = [NSURL URLWithString:@"http://marshmallow.camelcased.com"];
+        _manager = [AFHTTPRequestOperationManager manager];
     }
     
     return self;
@@ -25,6 +26,7 @@
     
     if (self) {
         _baseUrl = baseUrl;
+        _manager = [AFHTTPRequestOperationManager manager];
     }
     
     return self;

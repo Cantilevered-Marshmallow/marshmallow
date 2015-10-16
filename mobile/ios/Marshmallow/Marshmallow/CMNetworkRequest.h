@@ -13,6 +13,8 @@
 
 @property NSURL *baseUrl;
 
+@property AFHTTPRequestOperationManager *manager;
+
 - (id)initWithBaseUrl:(NSURL *)baseUrl;
 
 - (void)requestWithUser:(NSString *)token httpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data;
