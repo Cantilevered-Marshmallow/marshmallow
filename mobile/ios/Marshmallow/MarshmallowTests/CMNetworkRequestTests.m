@@ -30,7 +30,7 @@
 }
 
 - (void)testRequestWithUserMethodExists {
-    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:)]);
+    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:httpVerb:data:)]);
 }
 
 @end
