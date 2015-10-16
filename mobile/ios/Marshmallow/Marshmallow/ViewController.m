@@ -24,6 +24,10 @@
     
     loginButton.delegate = self;
     
+    [FBSDKProfile enableUpdatesOnAccessTokenChange:YES];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(profileUpdated:) name:FBSDKProfileDidChangeNotification object:nil];
+    
     [self.view addSubview:loginButton];
 }
 
@@ -46,7 +50,16 @@
 }
 
 - (void)loginButtonDidLogOut:(FBSDKLoginButton *)loginButton {
-    
+    NSLog(@"User has logged out");
+    _facebookProfile = nil;
+    _facebookToken = nil;
+}
+
+- (void)profileUpdated:(NSNotification *)notification {
+    if ([FBSDKProfile currentProfile]) {
+        _facebookProfile = [FBSDKProfile currentProfile];
+        NSLog(@"%@ %@", _facebookProfile.firstName, _facebookProfile.lastName);
+    }
 }
 
 @end

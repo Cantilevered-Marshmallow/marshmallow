@@ -15,5 +15,7 @@
 
 @property FBSDKAccessToken *facebookToken;
 
+@property FBSDKProfile *facebookProfile;
+
 @end
 
