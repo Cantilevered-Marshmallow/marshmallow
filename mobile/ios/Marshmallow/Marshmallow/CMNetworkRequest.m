@@ -14,7 +14,7 @@
     self = [super init];
     
     if (self) {
-        _baseUrl = [NSURL URLWithString:@"http://marshmallow.camelcased.com"];
+        _baseUrl = [NSURL URLWithString:@"https://reviews.camelcased.com"];
         _manager = [AFHTTPRequestOperationManager manager];
     }
     
@@ -32,8 +32,7 @@
     return self;
 }
 
-- (void)requestWithUser:(NSString *)token
-               httpVerb:(NSString *)verb
+- (void)requestWithHttpVerb:(NSString *)verb
                     url:(NSString *)url
                    data:(NSDictionary *)data
                response:(void (^)(NSError *error, NSDictionary *response))response {
@@ -41,9 +40,11 @@
         [_manager GET:[[_baseUrl absoluteString] stringByAppendingString:url]
            parameters:data
               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+                  NSLog(@"Success");
                   response(nil, responseObject);
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  NSLog(@"Error: %@", error);
                   response(error, nil);
               }];
     } else if ([verb isEqualToString:@"POST"]) {
@@ -56,13 +57,6 @@
                    response(error, nil);
                }];
     }
-}
-
-- (void)requestWithHttpVerb:(NSString *)verb
-                        url:(NSString *)url
-                       data:(NSDictionary *)data
-                   response:(void (^)(NSError *error, NSDictionary *response))response {
-    
 }
 
 @end

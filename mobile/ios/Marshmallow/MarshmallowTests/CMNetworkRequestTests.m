@@ -22,6 +22,13 @@
     [super setUp];
 
     _request = [[CMNetworkRequest alloc] initWithBaseUrl:[NSURL URLWithString:@"https://reviews.camelcased.com"]];
+    
+    // Remove any cookies from a previous logged in session
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://reviews.camelcased.com"]];
+    for (NSHTTPCookie *cookie in cookies)
+    {
+        [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
+    }
 }
 
 - (void)tearDown {
@@ -30,10 +37,6 @@
 }
 
 #pragma mark - Method Exists
-
-- (void)testRequestWithUserMethodExists {
-    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:httpVerb:url:data:response:)]);
-}
 
 - (void)testRequestWithVerbMethodExists {
     XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:response:)]);
@@ -50,45 +53,6 @@
     CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
     XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"https://reviews.camelcased.com"]);
     XCTAssertTrue(_request.manager);
-}
-
-- (void) testRquestWithUserHttpVerbUrlDataResponseMethod {
-    XCTestExpectation *getException = [self expectationWithDescription:@"GET Request threw"];
-    
-    // Test GET request with user
-    [_request requestWithUser:@"Im a token"
-                     httpVerb:@"GET"
-                          url:@"/api/reviews"
-                         data:@{}
-                     response:^(NSError *error, NSDictionary *response) {
-                         if (!error) {
-                             [getException fulfill];
-                         } else {
-                             NSLog(@"Callback: %@", error);
-                         }
-                     }];
-    
-    XCTestExpectation *postException = [self expectationWithDescription:@"POST Request threw"];
-    
-    // Test POST request with user
-    [_request requestWithUser:@"Im a token"
-                     httpVerb:@"POST"
-                          url:@"/api/reviews"
-                         data:@{}
-                     response:^(NSError *error, NSDictionary *response) {
-                         // TODO: Get a real server
-                         if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Request failed: not found (404)"]) {
-                             [postException fulfill];
-                         } else {
-                             NSLog(@"Callback: %@", error);
-                         }
-                     }];
-    
-    [self waitForExpectationsWithTimeout:5.0 handler:^(NSError *error) {
-        if (error) {
-            XCTFail(@"Exception for request with user failed: %@", error);
-        }
-    }];
 }
 
 - (void)testRequestWithHttpVerbUrlDataResponseMethod {
