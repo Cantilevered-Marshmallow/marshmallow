@@ -8,6 +8,9 @@
 
 #import "ViewController.h"
 
+#import "FBSDKCoreKit.h"
+#import "FBSDKLoginKit.h"
+
 @interface ViewController ()
 
 @end
