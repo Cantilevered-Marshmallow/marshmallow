@@ -33,4 +33,8 @@
     XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:httpVerb:data:)]);
 }
 
+- (void)testRequestWithVerbMethodExists {
+    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:data:)]);
+}
+
 @end

@@ -24,4 +24,8 @@
     
 }
 
+- (void)requestWithHttpVerb:(NSString *)verb data:(NSDictionary *)data {
+    
+}
+
 @end
