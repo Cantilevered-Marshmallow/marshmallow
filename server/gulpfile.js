@@ -1,4 +1,5 @@
 var gulp = require('gulp');
+var env = require('gulp-env');
 var jshint = require('gulp-jshint');
 
 gulp.task('linter', function() {
@@ -8,5 +9,10 @@ gulp.task('linter', function() {
              .pipe(jshint.reporter('fail'));
 });
 
+gulp.task('set-env', function () {
+  env({
+    file: '.env.json'
+  });
+});
 
-gulp.task('default', ['linter']);
+gulp.task('default', ['linter', 'set-env']);
