@@ -32,11 +32,11 @@
 #pragma mark - Method Exists
 
 - (void)testRequestWithUserMethodExists {
-    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:httpVerb:url:data:)]);
+    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:httpVerb:url:data:response:)]);
 }
 
 - (void)testRequestWithVerbMethodExists {
-    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:)]);
+    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:response:)]);
 }
 
 #pragma mark - Method Behavior

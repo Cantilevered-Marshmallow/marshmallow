@@ -17,8 +17,15 @@
 
 - (id)initWithBaseUrl:(NSURL *)baseUrl;
 
-- (void)requestWithUser:(NSString *)token httpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data;
+- (void)requestWithUser:(NSString *)token
+               httpVerb:(NSString *)verb
+                    url:(NSString *)url
+                   data:(NSDictionary *)data
+               response:(void (^)(NSError *error, NSDictionary *response))response;
 
-- (void)requestWithHttpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data;
+- (void)requestWithHttpVerb:(NSString *)verb
+                        url:(NSString *)url
+                       data:(NSDictionary *)data
+                   response:(void (^)(NSError *error, NSDictionary *response))response;
 
 @end
