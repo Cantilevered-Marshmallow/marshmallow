@@ -11,7 +11,7 @@
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
 
-@interface ViewController : UIViewController <FBSDKLoginButtonDelegate>
+@interface WelcomeViewController : UIViewController <FBSDKLoginButtonDelegate>
 
 # pragma mark - Facebook Properties
 
