@@ -29,12 +29,20 @@
     [super tearDown];
 }
 
+#pragma mark - Method Exists
+
 - (void)testRequestWithUserMethodExists {
     XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:httpVerb:url:data:)]);
 }
 
 - (void)testRequestWithVerbMethodExists {
     XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:)]);
+}
+
+#pragma mark - Method Behavior
+
+- (void)testInitWithBaseUrlMethod {
+    XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"http://marshmallow.camelcased.com"]);
 }
 
 @end
