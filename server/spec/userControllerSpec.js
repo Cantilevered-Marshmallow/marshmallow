@@ -1,19 +1,50 @@
-var Sequelize = require('sequelize');
-var sequelize = new Sequelize('mysql://');
-var model = require('../user/userModel')(sequelize);
-var userController = require('../user/userController')(sequelize);
+var userController = require('../user/userController');
 
 describe('User Controller', function () {
 
   var newUser = { email: 'test@testing.com', oauthToken: '4ecf21412412a8f0d9ec3242' };
-  beforeEach(function (done) {
-    sequelize.sync({force: true}).success(function () {
-      done();
-    });
+  var falseUserA = { email: 'test@testing.com', oauthToken: 'fakefake' };
+  var falseUserB = { email: 'fake@fake.com', oauthToken: '4ecf21412412a8f0d9ec3242' };
+
+  it('should a create new user', function (done) {
+    userController.registerNewUser(newUser)
+      .then(function (user) {
+        expect(user.email).to.equal(newUser.email);
+        expect(user.oauthToken).to.equal(newUser.oauthToken);
+        done();
+      })
+      .catch(function (err) {
+        throw new Error(err);
+      });
   });
 
-  it('should create user', function (done) {
-    var req = { body: newUser };
-    userController.create(req, mock);
+  it('should find an existing user', function (done) {
+    userController.isUser(newUser)
+      .then(function (user) {
+        expect(user.email).to.equal(newUser.email);
+        expect(user.oauthToken).to.equal(newUser.oauthToken);
+        done();
+      })
+      .catch(function (err) {
+        throw new Error(err);
+      });
+  });
+
+  it('should not find a non-existant user', function (done) {
+    userController.isUser(falseUserA)
+      .then(function (user) {
+        expect(user).to.equal(undefined);
+      })
+      .catch(function (err) {
+        throw new Error(err);
+      });
+    userController.isUser(falseUserB)
+      .then(function (user) {
+        expect(user).to.equal(undefined);
+        done();
+      })
+      .catch(function (err) {
+        throw new Error(err);
+      });
   });
 });
