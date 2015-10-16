@@ -29,8 +29,47 @@
     [super tearDown];
 }
 
+#pragma mark - Method Exists
+
 - (void)testRequestWithUserMethodExists {
-    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:)]);
+    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithUser:httpVerb:url:data:response:)]);
+}
+
+- (void)testRequestWithVerbMethodExists {
+    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:response:)]);
+}
+
+#pragma mark - Method Behavior
+
+- (void)testInitWithBaseUrlMethod {
+    XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"http://marshmallow.camelcased.com"]);
+    XCTAssertTrue(_request.manager);
+}
+
+- (void)testInitMethod {
+    CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
+    XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"http://marshmallow.camelcased.com"]);
+    XCTAssertTrue(_request.manager);
+}
+
+- (void) testRquestWithUserHttpVerbUrlDataResponseMethod {
+    // Test GET request with user
+    [_request requestWithUser:@"Im a token"
+                     httpVerb:@"GET"
+                          url:@"/"
+                         data:@{}
+                     response:^(NSError *error, NSDictionary *response) {
+                         XCTAssertTrue(!error);
+                     }];
+    
+    // Test POST request with user
+    [_request requestWithUser:@"Im a token"
+                     httpVerb:@"POST"
+                          url:@"/"
+                         data:@{}
+                     response:^(NSError *error, NSDictionary *response) {
+                         XCTAssertTrue(!error);
+                     }];
 }
 
 @end

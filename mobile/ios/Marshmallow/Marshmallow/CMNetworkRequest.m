@@ -10,17 +10,58 @@
 
 @implementation CMNetworkRequest
 
-- (id)initWithBaseUrl:(NSURL *)baseUrl {
+- (id)init {
     self = [super init];
     
     if (self) {
-        _baseUrl = baseUrl;
+        _baseUrl = [NSURL URLWithString:@"http://marshmallow.camelcased.com"];
+        _manager = [AFHTTPRequestOperationManager manager];
     }
     
     return self;
 }
 
-- (void)requestWithUser:(NSString *)token {
+- (id)initWithBaseUrl:(NSURL *)baseUrl {
+    self = [super init];
+    
+    if (self) {
+        _baseUrl = baseUrl;
+        _manager = [AFHTTPRequestOperationManager manager];
+    }
+    
+    return self;
+}
+
+- (void)requestWithUser:(NSString *)token
+               httpVerb:(NSString *)verb
+                    url:(NSString *)url
+                   data:(NSDictionary *)data
+               response:(void (^)(NSError *error, NSDictionary *response))response {
+    if ([verb isEqualToString:@"GET"]) {
+        [_manager GET:[[_baseUrl absoluteString] stringByAppendingString:url]
+           parameters:data
+              success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+                  response(nil, responseObject);
+              }
+              failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                  response(error, nil);
+              }];
+    } else if ([verb isEqualToString:@"POST"]) {
+        [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:url]
+            parameters:data
+               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
+                   response(nil, responseObject);
+               }
+               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                   response(error, nil);
+               }];
+    }
+}
+
+- (void)requestWithHttpVerb:(NSString *)verb
+                        url:(NSString *)url
+                       data:(NSDictionary *)data
+                   response:(void (^)(NSError *error, NSDictionary *response))response {
     
 }
 

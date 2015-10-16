@@ -7,13 +7,25 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 
 @interface CMNetworkRequest : NSObject
 
 @property NSURL *baseUrl;
 
+@property AFHTTPRequestOperationManager *manager;
+
 - (id)initWithBaseUrl:(NSURL *)baseUrl;
 
-- (void)requestWithUser:(NSString *)token;
+- (void)requestWithUser:(NSString *)token
+               httpVerb:(NSString *)verb
+                    url:(NSString *)url
+                   data:(NSDictionary *)data
+               response:(void (^)(NSError *error, NSDictionary *response))response;
+
+- (void)requestWithHttpVerb:(NSString *)verb
+                        url:(NSString *)url
+                       data:(NSDictionary *)data
+                   response:(void (^)(NSError *error, NSDictionary *response))response;
 
 @end
