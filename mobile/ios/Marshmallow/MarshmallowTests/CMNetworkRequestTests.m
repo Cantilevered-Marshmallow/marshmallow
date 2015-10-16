@@ -52,4 +52,24 @@
     XCTAssertTrue(_request.manager);
 }
 
+- (void) testRquestWithUserHttpVerbUrlDataResponseMethod {
+    // Test GET request with user
+    [_request requestWithUser:@"Im a token"
+                     httpVerb:@"GET"
+                          url:@"/"
+                         data:@{}
+                     response:^(NSError *error, NSDictionary *response) {
+                         XCTAssertTrue(!error);
+                     }];
+    
+    // Test POST request with user
+    [_request requestWithUser:@"Im a token"
+                     httpVerb:@"POST"
+                          url:@"/"
+                         data:@{}
+                     response:^(NSError *error, NSDictionary *response) {
+                         XCTAssertTrue(!error);
+                     }];
+}
+
 @end
