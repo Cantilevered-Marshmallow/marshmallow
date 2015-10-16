@@ -1,12 +1,16 @@
+[![Stories in Ready](https://badge.waffle.io/Cantilevered-Marshmallow/marshmallow.svg?label=ready&title=Ready)](http://waffle.io/Cantilevered-Marshmallow/marshmallow)
+
+[![Build Status](https://travis-ci.org/Cantilevered-Marshmallow/marshmallow.svg)](https://travis-ci.org/Cantilevered-Marshmallow/marshmallow)
+
 # Project Name
 
 > Pithy project description
 
 ## Team
 
-  - __Product Owner__: teamMember
-  - __Scrum Master__: teamMember
-  - __Development Team Members__: teamMember, teamMember
+  - __Product Owner__: Daniel O'Leary
+  - __Scrum Master__: Brian Leung
+  - __Development Team Members__: Daniel O'Leary, Brian Leung, Brandon Borders
 
 ## Table of Contents
 

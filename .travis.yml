@@ -1,0 +1,11 @@
+language: node_js
+node_js:
+  - '0.10'
+  - '4.1.1'
+
+before_script:
+  - npm install -g gulp
+  - cd server
+  - npm install
+  - cd ../
+script: gulp --gulpfile server/gulpfile.js
