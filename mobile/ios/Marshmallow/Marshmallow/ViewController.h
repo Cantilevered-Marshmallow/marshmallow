@@ -8,8 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+#import "FBSDKCoreKit.h"
+#import "FBSDKLoginKit.h"
 
+@interface ViewController : UIViewController <FBSDKLoginButtonDelegate>
+
+@property FBSDKAccessToken *facebookToken;
 
 @end
 
