@@ -3,7 +3,7 @@ var env = require('gulp-env');
 var jshint = require('gulp-jshint');
 
 gulp.task('linter', function() {
-  return gulp.src([/* files to lint */])
+  return gulp.src(['db/*.js', 'user/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
              .pipe(jshint.reporter('fail'));
