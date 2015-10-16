@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		47940B7E8F7189086CF25927 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
+		CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */; settings = {ASSET_TAGS = (); }; };
+		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
 		CAFCBF751BD0279C00C9E28B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF741BD0279C00C9E28B /* main.m */; };
 		CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF771BD0279C00C9E28B /* AppDelegate.m */; };
 		CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF7A1BD0279C00C9E28B /* WelcomeViewController.m */; };
@@ -39,6 +41,9 @@
 		0F55AAEA840E95876E77E0F5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		44F5354FD6707387425ED089 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F487F126BFF4BF85174A4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequestTests.m; sourceTree = "<group>"; };
+		CACC2FFA1BD165B8006D37F9 /* CMNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMNetworkRequest.h; sourceTree = "<group>"; };
+		CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequest.m; sourceTree = "<group>"; };
 		CAFCBF701BD0279C00C9E28B /* Marshmallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marshmallow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFCBF741BD0279C00C9E28B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CAFCBF761BD0279C00C9E28B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -91,6 +96,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CACC2FF91BD1658D006D37F9 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				CACC2FFA1BD165B8006D37F9 /* CMNetworkRequest.h */,
+				CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */,
+			);
+			name = Networking;
+			sourceTree = "<group>";
+		};
 		CAFCBF671BD0279C00C9E28B = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +130,7 @@
 		CAFCBF721BD0279C00C9E28B /* Marshmallow */ = {
 			isa = PBXGroup;
 			children = (
+				CACC2FF91BD1658D006D37F9 /* Networking */,
 				CAFCBF761BD0279C00C9E28B /* AppDelegate.h */,
 				CAFCBF771BD0279C00C9E28B /* AppDelegate.m */,
 				CAFCBF791BD0279C00C9E28B /* WelcomeViewController.h */,
@@ -142,6 +157,7 @@
 			children = (
 				CAFCBF8D1BD0279C00C9E28B /* MarshmallowTests.m */,
 				CAFCBF8F1BD0279C00C9E28B /* Info.plist */,
+				CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */,
 			);
 			path = MarshmallowTests;
 			sourceTree = "<group>";
@@ -345,6 +361,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */,
 				CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */,
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
@@ -355,6 +372,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */,
 				CAFCBF8E1BD0279C00C9E28B /* MarshmallowTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
