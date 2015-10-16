@@ -10,9 +10,11 @@ gulp.task('linter', function() {
 });
 
 gulp.task('set-env', function () {
-  env({
-    file: '.env.json'
-  });
+  if(!process.env.TRAVIS){
+    env({
+      file: '.env.json'
+    });
+  }
 });
 
 gulp.task('default', ['linter', 'set-env']);
