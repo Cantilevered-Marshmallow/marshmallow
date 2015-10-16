@@ -1,7 +1,9 @@
-language: node_js
-node_js:
-  - '0.10'
-  - '4.1.1'
+language: objective-c
+
+xcode_workspace: mobile/ios/Marshmallow/Marshmallow.xcworkspace
+xcode_scheme: Marshmallow
+podfile: mobile/ios/Marshmallow/Podfile
+osx_image: xcode7
 
 before_script:
   - npm install -g gulp
