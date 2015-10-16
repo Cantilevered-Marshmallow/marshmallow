@@ -10,4 +10,4 @@ before_script:
   - cd server
   - npm install
   - cd ../
-script: gulp --gulpfile server/gulpfile.js
+  - gulp --gulpfile server/gulpfile.js
