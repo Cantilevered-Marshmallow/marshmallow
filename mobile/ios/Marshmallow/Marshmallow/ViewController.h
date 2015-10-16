@@ -13,8 +13,12 @@
 
 @interface ViewController : UIViewController <FBSDKLoginButtonDelegate>
 
+# pragma mark - Facebook Properties
+
+// The OAuth token returned from Facebook
 @property FBSDKAccessToken *facebookToken;
 
+// The profile of the signed in user from Facebook
 @property FBSDKProfile *facebookProfile;
 
 @end

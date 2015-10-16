@@ -16,6 +16,7 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    // Binding FBSDKApplicationDelegate to this event
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     return YES;
@@ -46,6 +47,7 @@
 #pragma mark - Facebook SDK
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    // Binding FBSDKApplicationDelegate to this event
     return [[FBSDKApplicationDelegate sharedInstance]
             application:application
             openURL:url
