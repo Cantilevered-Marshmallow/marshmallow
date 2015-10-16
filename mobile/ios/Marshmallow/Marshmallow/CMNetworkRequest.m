@@ -20,11 +20,11 @@
     return self;
 }
 
-- (void)requestWithUser:(NSString *)token httpVerb:(NSString *)verb data:(NSDictionary *)data {
+- (void)requestWithUser:(NSString *)token httpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data {
     
 }
 
-- (void)requestWithHttpVerb:(NSString *)verb data:(NSDictionary *)data {
+- (void)requestWithHttpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data {
     
 }
 

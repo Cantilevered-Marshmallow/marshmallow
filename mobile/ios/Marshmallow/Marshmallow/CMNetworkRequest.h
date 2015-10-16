@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <AFNetworking/AFHTTPRequestOperationManager.h>
 
 @interface CMNetworkRequest : NSObject
 
@@ -14,8 +15,8 @@
 
 - (id)initWithBaseUrl:(NSURL *)baseUrl;
 
-- (void)requestWithUser:(NSString *)token httpVerb:(NSString *)verb data:(NSDictionary *)data;
+- (void)requestWithUser:(NSString *)token httpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data;
 
-- (void)requestWithHttpVerb:(NSString *)verb data:(NSDictionary *)data;
+- (void)requestWithHttpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data;
 
 @end
