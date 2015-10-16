@@ -10,6 +10,16 @@
 
 @implementation CMNetworkRequest
 
+- (id)init {
+    self = [super init];
+    
+    if (self) {
+        _baseUrl = [NSURL URLWithString:@"http://marshmallow.camelcased.com"];
+    }
+    
+    return self;
+}
+
 - (id)initWithBaseUrl:(NSURL *)baseUrl {
     self = [super init];
     
