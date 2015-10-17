@@ -29,6 +29,10 @@
     return 2;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    [self performSegueWithIdentifier:@"showChat" sender:self];
+}
+
 - (void)logout:(id)sender {
     [[[FBSDKLoginManager alloc] init] logOut];
     

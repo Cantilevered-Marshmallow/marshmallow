@@ -4,7 +4,29 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
-        <!--Root View Controller-->
+        <!--Chat View Controller-->
+        <scene sceneID="qie-Ba-tbk">
+            <objects>
+                <viewController id="Y7T-Ey-01K" customClass="ChatViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uKg-Dd-bZm"/>
+                        <viewControllerLayoutGuide type="bottom" id="0ci-6H-6XV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CHh-1h-7ai">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="moveToWelcome" id="0fY-4K-8Hv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRr-jk-1lF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2566" y="304"/>
+        </scene>
+        <!--Chats-->
         <scene sceneID="Qga-Uj-pRu">
             <objects>
                 <tableViewController id="pBM-Id-vmu" customClass="ChatsTableViewController" sceneMemberID="viewController">
@@ -30,9 +52,10 @@
                             <outlet property="delegate" destination="pBM-Id-vmu" id="zTK-ZI-hJx"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="3Az-Mh-MLD"/>
+                    <navigationItem key="navigationItem" title="Chats" id="3Az-Mh-MLD"/>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="showDetail" identifier="moveToWelcome" id="cn7-bE-eCc"/>
+                        <segue destination="Y7T-Ey-01K" kind="show" identifier="showChat" id="CbZ-ol-NEs"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rf-eE-DxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -99,7 +122,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="URk-C3-ea6" kind="show" identifier="moveToChats" id="kEc-iZ-Nly"/>
+                        <segue destination="URk-C3-ea6" kind="show" identifier="moveToChats" animates="NO" id="kEc-iZ-Nly"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -110,4 +133,7 @@
     <resources>
         <image name="iTunesArtwork" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="0fY-4K-8Hv"/>
+    </inferredMetricsTieBreakers>
 </document>

@@ -11,6 +11,8 @@
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
 
+#import "ChatViewController.h"
+
 @interface ChatsTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 # pragma mark - Facebook Properties
