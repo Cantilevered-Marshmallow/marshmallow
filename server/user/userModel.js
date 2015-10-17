@@ -3,7 +3,7 @@ var sequelize = require(__dirname + '/../db/db');
 
 var User = sequelize.define('user', {
   email: Sequelize.STRING,
-  oauth_token: Sequelize.STRING
+  oauthToken: Sequelize.STRING
 });
 
 User.sync();

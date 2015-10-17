@@ -1,9 +1,9 @@
-var User = require('userModel');
+var User = require('./userModel');
 
 module.exports = {
 
   registerNewUser: function (user) {},
 
-  findUser: function (user) {},
+  isUser: function (user) {},
 
 };
