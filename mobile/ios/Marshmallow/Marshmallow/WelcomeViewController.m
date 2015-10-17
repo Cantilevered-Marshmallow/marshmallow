@@ -19,7 +19,7 @@
     
     // Create the Facebook signin button
     FBSDKLoginButton *loginButton = [[FBSDKLoginButton alloc] init];
-    loginButton.center = self.view.center;
+    loginButton.center = CGPointMake(self.view.center.x, self.view.center.y + 60);
     
     // Tell Facebook which permissions we would like to have
     loginButton.readPermissions = @[@"email", @"user_friends"];
