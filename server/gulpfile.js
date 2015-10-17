@@ -19,7 +19,7 @@ gulp.task('set-env', function () {
 });
 
 gulp.task('dbtest', function () {
-  return gulp.src(['spec/userModelSpec.js','spec/userControllerSpec.js'], {read: false})
+  return gulp.src(['spec/userModelSpec.js','spec/userControllerSpec.js','spec/authSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
 
