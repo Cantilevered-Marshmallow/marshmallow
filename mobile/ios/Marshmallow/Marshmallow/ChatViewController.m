@@ -35,6 +35,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
+    FBSDKProfile *userProfile = [FBSDKProfile currentProfile];
     
     NSArray *subviews = [cell subviews];
     // Ewww, why so many nested statements?
@@ -46,8 +47,18 @@
                     // Hah, found you.
                     // Set the image in the cell to be the profile image of the user from facebook
                     [((CMRemoteImageView *)subview) setRemoteUrl:[NSURL URLWithString:
-                                                                  [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", [[FBSDKProfile currentProfile] userID]]
+                                                                  [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", [userProfile userID]]
                                                                   ]];
+                }
+                
+                if ([[[subview class] description] isEqualToString:@"UILabel"]) {
+                    UILabel *label = ((UILabel *)subview);
+                    
+                    if ([label.text isEqualToString:@"John Appleseed"]) {
+                        // Username label
+                        
+                        label.text = [NSString stringWithFormat:@"%@ %@", [userProfile firstName], [userProfile lastName]];
+                    }
                 }
             }
         }
