@@ -1,8 +1,8 @@
 //
-//  ViewController.h
+//  ChatsTableViewController.h
 //  Marshmallow
 //
-//  Created by Brandon Borders on 10/15/15.
+//  Created by Brandon Borders on 10/16/15.
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
 
@@ -11,9 +11,9 @@
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
 
-#import "ChatsTableViewController.h"
+#import "ChatViewController.h"
 
-@interface WelcomeViewController : UIViewController <FBSDKLoginButtonDelegate>
+@interface ChatsTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 # pragma mark - Facebook Properties
 
@@ -23,7 +23,6 @@
 // The profile of the signed in user from Facebook
 @property FBSDKProfile *facebookProfile;
 
-- (void)leaveWelcome:(id)sender;
+- (void)logout:(id)sender;
 
 @end
-

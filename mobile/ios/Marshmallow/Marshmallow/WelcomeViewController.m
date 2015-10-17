@@ -42,6 +42,21 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"moveToChats"]) {
+        UINavigationController *navigationController = segue.destinationViewController;
+        ChatsTableViewController *chats = [navigationController viewControllers][0];
+        
+        // pass data along
+        chats.facebookToken = [self facebookToken];
+        chats.facebookProfile = [self facebookProfile];
+    }
+}
+
+- (void)leaveWelcome:(id)sender {
+    [self performSegueWithIdentifier:@"moveToChats" sender:sender];
+}
+
 #pragma mark - Facebook Login
 
 // Invoked when the user has logged in
@@ -52,6 +67,9 @@
         if (!result.isCancelled) { // Did the user cancel the login?
             _facebookToken = result.token;
             NSLog(@"The token is %@", _facebookToken.tokenString);
+            
+            // Need to delay to the segue because the animation from the sigin frame has not finished yet
+            [self performSelector:@selector(leaveWelcome:) withObject:self afterDelay:0.9];
         }
     }
 }

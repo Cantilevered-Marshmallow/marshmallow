@@ -10,6 +10,9 @@
 
 #import "FBSDKCoreKit.h"
 
+#import "WelcomeViewController.h"
+#import "ChatsTableViewController.h"
+
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;

@@ -4,10 +4,90 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <scenes>
+        <!--Chat View Controller-->
+        <scene sceneID="qie-Ba-tbk">
+            <objects>
+                <viewController id="Y7T-Ey-01K" customClass="ChatViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="uKg-Dd-bZm"/>
+                        <viewControllerLayoutGuide type="bottom" id="0ci-6H-6XV"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="CHh-1h-7ai">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="moveToWelcome" id="0fY-4K-8Hv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nRr-jk-1lF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2566" y="304"/>
+        </scene>
+        <!--Chats-->
+        <scene sceneID="Qga-Uj-pRu">
+            <objects>
+                <tableViewController id="pBM-Id-vmu" customClass="ChatsTableViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="buZ-DV-Mrr">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" id="4ZY-kK-3Uf">
+                                <rect key="frame" x="0.0" y="92" width="600" height="44"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="4ZY-kK-3Uf" id="9pK-xT-C7q">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <animations/>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="pBM-Id-vmu" id="gTY-ke-lCh"/>
+                            <outlet property="delegate" destination="pBM-Id-vmu" id="zTK-ZI-hJx"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Chats" id="3Az-Mh-MLD"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="moveToWelcome" id="cn7-bE-eCc"/>
+                        <segue destination="Y7T-Ey-01K" kind="show" identifier="showChat" id="CbZ-ol-NEs"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2rf-eE-DxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1848" y="304"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="89k-Fs-9RU">
+            <objects>
+                <navigationController storyboardIdentifier="NavigationController" id="URk-C3-ea6" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="VG8-Tb-17D">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="O7O-AE-08j">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="pBM-Id-vmu" kind="relationship" relationship="rootViewController" id="Bsg-H1-MHI"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Kiw-3T-gs1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1028" y="303"/>
+        </scene>
         <!--Welcome View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="WelcomeViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="WelcomeViewController" id="BYZ-38-t0r" customClass="WelcomeViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -41,6 +121,9 @@
                             <constraint firstItem="X20-aq-5p9" firstAttribute="top" secondItem="pcA-Sj-VHf" secondAttribute="bottom" constant="8" symbolic="YES" id="gAI-Ct-VO7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="URk-C3-ea6" kind="show" identifier="moveToChats" animates="NO" id="kEc-iZ-Nly"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
@@ -50,4 +133,7 @@
     <resources>
         <image name="iTunesArtwork" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="0fY-4K-8Hv"/>
+    </inferredMetricsTieBreakers>
 </document>
