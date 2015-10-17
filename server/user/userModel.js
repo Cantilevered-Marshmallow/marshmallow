@@ -2,10 +2,8 @@ var Sequelize = require('Sequelize');
 var sequelize = require(__dirname + '/../db/db');
 
 var User = sequelize.define('user', {
-  email: Sequelize.STRING,
-  oauthToken: Sequelize.STRING
+  email: {type: Sequelize.STRING, unique: true},
+  oauthToken: {type: Sequelize.STRING, unique: true}
 });
-
-User.sync();
 
 module.exports = User;
