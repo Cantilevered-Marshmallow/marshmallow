@@ -1,3 +1,4 @@
+var sequelize = require('../db/db');
 var expect = require('chai').expect;
 var userController = require('../user/userController');
 
@@ -7,7 +8,15 @@ describe('User Controller', function () {
   var falseUserA = { email: 'test@testing.com', oauthToken: 'fakefake' };
   var falseUserB = { email: 'fake@fake.com', oauthToken: '4ecf21412412a8f0d9ec3242' };
 
-  it('should a create new user', function (done) {
+  before(function (done) {
+    sequelize.sync({force:true}).then(function () { done() });
+  });
+
+  after(function (done) {
+    sequelize.drop().then(function() { done() });
+  });
+
+  it('should create a new user', function (done) {
     userController.registerNewUser(newUser)
       .then(function (user) {
         expect(user.email).to.equal(newUser.email);
@@ -16,6 +25,19 @@ describe('User Controller', function () {
       })
       .catch(function (err) {
         throw new Error(err);
+      });
+  });
+
+  it('should not create the same user twice', function (done) {
+    userController.registerNewUser(newUser)
+      .then(function (user) {
+        expect(user).to.not.equal(newUser);
+        done();
+      })
+      .catch(function (err) {
+        console.log(err);
+        expect(err.name).to.equal('SequelizeUniqueConstraintError');
+        done();
       });
   });
 
@@ -34,18 +56,19 @@ describe('User Controller', function () {
   it('should not find a non-existant user', function (done) {
     userController.isUser(falseUserA)
       .then(function (user) {
-        expect(user).to.equal(undefined);
+        expect(user).to.not.equal(falseUserA);
       })
       .catch(function (err) {
         throw new Error(err);
       });
+
     userController.isUser(falseUserB)
       .then(function (user) {
-        expect(user).to.equal(undefined);
-        done();
+        expect(user).to.not.equal(falseUserB);
       })
       .catch(function (err) {
         throw new Error(err);
       });
+      done();
   });
 });
