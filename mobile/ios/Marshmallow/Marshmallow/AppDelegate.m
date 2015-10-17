@@ -19,6 +19,16 @@
     // Binding FBSDKApplicationDelegate to this event
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    if ([FBSDKAccessToken currentAccessToken]) {
+        UINavigationController *nc = [storyboard instantiateViewControllerWithIdentifier:@"NavigationController"];
+        [[self window] setRootViewController:nc];
+    } else {
+        WelcomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
+        [[self window] setRootViewController:vc];
+    }
+    
     return YES;
 }
 
