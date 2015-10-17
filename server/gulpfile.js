@@ -25,4 +25,4 @@ gulp.task('dbtest', function () {
 
 gulp.task('test', ['set-env', 'dbtest']);
 
-gulp.task('default', ['linter', 'set-env']);
+gulp.task('default', ['linter']);

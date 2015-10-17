@@ -2,8 +2,13 @@ var User = require('./userModel');
 
 module.exports = {
 
-  registerNewUser: function (user) {},
+  registerNewUser: function (newUser) {
+    return User.create(newUser);
+  },
 
-  isUser: function (user) {},
-
+  isUser: function (user) {
+    return User.findOne({
+      where: { email: user.email }
+    });
+  },
 };
