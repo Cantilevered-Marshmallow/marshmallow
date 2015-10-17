@@ -14,7 +14,7 @@
 
 #import "CMRemoteImageView.h"
 
-@interface ChatViewController : UIViewController <UITableViewDataSource>
+@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;

@@ -64,11 +64,37 @@
                         label.text = [[NSDate dateWithTimeIntervalSinceNow:-4] timeAgoSinceNow];
                     }
                 }
+                
+                if ([[[subview class] description] isEqualToString:@"UITextView"]) {
+                    UITextView *tv = ((UITextView *) subview);
+                    NSArray *messages = @[
+                                          @"Hey it's Marsh.",
+                                          @"Some very long text. This message has no reason for it's existence other than to annoy you right now. So apparently I need to be even longer than I was before. Hopefully I'm long enough now."
+                                        ];
+                    
+                    tv.text = messages[indexPath.row];
+                }
             }
         }
     }
     
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *messages = @[
+                          @"Hey it's Marsh.",
+                          @"Some very long text. This message has no reason for it's existence other than to annoy you right now. So apparently I need to be even longer than I was before. Hopefully I'm long enough now."
+                          ];
+    UITextView *tv = [[UITextView alloc] init];
+    tv.text = messages[indexPath.row];
+    
+    int tvDefaultHeight = 94;
+    int differenceInHeight = tvDefaultHeight - [tv contentSize].height;
+    if (differenceInHeight > 0) {
+        return tvDefaultHeight + differenceInHeight;
+    }
+    return 110;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
