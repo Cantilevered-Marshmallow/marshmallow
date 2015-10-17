@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var env = require('gulp-env');
+var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 
 gulp.task('linter', function() {
@@ -17,4 +18,11 @@ gulp.task('set-env', function () {
   }
 });
 
+gulp.task('dbtest', function () {
+  return gulp.src(['spec/userModelSpec.js','spec/userControllerSpec.js'], {read: false})
+             .pipe(mocha({reporter: 'spec'}));
+});
+
 gulp.task('default', ['linter', 'set-env']);
+
+gulp.task('test', ['set-env', 'dbtest']);

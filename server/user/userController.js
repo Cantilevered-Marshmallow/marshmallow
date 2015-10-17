@@ -4,6 +4,6 @@ module.exports = {
 
   registerNewUser: function (user) {},
 
-  findUser: function (user) {},
+  isUser: function (user) {},
 
 };
