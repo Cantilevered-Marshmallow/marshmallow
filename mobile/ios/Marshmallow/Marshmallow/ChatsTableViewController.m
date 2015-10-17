@@ -13,6 +13,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Add logout button to navigation bar
     UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
     [[self navigationItem] setRightBarButtonItem:logoutButton animated:YES];
 }
@@ -20,7 +21,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
     
-    cell.textLabel.text = @"I am a cell";
+    cell.textLabel.text = @"I am a cell"; // Static cell text
     
     return cell;
 }

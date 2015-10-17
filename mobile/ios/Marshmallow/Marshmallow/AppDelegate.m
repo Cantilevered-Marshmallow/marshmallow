@@ -21,7 +21,7 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    if ([FBSDKAccessToken currentAccessToken]) {
+    if ([FBSDKAccessToken currentAccessToken]) { // Are we logged in?
         UINavigationController *nc = [storyboard instantiateViewControllerWithIdentifier:@"NavigationController"];
         [[self window] setRootViewController:nc];
     } else {

@@ -43,9 +43,11 @@
 }
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([segue.identifier isEqualToString:@"moveToChats"] || [segue.identifier isEqualToString:@"moveToChatsStatic"]) {
+    if ([segue.identifier isEqualToString:@"moveToChats"]) {
         UINavigationController *navigationController = segue.destinationViewController;
         ChatsTableViewController *chats = [navigationController viewControllers][0];
+        
+        // pass data along
         chats.facebookToken = [self facebookToken];
         chats.facebookProfile = [self facebookProfile];
     }

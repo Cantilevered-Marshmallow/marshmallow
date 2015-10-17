@@ -13,6 +13,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Add logout button to navigation bar
     UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
     [[self navigationItem] setRightBarButtonItem:logoutButton animated:YES];
 }
