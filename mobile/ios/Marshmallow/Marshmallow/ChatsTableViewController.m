@@ -17,6 +17,18 @@
     [[self navigationItem] setRightBarButtonItem:logoutButton animated:YES];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    
+    cell.textLabel.text = @"I am a cell";
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+
 - (void)logout:(id)sender {
     [[[FBSDKLoginManager alloc] init] logOut];
     
