@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <DateTools/NSDate+DateTools.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"

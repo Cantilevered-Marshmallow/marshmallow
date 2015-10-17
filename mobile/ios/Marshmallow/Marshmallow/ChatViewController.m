@@ -58,6 +58,10 @@
                         // Username label
                         
                         label.text = [NSString stringWithFormat:@"%@ %@", [userProfile firstName], [userProfile lastName]];
+                    } else if ([[label text] isEqualToString:@"Nov. 14, 2015"]) {
+                        // Date text
+                        
+                        label.text = [[NSDate dateWithTimeIntervalSinceNow:-4] timeAgoSinceNow];
                     }
                 }
             }
