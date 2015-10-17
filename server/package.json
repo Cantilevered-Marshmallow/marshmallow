@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
@@ -16,9 +17,13 @@
     "sinon": "^1.17.1"
   },
   "dependencies": {
+    "body-parser": "^1.14.1",
     "chai": "^3.3.0",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
     "gulp-env": "^0.2.0",
     "mocha": "^2.3.3",
+    "morgan": "^1.6.1",
     "mysql": "^2.9.0",
     "sequelize": "^3.12.1"
   }

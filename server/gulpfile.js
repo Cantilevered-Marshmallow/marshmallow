@@ -23,6 +23,11 @@ gulp.task('dbtest', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('test', ['set-env', 'dbtest']);
+gulp.task('server-test', function () {
+  return gulp.src(['spec/serverSpec.js'], {read: false})
+             .pipe(mocha({reporter: 'spec'}));
+});
+
+gulp.task('test', ['set-env', 'dbtest', 'server-test']);
 
 gulp.task('default', ['linter']);

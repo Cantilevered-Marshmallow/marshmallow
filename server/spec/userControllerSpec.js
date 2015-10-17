@@ -35,7 +35,6 @@ describe('User Controller', function () {
         done();
       })
       .catch(function (err) {
-        console.log(err);
         expect(err.name).to.equal('SequelizeUniqueConstraintError');
         done();
       });
