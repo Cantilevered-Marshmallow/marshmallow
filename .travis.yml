@@ -10,7 +10,6 @@ before_script:
   - cd server
   - npm install
   - cd ../
-  - mysql -e 'create database marshmallow;'
   - gulp --gulpfile server/gulpfile.js
 script:
   - xctool -workspace mobile/ios/Marshmallow/Marshmallow.xcworkspace -scheme Marshmallow -sdk iphonesimulator build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test -omit MarshmallowUITests
