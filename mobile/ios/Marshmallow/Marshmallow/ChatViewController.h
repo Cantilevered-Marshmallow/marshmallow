@@ -8,7 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
+
+#import "CMRemoteImageView.h"
 
 @interface ChatViewController : UIViewController <UITableViewDataSource>
 

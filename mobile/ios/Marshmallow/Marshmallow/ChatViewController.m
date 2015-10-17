@@ -36,8 +36,22 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
     
-    cell.textLabel.text = @"Marsh";
-    cell.detailTextLabel.text = @"Our beautiful mascot";
+    NSArray *subviews = [cell subviews];
+    // Ewww, why so many nested statements?
+    // Because the API forced me
+    for (UIView *view in subviews) {
+        if ([[[view class] description] isEqualToString:@"UITableViewCellContentView"]) {
+            for (UIView *subview in [view subviews]) {
+                if ([[[subview class] description] isEqualToString:@"CMRemoteImageView"]) {
+                    // Hah, found you.
+                    // Set the image in the cell to be the profile image of the user from facebook
+                    [((CMRemoteImageView *)subview) setRemoteUrl:[NSURL URLWithString:
+                                                                  [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", [[FBSDKProfile currentProfile] userID]]
+                                                                  ]];
+                }
+            }
+        }
+    }
     
     return cell;
 }
