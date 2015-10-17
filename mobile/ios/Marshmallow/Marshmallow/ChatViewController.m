@@ -33,4 +33,17 @@
     [self performSegueWithIdentifier:@"moveToWelcome" sender:self];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
+    
+    cell.textLabel.text = @"Marsh";
+    cell.detailTextLabel.text = @"Our beautiful mascot";
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+
 @end

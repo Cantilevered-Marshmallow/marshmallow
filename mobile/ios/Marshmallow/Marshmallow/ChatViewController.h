@@ -10,7 +10,7 @@
 
 #import "FBSDKLoginKit.h"
 
-@interface ChatViewController : UIViewController
+@interface ChatViewController : UIViewController <UITableViewDataSource>
 
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
