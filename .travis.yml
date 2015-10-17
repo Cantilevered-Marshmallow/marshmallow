@@ -5,11 +5,18 @@ xcode_scheme: Marshmallow
 podfile: mobile/ios/Marshmallow/Podfile
 osx_image: xcode7
 
+env:
+  - DB="marshmallow"
+  - DB_SERVER="localhost"
+  - DB_USER="root"
+  - DB_PASSWORD=""
+
 before_script:
   - npm install -g gulp
   - cd server
   - npm install
   - cd ../
+  - mysql -e 'create database marshmallow;'
   - gulp --gulpfile server/gulpfile.js
 script:
   - xctool -workspace mobile/ios/Marshmallow/Marshmallow.xcworkspace -scheme Marshmallow -sdk iphonesimulator build CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO test -omit MarshmallowUITests
