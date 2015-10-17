@@ -23,6 +23,6 @@ gulp.task('dbtest', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('default', ['linter', 'set-env']);
-
 gulp.task('test', ['set-env', 'dbtest']);
+
+gulp.task('default', ['linter', 'set-env']);
