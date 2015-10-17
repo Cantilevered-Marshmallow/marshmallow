@@ -29,7 +29,7 @@ describe('User Model', function () {
   });
 
   it('should find an existing user', function (done) {
-    User.findOne(newUser)
+    User.findOne({where: {email: newUser.email}})
       .then(function (user) {
         expect(user).to.not.equal(newUser);
         done();
@@ -40,14 +40,14 @@ describe('User Model', function () {
   });
 
   it('should not find a non-existant user', function (done) {
-    User.findOne(falseUserA)
+    User.findOne({where: {email: falseUserA.email}})
       .then(function (user) {
         expect(user).to.not.equal(falseUserA);
       })
       .catch(function (err) {
         throw new Error(err);
       });
-    User.findOne(falseUserB)
+    User.findOne({where: {email: falseUserB.email}})
       .then(function (user) {
         expect(user).to.not.equal(falseUserB);
         done();
