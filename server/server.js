@@ -11,6 +11,11 @@ var app = express();
 
 app.set('port', process.env.PORT || 8080);
 
+app.use(session({
+  resave: false,
+  saveUninitialized: true,
+  secret: 'marshmallowed'
+}));
 app.use('/', router);
 
 

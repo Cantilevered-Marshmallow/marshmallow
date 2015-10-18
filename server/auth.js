@@ -1,9 +1,26 @@
 var userController = require('./user/userController');
+var request = require('request');
 
 module.exports = {
 
-  signup: function (req, res) {
+  authFacebook: function (req, res, next) {
     var user = req.body;
+    request('https://graph.facebook.com/me?access_token=' + user.oauthToken,
+      function (err, res, body) {
+        if (body.id === user.userId){
+          next();
+        } else {
+          res.status(400).send('Invalid Facebook access token');
+        }
+      });
+  },
+
+  signup: function (req, res) {
+    var user = {
+      email:      req.body.email,
+      facebookId: req.body.facebookId
+    };
+
     userController.registerNewUser(user)
       .then(function (user) {
         res.status(201);
@@ -22,7 +39,7 @@ module.exports = {
       .then(function (user) {
         res.status(200);
         this._authSession(req, res, user);
-      })
+      }.bind(this))
       .catch(function (err) {
         if (err) {
           res.status(400).send('User does not exist');
