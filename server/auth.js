@@ -11,6 +11,8 @@ module.exports = {
         if (body.id === user.facebookId){
           next();
         } else {
+          console.log(user);
+          console.log(body);
           res.status(400).send('Invalid Facebook access token');
         }
       });

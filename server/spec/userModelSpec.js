@@ -2,7 +2,7 @@ var sequelize = require('../db/db').sequelize;
 var expect = require('chai').expect;
 var User = require('../db/db').User;
 
-describe('User Model', function () {
+xdescribe('User Model', function () {
 
 var UserA = {
               email: "cantilevered.marshmallow@gmail.com",

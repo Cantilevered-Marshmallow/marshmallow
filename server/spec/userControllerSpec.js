@@ -3,7 +3,7 @@ var expect = require('chai').expect;
 var userController = require('../user/userController');
 var User = require('../db/db').User;
 
-describe('User Controller', function () {
+xdescribe('User Controller', function () {
 
 var UserA = {
               email: "cantilevered.marshmallow@gmail.com",
