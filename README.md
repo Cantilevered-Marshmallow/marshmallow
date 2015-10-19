@@ -2,9 +2,9 @@
 
 [![Build Status](https://travis-ci.org/Cantilevered-Marshmallow/marshmallow.svg)](https://travis-ci.org/Cantilevered-Marshmallow/marshmallow)
 
-# Project Name
+# Marshmallow
 
-> Pithy project description
+> The worlds greatest chat application with a cute little Marshmallow.
 
 ## Team
 
@@ -29,21 +29,17 @@
 ## Requirements
 
 - Node 0.10.x
-- Redis 2.6.x
-- Postgresql 9.1.x
-- etc
-- etc
+- xcode 7
+- Cocoapods
 
 ## Development
 
 ### Installing Dependencies
 
-From within the root directory:
+From within the `mobile/ios/Marshmallow` directory:
 
 ```sh
-sudo npm install -g bower
-npm install
-bower install
+pod install
 ```
 
 ### Roadmap
