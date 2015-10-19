@@ -36,7 +36,11 @@ module.exports = {
   },
 
   login: function (req, res) {
-    var user = req.body;
+    var user = {
+      email:      req.body.email,
+      facebookId: req.body.facebookId
+    };
+
     userController.isUser(user)
       .then(function (user) {
         res.status(200);
