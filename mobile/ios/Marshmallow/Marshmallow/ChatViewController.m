@@ -33,4 +33,72 @@
     [self performSegueWithIdentifier:@"moveToWelcome" sender:self];
 }
 
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
+    FBSDKProfile *userProfile = [FBSDKProfile currentProfile];
+    
+    NSArray *subviews = [cell subviews];
+    // Ewww, why so many nested statements?
+    // Because the API forced me
+    for (UIView *view in subviews) {
+        if ([[[view class] description] isEqualToString:@"UITableViewCellContentView"]) {
+            for (UIView *subview in [view subviews]) {
+                if ([[[subview class] description] isEqualToString:@"CMRemoteImageView"]) {
+                    // Hah, found you.
+                    // Set the image in the cell to be the profile image of the user from facebook
+                    [((CMRemoteImageView *)subview) setRemoteUrl:[NSURL URLWithString:
+                                                                  [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", [userProfile userID]]
+                                                                  ]];
+                }
+                
+                if ([[[subview class] description] isEqualToString:@"UILabel"]) {
+                    UILabel *label = ((UILabel *)subview);
+                    
+                    if ([label.text isEqualToString:@"John Appleseed"]) {
+                        // Username label
+                        
+                        label.text = [NSString stringWithFormat:@"%@ %@", [userProfile firstName], [userProfile lastName]];
+                    } else if ([[label text] isEqualToString:@"Nov. 14, 2015"]) {
+                        // Date text
+                        
+                        label.text = [[NSDate dateWithTimeIntervalSinceNow:-4] timeAgoSinceNow];
+                    }
+                }
+                
+                if ([[[subview class] description] isEqualToString:@"UITextView"]) {
+                    UITextView *tv = ((UITextView *) subview);
+                    NSArray *messages = @[
+                                          @"Hey it's Marsh.",
+                                          @"Some very long text. This message has no reason for it's existence other than to annoy you right now. So apparently I need to be even longer than I was before. Hopefully I'm long enough now."
+                                        ];
+                    
+                    tv.text = messages[indexPath.row];
+                }
+            }
+        }
+    }
+    
+    return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSArray *messages = @[
+                          @"Hey it's Marsh.",
+                          @"Some very long text. This message has no reason for it's existence other than to annoy you right now. So apparently I need to be even longer than I was before. Hopefully I'm long enough now."
+                          ];
+    UITextView *tv = [[UITextView alloc] init];
+    tv.text = messages[indexPath.row];
+    
+    int tvDefaultHeight = 94;
+    int differenceInHeight = tvDefaultHeight - [tv contentSize].height;
+    if (differenceInHeight > 0) {
+        return tvDefaultHeight + differenceInHeight;
+    }
+    return 110;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 2;
+}
+
 @end

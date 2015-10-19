@@ -10,6 +10,7 @@
 		47940B7E8F7189086CF25927 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
 		A73E2D89A0532F3CB964A5DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
 		CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */; settings = {ASSET_TAGS = (); }; };
+		CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */; settings = {ASSET_TAGS = (); }; };
 		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -46,6 +47,8 @@
 		44F5354FD6707387425ED089 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F487F126BFF4BF85174A4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequestTests.m; sourceTree = "<group>"; };
+		CA2432D41BD2F9FC0023E234 /* CMRemoteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMRemoteImageView.h; sourceTree = "<group>"; };
+		CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMRemoteImageView.m; sourceTree = "<group>"; };
 		CAC352251BD1C1DC00AEF3D3 /* ChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
 		CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
 		CAC352281BD1EAA000AEF3D3 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -106,6 +109,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		CA2432D31BD2F9DE0023E234 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CA2432D41BD2F9FC0023E234 /* CMRemoteImageView.h */,
+				CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
 		CACC2FF91BD1658D006D37F9 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -140,6 +152,7 @@
 		CAFCBF721BD0279C00C9E28B /* Marshmallow */ = {
 			isa = PBXGroup;
 			children = (
+				CA2432D31BD2F9DE0023E234 /* Views */,
 				CACC2FF91BD1658D006D37F9 /* Networking */,
 				CAFCBF761BD0279C00C9E28B /* AppDelegate.h */,
 				CAFCBF771BD0279C00C9E28B /* AppDelegate.m */,
@@ -455,6 +468,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */,
 				CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */,
 				CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */,
 				CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */,

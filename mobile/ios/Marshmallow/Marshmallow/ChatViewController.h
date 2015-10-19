@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <DateTools/NSDate+DateTools.h>
 
+#import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
 
-@interface ChatViewController : UIViewController
+#import "CMRemoteImageView.h"
+
+@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
