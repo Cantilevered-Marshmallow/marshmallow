@@ -2,12 +2,20 @@ var gulp = require('gulp');
 var env = require('gulp-env');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
+var nodemon = require('gulp-nodemon');
+
 
 gulp.task('linter', function() {
   return gulp.src(['db/*.js', 'user/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
              .pipe(jshint.reporter('fail'));
+});
+
+gulp.task('nodemon', function () {
+  nodemon({
+    script: 'server.js'
+  });
 });
 
 gulp.task('set-env', function () {
@@ -29,5 +37,7 @@ gulp.task('server-test', function () {
 });
 
 gulp.task('test', ['set-env', 'dbtest', 'server-test']);
+
+gulp.task('start-server', ['set-env', 'nodemon']);
 
 gulp.task('default', ['linter']);

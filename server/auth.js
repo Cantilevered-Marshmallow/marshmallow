@@ -6,8 +6,9 @@ module.exports = {
   authFacebook: function (req, res, next) {
     var user = req.body;
     request('https://graph.facebook.com/me?access_token=' + user.oauthToken,
-      function (err, res, body) {
-        if (body.id === user.userId){
+      function (err, _, body) {
+        body = JSON.parse(body);
+        if (body.id === user.facebookId){
           next();
         } else {
           res.status(400).send('Invalid Facebook access token');
@@ -24,13 +25,14 @@ module.exports = {
     userController.registerNewUser(user)
       .then(function (user) {
         res.status(201);
-        this._authSession(req, res, user);
-      }.bind(this))
+        module.exports._authSession(req, res, user);
+      })
       .catch(function (err) {
+        console.log(err);
         if (err) {
-          this.login(req, res);
+          module.exports.login(req, res);
         }
-      }.bind(this));
+      });
   },
 
   login: function (req, res) {
@@ -38,8 +40,8 @@ module.exports = {
     userController.isUser(user)
       .then(function (user) {
         res.status(200);
-        this._authSession(req, res, user);
-      }.bind(this))
+        module.exports._authSession(req, res, user);
+      })
       .catch(function (err) {
         if (err) {
           res.status(400).send('User does not exist');
