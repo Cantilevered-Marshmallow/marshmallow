@@ -21,10 +21,10 @@
 - (void)setUp {
     [super setUp];
 
-    _request = [[CMNetworkRequest alloc] initWithBaseUrl:[NSURL URLWithString:@"https://reviews.camelcased.com"]];
+    _request = [[CMNetworkRequest alloc] initWithBaseUrl:[NSURL URLWithString:@"http://localhost:8080"]];
     
     // Remove any cookies from a previous logged in session
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://reviews.camelcased.com"]];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://localhost:8080"]];
     for (NSHTTPCookie *cookie in cookies)
     {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
@@ -45,13 +45,13 @@
 #pragma mark - Method Behavior
 
 - (void)testInitWithBaseUrlMethod {
-    XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"https://reviews.camelcased.com"]);
+    XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"http://localhost:8080"]);
     XCTAssertTrue(_request.manager);
 }
 
 - (void)testInitMethod {
     CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
-    XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"https://reviews.camelcased.com"]);
+    XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"http://localhost:8080"]);
     XCTAssertTrue(_request.manager);
 }
 

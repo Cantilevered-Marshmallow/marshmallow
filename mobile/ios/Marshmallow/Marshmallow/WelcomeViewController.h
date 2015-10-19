@@ -12,6 +12,9 @@
 #import "FBSDKLoginKit.h"
 
 #import "ChatsTableViewController.h"
+#import "CMNetworkRequest.h"
+
+#import "User.h"
 
 @interface WelcomeViewController : UIViewController <FBSDKLoginButtonDelegate>
 
@@ -22,6 +25,8 @@
 
 // The profile of the signed in user from Facebook
 @property FBSDKProfile *facebookProfile;
+
+@property User *user;
 
 - (void)leaveWelcome:(id)sender;
 

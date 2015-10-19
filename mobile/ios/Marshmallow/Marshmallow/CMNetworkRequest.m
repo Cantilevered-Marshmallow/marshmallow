@@ -14,7 +14,7 @@
     self = [super init];
     
     if (self) {
-        _baseUrl = [NSURL URLWithString:@"https://reviews.camelcased.com"];
+        _baseUrl = [NSURL URLWithString:@"http://localhost:8080"];
         _manager = [AFHTTPRequestOperationManager manager];
     }
     
@@ -35,7 +35,7 @@
 - (void)requestWithHttpVerb:(NSString *)verb
                     url:(NSString *)url
                    data:(NSDictionary *)data
-               response:(void (^)(NSError *error, NSDictionary *response))response {
+               response:(void (^)(NSError  * _Nullable error, NSDictionary  * _Nullable response))response {
     if ([verb isEqualToString:@"GET"]) {
         [_manager GET:[[_baseUrl absoluteString] stringByAppendingString:url]
            parameters:data
@@ -48,6 +48,7 @@
                   response(error, nil);
               }];
     } else if ([verb isEqualToString:@"POST"]) {
+        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
         [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:url]
             parameters:data
                success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
