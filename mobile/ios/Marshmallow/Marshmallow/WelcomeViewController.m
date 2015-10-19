@@ -50,6 +50,7 @@
         // pass data along
         chats.facebookToken = [self facebookToken];
         chats.facebookProfile = [self facebookProfile];
+        chats.user = _user;
     }
 }
 
@@ -66,10 +67,30 @@
     } else {
         if (!result.isCancelled) { // Did the user cancel the login?
             _facebookToken = result.token;
-            NSLog(@"The token is %@", _facebookToken.tokenString);
             
-            // Need to delay to the segue because the animation from the sigin frame has not finished yet
-            [self performSelector:@selector(leaveWelcome:) withObject:self afterDelay:0.9];
+            FBSDKGraphRequest *graphRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,email"}];
+            
+            [graphRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                if (!error) {
+                    CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
+                    [request requestWithHttpVerb:@"POST" url:@"/signup" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"facebookId": [[FBSDKProfile currentProfile] userID], @"email": result[@"email"]} response:^(NSError * _Nullable error, NSDictionary * _Nullable response) {
+                        if (!error) {
+                            _user = [[User alloc] initWithName:result[@"name"]];
+                            _user.email = result[@"email"];
+                            _user.token = [_facebookToken tokenString];
+                            
+                            [_user saveUser];
+                            
+                            // Need to delay to the segue because the animation from the sigin frame has not finished yet
+                            [self performSelector:@selector(leaveWelcome:) withObject:self afterDelay:0.9];
+                        } else {
+                            NSLog(@"%@", error);
+                        }
+                    }];
+                } else {
+                    NSLog(@"%@", error);
+                }
+            }];
         }
     }
 }
@@ -85,7 +106,6 @@
 - (void)profileUpdated:(NSNotification *)notification {
     if ([FBSDKProfile currentProfile]) { // Check to see if the profile is not nil
         _facebookProfile = [FBSDKProfile currentProfile];
-        NSLog(@"%@ %@", _facebookProfile.firstName, _facebookProfile.lastName);
     }
 }
 

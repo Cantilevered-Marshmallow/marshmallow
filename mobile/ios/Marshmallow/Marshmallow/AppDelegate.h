@@ -11,6 +11,7 @@
 #import "FBSDKCoreKit.h"
 
 #import "CMDataAccessor.h"
+#import "User.h"
 
 #import "WelcomeViewController.h"
 #import "ChatsTableViewController.h"

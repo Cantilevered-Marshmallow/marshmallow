@@ -23,6 +23,8 @@
     
     if ([FBSDKAccessToken currentAccessToken]) { // Are we logged in?
         UINavigationController *nc = [storyboard instantiateViewControllerWithIdentifier:@"NavigationController"];
+        ChatsTableViewController *chatsVC = [nc viewControllers][0];
+        chatsVC.user = [[User alloc] initWithName:[[FBSDKProfile currentProfile] name]];
         [[self window] setRootViewController:nc];
     } else {
         WelcomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];

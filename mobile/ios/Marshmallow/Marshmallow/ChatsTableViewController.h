@@ -12,6 +12,7 @@
 #import "FBSDKLoginKit.h"
 
 #import "ChatViewController.h"
+#import "User.h"
 
 @interface ChatsTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
@@ -22,6 +23,8 @@
 
 // The profile of the signed in user from Facebook
 @property FBSDKProfile *facebookProfile;
+
+@property User *user;
 
 - (void)logout:(id)sender;
 

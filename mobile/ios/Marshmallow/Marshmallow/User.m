@@ -26,7 +26,7 @@
     self = [self init];
     
     if (self) {
-        _name = userName;
+        self.name = userName;
         
         [self getUser];
     }
@@ -35,20 +35,22 @@
 }
 
 - (BOOL)saveUser {
-    if ([[_accessor fetchRowsForColumn:@"name" withValue:[self name] anEntityName:@"User"] count] == 0) {
-        return [_accessor saveObject:_userObject];
-    } else {
-        [self getUser];
-        return YES;
-    }
+    return [_accessor saveObject:_userObject];
 }
 
 - (void)getUser {
-    _userObject = [_accessor fetchRowsForColumn:@"name" withValue:self.name anEntityName:@"User"][0];
+    NSArray *results = [_accessor fetchRowsForColumn:@"name" withValue:self.name anEntityName:@"User"];
     
-    self.email = [_userObject valueForKey:@"email"];
-    self.token = [_userObject valueForKey:@"token"];
-    self.profileImage = [_userObject valueForKey:@"profile_image"];
+    if ([results count] > 0) {
+        _userObject = results[0];
+        self.email = [_userObject valueForKey:@"email"];
+        self.token = [_userObject valueForKey:@"token"];
+        self.profileImage = [_userObject valueForKey:@"profile_image"];
+    }
+}
+
+- (NSString *)description {
+    return [NSString stringWithFormat:@"User %@ prefers to be contacted at %@. Their auth token is %@.", self.name, self.email, self.token];
 }
 
 #pragma mark - setters
@@ -56,7 +58,7 @@
 - (void)setName:(NSString *)name {
     _name = name;
     
-    [_userObject setValue:name forKey:@"key"];
+    [_userObject setValue:name forKey:@"name"];
 }
 
 - (void)setEmail:(NSString *)email {
