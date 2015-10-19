@@ -2,14 +2,66 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var auth = require('../auth');
 var User = require('../user/userModel');
+
+var UserA = {
+              email: "cantilevered.marshmallow@gmail.com",
+              facebookId: "118724648484592",
+              oauthToken: "CAABlq42VOg0BAPDz6Yw5Kc68CMXHSArMiIJfrO2U5czOZC8yFxbdUYfOaXjiX0ZB1TziPpuKjK4AmNboilObJfvijODZAYw6xsabYRB5WBxTfdddm5okDreDDk2nTvMhEZCQqHtbK3snPbyDbSTA9lzpC8g6PMOGDcR4aGEzzVTkDo0uonIzKwZCDpvsjhE2wI9BLNkHaZCPS40PCxZAo9vNjKjWSBUqrMALo5eZBoWZBkgZDZD",
+            };
+var falseUserA = { email: 'test@testing.com', facebookId: '118724648484592'};
+var falseUserB = { email: 'test@testing.com'};
+
 describe('Auth Service', function () {
 
-  describe('Signup', function () {
+  describe('authFacebook method', function () {
 
-    var UserA = { email: 'test@testing.com', oauthToken: '4ecf21412412a8f0d9ec3242' };
-    var falseUserA = { email: 'test@testing.com' };
+    it('should call the next callback on legitimate request', function (done) {
+      var req = {
+        body: UserA
+      };
+      var res = {
+        status: function () {
+          return this;
+        },
+        send: function (data) {
+          done(new Error(data));
+        }
+      };
+      var next = function () {
+        done();
+      };
+      auth.authFacebook(req, res, next);
+    });
+
+    it('should response to an invalid request with status code 400', function (done) {
+      var req = {
+        body: falseUserA
+      };
+      var statusCode;
+      var res = {
+        status: function (code) {
+          statusCode = code;
+          return this;
+        },
+        send: function () {
+          expect(statusCode).to.equal(400);
+          done();
+        }
+      };
+      var next = function () {
+        done(new Error('Allowed unauthorized access'));
+      };
+
+      auth.authFacebook(req, res, next);
+    });
+
+  });
+
+  describe('signup method', function () {
+
     var res = {};
     var req = {};
+
     before(function (done) {
       User.sync({ force: true })
       .then(function () {
@@ -32,25 +84,22 @@ describe('Auth Service', function () {
       done();
     });
 
-    it('should create a new user, create session object on req, and send back user data', function (done) {
+    it('should create a new user, amend session object on req, and send back user data', function (done) {
       req.body = UserA;
 
-      var sendStub = sinon.stub(res, 'send', function(data){
+      res.send = function (data) {
 
         expect(res.statusCode).to.equal(201);
         expect(data.email).to.equal(UserA.email);
-        expect(data.oauthToken).to.equal(UserA.oauthToken);
+        expect(data.facebookId).to.equal(UserA.facebookId);
 
-        User.findOne({where: UserA}).then(function (user) {
+        User.findOne({where: {email: UserA.email}}).then(function (user) {
           expect(user.email).to.equal(UserA.email);
-          expect(user.oauthToken).to.equal(UserA.oauthToken);
+          expect(user.facebookId).to.equal(UserA.facebookId);
           done();
-        })
-        .catch(function (err) {
-          throw new Error('AuthSpec: User model findOne error.', err);
         });
 
-      });
+      };
 
       auth.signup(req, res);
     });
@@ -67,12 +116,23 @@ describe('Auth Service', function () {
 
       auth.signup(req, res);
     });
+
+    it('should return an error on signup with falsified OAuth Token', function (done) {
+      req.body = falseUserB;
+
+      var sendStub = sinon.stub(res, 'send', function(data){
+
+        expect(res.statusCode).to.equal(400);
+        expect(data.email).to.not.equal(falseUserB.email);
+        done();
+      });
+
+      auth.signup(req, res);
+    });
   });
 
-  describe('Login', function () {
+  describe('login method', function () {
 
-    var UserA = { email: 'test@testing.com', oauthToken: '4ecf21412412a8f0d9ec3242' };
-    var falseUserA = { email: 'test@testing.com', oauthToken: 'faketokenfaketoken'};
     var res = {};
     var req = {};
     before(function (done) {
@@ -89,68 +149,42 @@ describe('Auth Service', function () {
           this.statusCode = statusCode;
           return this; },
         send: function () {},
-        statusCode: 0
+        statusCode: null
       };
       req = {
         session: {}
       };
 
-
       done();
     });
 
     it('should authenticate user and send back user data', function (done) {
-      User.create(UserA);
 
       req.body = UserA;
 
-      var test = function (data) {
-        // expect(res.statusCode).to.equal(200);
-        // expect(data.email).to.equal(UserA.email);
-        // expect(data.oauthToken).to.equal(UserA.oauthToken);
-
-        User.findOne({ where: UserA }).then(function (user) {
-          // expect(user).to.deep.equal(UserA);
-          done();
-        })
-        .catch(function (err) {
-          done(err);
-        });
+      res.send = function (data) {
+        expect(res.statusCode).to.equal(200);
+        expect(data.email).to.equal(UserA.email);
+        expect(data.facebookId).to.equal(UserA.facebookId);
+        expect(req.session.auth).to.equal(true);
+        done();
       };
 
-      res.send = function(data){
-        test(data);
-      };
-
-      auth.login(req, res);
-    });
-
-    it('should return an error on login with false information', function (done) {
-      req.body = falseUserA;
-
-      var sendStub = sinon.stub(res, 'send', function(data){
-
-        expect(data).to.not.deep.equal(falseUserA);
-
-        User.findOne({ where: falseUserA }).then(function (user) {
-          // expect(user).to.not.deep.equal(UserA);
-          done();
-        })
-        .catch(function (err) {
-          throw new Error('User model findOne error.', err);
-        });
-
+      User.create({
+        email: UserA.email,
+        facebookId: UserA.facebookId
+      })
+      .then(function () {
+        auth.login(req, res);
       });
 
-      auth.login(req, res);
     });
+
   });
 
   describe('Authenticate Middleware', function () {
     var req;
     var res;
-
-    var UserA = { email: 'test@testing.com', oauthToken: '4ecf21412412a8f0d9ec3242' };
 
     beforeEach(function (done) {
       req = {
@@ -160,7 +194,7 @@ describe('Auth Service', function () {
         status: function (statusCode) {
           this.statusCode = statusCode;
           return this; },
-        send: null,
+        send: sinon.spy(),
         statusCode: 0
       };
 
@@ -173,17 +207,13 @@ describe('Auth Service', function () {
     });
 
     it('should authenticate logged in user', function (done) {
-      req.body = UserA;
-      auth.login(req, res);
+      req.session.user = UserA;
+      req.session.auth = true;
+
       var next = function () {
         expect(res.send.called).to.equal(false);
         done();
       };
-      res.send = function () {
-        expect(res.statusCode).to.equal(0);
-        done();
-      };
-
 
       auth.authenticate(req, res, next);
     });
@@ -198,6 +228,10 @@ describe('Auth Service', function () {
 
       auth.authenticate(req, res, next);
     });
+
+  });
+
+  xdescribe('Logout', function () {
 
   });
 
