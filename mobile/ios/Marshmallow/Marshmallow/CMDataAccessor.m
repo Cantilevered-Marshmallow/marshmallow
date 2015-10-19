@@ -26,7 +26,8 @@
     if (_managedObjectModel != nil) {
         return _managedObjectModel;
     }
-    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"marshmallow" withExtension:@"momd"];
+    NSURL *modelURL = [[NSBundle mainBundle] URLForResource:@"models" withExtension:@"momd"];
+    NSLog(@"%@", [modelURL absoluteString]);
     _managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:modelURL];
     return _managedObjectModel;
 }
@@ -99,7 +100,7 @@
 - (NSArray *)fetchRowsForColumn:(NSString *)columnName withValue:(id)aValue anEntityName:(NSString *)entityName {
     NSFetchRequest *request = [[NSFetchRequest alloc] initWithEntityName:entityName];
     
-    NSPredicate *predicte = [NSPredicate predicateWithFormat:@"%K === %@", columnName, aValue];
+    NSPredicate *predicte = [NSPredicate predicateWithFormat:@"%K == %@", columnName, aValue];
     [request setPredicate:predicte];
     
     NSError *error = nil;

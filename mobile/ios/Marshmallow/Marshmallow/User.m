@@ -16,7 +16,7 @@
     if (self) {
         _accessor = [[CMDataAccessor alloc] init];
         
-        _userObject = [_accessor createObjectForEntityName:@"user"];
+        _userObject = [_accessor createObjectForEntityName:@"User"];
     }
     
     return self;
@@ -39,7 +39,7 @@
 }
 
 - (void)getUser {
-    _userObject = [_accessor fetchRowsForColumn:@"name" withValue:self.name anEntityName:@"user"][0];
+    _userObject = [_accessor fetchRowsForColumn:@"name" withValue:self.name anEntityName:@"User"][0];
     
     self.email = [_userObject valueForKey:@"email"];
     self.token = [_userObject valueForKey:@"token"];
