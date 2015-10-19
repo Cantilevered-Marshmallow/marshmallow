@@ -26,13 +26,13 @@ gulp.task('set-env', function () {
   }
 });
 
-gulp.task('dbtest', function () {
+gulp.task('user-test', function () {
   return gulp.src(['spec/userModelSpec.js','spec/userControllerSpec.js','spec/authSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('auth-test', function () {
-  return gulp.src(['spec/authSpec.js'], {read: false})
+gulp.task('controller-test', function () {
+  return gulp.src(['spec/userControllerSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
 
@@ -43,10 +43,8 @@ gulp.task('server-test', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('test', ['set-env', 'dbtest', 'server-test']);
+gulp.task('test', ['set-env', 'user-test', 'server-test']);
 
-gulp.task('authTest', ['set-env', 'auth-test']);
-
-gulp.task('start-server', ['set-env', 'nodemon']);
+gulp.task('start', ['set-env', 'nodemon']);
 
 gulp.task('default', ['linter']);

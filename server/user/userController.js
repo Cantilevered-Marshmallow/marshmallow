@@ -8,7 +8,10 @@ module.exports = {
 
   isUser: function (user) {
     return User.findOne({
-      where: { email: user.email }
+      where: {
+        email: user.email,
+        facebookId: user.facebookId
+      }
     });
   },
 };
