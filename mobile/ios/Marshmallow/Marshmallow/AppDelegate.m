@@ -59,6 +59,7 @@
     [_accessor saveContext];
 }
 
+// This section of the app delegate passes the method calls to the CMDataAccessor instance
 #pragma mark - Core Data stack
 
 - (NSURL *)applicationDocumentsDirectory {
