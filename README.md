@@ -4,7 +4,7 @@
 
 # Marshmallow
 
-> The worlds greatest chat application with a cute little Marshmallow.
+> The worlds greatest chat application with a cute little Marshmallow known as Marsh.
 
 ## Team
 
