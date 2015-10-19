@@ -14,6 +14,9 @@
 		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
+		CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		CACEEDA91BD5616E0086CBCF /* CMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = CACEEDA81BD5616E0086CBCF /* CMDataAccessor.m */; settings = {ASSET_TAGS = (); }; };
+		CACEEDAC1BD567DE0086CBCF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CACEEDAB1BD567DE0086CBCF /* User.m */; settings = {ASSET_TAGS = (); }; };
 		CAFCBF751BD0279C00C9E28B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF741BD0279C00C9E28B /* main.m */; };
 		CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF771BD0279C00C9E28B /* AppDelegate.m */; };
 		CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF7A1BD0279C00C9E28B /* WelcomeViewController.m */; };
@@ -55,6 +58,11 @@
 		CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatViewController.m; sourceTree = "<group>"; };
 		CACC2FFA1BD165B8006D37F9 /* CMNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMNetworkRequest.h; sourceTree = "<group>"; };
 		CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequest.m; sourceTree = "<group>"; };
+		CACEED7F1BD55D220086CBCF /* models.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = models.xcdatamodel; sourceTree = "<group>"; };
+		CACEEDA71BD5616E0086CBCF /* CMDataAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDataAccessor.h; sourceTree = "<group>"; };
+		CACEEDA81BD5616E0086CBCF /* CMDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataAccessor.m; sourceTree = "<group>"; };
+		CACEEDAA1BD567DE0086CBCF /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		CACEEDAB1BD567DE0086CBCF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CAFCBF701BD0279C00C9E28B /* Marshmallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marshmallow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFCBF741BD0279C00C9E28B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CAFCBF761BD0279C00C9E28B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -127,6 +135,17 @@
 			name = Networking;
 			sourceTree = "<group>";
 		};
+		CACEED7D1BD55D080086CBCF /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CACEEDA71BD5616E0086CBCF /* CMDataAccessor.h */,
+				CACEEDA81BD5616E0086CBCF /* CMDataAccessor.m */,
+				CACEEDAA1BD567DE0086CBCF /* User.h */,
+				CACEEDAB1BD567DE0086CBCF /* User.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
 		CAFCBF671BD0279C00C9E28B = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +172,8 @@
 			isa = PBXGroup;
 			children = (
 				CA2432D31BD2F9DE0023E234 /* Views */,
+				CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */,
+				CACEED7D1BD55D080086CBCF /* Models */,
 				CACC2FF91BD1658D006D37F9 /* Networking */,
 				CAFCBF761BD0279C00C9E28B /* AppDelegate.h */,
 				CAFCBF771BD0279C00C9E28B /* AppDelegate.m */,
@@ -469,10 +490,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */,
+				CACEEDA91BD5616E0086CBCF /* CMDataAccessor.m in Sources */,
 				CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */,
+				CACEEDAC1BD567DE0086CBCF /* User.m in Sources */,
 				CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */,
 				CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */,
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
+				CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */,
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
 				CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */,
 			);
@@ -742,6 +766,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				CACEED7F1BD55D220086CBCF /* models.xcdatamodel */,
+			);
+			currentVersion = CACEED7F1BD55D220086CBCF /* models.xcdatamodel */;
+			path = models.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = CAFCBF681BD0279C00C9E28B /* Project object */;
 }

@@ -29,6 +29,8 @@
         [[self window] setRootViewController:vc];
     }
     
+    _accessor = [[CMDataAccessor alloc] init];
+    
     return YES;
 }
 
@@ -52,6 +54,27 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    [_accessor saveContext];
+}
+
+#pragma mark - Core Data stack
+
+- (NSURL *)applicationDocumentsDirectory {
+    // The directory the application uses to store the Core Data store file. This code uses a directory named "org.cantilevered.marshmallow.test_core_data" in the application's documents directory.
+    return [_accessor applicationDocumentsDirectory];
+}
+
+- (NSManagedObjectModel *)managedObjectModel {
+    return [_accessor managedObjectModel];
+}
+
+- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
+    return [_accessor persistentStoreCoordinator];
+}
+
+
+- (NSManagedObjectContext *)managedObjectContext {
+    return [_accessor managedObjectContext];
 }
 
 #pragma mark - Facebook SDK

@@ -10,12 +10,16 @@
 
 #import "FBSDKCoreKit.h"
 
+#import "CMDataAccessor.h"
+
 #import "WelcomeViewController.h"
 #import "ChatsTableViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+
+@property (strong, nonatomic) CMDataAccessor *accessor;
 
 @end
 
