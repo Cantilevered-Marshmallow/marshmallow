@@ -22,6 +22,8 @@
     return self;
 }
 
+
+// Use this instead of init as this will properly initialize the object
 - (id)initWithName:(NSString *)userName {
     self = [self init];
     
@@ -34,10 +36,12 @@
     return self;
 }
 
+// Simply tells the accessor to persist the user
 - (BOOL)saveUser {
     return [_accessor saveObject:_userObject];
 }
 
+// Retrieves the user and sets the properties of this class to the values found for the user
 - (void)getUser {
     NSArray *results = [_accessor fetchRowsForColumn:@"name" withValue:self.name anEntityName:@"User"];
     
@@ -49,10 +53,12 @@
     }
 }
 
+// Objective-C method for converting a NSObject to a string. Usually called when the instance is passed into NSLog.
 - (NSString *)description {
     return [NSString stringWithFormat:@"User %@ prefers to be contacted at %@. Their auth token is %@.", self.name, self.email, self.token];
 }
 
+// Override the default setters so that they also set the value on the object for core data
 #pragma mark - setters
 
 - (void)setName:(NSString *)name {

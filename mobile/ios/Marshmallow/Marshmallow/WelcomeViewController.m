@@ -70,9 +70,11 @@
             
             FBSDKGraphRequest *graphRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,email"}];
             
+            // Send a http request to facebook to ge the user's email
             [graphRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                 if (!error) {
                     CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
+                    // Send a http request to our serverfor signup and login of the user
                     [request requestWithHttpVerb:@"POST" url:@"/signup" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"facebookId": [[FBSDKProfile currentProfile] userID], @"email": result[@"email"]} response:^(NSError * _Nullable error, NSDictionary * _Nullable response) {
                         if (!error) {
                             _user = [[User alloc] initWithName:result[@"name"]];
