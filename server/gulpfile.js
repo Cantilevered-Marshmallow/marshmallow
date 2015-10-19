@@ -31,12 +31,21 @@ gulp.task('dbtest', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
+gulp.task('auth-test', function () {
+  return gulp.src(['spec/authSpec.js'], {read: false})
+             .pipe(mocha({reporter: 'spec'}));
+});
+
+
+
 gulp.task('server-test', function () {
   return gulp.src(['spec/serverSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
 
 gulp.task('test', ['set-env', 'dbtest', 'server-test']);
+
+gulp.task('authTest', ['set-env', 'auth-test']);
 
 gulp.task('start-server', ['set-env', 'nodemon']);
 
