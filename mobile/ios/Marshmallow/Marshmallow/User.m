@@ -37,9 +37,10 @@
 - (BOOL)saveUser {
     if ([[_accessor fetchRowsForColumn:@"name" withValue:[self name] anEntityName:@"User"] count] == 0) {
         return [_accessor saveObject:_userObject];
+    } else {
+        [self getUser];
+        return YES;
     }
-    
-    return YES;
 }
 
 - (void)getUser {
