@@ -38,28 +38,24 @@
         
         [self setValue:value forKeyPath:key];
     } else {
-        if (![key hasPrefix:@"attr"]) {
-            [super setValue:value forKey:key];
-        } else {
+        if ([key hasPrefix:@"attr"]) {
             key = [key substringFromIndex:4];
             [key stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[key substringToIndex:0] lowercaseString]];
-            [self setValue:value forKey:key];
             [_dataObject setValue:value forKey:key];
         }
+        
+        [super setValue:value forKey:key];
     }
 }
 
 - (id)valueForKey:(NSString *)key {
-    id value;
     if ([key hasPrefix:@"attr"]) {
         NSString *dataKey = [key substringFromIndex:4];
         [dataKey stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[[dataKey substringToIndex:0] lowercaseString]];
-        value = [self.dataObject valueForKey:dataKey];
+        return [self.dataObject valueForKey:dataKey];
     } else {
-        value = [super valueForKey:key];
+        return [super valueForKey:key];
     }
-    
-    return value;
 }
 
 - (BOOL)saveObject {
