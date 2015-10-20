@@ -36,8 +36,6 @@ gulp.task('controller-test', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
-
-
 gulp.task('server-test', function () {
   return gulp.src(['spec/serverSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
