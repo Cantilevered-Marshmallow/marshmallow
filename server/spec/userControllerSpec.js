@@ -5,13 +5,13 @@ var User = require('../db/db').User;
 
 describe('User Controller', function () {
 
-var UserA = {
-              email: "cantilevered.marshmallow@gmail.com",
-              facebookId: "118724648484592",
-              oauthToken: "CAABlq42VOg0BAPDz6Yw5Kc68CMXHSArMiIJfrO2U5czOZC8yFxbdUYfOaXjiX0ZB1TziPpuKjK4AmNboilObJfvijODZAYw6xsabYRB5WBxTfdddm5okDreDDk2nTvMhEZCQqHtbK3snPbyDbSTA9lzpC8g6PMOGDcR4aGEzzVTkDo0uonIzKwZCDpvsjhE2wI9BLNkHaZCPS40PCxZAo9vNjKjWSBUqrMALo5eZBoWZBkgZDZD",
-            };
-var falseUserA = { email: 'cantilevered.marshmallow@gmail.com', facebookId: '111222333444555'};
-var falseUserB = { email: 'fake.marshmallow@gmail.com', facebookId: '118724648484592'};
+  var UserA = {
+                email: "cantilevered.marshmallow@gmail.com",
+                facebookId: "118724648484592",
+                oauthToken: "CAABlq42VOg0BAPDz6Yw5Kc68CMXHSArMiIJfrO2U5czOZC8yFxbdUYfOaXjiX0ZB1TziPpuKjK4AmNboilObJfvijODZAYw6xsabYRB5WBxTfdddm5okDreDDk2nTvMhEZCQqHtbK3snPbyDbSTA9lzpC8g6PMOGDcR4aGEzzVTkDo0uonIzKwZCDpvsjhE2wI9BLNkHaZCPS40PCxZAo9vNjKjWSBUqrMALo5eZBoWZBkgZDZD",
+              };
+  var falseUserA = { email: 'cantilevered.marshmallow@gmail.com', facebookId: '111222333444555'};
+  var falseUserB = { email: 'fake.marshmallow@gmail.com', facebookId: '118724648484592'};
 
   beforeEach(function (done) {
     sequelize.sync({force:true}).then(function () { done(); });

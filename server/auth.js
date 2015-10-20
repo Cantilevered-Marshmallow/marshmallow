@@ -54,8 +54,8 @@ module.exports = {
   },
 
   logout: function (req, res) {
-    if (req.session) {
-      req.session.destroy();
+    if (req.session.auth) {
+      req.session.auth = false;
     }
     res.status(200).end();
   },
