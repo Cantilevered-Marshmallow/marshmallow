@@ -78,11 +78,11 @@
                     // Send a http request to our serverfor signup and login of the user
                     [request requestWithHttpVerb:@"POST" url:@"/signup" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"facebookId": [[FBSDKProfile currentProfile] userID], @"email": result[@"email"]} response:^(NSError * _Nullable error, NSDictionary * _Nullable response) {
                         if (!error) {
-                            _user = [[User alloc] initWithName:result[@"name"]];
+                            _user = [[User alloc] initWithEntityName:@"User" andName:result[@"name"]];
                             _user.email = result[@"email"];
                             _user.token = [_facebookToken tokenString];
                             
-                            [_user saveUser];
+                            [_user saveObject];
                             
                             // Need to delay to the segue because the animation from the sigin frame has not finished yet
                             [self performSelector:@selector(leaveWelcome:) withObject:self afterDelay:0.9];

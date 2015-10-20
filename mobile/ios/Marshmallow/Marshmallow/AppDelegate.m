@@ -25,7 +25,7 @@
         UITabBarController *tb = [storyboard instantiateViewControllerWithIdentifier:@"TabsController"];
         UINavigationController *nc = [tb viewControllers][0];
         ChatsTableViewController *chatsVC = [nc viewControllers][0];
-        chatsVC.user = [[User alloc] initWithName:[[FBSDKProfile currentProfile] name]];
+        chatsVC.user = [[User alloc] initWithEntityName:@"User" andName:[[FBSDKProfile currentProfile] name]];
         [[self window] setRootViewController:tb];
     } else {
         WelcomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];

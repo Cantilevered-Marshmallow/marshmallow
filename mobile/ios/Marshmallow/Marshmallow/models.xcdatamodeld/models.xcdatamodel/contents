@@ -17,20 +17,20 @@
     <entity name="TestUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="profile_image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="profileImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="User" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="profile_image" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="profileImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chatParticipation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chats" syncable="YES"/>
     </entity>
     <elements>
-        <element name="TestUser" positionX="583" positionY="-360" width="128" height="105"/>
-        <element name="User" positionX="286" positionY="-216" width="128" height="120"/>
         <element name="Chats" positionX="81" positionY="-216" width="128" height="75"/>
         <element name="Message" positionX="225" positionY="-534" width="126" height="163"/>
+        <element name="TestUser" positionX="583" positionY="-360" width="128" height="103"/>
+        <element name="User" positionX="286" positionY="-216" width="128" height="118"/>
     </elements>
 </model>

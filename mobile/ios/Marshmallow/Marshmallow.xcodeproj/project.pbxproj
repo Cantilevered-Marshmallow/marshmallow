@@ -13,6 +13,9 @@
 		CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
+		CAA8F23B1BD6C78C009844AC /* Chats.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23A1BD6C78C009844AC /* Chats.m */; settings = {ASSET_TAGS = (); }; };
+		CAA8F23E1BD6C8BC009844AC /* CMDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */; settings = {ASSET_TAGS = (); }; };
+		CAA8F2401BD6F4E6009844AC /* CMDataModelTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -60,6 +63,11 @@
 		CAA8F2321BD5BECC009844AC /* HDNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDNotificationView.h; sourceTree = "<group>"; };
 		CAA8F2361BD6BF0C009844AC /* IconTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTabBarController.h; sourceTree = "<group>"; };
 		CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconTabBarController.m; sourceTree = "<group>"; };
+		CAA8F2391BD6C78C009844AC /* Chats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chats.h; sourceTree = "<group>"; };
+		CAA8F23A1BD6C78C009844AC /* Chats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chats.m; sourceTree = "<group>"; };
+		CAA8F23C1BD6C8BC009844AC /* CMDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDataModel.h; sourceTree = "<group>"; };
+		CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataModel.m; sourceTree = "<group>"; };
+		CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataModelTestCase.m; sourceTree = "<group>"; };
 		CAC352251BD1C1DC00AEF3D3 /* ChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
 		CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
 		CAC352281BD1EAA000AEF3D3 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -161,6 +169,10 @@
 				CACEEDA81BD5616E0086CBCF /* CMDataAccessor.m */,
 				CACEEDAA1BD567DE0086CBCF /* User.h */,
 				CACEEDAB1BD567DE0086CBCF /* User.m */,
+				CAA8F2391BD6C78C009844AC /* Chats.h */,
+				CAA8F23A1BD6C78C009844AC /* Chats.m */,
+				CAA8F23C1BD6C8BC009844AC /* CMDataModel.h */,
+				CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -230,6 +242,7 @@
 				CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */,
 				CACEEDAD1BD5A2240086CBCF /* CMDataAccessorTestCase.m */,
 				CAE7FD251BD5A84B005E7017 /* UserTestCase.m */,
+				CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */,
 			);
 			path = MarshmallowTests;
 			sourceTree = "<group>";
@@ -518,11 +531,13 @@
 				CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */,
 				CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */,
 				CACEEDAC1BD567DE0086CBCF /* User.m in Sources */,
+				CAA8F23E1BD6C8BC009844AC /* CMDataModel.m in Sources */,
 				CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */,
 				CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */,
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
 				CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */,
 				CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */,
+				CAA8F23B1BD6C78C009844AC /* Chats.m in Sources */,
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
 				CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */,
 			);
@@ -536,6 +551,7 @@
 				CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */,
 				CACEEDAE1BD5A2240086CBCF /* CMDataAccessorTestCase.m in Sources */,
 				CAFCBF8E1BD0279C00C9E28B /* MarshmallowTests.m in Sources */,
+				CAA8F2401BD6F4E6009844AC /* CMDataModelTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
