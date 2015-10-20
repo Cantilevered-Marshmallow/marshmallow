@@ -13,10 +13,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Add logout button to navigation bar
-    UIBarButtonItem *logoutButton = [[UIBarButtonItem alloc] initWithTitle:@"Logout" style:UIBarButtonItemStylePlain target:self action:@selector(logout:)];
-    [[self navigationItem] setRightBarButtonItem:logoutButton animated:YES];
-    
     _request = [[CMNetworkRequest alloc] init];
     _chats = @[];
     
@@ -43,12 +39,6 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [self performSegueWithIdentifier:@"showChat" sender:self];
-}
-
-- (void)logout:(id)sender {
-    [[[FBSDKLoginManager alloc] init] logOut];
-    
-    [self performSegueWithIdentifier:@"moveToWelcome" sender:self];
 }
 
 - (void)fetchChats:(id)sender {

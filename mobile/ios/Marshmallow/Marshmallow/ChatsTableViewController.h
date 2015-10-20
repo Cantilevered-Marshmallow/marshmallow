@@ -34,8 +34,6 @@
 
 @property NSArray *chats;
 
-- (void)logout:(id)sender;
-
 - (void)fetchChats:(id)sender;
 
 @end

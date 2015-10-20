@@ -146,7 +146,6 @@
                     <connections>
                         <outlet property="chatControls" destination="iGy-NE-xE0" id="Sio-iI-TSo"/>
                         <outlet property="messageInput" destination="yZc-5r-c26" id="4Am-2K-lT2"/>
-                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="moveToWelcome" id="0fY-4K-8Hv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRr-jk-1lF" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -182,7 +181,6 @@
                     <tabBarItem key="tabBarItem" title="Item" id="avK-aO-cJJ"/>
                     <navigationItem key="navigationItem" title="Chats" id="3Az-Mh-MLD"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="showDetail" identifier="moveToWelcome" id="cn7-bE-eCc"/>
                         <segue destination="Y7T-Ey-01K" kind="show" identifier="showChat" id="CbZ-ol-NEs"/>
                     </connections>
                 </tableViewController>
@@ -339,7 +337,4 @@
         <image name="Icon-72" width="72" height="72"/>
         <image name="iTunesArtwork" width="512" height="512"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="cn7-bE-eCc"/>
-    </inferredMetricsTieBreakers>
 </document>
