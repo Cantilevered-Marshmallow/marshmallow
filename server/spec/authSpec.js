@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var auth = require('../auth');
-var User = require('../user/userModel');
+var User = require('../db/db').User;
 
 var UserA = {
               email: "cantilevered.marshmallow@gmail.com",
