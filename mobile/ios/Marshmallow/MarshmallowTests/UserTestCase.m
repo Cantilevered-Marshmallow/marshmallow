@@ -21,7 +21,7 @@
 - (void)setUp {
     [super setUp];
     
-    _user = [[User alloc] init];
+    _user = [[User alloc] initWithEntityName:@"TestUser" andName:@"Marsh Canti"];
 }
 
 - (void)tearDown {
@@ -30,7 +30,6 @@
 }
 
 - (void)testInitWithNameMethod {
-    _user = [[User alloc] initWithEntityName:@"User" andName:@"Marsh Canti"];
     XCTAssertTrue([_user.name isEqualToString:@"Marsh Canti"]);
 }
 
