@@ -15,6 +15,8 @@
     
     if (self) {
         [self setValue:title forKey:@"attrTitle"];
+        
+        [self populatePropertiesAtColumn:@"title" withValue:title];
     }
     
     return self;
