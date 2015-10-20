@@ -21,7 +21,7 @@
 - (void)setUp {
     [super setUp];
     
-    _user = [[User alloc] init];
+    _user = [[User alloc] initWithEntityName:@"TestUser" andName:@"Marsh Canti"];
 }
 
 - (void)tearDown {
@@ -29,20 +29,7 @@
     [super tearDown];
 }
 
-- (void)testSaveUserMethod {
-    _user.name = @"Marsh Canti";
-    _user.email = @"marsh@marshmallowworld.com";
-    XCTAssertTrue([_user saveUser]);
-}
-
-- (void)testGetUserMethod {
-    _user.name = @"Marsh Canti";
-    [_user getUser];
-    XCTAssertTrue([_user.email isEqualToString:@"marsh@marshmallowworld.com"]);
-}
-
 - (void)testInitWithNameMethod {
-    _user = [[User alloc] initWithName:@"Marsh Canti"];
     XCTAssertTrue([_user.name isEqualToString:@"Marsh Canti"]);
 }
 

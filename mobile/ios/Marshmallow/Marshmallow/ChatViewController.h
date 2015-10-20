@@ -19,6 +19,4 @@
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
 
-- (void)logout:(id)sender;
-
 @end

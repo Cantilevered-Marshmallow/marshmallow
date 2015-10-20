@@ -11,6 +11,10 @@
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
 
+#import "HDNotificationView.h"
+
+#import "CMNetworkRequest.h"
+
 #import "ChatViewController.h"
 #import "User.h"
 
@@ -26,6 +30,10 @@
 
 @property User *user;
 
-- (void)logout:(id)sender;
+@property CMNetworkRequest *request;
+
+@property NSArray *chats;
+
+- (void)fetchChats:(id)sender;
 
 @end
