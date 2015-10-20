@@ -8,7 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-#import "CMDataAccessor.h"
 #import "CMDataModel.h"
 
 @interface User : CMDataModel
