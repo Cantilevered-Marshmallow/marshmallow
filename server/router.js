@@ -24,12 +24,21 @@ router.post('/userlist', function (req, res) {
 
 router.post('/chat', auth.authenticate, function (req, res) {
   chatController.createChat(req.body.users)
-    .then(function () {});
+    .then(function (chat) {
+      var jsonResponse = {chatId: chat.id};
+      res.status(201).send(jsonResponse);
+    })
+    .catch(function (err) {
+      res.status(400).send(err.message);
+    });
 });
 
 router.get('/chat', auth.authenticate, function (req, res) {
   chatController.retrieveChats(req.session.user)
-    .then(function () {});
+    .then(function (chats) {
+      var jsonResponse = {chats: chats};
+      res.status(200).send(jsonResponse);
+    });
 });
 
 // router.get('/chat/:id', );
