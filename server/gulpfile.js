@@ -42,26 +42,16 @@ gulp.task('user-test', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('auth-test', function () {
-  return gulp.src(['spec/authSpec.js'], {read: false})
-             .pipe(mocha({reporter: 'spec'}));
-});
-
-gulp.task('user-controller-test', function () {
-  return gulp.src(['spec/userControllerSpec.js'], {read: false})
-             .pipe(mocha({reporter: 'spec'}));
-});
 
 gulp.task('server-test', function () {
   return gulp.src(['spec/serverSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('test', ['set-env', 'user-test']);
 
-gulp.task('local-test', ['set-env', 'db:drop', 'db:create', 'server-test']);
+gulp.task('server-test', ['set-env', 'db:drop', 'db:create', 'server-test']);
 
-gulp.task('newTest', ['set-env', 'auth-test']);
+gulp.task('local-test', ['set-env', 'user-test']);
 
 gulp.task('start', ['set-env', 'nodemon']);
 
