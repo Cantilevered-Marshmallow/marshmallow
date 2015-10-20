@@ -18,7 +18,9 @@
     
     for (UITabBarItem *item in items) {
         if ([item.title isEqualToString:@"Chats"]) {
-            item.image = [[FAKFontAwesome iconWithIdentifier:@"fa-envelope-o" size:25 error:&error] imageWithSize:CGSizeMake(25, 25)];
+            item.image = [[FAKIonIcons iconWithIdentifier:@"ion-ios-chatboxes-outline" size:35 error:&error] imageWithSize:CGSizeMake(35, 35)];
+        } else if ([item.title isEqualToString:@"Contacts"]) {
+            item.image = [[FAKIonIcons iconWithIdentifier:@"ion-ios-people-outline" size:35 error:&error] imageWithSize:CGSizeMake(35, 35)];
         }
     }
 }
