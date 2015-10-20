@@ -1,6 +1,7 @@
 var sequelize = require('../db/db').sequelize;
 var expect = require('chai').expect;
 var userController = require('../user/userController');
+var sinon = require('sinon');
 var User = require('../db/db').User;
 
 describe('User Controller', function () {
@@ -64,5 +65,23 @@ describe('User Controller', function () {
         expect(user).to.not.deep.equal(falseUserB);
         done();
       });
+  });
+
+  it('should return a list of facebookIds', function (done) {
+    var users = ['213432123450987', '653496787465543', '365425430798645'];
+    var findAllMock = sinon.stub(User, 'findAll').returns(
+        new Promise(function (resolve) {
+          resolve([
+          {email: 'testemail@test.com', facebookId: '653496787465543'},
+          {email: 'test2@test2.com', facebookId: '653523446554453'}
+          ]);
+        })
+      );
+
+    userController.userList(users).then(function (list) {
+      expect(list).to.deep.equal(['653496787465543']);
+      done();
+    });
+
   });
 });

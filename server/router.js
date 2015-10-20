@@ -14,7 +14,12 @@ router.post('/login', auth.authFacebook, auth.login);
 
 router.get('/logout', auth.logout);
 
-// router.post('/userlist', );
+router.post('/userlist', function (req, res) {
+  userController.userList(req.body.users)
+    .then(function (users) {
+
+    });
+});
 
 // router.post('/chat', );
 
