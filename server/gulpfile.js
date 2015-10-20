@@ -41,11 +41,7 @@ gulp.task('server-test', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
-<<<<<<< f7aa5ea4deed75ce0dc149690e09199bf8c31856
 gulp.task('test', ['set-env', 'user-test', 'server-test']);
-=======
-gulp.task('test', ['set-env', 'db:drop', 'db:create', 'dbtest', 'server-test']);
->>>>>>> Fix tests in serverSpec.
 
 gulp.task('start', ['set-env', 'nodemon']);
 
