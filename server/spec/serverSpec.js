@@ -1,7 +1,6 @@
 var request = require('supertest');
 var sinon = require('sinon');
 var auth = require('../auth');
-// var User = require('../user/userModel');
 
 /* For reference
    http://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
