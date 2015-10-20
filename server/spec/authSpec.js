@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var auth = require('../auth');
-var User = require('../db/db').User;
+var userController = require('../user/userController');
 
 var UserA = {
               email: "cantilevered.marshmallow@gmail.com",
@@ -61,13 +61,7 @@ describe('Auth Service', function () {
 
     var res = {};
     var req = {};
-
-    before(function (done) {
-      User.sync({ force: true })
-      .then(function () {
-        done();
-      });
-    });
+    var userControllerStub;
 
     beforeEach(function (done) {
       res = {
@@ -84,49 +78,26 @@ describe('Auth Service', function () {
       done();
     });
 
+    afterEach(function (done) {
+      userControllerStub.restore();
+      done();
+    });
+
     it('should create a new user, amend session object on req, and send back user data', function (done) {
+      userControllerStub = sinon.stub(userController, 'registerNewUser', function (newUser) {
+        return new Promise(function (resolve, reject) {
+          resolve(newUser);
+        });
+      });
+
       req.body = UserA;
 
       res.send = function (data) {
-
         expect(res.statusCode).to.equal(201);
         expect(data.email).to.equal(UserA.email);
         expect(data.facebookId).to.equal(UserA.facebookId);
-
-        User.findOne({where: {email: UserA.email}}).then(function (user) {
-          expect(user.email).to.equal(UserA.email);
-          expect(user.facebookId).to.equal(UserA.facebookId);
-          done();
-        });
-
+        done();
       };
-
-      auth.signup(req, res);
-    });
-
-    it('should return an error on signup with incomplete information', function (done) {
-      req.body = falseUserA;
-
-      var sendStub = sinon.stub(res, 'send', function(data){
-
-        expect(res.statusCode).to.equal(400);
-        expect(data.email).to.not.equal(falseUserA.email);
-        done();
-      });
-
-      auth.signup(req, res);
-    });
-
-    it('should return an error on signup with falsified OAuth Token', function (done) {
-      req.body = falseUserB;
-
-      var sendStub = sinon.stub(res, 'send', function(data){
-
-        expect(res.statusCode).to.equal(400);
-        expect(data.email).to.not.equal(falseUserB.email);
-        done();
-      });
-
       auth.signup(req, res);
     });
   });
@@ -135,13 +106,7 @@ describe('Auth Service', function () {
 
     var res = {};
     var req = {};
-    before(function (done) {
-      User.sync({ force: true })
-          .then(function () {
-            done();
-          })
-          .catch(done);
-    });
+    var userControllerStub;
 
     beforeEach(function (done) {
       res = {
@@ -158,7 +123,19 @@ describe('Auth Service', function () {
       done();
     });
 
+    afterEach(function (done) {
+      userControllerStub.restore();
+      done();
+    });
+
+
     it('should authenticate user and send back user data', function (done) {
+
+      userControllerStub = sinon.stub(userController, 'isUser', function (user) {
+        return new Promise(function (resolve, reject) {
+          resolve(user);
+        });
+      });
 
       req.body = UserA;
 
@@ -170,14 +147,7 @@ describe('Auth Service', function () {
         done();
       };
 
-      User.create({
-        email: UserA.email,
-        facebookId: UserA.facebookId
-      })
-      .then(function () {
-        auth.login(req, res);
-      });
-
+      auth.login(req, res);
     });
 
   });
@@ -197,13 +167,7 @@ describe('Auth Service', function () {
         send: sinon.spy(),
         statusCode: 0
       };
-
-      User.sync({ force: true })
-        .then(function () {
-          User.create(UserA).then(function () {
-            done();
-          });
-        });
+      done();
     });
 
     it('should authenticate logged in user', function (done) {
