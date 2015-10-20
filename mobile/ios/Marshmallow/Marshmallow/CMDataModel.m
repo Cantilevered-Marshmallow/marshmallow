@@ -34,8 +34,6 @@
             key = [key stringByAppendingString:[components[i] substringFromIndex:1]];
         }
         
-         NSLog(@"%@", key);
-        
         [self setValue:value forKeyPath:key];
     } else {
         if ([key hasPrefix:@"attr"]) {
@@ -74,9 +72,7 @@
         
         if (![key isEqualToString:@"accessor"] && ![key isEqualToString:@"dataObject"]) {
             NSString *attrKey = [[key substringWithRange:NSMakeRange(0, 1)] uppercaseString];
-            NSLog(@"%@", attrKey);
             attrKey = [attrKey stringByAppendingString:[key substringFromIndex:1]];
-            NSLog(@"%@", key);
             [self setValue:[row valueForKey:key] forKey:[NSString stringWithFormat:@"attr%@", attrKey]];
         }
     }
