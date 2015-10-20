@@ -16,6 +16,7 @@
 		CAA8F23B1BD6C78C009844AC /* Chats.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23A1BD6C78C009844AC /* Chats.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F23E1BD6C8BC009844AC /* CMDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2401BD6F4E6009844AC /* CMDataModelTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */; settings = {ASSET_TAGS = (); }; };
+		CAA8F2421BD7060B009844AC /* ChatsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2411BD7060B009844AC /* ChatsTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -68,6 +69,7 @@
 		CAA8F23C1BD6C8BC009844AC /* CMDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDataModel.h; sourceTree = "<group>"; };
 		CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataModel.m; sourceTree = "<group>"; };
 		CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataModelTestCase.m; sourceTree = "<group>"; };
+		CAA8F2411BD7060B009844AC /* ChatsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTestCase.m; sourceTree = "<group>"; };
 		CAC352251BD1C1DC00AEF3D3 /* ChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
 		CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
 		CAC352281BD1EAA000AEF3D3 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -243,6 +245,7 @@
 				CACEEDAD1BD5A2240086CBCF /* CMDataAccessorTestCase.m */,
 				CAE7FD251BD5A84B005E7017 /* UserTestCase.m */,
 				CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */,
+				CAA8F2411BD7060B009844AC /* ChatsTestCase.m */,
 			);
 			path = MarshmallowTests;
 			sourceTree = "<group>";
@@ -548,6 +551,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CAE7FD261BD5A84B005E7017 /* UserTestCase.m in Sources */,
+				CAA8F2421BD7060B009844AC /* ChatsTestCase.m in Sources */,
 				CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */,
 				CACEEDAE1BD5A2240086CBCF /* CMDataAccessorTestCase.m in Sources */,
 				CAFCBF8E1BD0279C00C9E28B /* MarshmallowTests.m in Sources */,
