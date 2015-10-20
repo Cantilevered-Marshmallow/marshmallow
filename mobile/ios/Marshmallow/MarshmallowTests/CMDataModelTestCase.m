@@ -60,4 +60,13 @@
     XCTAssertTrue([[self.model valueForKey:@"attrName"] isEqualToString:@"Marsh Canti"]);
 }
 
+- (void)testSaveObjectMethod {
+    [_model setValue:@"Marsh Canti" forKey:@"attrName"];
+    [_model saveObject];
+    
+    _model = [[User alloc] initWithEntityName:@"TestUser"];
+    [_model populatePropertiesAtColumn:@"name" withValue:@"Marsh Canti"];
+    XCTAssertTrue([_model.name isEqualToString:@"Marsh Canti"]);
+}
+
 @end

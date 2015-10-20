@@ -21,4 +21,6 @@
 
 - (BOOL)saveObject;
 
+- (void)populatePropertiesAtColumn:(NSString *)column withValue:(id)value;
+
 @end

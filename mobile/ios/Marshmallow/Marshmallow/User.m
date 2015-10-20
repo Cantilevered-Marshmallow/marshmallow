@@ -16,6 +16,8 @@
     
     if (self) {
         [self setValue:userName forKey:@"attrName"];
+        
+        [self populatePropertiesAtColumn:@"name" withValue:userName];
     }
     
     return self;
