@@ -2,6 +2,7 @@ var router = require('express').Router();
 
 var auth = require('./auth');
 var userController = require('./user/userController');
+var chatController = require('./chat/chatController');
 
 router.use(function timeLog (req, res, next) {
   console.log('Time :', Date.now());
@@ -21,9 +22,15 @@ router.post('/userlist', function (req, res) {
     });
 });
 
-// router.post('/chat', );
+router.post('/chat', auth.authenticate, function (req, res) {
+  chatController.createChat(req.body.users)
+    .then(function () {});
+});
 
-// router.get('/chat', );
+router.get('/chat', auth.authenticate, function (req, res) {
+  chatController.retrieveChats(req.session.user)
+    .then(function () {});
+});
 
 // router.get('/chat/:id', );
 
