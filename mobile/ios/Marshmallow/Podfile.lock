@@ -38,12 +38,45 @@ PODS:
     - FBSDKCoreKit/arc
   - FBSDKLoginKit (4.7.0):
     - FBSDKCoreKit
+  - FontAwesomeKit (2.1.9):
+    - FontAwesomeKit/Core (= 2.1.9)
+    - FontAwesomeKit/FontAwesome (= 2.1.9)
+    - FontAwesomeKit/FoundationIcons (= 2.1.9)
+    - FontAwesomeKit/IonIcons (= 2.1.9)
+    - FontAwesomeKit/Material (= 2.1.9)
+    - FontAwesomeKit/Octicons (= 2.1.9)
+    - FontAwesomeKit/Zocial (= 2.1.9)
+  - FontAwesomeKit/Core (2.1.9)
+  - FontAwesomeKit/FontAwesome (2.1.9):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/FoundationIcons (2.1.9):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/IonIcons (2.1.9):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Material (2.1.9):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Octicons (2.1.9):
+    - FontAwesomeKit/Core
+  - FontAwesomeKit/Zocial (2.1.9):
+    - FontAwesomeKit/Core
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
   - DateTools
   - FBSDKCoreKit (~> 4.7)
   - FBSDKLoginKit (~> 4.7)
+  - FontAwesomeKit (from `https://github.com/PrideChung/FontAwesomeKit.git`, commit
+    `1bdb8de41294ec30f2d56858c5c2742c14933ad7`)
+
+EXTERNAL SOURCES:
+  FontAwesomeKit:
+    :commit: 1bdb8de41294ec30f2d56858c5c2742c14933ad7
+    :git: https://github.com/PrideChung/FontAwesomeKit.git
+
+CHECKOUT OPTIONS:
+  FontAwesomeKit:
+    :commit: 1bdb8de41294ec30f2d56858c5c2742c14933ad7
+    :git: https://github.com/PrideChung/FontAwesomeKit.git
 
 SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
@@ -51,5 +84,6 @@ SPEC CHECKSUMS:
   DateTools: 53288ee8b905fdc75897a1e6b5cc0144b14cba60
   FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
   FBSDKLoginKit: 01bce8dd3f3a26a023b0ba4ffdde7ef5062889fe
+  FontAwesomeKit: 1a21b835bd74f0591bfc1dac8c5540188eab3f38
 
 COCOAPODS: 0.39.0

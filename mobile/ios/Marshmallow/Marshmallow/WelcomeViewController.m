@@ -44,7 +44,8 @@
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([segue.identifier isEqualToString:@"moveToChats"]) {
-        UINavigationController *navigationController = segue.destinationViewController;
+        UITabBarController *tb = segue.destinationViewController;
+        UINavigationController *navigationController = [tb viewControllers][0];
         ChatsTableViewController *chats = [navigationController viewControllers][0];
         
         // pass data along
