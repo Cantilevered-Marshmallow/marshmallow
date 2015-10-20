@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+    <entity name="Chats" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="Message" syncable="YES">
+        <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="chatsId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="googleImageId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="youtubeVideoId" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chats" syncable="YES"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="User" syncable="YES"/>
+    </entity>
     <entity name="TestUser" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -11,9 +25,12 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profile_image" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="chatParticipation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chats" syncable="YES"/>
     </entity>
     <elements>
-        <element name="User" positionX="-63" positionY="-18" width="128" height="105"/>
-        <element name="TestUser" positionX="-54" positionY="18" width="128" height="105"/>
+        <element name="TestUser" positionX="583" positionY="-360" width="128" height="105"/>
+        <element name="User" positionX="286" positionY="-216" width="128" height="120"/>
+        <element name="Chats" positionX="81" positionY="-216" width="128" height="75"/>
+        <element name="Message" positionX="225" positionY="-534" width="126" height="163"/>
     </elements>
 </model>
