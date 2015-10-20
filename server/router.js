@@ -17,7 +17,7 @@ router.get('/logout', auth.logout);
 router.post('/userlist', function (req, res) {
   userController.userList(req.body.users)
     .then(function (users) {
-
+      res.status(200).send(users);
     });
 });
 
