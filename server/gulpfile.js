@@ -38,11 +38,16 @@ gulp.task('db:create', dbTask.create(dbCredentials.DB));
 gulp.task('db:drop', dbTask.drop(dbCredentials.DB));
 
 gulp.task('user-test', function () {
-  return gulp.src(['spec/userModelSpec.js','spec/userControllerSpec.js','spec/authSpec.js'], {read: false})
+  return gulp.src(['spec/userControllerSpec.js','spec/authSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
 
-gulp.task('controller-test', function () {
+gulp.task('auth-test', function () {
+  return gulp.src(['spec/authSpec.js'], {read: false})
+             .pipe(mocha({reporter: 'spec'}));
+});
+
+gulp.task('user-controller-test', function () {
   return gulp.src(['spec/userControllerSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
@@ -55,6 +60,8 @@ gulp.task('server-test', function () {
 gulp.task('test', ['set-env', 'user-test']);
 
 gulp.task('local-test', ['set-env', 'db:drop', 'db:create', 'server-test']);
+
+gulp.task('newTest', ['set-env', 'auth-test']);
 
 gulp.task('start', ['set-env', 'nodemon']);
 
