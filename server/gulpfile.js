@@ -49,7 +49,7 @@ gulp.task('server-test', function () {
 });
 
 
-gulp.task('server-test', ['set-env', 'db:drop', 'db:create', 'server-test']);
+gulp.task('server-integration-test', ['set-env', 'db:drop', 'db:create', 'server-test']);
 
 gulp.task('local-test', ['set-env', 'user-test']);
 
