@@ -231,8 +231,35 @@ describe('Auth Service', function () {
 
   });
 
-  xdescribe('Logout', function () {
+  describe('Logout', function () {
 
+    var req = {};
+    var res;
+
+    beforeEach(function (done) {
+      req.session = {};
+      res = {
+        status: function (code) {
+            this.statusCode = code;
+            return this;
+          },
+        statusCode: null
+      };
+      done();
+    });
+
+    it('should remove authenticated status from logged in user\'s session', function (done) {
+      req.session.user = UserA;
+      req.session.auth = true;
+
+      res.end = function () {
+        expect(req.session.auth).to.not.equal(true);
+        expect(res.statusCode).to.equal(200);
+        done();
+      };
+
+      auth.logout(req, res);
+    });
   });
 
 });

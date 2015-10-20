@@ -1,6 +1,7 @@
-var express = require('express');
-var router = express.Router();
+var router = require('express').Router();
+
 var auth = require('./auth');
+var userController = require('./user/userController');
 
 router.use(function timeLog (req, res, next) {
   console.log('Time :', Date.now());
