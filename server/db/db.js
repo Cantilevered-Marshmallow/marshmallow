@@ -6,6 +6,8 @@ var sequelize = new Sequelize(process.env.DB, process.env.DB_USER, process.env.D
   logging: false
 });
 
+var UserChat = sequelize.define('user_chat', {});
+
 var User = sequelize.define('user', {
   email: {type: Sequelize.STRING, unique: true},
   facebookId: {type: Sequelize.STRING, unique: true}
