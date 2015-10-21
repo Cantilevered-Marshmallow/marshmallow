@@ -88,8 +88,7 @@
                             
                             [_user saveObject];
                             
-                            // Need to delay to the segue because the animation from the sigin frame has not finished yet
-                            [self performSelector:@selector(leaveWelcome:) withObject:self afterDelay:0.9];
+                            [self getFriends];
                         } else {
                             NSLog(@"%@", error);
                         }
@@ -114,6 +113,31 @@
     if ([FBSDKProfile currentProfile]) { // Check to see if the profile is not nil
         _facebookProfile = [FBSDKProfile currentProfile];
     }
+}
+
+- (void)getFriends {
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:@"/me/friends"
+                                  parameters:@{}
+                                  HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        if (!error) {
+            NSArray *friends = result[@"data"];
+            for (NSDictionary *friend in friends) {
+                Contact *contact = [[Contact alloc] initWithEntityName:@"Contact" andName:friend[@"name"]];
+                [contact setValue:friend[@"id"] forKey:@"attrContactId"];
+                
+                [contact saveObject];
+            }
+            
+            // Need to delay to the segue because the animation from the sigin frame has not finished yet
+            [self performSelector:@selector(leaveWelcome:) withObject:self afterDelay:0.9];
+        } else {
+            NSLog(@"%@", error);
+        }
+    }];
 }
 
 @end

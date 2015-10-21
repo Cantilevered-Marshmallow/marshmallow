@@ -17,6 +17,7 @@
 #import "CMNetworkRequest.h"
 
 #import "User.h"
+#import "Contact.h"
 
 @interface WelcomeViewController : UIViewController <FBSDKLoginButtonDelegate>
 
@@ -31,6 +32,8 @@
 @property User *user;
 
 - (void)leaveWelcome:(id)sender;
+
+- (void)getFriends;
 
 @end
 
