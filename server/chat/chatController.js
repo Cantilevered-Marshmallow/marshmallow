@@ -32,6 +32,16 @@ module.exports = {
         return chat.id;
       });
     });
-  }
+  },
+
+  getMessages: function (chatId) {
+
+  },
+
+  postMessage: function (chatId, message) {
+
+  },
+
+  _messageStore: {}
 
 };

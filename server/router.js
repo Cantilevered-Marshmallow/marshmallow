@@ -35,9 +35,19 @@ router.get('/chat', auth.authenticate, function (req, res) {
     });
 });
 
-// router.get('/chat/:id', );
+router.get('/chat/:id', auth.authenticate, function (req, res) {
+  chatController.getMessages(req.params.id)
+    .then(function (messages) {
+      res.status(200).send({ messages: messages });
+    });
+});
 
-// router.post('/chat/:id',);
+router.post('/chat/:id', auth.authenticate, function (req, res) {
+  chatController.postMessage(req.params.id, req.body)
+    .then(function () {
+      res.status(201).send();
+    });
+});
 
 // router.get('/youtube', );
 

@@ -68,7 +68,6 @@ describe('Chat Controller', function () {
           done();
         });
     });
-
   });
 
   describe('Retrieve chats', function () {
@@ -117,6 +116,14 @@ describe('Chat Controller', function () {
           done();
         });
     });
+  });
+
+  xdescribe('Get messages', function () {
+
+  });
+
+  xdescribe('Post messages', function () {
+
   });
 
 });
