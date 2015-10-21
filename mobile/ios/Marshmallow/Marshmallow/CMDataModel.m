@@ -46,7 +46,7 @@
             [_dataObject setValue:value forKey:key];
         }
         
-        // Then call super to not break the chain
+        // Then call super to not break the class inheritence chain
         [super setValue:value forKey:key];
     }
 }
