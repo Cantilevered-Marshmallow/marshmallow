@@ -15,13 +15,6 @@ router.post('/login', auth.authFacebook, auth.login);
 
 router.get('/logout', auth.logout);
 
-router.post('/userlist', function (req, res) {
-  userController.userList(req.body.users)
-    .then(function (users) {
-      res.status(200).send(users);
-    });
-});
-
 router.post('/chat', auth.authenticate, function (req, res) {
   chatController.createChat(req.body.users)
     .then(function (chat) {

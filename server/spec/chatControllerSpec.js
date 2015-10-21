@@ -1,5 +1,5 @@
 var expect = require('chai').expect;
-var chatController = require('../user/chatController');
+var chatController = require('../chat/chatController');
 var sinon = require('sinon');
 var Chat = require('../db/db').Chat;
 var User = require('../db/db').User;
@@ -37,14 +37,17 @@ describe('Chat Controller', function () {
     it('should create a chat with correct users', function (done) {
       var setUsersList;
 
-      userStub.returns([
+      var usersList = [
           {email: 'test3@test.com', facebookId: '5253463547456458'},
           {email: 'test4@test.com', facebookId: '6253463547456459'}
-        ]);
+        ];
+
+      userStub.returns(new Promise (function (resolve, reject) {
+        resolve(usersList);
+      }));
 
       var chatInstance = {
           id: 12341245,
-          users: [],
           setUsers: function (list) {
             setUsersList = list;
           }
@@ -55,9 +58,10 @@ describe('Chat Controller', function () {
         );
 
       var inputList = ['6253463547456459', '5253463547456458'];
+
       chatController.createChat(inputList)
         .then(function (resolveObj) {
-          expect(setUsersList).to.deep.equal(inputList);
+          expect(setUsersList).to.deep.equal(usersList);
           expect(userStub.called).to.equal(true);
           expect(chatStub.called).to.equal(true);
           expect(resolveObj).to.deep.equal(chatInstance);
@@ -87,6 +91,7 @@ describe('Chat Controller', function () {
     var userStub;
 
     beforeEach(function (done) {
+
       userStub = sinon.stub(User, 'findOne', function (query) {
         return new Promise (function (resolve, reject) {
           if(query.where.email === user.email && query.where.facebookId === user.facebookId){
@@ -96,6 +101,7 @@ describe('Chat Controller', function () {
           }
         });
       });
+
       done();
     });
 
@@ -105,9 +111,9 @@ describe('Chat Controller', function () {
     });
 
     it('should resolve all chats', function (done) {
-      chatController(user)
+      chatController.retrieveChats(user)
         .then(function (resolveObj) {
-          expect(resolveObj).to.deep.equal(chats);
+          expect(resolveObj).to.deep.equal(['1','2']);
           done();
         });
     });

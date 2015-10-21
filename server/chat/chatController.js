@@ -25,9 +25,11 @@ module.exports = {
       email: user.email,
       facebookId: user.facebookId
     }}).then(function (userInstance) {
-      return userInstance.getChats().map(function (chat) {
-        return chat.id
-      })
+      return userInstance.getChats();
+    }).then(function (chats) {
+      return chats.map(function (chat) {
+        return chat.id;
+      });
     });
   }
 
