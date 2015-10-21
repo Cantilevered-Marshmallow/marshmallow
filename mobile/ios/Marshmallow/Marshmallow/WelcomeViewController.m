@@ -52,6 +52,8 @@
         chats.facebookToken = [self facebookToken];
         chats.facebookProfile = [self facebookProfile];
         chats.user = _user;
+        
+        [HDNotificationView hideNotificationView];
     }
 }
 
@@ -67,6 +69,8 @@
         NSLog(@"%@", error);
     } else {
         if (!result.isCancelled) { // Did the user cancel the login?
+            [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Loading..." message:@"Setting up data" isAutoHide:NO];
+            
             _facebookToken = result.token;
             
             FBSDKGraphRequest *graphRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,email"}];
