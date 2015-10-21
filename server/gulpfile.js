@@ -48,6 +48,11 @@ gulp.task('server-test', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
+gulp.task('chat-test', function () {
+  return gulp.src(['spec/chatControllerSpec.js'], {read: false})
+             .pipe(mocha({reporter: 'spec'}));
+});
+
 
 gulp.task('server-integration-test', ['set-env', 'db:drop', 'db:create', 'server-test']);
 

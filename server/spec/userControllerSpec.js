@@ -57,7 +57,7 @@ describe('User Controller', function () {
   it('should find an existing user', function (done) {
     userStub = sinon.stub(User, 'findOne', function (query) {
       return new Promise(function (resolve, reject) {
-        if (query.where.email === UserA.email 
+        if (query.where.email === UserA.email
             && query.where.facebookId === UserA.facebookId) {
           resolve(UserA);
         }
@@ -75,7 +75,7 @@ describe('User Controller', function () {
   it('should not find a non-existant user', function (done) {
     userStub = sinon.stub(User, 'findOne', function (query) {
       return new Promise(function (resolve, reject) {
-        if (query.where.email === UserA.email 
+        if (query.where.email === UserA.email
             && query.where.facebookId === UserA.facebookId) {
           resolve(UserA);
         } else {
@@ -98,23 +98,4 @@ describe('User Controller', function () {
       });
   });
 
-  it('should return a list of facebookIds', function (done) {
-    var users = {users: ['213432123450987', '653496787465543', '365425430798645']};
-    var findAllMock = sinon.stub(User, 'findAll').returns(
-        new Promise(function (resolve) {
-          resolve([
-          {email: 'testemail@test.com', facebookId: '653496787465543'},
-          {email: 'test2@test2.com', facebookId: '653523446554453'}
-          ]);
-        })
-      );
-
-    userController.userList(users).then(function (returnObject) {
-      expect(returnObject).to.deep.equal(
-          {users: ['653496787465543']}
-        );
-      done();
-    });
-
-  });
 });

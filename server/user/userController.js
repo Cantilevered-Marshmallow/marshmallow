@@ -13,23 +13,6 @@ module.exports = {
         facebookId: user.facebookId
       }
     });
-  },
-
-  userList: function (list) {
-    return User.findAll().then(function (returnList) {
-
-      var users = returnList.map(function (user) {
-        return user.facebookId;
-      }).filter(function (fbid) {
-        for (var i = 0; i < list.users.length; i++) {
-          if(list.users[i] === fbid){
-            return true;
-          }
-        }
-        return false;
-      });
-
-      return {users: users};
-    });
   }
+
 };
