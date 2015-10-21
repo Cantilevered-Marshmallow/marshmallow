@@ -19,6 +19,8 @@
 
 - (id)initWithEntityName:(NSString *)entityName;
 
+- (id)initWithObject:(NSManagedObject *)object;
+
 - (BOOL)saveObject;
 
 - (void)populatePropertiesAtColumn:(NSString *)column withValue:(id)value;

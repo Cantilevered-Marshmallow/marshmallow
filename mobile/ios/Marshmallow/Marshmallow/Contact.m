@@ -22,4 +22,14 @@
     return self;
 }
 
+- (id)initWithObject:(NSManagedObject *)object {
+    self = [super initWithObject:object];
+    
+    if (self) {
+        [self populatePropertiesAtColumn:@"name" withValue:[object valueForKey:@"name"]];
+    }
+    
+    return self;
+}
+
 @end

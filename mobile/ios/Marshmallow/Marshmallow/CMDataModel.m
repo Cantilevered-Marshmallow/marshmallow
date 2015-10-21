@@ -22,6 +22,18 @@
     return self;
 }
 
+- (id)initWithObject:(NSManagedObject *)object {
+    self = [super init];
+    
+    if (self) {
+        _accessor = [[CMDataAccessor alloc] init];
+        
+        _dataObject = object;
+    }
+    
+    return self;
+}
+
 - (void)setValue:(id)value forKey:(NSString *)key {
     // camelCase-ify the string
     if ([key containsString:@"_"]) {
