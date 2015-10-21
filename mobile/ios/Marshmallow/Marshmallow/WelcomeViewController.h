@@ -11,6 +11,8 @@
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
 
+#import "HDNotificationView.h"
+
 #import "ChatsTableViewController.h"
 #import "CMNetworkRequest.h"
 
