@@ -9,6 +9,8 @@ var router = require('./router');
 // Mount middleware
 var app = express();
 
+// app.use(morgan('combined'));
+
 app.set('port', process.env.PORT || 8080);
 
 app.use(bodyParser.json());
