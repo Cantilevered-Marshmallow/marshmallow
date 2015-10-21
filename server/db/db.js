@@ -6,7 +6,6 @@ var sequelize = new Sequelize(process.env.DB, process.env.DB_USER, process.env.D
   logging: false
 });
 
-var UserChat = sequelize.define('user_chat', {});
 
 var User = sequelize.define('user', {
   email: {type: Sequelize.STRING, unique: true},
@@ -15,11 +14,15 @@ var User = sequelize.define('user', {
 
 var Chat = sequelize.define('chat', {});
 
-Chat.belongsToMany(User, {through: 'UserChat'});
-User.belongsToMany(Chat, {through: 'UserChat'});
+var UserChat = sequelize.define('user_chat', {});
 
-User.sync();
-Chat.sync();
+Chat.belongsToMany(User, {through: UserChat });
+User.belongsToMany(Chat, {through: UserChat });
+
+sequelize.sync();
+// User.sync();
+// Chat.sync();
+
 
 module.exports = {
   sequelize: sequelize,

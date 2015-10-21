@@ -4,6 +4,8 @@ var User = require('../db/db').User;
 module.exports = {
 
   createChat: function (userList) {
+    console.log('called');
+    console.log(userList);
     if (userList.length < 2) {
       return new Promise(function (resolve, reject) {
         reject(new Error('Cannot create chat for less than two person'));

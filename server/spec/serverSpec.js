@@ -6,18 +6,24 @@ var auth = require('../auth');
    http://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
 */
 
+var server;
+
+var BradSmith = {
+  email: "cantilevered.marshmallow@gmail.com",
+  oauthToken: "CAABlq42VOg0BAPDz6Yw5Kc68CMXHSArMiIJfrO2U5czOZC8yFxbdUYfOaXjiX0ZB1TziPpuKjK4AmNboilObJfvijODZAYw6xsabYRB5WBxTfdddm5okDreDDk2nTvMhEZCQqHtbK3snPbyDbSTA9lzpC8g6PMOGDcR4aGEzzVTkDo0uonIzKwZCDpvsjhE2wI9BLNkHaZCPS40PCxZAo9vNjKjWSBUqrMALo5eZBoWZBkgZDZD",
+  facebookId: "118724648484592"
+};
+
+var PeterParker = {
+  email: "cantilevered.marshmallowed@gmail.com",
+  oauthToken: "CAABlq42VOg0BAIjAi3ZAcymPFZAuutxpSlfb1ZCVzgS6xB9JAgt84EqKDrRJHZCFj4EaO6xxEA6EHC5dwV14MmGuyicJ7nfRcTNImI2xiW9eutCTOaQSsJndrLsJqkq71ewvn73ygkJ33T9TsRuKYeyYvZCbeGOSFiS12fr5XhKqOJhfOXK7MWcPEyp0FlsRVqcUzlG0fKNP40rFFfzF7hNdAOCrFWh7ZApHJag31gxQZDZD",
+  facebookId: "102400480121838"
+};
+
+
 describe('Sign up and log in', function () {
-  var server;
-  var user;
   before(function (done) {
     server = require('../server');
-    // fake user
-    user = {
-      email: "cantilevered.marshmallow@gmail.com",
-      oauthToken: "CAABlq42VOg0BAPDz6Yw5Kc68CMXHSArMiIJfrO2U5czOZC8yFxbdUYfOaXjiX0ZB1TziPpuKjK4AmNboilObJfvijODZAYw6xsabYRB5WBxTfdddm5okDreDDk2nTvMhEZCQqHtbK3snPbyDbSTA9lzpC8g6PMOGDcR4aGEzzVTkDo0uonIzKwZCDpvsjhE2wI9BLNkHaZCPS40PCxZAo9vNjKjWSBUqrMALo5eZBoWZBkgZDZD",
-      facebookId: "118724648484592"
-    };
-    
     done();
   });
 
@@ -29,7 +35,19 @@ describe('Sign up and log in', function () {
   it('should register a new user and authenticate a new session', function (done) {
     request(server).post('/signup')
       .set('Content-Type', 'application/json')
-      .send(user)
+      .send(BradSmith)
+      .expect(function (res) {
+        if (typeof res.body !== 'object') {
+          throw new Error("Missing response body");
+        }
+      })
+      .expect(201, done);
+  });
+
+  it('should register another new user and authenticate a new session', function (done) {
+    request(server).post('/signup')
+      .set('Content-Type', 'application/json')
+      .send(PeterParker)
       .expect(function (res) {
         if (typeof res.body !== 'object') {
           throw new Error("Missing response body");
@@ -41,7 +59,7 @@ describe('Sign up and log in', function () {
   it('should not register the same user twice and it should redirect registered user to login', function (done) {
     request(server).post('/signup')
       .set('Content-Type', 'application/json')
-      .send(user)
+      .send(BradSmith)
       .expect(function (res) {
         if (typeof res.body !== 'object') {
           throw new Error("Missing response body");
@@ -53,7 +71,7 @@ describe('Sign up and log in', function () {
   it('should log in an existing user', function (done) {
     request(server).post('/login')
       .set('Content-Type', 'application/json')
-      .send(user)
+      .send(BradSmith)
       .expect(function (res) {
         if (typeof res.body !== 'object') {
           throw new Error("Missing response body");
@@ -61,4 +79,52 @@ describe('Sign up and log in', function () {
       })
       .expect(200, done);
   });
+
+});
+
+describe('GET and POST to /chat', function () {
+
+  before(function (done) {
+    server = require('../server');
+    done();
+  });
+
+  after(function (done) {
+    server.close();
+    authStub.restore();
+    done();
+  });
+
+  it('should create a new chat room for list of users', function (done) {
+
+    var users = { users: ['118724648484592', '102400480121838'] };
+    request(server).post('/chat')
+      .set('Content-Type', 'application/json')
+      .send(users)
+      .expect(function (res) {
+        console.log(res.body);
+        if (!res.body.hasOwnProperty('chatId')) {
+          throw new Error('Failed to create new chat room');
+        }
+      })
+      .expect(201, done);
+  });
+
+  xit('should not create a new chat room for a list of less than two users', function (done) {
+    var users = { users: ['5253463547456458'] };
+    request(server).post('/chat')
+      .set('Content-Type', 'application/json')
+      .send(users)
+      .expect(400, done);
+  });
+
+  xit('should retrieve all chat room id\'s is associated with ', function (done) {
+    var users = { users: ['5253463547456458'] };
+    request(server).post('/chat')
+      .set('Content-Type', 'application/json')
+      .send(users)
+      .expect(400, done);
+  });
+
+
 });

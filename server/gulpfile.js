@@ -33,18 +33,8 @@ gulp.task('set-env', function () {
   }
 });
 
-gulp.task('db:create', dbTask.create(dbCredentials.DB));
-
-gulp.task('db:drop', dbTask.drop(dbCredentials.DB));
-
 gulp.task('user-test', function () {
   return gulp.src(['spec/userControllerSpec.js','spec/authSpec.js'], {read: false})
-             .pipe(mocha({reporter: 'spec'}));
-});
-
-
-gulp.task('server-test', function () {
-  return gulp.src(['spec/serverSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
 
@@ -53,10 +43,29 @@ gulp.task('chat-test', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
+gulp.task('db:drop', dbTask.drop(dbCredentials.DB));
 
-gulp.task('server-integration-test', ['set-env', 'db:drop', 'db:create', 'server-test']);
+gulp.task('db:create', dbTask.create(dbCredentials.DB));
 
-gulp.task('local-test', ['set-env', 'user-test']);
+// gulp.task('db:drop', function (cb) {
+//   dbTask.drop(dbCredentials.DB);
+//   cb();
+// });
+
+// gulp.task('db:create', ['db:drop'], function (cb) {
+//   dbTask.create(dbCredentials.DB);
+//   cb();
+// });
+
+gulp.task('server-test', function () {
+  return gulp.src(['spec/serverSpec.js'], {read: false})
+             .pipe(mocha({reporter: 'spec'}));
+});
+
+
+gulp.task('server-integration-test', ['db:drop', 'db:create', 'set-env', 'server-test']);
+
+gulp.task('local-test', ['set-env', 'user-test', 'chat-test']);
 
 gulp.task('start', ['set-env', 'nodemon']);
 
