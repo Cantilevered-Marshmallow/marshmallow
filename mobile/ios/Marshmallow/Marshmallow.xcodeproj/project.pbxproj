@@ -19,6 +19,8 @@
 		CAA8F2421BD7060B009844AC /* ChatsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2411BD7060B009844AC /* ChatsTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2451BD70700009844AC /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2441BD706FF009844AC /* Message.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2471BD709E4009844AC /* MessageTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2461BD709E4009844AC /* MessageTestCase.m */; settings = {ASSET_TAGS = (); }; };
+		CAA8F24A1BD725E1009844AC /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2491BD725E1009844AC /* Contact.m */; settings = {ASSET_TAGS = (); }; };
+		CAA8F24C1BD726EC009844AC /* ContactTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24B1BD726EC009844AC /* ContactTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -75,6 +77,9 @@
 		CAA8F2431BD706FF009844AC /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		CAA8F2441BD706FF009844AC /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		CAA8F2461BD709E4009844AC /* MessageTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTestCase.m; sourceTree = "<group>"; };
+		CAA8F2481BD725E1009844AC /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		CAA8F2491BD725E1009844AC /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		CAA8F24B1BD726EC009844AC /* ContactTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTestCase.m; sourceTree = "<group>"; };
 		CAC352251BD1C1DC00AEF3D3 /* ChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
 		CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
 		CAC352281BD1EAA000AEF3D3 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -182,6 +187,8 @@
 				CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */,
 				CAA8F2431BD706FF009844AC /* Message.h */,
 				CAA8F2441BD706FF009844AC /* Message.m */,
+				CAA8F2481BD725E1009844AC /* Contact.h */,
+				CAA8F2491BD725E1009844AC /* Contact.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -254,6 +261,7 @@
 				CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */,
 				CAA8F2411BD7060B009844AC /* ChatsTestCase.m */,
 				CAA8F2461BD709E4009844AC /* MessageTestCase.m */,
+				CAA8F24B1BD726EC009844AC /* ContactTestCase.m */,
 			);
 			path = MarshmallowTests;
 			sourceTree = "<group>";
@@ -537,6 +545,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAA8F24A1BD725E1009844AC /* Contact.m in Sources */,
 				CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */,
 				CACEEDA91BD5616E0086CBCF /* CMDataAccessor.m in Sources */,
 				CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */,
@@ -563,6 +572,7 @@
 				CAA8F2471BD709E4009844AC /* MessageTestCase.m in Sources */,
 				CAA8F2421BD7060B009844AC /* ChatsTestCase.m in Sources */,
 				CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */,
+				CAA8F24C1BD726EC009844AC /* ContactTestCase.m in Sources */,
 				CACEEDAE1BD5A2240086CBCF /* CMDataAccessorTestCase.m in Sources */,
 				CAFCBF8E1BD0279C00C9E28B /* MarshmallowTests.m in Sources */,
 				CAA8F2401BD6F4E6009844AC /* CMDataModelTestCase.m in Sources */,
