@@ -15,6 +15,5 @@
 
 @dynamic contactId;
 @dynamic name;
-@dynamic profileImage;
 
 @end

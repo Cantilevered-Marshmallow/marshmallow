@@ -16,9 +16,11 @@
     _request = [[CMNetworkRequest alloc] init];
     _chats = @[];
     
-//    [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Loading..." message:@"Retrieving chats" isAutoHide:NO];
+    [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Loading..." message:@"Retrieving chats" isAutoHide:NO];
     
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchChats:) userInfo:nil repeats:true];
+    [self fetchChats:self];
+    
+    self.fetchChatsTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchChats:) userInfo:nil repeats:true];
     
     self.navigationItem.rightBarButtonItem.target = self;
     self.navigationItem.rightBarButtonItem.action = @selector(createChat:);
@@ -26,6 +28,13 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.fetchChatsTimer invalidate];
+    self.fetchChatsTimer = nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -54,13 +63,20 @@
                     
                     [HDNotificationView hideNotificationView];
                 });
+            } else {
+                // Try to log back in
+                [_request requestWithHttpVerb:@"POST" url:@"/login" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"email": self.user.email, @"facebookId": [[FBSDKAccessToken currentAccessToken] userID]} response:^(NSError *error, NSDictionary *response) {
+                    if (!error) {
+                        [self fetchChats:self];
+                    }
+                }];
             }
         }];
     });
 }
 
 - (void)createChat:(id)sender {
-    
+    [self performSegueWithIdentifier:@"startAChat" sender:self];
 }
 
 @end

@@ -31,23 +31,9 @@
     for (UIView *view in subviews) {
         if ([[[view class] description] isEqualToString:@"UITableViewCellContentView"]) {
             for (UIView *subview in [view subviews]) {
-                if ([[[subview class] description] isEqualToString:@"CMRemoteImageView"]) {
-                    CMRemoteImageView *iv = ((CMRemoteImageView *)subview);
-                    if (!contact.profileImage) {
-                        [iv setRemoteUrl:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", contact.contactId]
-                                                                  ]
-                         success:^(UIImage *image) {
-                             if (iv.image != nil) {
-                                 NSData *imageData = UIImagePNGRepresentation(image);
-                                 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                                     Contact *contact = [Contact MR_findFirstByAttribute:@"name" withValue:contact.name inContext:localContext];
-                                     contact.profileImage = imageData;
-                                 }];
-                             }
-                         }];
-                    } else {
-                        iv.image = [UIImage imageWithData:contact.profileImage];
-                    }
+                if ([[[subview class] description] isEqualToString:@"UIImageView"]) {
+                    UIImageView *iv = ((UIImageView *)subview);
+                    [iv hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", contact.contactId]]];
                 }
                 
                 if ([[[subview class] description] isEqualToString:@"UILabel"]) {
@@ -71,6 +57,9 @@
 - (void)fetchContacts {
     
     self.contacts = [NSMutableArray arrayWithArray:[Contact MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
+    
+    // Sorts the contacts in alphabetical order by their name property
+    [self.contacts sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
     
     [self.tableView reloadData];
 }

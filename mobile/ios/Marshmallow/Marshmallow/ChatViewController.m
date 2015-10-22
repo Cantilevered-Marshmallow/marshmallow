@@ -33,10 +33,10 @@
     for (UIView *view in subviews) {
         if ([[[view class] description] isEqualToString:@"UITableViewCellContentView"]) {
             for (UIView *subview in [view subviews]) {
-                if ([[[subview class] description] isEqualToString:@"CMRemoteImageView"]) {
+                if ([[[subview class] description] isEqualToString:@"UIImageView"]) {
                     // Hah, found you.
                     // Set the image in the cell to be the profile image of the user from facebook
-                    [((CMRemoteImageView *)subview) setRemoteUrl:[NSURL URLWithString:
+                    [((UIImageView *)subview) hnk_setImageFromURL:[NSURL URLWithString:
                                                                   [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", [userProfile userID]]
                                                                   ]];
                 }

@@ -34,6 +34,8 @@
 
 @property NSArray *chats;
 
+@property NSTimer *fetchChatsTimer;
+
 - (void)fetchChats:(id)sender;
 
 - (void)createChat:(id)sender;

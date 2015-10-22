@@ -9,8 +9,8 @@
 /* Begin PBXBuildFile section */
 		47940B7E8F7189086CF25927 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
 		A73E2D89A0532F3CB964A5DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
+		CA05B40F1BD95F64002FD8D6 /* CreateChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */; settings = {ASSET_TAGS = (); }; };
-		CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF1101BD861DB0025FC6C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1021BD861DB0025FC6C /* User.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1041BD861DB0025FC6C /* Chats+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
@@ -58,9 +58,9 @@
 		0F55AAEA840E95876E77E0F5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		44F5354FD6707387425ED089 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F487F126BFF4BF85174A4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CA05B40D1BD95F64002FD8D6 /* CreateChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateChatViewController.h; sourceTree = "<group>"; };
+		CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateChatViewController.m; sourceTree = "<group>"; };
 		CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequestTests.m; sourceTree = "<group>"; };
-		CA2432D41BD2F9FC0023E234 /* CMRemoteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMRemoteImageView.h; sourceTree = "<group>"; };
-		CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMRemoteImageView.m; sourceTree = "<group>"; };
 		CA6AF0FF1BD861DB0025FC6C /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
 		CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CA6AF1011BD861DB0025FC6C /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -144,15 +144,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CA2432D31BD2F9DE0023E234 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CA2432D41BD2F9FC0023E234 /* CMRemoteImageView.h */,
-				CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */,
-			);
-			name = Views;
-			sourceTree = "<group>";
-		};
 		CAA8F22F1BD5BE7B009844AC /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
@@ -220,7 +211,6 @@
 			isa = PBXGroup;
 			children = (
 				CAA8F22F1BD5BE7B009844AC /* ThirdParty */,
-				CA2432D31BD2F9DE0023E234 /* Views */,
 				CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */,
 				CACEED7D1BD55D080086CBCF /* Models */,
 				CACC2FF91BD1658D006D37F9 /* Networking */,
@@ -241,6 +231,8 @@
 				CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */,
 				CAA8F24D1BD72BEA009844AC /* ContactsTableViewController.h */,
 				CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */,
+				CA05B40D1BD95F64002FD8D6 /* CreateChatViewController.h */,
+				CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */,
 			);
 			path = Marshmallow;
 			sourceTree = "<group>";
@@ -542,9 +534,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA05B40F1BD95F64002FD8D6 /* CreateChatViewController.m in Sources */,
 				CA6AF1101BD861DB0025FC6C /* User.m in Sources */,
 				CA6AF1141BD861DB0025FC6C /* Contact.m in Sources */,
-				CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */,
 				CA6AF1151BD861DB0025FC6C /* Message+CoreDataProperties.m in Sources */,
 				CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */,
 				CA6AF1121BD861DB0025FC6C /* Chats.m in Sources */,
