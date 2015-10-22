@@ -36,4 +36,6 @@
 
 - (void)fetchChats:(id)sender;
 
+- (void)createChat:(id)sender;
+
 @end

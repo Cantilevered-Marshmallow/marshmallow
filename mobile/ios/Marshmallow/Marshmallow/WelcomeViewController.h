@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MagicalRecord/MagicalRecord.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"

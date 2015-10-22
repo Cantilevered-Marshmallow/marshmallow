@@ -82,13 +82,15 @@
                     // Send a http request to our serverfor signup and login of the user
                     [request requestWithHttpVerb:@"POST" url:@"/signup" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"facebookId": [[FBSDKProfile currentProfile] userID], @"email": result[@"email"]} response:^(NSError * _Nullable error, NSDictionary * _Nullable response) {
                         if (!error) {
-                            _user = [[User alloc] initWithEntityName:@"User" andName:result[@"name"]];
-                            _user.email = result[@"email"];
-                            _user.token = [_facebookToken tokenString];
                             
-                            [_user saveObject];
-                            
-                            [self getFriends];
+                            [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                                _user = [User MR_createEntityInContext:localContext];
+                                _user.name = result[@"name"];
+                                _user.email = result[@"email"];
+                                _user.token = [_facebookToken tokenString];
+                            } completion:^(BOOL contextDidSave, NSError *error) {
+                                [self getFriends];
+                            }];
                         } else {
                             NSLog(@"%@", error);
                         }
@@ -126,10 +128,11 @@
         if (!error) {
             NSArray *friends = result[@"data"];
             for (NSDictionary *friend in friends) {
-                Contact *contact = [[Contact alloc] initWithEntityName:@"Contact" andName:friend[@"name"]];
-                [contact setValue:friend[@"id"] forKey:@"attrContactId"];
-                
-                [contact saveObject];
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    Contact *contact = [Contact MR_createEntityInContext:localContext];
+                    contact.name = friend[@"name"];
+                    contact.contactId = friend[@"id"];
+                }];
             }
             
             // Need to delay to the segue because the animation from the sigin frame has not finished yet

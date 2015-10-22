@@ -13,22 +13,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    _accessor = [[CMDataAccessor alloc] init];
     _contacts = [[NSMutableArray alloc] init];
     
-    NSFetchRequest *request = [[NSFetchRequest alloc] init];
+    [self fetchContacts];
     
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Contact" inManagedObjectContext:self.accessor.managedObjectContext];
-    [request setEntity:entity];
-    
-    NSError *error;
-    NSArray *result = [self.accessor.managedObjectContext executeFetchRequest:request error:&error];
-    
-    for (NSManagedObject *resultItem in result) {
-        [self.contacts addObject:[[Contact alloc] initWithObject:resultItem]];
-    }
-    
-    [self.tableView reloadData];
+    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(checkForNewFriends:) userInfo:nil repeats:YES];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -46,12 +35,16 @@
                     CMRemoteImageView *iv = ((CMRemoteImageView *)subview);
                     if (!contact.profileImage) {
                         [iv setRemoteUrl:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", contact.contactId]
-                                                                  ]];
-                        [NSTimer scheduledTimerWithTimeInterval:5.0
-                                                         target:self
-                                                       selector:@selector(saveContactImage:)
-                                                       userInfo:@{@"iv": iv, @"contact": contact}
-                                                        repeats:NO];
+                                                                  ]
+                         success:^(UIImage *image) {
+                             if (iv.image != nil) {
+                                 NSData *imageData = UIImagePNGRepresentation(image);
+                                 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                                     Contact *contact = [Contact MR_findFirstByAttribute:@"name" withValue:contact.name inContext:localContext];
+                                     contact.profileImage = imageData;
+                                 }];
+                             }
+                         }];
                     } else {
                         iv.image = [UIImage imageWithData:contact.profileImage];
                     }
@@ -75,11 +68,38 @@
     return [self.contacts count];
 }
 
-- (void)saveContactImage:(NSTimer *)timer {
-    CMRemoteImageView *iv = (CMRemoteImageView *)timer.userInfo[@"iv"];
-    Contact *contact = (Contact *)timer.userInfo[@"contact"];
-    [contact setValue:UIImagePNGRepresentation(iv.image) forKey:@"attrProfileImage"];
-    [contact saveObject];
+- (void)fetchContacts {
+    
+    self.contacts = [NSMutableArray arrayWithArray:[Contact MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
+    
+    [self.tableView reloadData];
+}
+
+- (void)checkForNewFriends:(NSTimer *)timer {
+    FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
+                                  initWithGraphPath:@"/me/friends"
+                                  parameters:@{}
+                                  HTTPMethod:@"GET"];
+    [request startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection,
+                                          id result,
+                                          NSError *error) {
+        if (!error) {
+            NSArray *friends = result[@"data"];
+            for (NSDictionary *friend in friends) {
+                if (![Contact MR_findFirstByAttribute:@"name" withValue:friend[@"name"]]) {
+                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
+                        Contact *contact = [Contact MR_createEntityInContext:localContext];
+                        contact.name = friend[@"name"];
+                        contact.contactId = friend[@"id"];
+                    }];
+                }
+            }
+            
+            [self fetchContacts];
+        } else {
+            NSLog(@"%@", error);
+        }
+    }];
 }
 
 @end

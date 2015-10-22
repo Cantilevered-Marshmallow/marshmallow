@@ -17,4 +17,6 @@ IB_DESIGNABLE
 
 - (id)initWithPlaceholder:(UIImage *)placeholder andRemoteUrl:(NSURL *)remoteUrl;
 
+- (void)setRemoteUrl:(NSURL *)remoteUrl success:(void (^)(UIImage *image))success;
+
 @end

@@ -7,8 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MagicalRecord/MagicalRecord.h>
 
-#import "CMDataAccessor.h"
+#import "FBSDKCoreKit/FBSDKCoreKit.h"
+
 #import "CMRemoteImageView.h"
 
 #import "Contact.h"
@@ -17,8 +19,8 @@
 
 @property NSMutableArray<Contact *> *contacts;
 
-@property CMDataAccessor *accessor;
+- (void)checkForNewFriends:(NSTimer *)timer;
 
-- (void)saveContactImage:(NSTimer *)timer;
+- (void)fetchContacts;
 
 @end

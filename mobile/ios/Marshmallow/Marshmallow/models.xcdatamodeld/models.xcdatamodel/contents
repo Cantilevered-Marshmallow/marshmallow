@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
-    <entity name="Chats" syncable="YES">
+    <entity name="Chats" representedClassName="Chats" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Contact" syncable="YES">
+    <entity name="Contact" representedClassName="Contact" syncable="YES">
         <attribute name="contactId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImage" optional="YES" attributeType="Binary" syncable="YES"/>
     </entity>
-    <entity name="Message" syncable="YES">
+    <entity name="Message" representedClassName="Message" syncable="YES">
         <attribute name="body" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chatsId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="googleImageId" optional="YES" attributeType="String" syncable="YES"/>
@@ -25,7 +25,7 @@
         <attribute name="profileImage" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="token" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="User" syncable="YES">
+    <entity name="User" representedClassName="User" syncable="YES">
         <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="profileImage" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -34,9 +34,9 @@
     </entity>
     <elements>
         <element name="Chats" positionX="81" positionY="-216" width="128" height="75"/>
+        <element name="Contact" positionX="306" positionY="-360" width="128" height="90"/>
         <element name="Message" positionX="225" positionY="-534" width="126" height="163"/>
         <element name="TestUser" positionX="583" positionY="-360" width="128" height="103"/>
         <element name="User" positionX="286" positionY="-216" width="128" height="118"/>
-        <element name="Contact" positionX="306" positionY="-360" width="128" height="90"/>
     </elements>
 </model>

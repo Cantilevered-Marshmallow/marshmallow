@@ -19,6 +19,9 @@
 //    [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Loading..." message:@"Retrieving chats" isAutoHide:NO];
     
     [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchChats:) userInfo:nil repeats:true];
+    
+    self.navigationItem.rightBarButtonItem.target = self;
+    self.navigationItem.rightBarButtonItem.action = @selector(createChat:);
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -54,6 +57,10 @@
             }
         }];
     });
+}
+
+- (void)createChat:(id)sender {
+    
 }
 
 @end

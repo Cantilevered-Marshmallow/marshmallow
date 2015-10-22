@@ -23,14 +23,16 @@
     return self;
 }
 
-- (void)setRemoteUrl:(NSURL *)remoteUrl {
+- (void)setRemoteUrl:(NSURL *)remoteUrl success:(void (^)(UIImage *))success {
     _remoteUrl = remoteUrl;
     
     AFHTTPRequestOperation *requestOperation = [[AFHTTPRequestOperation alloc] initWithRequest:[NSURLRequest requestWithURL:remoteUrl]];
     requestOperation.responseSerializer = [AFImageResponseSerializer serializer];
     
     [requestOperation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
-        [self setImage:((UIImage *)responseObject)];
+        UIImage *image = ((UIImage *)responseObject);
+        [self setImage:image];
+        success(image);
     } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         NSLog(@"Image error: %@", error);
     }];
