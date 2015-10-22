@@ -15,7 +15,6 @@
 
 @dynamic email;
 @dynamic name;
-@dynamic profileImage;
 @dynamic token;
 @dynamic chatParticipation;
 

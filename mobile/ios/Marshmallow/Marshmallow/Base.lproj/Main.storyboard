@@ -32,16 +32,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e5H-O1-orm" customClass="CMRemoteImageView">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e5H-O1-orm">
                                                     <rect key="frame" x="17" y="6" width="50" height="50"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="50" id="QHB-JK-mVZ"/>
                                                         <constraint firstAttribute="width" constant="50" id="ckc-bu-Wsh"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="image" keyPath="placeholder" value="Icon-72"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="John Appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYh-rc-DzC">
                                                     <rect key="frame" x="75" y="8" width="140" height="21"/>
@@ -169,7 +166,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="THO-uG-Soy" customClass="CMRemoteImageView">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="THO-uG-Soy">
                                             <rect key="frame" x="17" y="6" width="80" height="80"/>
                                             <animations/>
                                             <constraints>
@@ -255,14 +252,7 @@
         <scene sceneID="89k-Fs-9RU">
             <objects>
                 <navigationController storyboardIdentifier="NavigationController" id="URk-C3-ea6" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Chats" id="3r9-XN-qnz">
-                        <userDefinedRuntimeAttributes>
-                            <userDefinedRuntimeAttribute type="string" keyPath="iconIdentifier" value="fa-star"/>
-                            <userDefinedRuntimeAttribute type="number" keyPath="iconSize">
-                                <real key="value" value="15"/>
-                            </userDefinedRuntimeAttribute>
-                        </userDefinedRuntimeAttributes>
-                    </tabBarItem>
+                    <tabBarItem key="tabBarItem" title="Chats" id="3r9-XN-qnz"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="VG8-Tb-17D">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -343,15 +333,12 @@
                                     <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CoZ-CQ-kpr" customClass="CMRemoteImageView">
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="CoZ-CQ-kpr">
                                             <rect key="frame" x="17" y="6" width="80" height="80"/>
                                             <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="80" id="i3q-cd-Ybh"/>
                                             </constraints>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="image" keyPath="placeholder" value="Icon-72"/>
-                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jz7-Tf-pBa">
                                             <rect key="frame" x="105" y="8" width="140" height="21"/>
@@ -427,7 +414,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Icon-72" width="72" height="72"/>
         <image name="iTunesArtwork" width="512" height="512"/>
     </resources>
 </document>

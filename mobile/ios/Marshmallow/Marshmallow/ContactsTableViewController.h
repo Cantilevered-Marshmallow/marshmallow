@@ -8,10 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MagicalRecord/MagicalRecord.h>
+#import <Haneke/Haneke.h>
 
 #import "FBSDKCoreKit/FBSDKCoreKit.h"
-
-#import "CMRemoteImageView.h"
 
 #import "Contact.h"
 

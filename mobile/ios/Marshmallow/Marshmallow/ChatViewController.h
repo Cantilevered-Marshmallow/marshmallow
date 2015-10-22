@@ -8,11 +8,10 @@
 
 #import <UIKit/UIKit.h>
 #import <DateTools/NSDate+DateTools.h>
+#import <Haneke/Haneke.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
-
-#import "CMRemoteImageView.h"
 
 @interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 

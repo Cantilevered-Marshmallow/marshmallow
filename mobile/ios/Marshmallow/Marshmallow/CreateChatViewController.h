@@ -8,9 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <MagicalRecord/MagicalRecord.h>
+#import <Haneke/Haneke.h>
 
 #import "Contact.h"
-#import "CMRemoteImageView.h"
 
 @interface CreateChatViewController : UITableViewController <UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate>
 
