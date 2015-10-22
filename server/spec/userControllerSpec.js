@@ -57,8 +57,7 @@ describe('User Controller', function () {
   it('should find an existing user', function (done) {
     userStub = sinon.stub(User, 'findOne', function (query) {
       return new Promise(function (resolve, reject) {
-        if (query.where.email === UserA.email
-            && query.where.facebookId === UserA.facebookId) {
+        if (query.where.email === UserA.email && query.where.facebookId === UserA.facebookId) {
           resolve(UserA);
         }
       });
@@ -75,8 +74,7 @@ describe('User Controller', function () {
   it('should not find a non-existant user', function (done) {
     userStub = sinon.stub(User, 'findOne', function (query) {
       return new Promise(function (resolve, reject) {
-        if (query.where.email === UserA.email
-            && query.where.facebookId === UserA.facebookId) {
+        if (query.where.email === UserA.email && query.where.facebookId === UserA.facebookId) {
           resolve(UserA);
         } else {
           resolve(null);

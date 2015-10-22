@@ -9,23 +9,31 @@ var sequelize = new Sequelize(process.env.DB, process.env.DB_USER, process.env.D
 
 var User = sequelize.define('user', {
   email: {type: Sequelize.STRING, unique: true},
-  facebookId: {type: Sequelize.STRING, unique: true}
+  facebookId: {type: Sequelize.STRING, unique: true, primaryKey: true}
 });
 
 var Chat = sequelize.define('chat', {});
+
+var Message = sequelize.define('message', {
+  text: Sequelize.STRING,
+  youtubeVideoId: Sequelize.STRING,
+  googleImageId: Sequelize.STRING
+});
 
 var UserChat = sequelize.define('user_chat', {});
 
 Chat.belongsToMany(User, {through: UserChat });
 User.belongsToMany(Chat, {through: UserChat });
 
-sequelize.sync();
-// User.sync();
-// Chat.sync();
+Chat.hasMany(Message);
+Message.belongsTo(User);
+Message.belongsTo(Chat);
 
+sequelize.sync();
 
 module.exports = {
   sequelize: sequelize,
   User: User,
-  Chat: Chat
+  Chat: Chat,
+  Message: Message
 };

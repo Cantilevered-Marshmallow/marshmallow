@@ -3,6 +3,7 @@ var chatController = require('../chat/chatController');
 var sinon = require('sinon');
 var Chat = require('../db/db').Chat;
 var User = require('../db/db').User;
+var Message = require('../db/db').Message;
 
 describe('Chat Controller', function () {
 
@@ -68,7 +69,6 @@ describe('Chat Controller', function () {
           done();
         });
     });
-
   });
 
   describe('Retrieve chats', function () {
@@ -114,6 +114,68 @@ describe('Chat Controller', function () {
       chatController.retrieveChats(user)
         .then(function (resolveObj) {
           expect(resolveObj).to.deep.equal(['1','2']);
+          done();
+        });
+    });
+  });
+
+  describe('Get messages', function () {
+    var chatId = 1234;
+    var chats = {
+      1234: {id: chatId, messages: []},
+      5678: {id: 5678, messages: []}
+    };
+    var userStub = sinon.stub(Chat, 'findOne', function (query) {
+      return new Promise (function (resolve, reject) {
+        resolve(chats[query.where.id]);
+      });
+    });
+
+    it('should retrieve all messages in the chat', function (done) {
+      chatController.getMessages(chatId)
+        .then(function (messages) {
+          expect(messages).to.deep.equal(chats[chatId].messages);
+          done();
+        });
+    });
+  });
+
+  describe('Post messages', function () {
+    var facebookId = '1234';
+    var chatId = '5678';
+    var message = {
+      text: 'hello world'
+    };
+
+    it('should post a message with correct information', function (done) {
+      var setChat = false;
+      var setUser = false;
+      var inputMessage;
+
+      var messageStub = sinon.stub(Message, 'create', function (messageObj) {
+        inputMessage = messageObj;
+        return new Promise (function (resolve, reject) {
+          messageObj.setChat = function (chatId) {
+            setChat = true;
+            return new Promise (function (resolve, reject) {
+              resolve(messageObj);
+            });
+          };
+          messageObj.setUser = function (facebookId) {
+            setUser = true;
+            return new Promise (function (resolve, reject) {
+              resolve(messageObj);
+            });
+          };
+          resolve(messageObj);
+        });
+      });
+
+      chatController.postMessage(chatId, facebookId, message)
+        .then(function () {
+          expect(setChat).to.equal(true);
+          expect(setUser).to.equal(true);
+          expect(message).to.deep.equal(inputMessage);
           done();
         });
     });
