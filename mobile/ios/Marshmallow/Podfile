@@ -5,5 +5,6 @@ pod 'FBSDKLoginKit', '~> 4.7'
 pod 'AFNetworking', '~> 2.0'
 pod 'DateTools'
 pod 'FontAwesomeKit', :git => 'https://github.com/PrideChung/FontAwesomeKit.git', :commit => '1bdb8de41294ec30f2d56858c5c2742c14933ad7'
+pod 'MagicalRecord'
 
 link_with 'Marshmallow', 'MarshmallowTests', 'MarshmallowUITests'

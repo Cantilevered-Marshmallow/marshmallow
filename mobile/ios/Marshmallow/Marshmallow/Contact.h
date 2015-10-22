@@ -2,18 +2,21 @@
 //  Contact.h
 //  Marshmallow
 //
-//  Created by Brandon Borders on 10/20/15.
+//  Created by Brandon Borders on 10/21/15.
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
 
-#import "CMDataModel.h"
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-@interface Contact : CMDataModel
+NS_ASSUME_NONNULL_BEGIN
 
-@property (nonatomic) NSString *contactId;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSData *profileImage;
+@interface Contact : NSManagedObject
 
-- (id)initWithEntityName:(NSString *)entityName andName:(NSString *)name;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Contact+CoreDataProperties.h"

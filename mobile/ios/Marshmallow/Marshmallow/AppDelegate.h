@@ -7,10 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MagicalRecord/MagicalRecord.h>
 
 #import "FBSDKCoreKit.h"
-
-#import "CMDataAccessor.h"
 #import "User.h"
 
 #import "WelcomeViewController.h"
@@ -19,8 +18,6 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-
-@property (strong, nonatomic) CMDataAccessor *accessor;
 
 @end
 

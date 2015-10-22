@@ -2,19 +2,21 @@
 //  Chats.h
 //  Marshmallow
 //
-//  Created by Brandon Borders on 10/20/15.
+//  Created by Brandon Borders on 10/21/15.
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-#import "CMDataModel.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@interface Chats : CMDataModel
+@interface Chats : NSManagedObject
 
-@property (nonatomic) NSString *id;
-@property (nonatomic) NSString *title;
-
-- (id)initWithEntityName:(NSString *)entityName andTitle:(NSString *)title;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "Chats+CoreDataProperties.h"

@@ -19,20 +19,22 @@
     // Binding FBSDKApplicationDelegate to this event
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
+    [MagicalRecord setupCoreDataStack];
+    
+    NSLog(@"%@", [MagicalRecord defaultStoreName]);
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     if ([FBSDKAccessToken currentAccessToken]) { // Are we logged in?
         UITabBarController *tb = [storyboard instantiateViewControllerWithIdentifier:@"TabsController"];
         UINavigationController *nc = [tb viewControllers][0];
         ChatsTableViewController *chatsVC = [nc viewControllers][0];
-        chatsVC.user = [[User alloc] initWithEntityName:@"User" andName:[[FBSDKProfile currentProfile] name]];
+        chatsVC.user = [User MR_findFirstByAttribute:@"name" withValue:[[FBSDKProfile currentProfile] name]];
         [[self window] setRootViewController:tb];
     } else {
         WelcomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
         [[self window] setRootViewController:vc];
     }
-    
-    _accessor = [[CMDataAccessor alloc] init];
     
     return YES;
 }
@@ -49,6 +51,7 @@
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    [MagicalRecord cleanUp];
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
@@ -57,28 +60,7 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    [_accessor saveContext];
-}
-
-// This section of the app delegate passes the method calls to the CMDataAccessor instance
-#pragma mark - Core Data stack
-
-- (NSURL *)applicationDocumentsDirectory {
-    // The directory the application uses to store the Core Data store file. This code uses a directory named "org.cantilevered.marshmallow.test_core_data" in the application's documents directory.
-    return [_accessor applicationDocumentsDirectory];
-}
-
-- (NSManagedObjectModel *)managedObjectModel {
-    return [_accessor managedObjectModel];
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator {
-    return [_accessor persistentStoreCoordinator];
-}
-
-
-- (NSManagedObjectContext *)managedObjectContext {
-    return [_accessor managedObjectContext];
+    [MagicalRecord cleanUp];
 }
 
 #pragma mark - Facebook SDK

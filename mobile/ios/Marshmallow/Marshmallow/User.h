@@ -2,21 +2,21 @@
 //  User.h
 //  Marshmallow
 //
-//  Created by Brandon Borders on 10/19/15.
+//  Created by Brandon Borders on 10/21/15.
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-#import "CMDataModel.h"
+NS_ASSUME_NONNULL_BEGIN
 
-@interface User : CMDataModel
+@interface User : NSManagedObject
 
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *email;
-@property (nonatomic) NSString *token;
-@property (nonatomic) NSData *profileImage;
-
-- (id)initWithEntityName:(NSString *)entityName andName:(NSString *)userName;
+// Insert code here to declare functionality of your managed object subclass
 
 @end
+
+NS_ASSUME_NONNULL_END
+
+#import "User+CoreDataProperties.h"

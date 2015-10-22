@@ -179,7 +179,11 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Item" id="avK-aO-cJJ"/>
-                    <navigationItem key="navigationItem" title="Chats" id="3Az-Mh-MLD"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Chats" id="3Az-Mh-MLD">
+                        <barButtonItem key="rightBarButtonItem" title="Start a Chat" id="qh2-kM-Jh6"/>
+                    </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="Y7T-Ey-01K" kind="show" identifier="showChat" id="CbZ-ol-NEs"/>
                     </connections>

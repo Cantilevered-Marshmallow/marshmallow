@@ -59,6 +59,7 @@ PODS:
     - FontAwesomeKit/Core
   - FontAwesomeKit/Zocial (2.1.9):
     - FontAwesomeKit/Core
+  - MagicalRecord (2.3.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -67,6 +68,7 @@ DEPENDENCIES:
   - FBSDKLoginKit (~> 4.7)
   - FontAwesomeKit (from `https://github.com/PrideChung/FontAwesomeKit.git`, commit
     `1bdb8de41294ec30f2d56858c5c2742c14933ad7`)
+  - MagicalRecord
 
 EXTERNAL SOURCES:
   FontAwesomeKit:
@@ -85,5 +87,6 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: eb580bfc2040ad44f4c0b4f4d0befb1d35bce59c
   FBSDKLoginKit: 01bce8dd3f3a26a023b0ba4ffdde7ef5062889fe
   FontAwesomeKit: 1a21b835bd74f0591bfc1dac8c5540188eab3f38
+  MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
 
 COCOAPODS: 0.39.0

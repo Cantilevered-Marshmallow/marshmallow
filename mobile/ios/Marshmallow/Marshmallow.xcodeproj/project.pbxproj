@@ -11,23 +11,25 @@
 		A73E2D89A0532F3CB964A5DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
 		CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */; settings = {ASSET_TAGS = (); }; };
 		CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */; settings = {ASSET_TAGS = (); }; };
+		CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		CA6AF1101BD861DB0025FC6C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1021BD861DB0025FC6C /* User.m */; settings = {ASSET_TAGS = (); }; };
+		CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1041BD861DB0025FC6C /* Chats+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		CA6AF1121BD861DB0025FC6C /* Chats.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1061BD861DB0025FC6C /* Chats.m */; settings = {ASSET_TAGS = (); }; };
+		CA6AF1131BD861DB0025FC6C /* Contact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1081BD861DB0025FC6C /* Contact+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		CA6AF1141BD861DB0025FC6C /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10A1BD861DB0025FC6C /* Contact.m */; settings = {ASSET_TAGS = (); }; };
+		CA6AF1151BD861DB0025FC6C /* Message+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
+		CA6AF1161BD861DB0025FC6C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10E1BD861DB0025FC6C /* Message.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F23B1BD6C78C009844AC /* Chats.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23A1BD6C78C009844AC /* Chats.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F23E1BD6C8BC009844AC /* CMDataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2401BD6F4E6009844AC /* CMDataModelTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2421BD7060B009844AC /* ChatsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2411BD7060B009844AC /* ChatsTestCase.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F2451BD70700009844AC /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2441BD706FF009844AC /* Message.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2471BD709E4009844AC /* MessageTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2461BD709E4009844AC /* MessageTestCase.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F24A1BD725E1009844AC /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2491BD725E1009844AC /* Contact.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F24C1BD726EC009844AC /* ContactTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24B1BD726EC009844AC /* ContactTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
 		CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		CACEEDA91BD5616E0086CBCF /* CMDataAccessor.m in Sources */ = {isa = PBXBuildFile; fileRef = CACEEDA81BD5616E0086CBCF /* CMDataAccessor.m */; settings = {ASSET_TAGS = (); }; };
-		CACEEDAC1BD567DE0086CBCF /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CACEEDAB1BD567DE0086CBCF /* User.m */; settings = {ASSET_TAGS = (); }; };
 		CACEEDAE1BD5A2240086CBCF /* CMDataAccessorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CACEEDAD1BD5A2240086CBCF /* CMDataAccessorTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAE7FD261BD5A84B005E7017 /* UserTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE7FD251BD5A84B005E7017 /* UserTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAFCBF751BD0279C00C9E28B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF741BD0279C00C9E28B /* main.m */; };
@@ -65,21 +67,29 @@
 		CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequestTests.m; sourceTree = "<group>"; };
 		CA2432D41BD2F9FC0023E234 /* CMRemoteImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMRemoteImageView.h; sourceTree = "<group>"; };
 		CA2432D51BD2F9FC0023E234 /* CMRemoteImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMRemoteImageView.m; sourceTree = "<group>"; };
+		CA6AF0FF1BD861DB0025FC6C /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CA6AF1011BD861DB0025FC6C /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
+		CA6AF1021BD861DB0025FC6C /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		CA6AF1031BD861DB0025FC6C /* Chats+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Chats+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CA6AF1041BD861DB0025FC6C /* Chats+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Chats+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CA6AF1051BD861DB0025FC6C /* Chats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chats.h; sourceTree = "<group>"; };
+		CA6AF1061BD861DB0025FC6C /* Chats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chats.m; sourceTree = "<group>"; };
+		CA6AF1071BD861DB0025FC6C /* Contact+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Contact+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CA6AF1081BD861DB0025FC6C /* Contact+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Contact+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CA6AF1091BD861DB0025FC6C /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
+		CA6AF10A1BD861DB0025FC6C /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
+		CA6AF10B1BD861DB0025FC6C /* Message+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Message+CoreDataProperties.h"; sourceTree = "<group>"; };
+		CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Message+CoreDataProperties.m"; sourceTree = "<group>"; };
+		CA6AF10D1BD861DB0025FC6C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
+		CA6AF10E1BD861DB0025FC6C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationView.m; sourceTree = "<group>"; };
 		CAA8F2321BD5BECC009844AC /* HDNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDNotificationView.h; sourceTree = "<group>"; };
 		CAA8F2361BD6BF0C009844AC /* IconTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTabBarController.h; sourceTree = "<group>"; };
 		CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconTabBarController.m; sourceTree = "<group>"; };
-		CAA8F2391BD6C78C009844AC /* Chats.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Chats.h; sourceTree = "<group>"; };
-		CAA8F23A1BD6C78C009844AC /* Chats.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Chats.m; sourceTree = "<group>"; };
-		CAA8F23C1BD6C8BC009844AC /* CMDataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDataModel.h; sourceTree = "<group>"; };
-		CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataModel.m; sourceTree = "<group>"; };
 		CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataModelTestCase.m; sourceTree = "<group>"; };
 		CAA8F2411BD7060B009844AC /* ChatsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTestCase.m; sourceTree = "<group>"; };
-		CAA8F2431BD706FF009844AC /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
-		CAA8F2441BD706FF009844AC /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
 		CAA8F2461BD709E4009844AC /* MessageTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTestCase.m; sourceTree = "<group>"; };
-		CAA8F2481BD725E1009844AC /* Contact.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Contact.h; sourceTree = "<group>"; };
-		CAA8F2491BD725E1009844AC /* Contact.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Contact.m; sourceTree = "<group>"; };
 		CAA8F24B1BD726EC009844AC /* ContactTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTestCase.m; sourceTree = "<group>"; };
 		CAA8F24D1BD72BEA009844AC /* ContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewController.h; sourceTree = "<group>"; };
 		CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewController.m; sourceTree = "<group>"; };
@@ -90,10 +100,6 @@
 		CACC2FFA1BD165B8006D37F9 /* CMNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMNetworkRequest.h; sourceTree = "<group>"; };
 		CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequest.m; sourceTree = "<group>"; };
 		CACEED7F1BD55D220086CBCF /* models.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = models.xcdatamodel; sourceTree = "<group>"; };
-		CACEEDA71BD5616E0086CBCF /* CMDataAccessor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDataAccessor.h; sourceTree = "<group>"; };
-		CACEEDA81BD5616E0086CBCF /* CMDataAccessor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataAccessor.m; sourceTree = "<group>"; };
-		CACEEDAA1BD567DE0086CBCF /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
-		CACEEDAB1BD567DE0086CBCF /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
 		CACEEDAD1BD5A2240086CBCF /* CMDataAccessorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataAccessorTestCase.m; sourceTree = "<group>"; };
 		CAE7FD251BD5A84B005E7017 /* UserTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTestCase.m; sourceTree = "<group>"; };
 		CAFCBF701BD0279C00C9E28B /* Marshmallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marshmallow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,18 +186,22 @@
 		CACEED7D1BD55D080086CBCF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				CACEEDA71BD5616E0086CBCF /* CMDataAccessor.h */,
-				CACEEDA81BD5616E0086CBCF /* CMDataAccessor.m */,
-				CACEEDAA1BD567DE0086CBCF /* User.h */,
-				CACEEDAB1BD567DE0086CBCF /* User.m */,
-				CAA8F2391BD6C78C009844AC /* Chats.h */,
-				CAA8F23A1BD6C78C009844AC /* Chats.m */,
-				CAA8F23C1BD6C8BC009844AC /* CMDataModel.h */,
-				CAA8F23D1BD6C8BC009844AC /* CMDataModel.m */,
-				CAA8F2431BD706FF009844AC /* Message.h */,
-				CAA8F2441BD706FF009844AC /* Message.m */,
-				CAA8F2481BD725E1009844AC /* Contact.h */,
-				CAA8F2491BD725E1009844AC /* Contact.m */,
+				CA6AF0FF1BD861DB0025FC6C /* User+CoreDataProperties.h */,
+				CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */,
+				CA6AF1011BD861DB0025FC6C /* User.h */,
+				CA6AF1021BD861DB0025FC6C /* User.m */,
+				CA6AF1031BD861DB0025FC6C /* Chats+CoreDataProperties.h */,
+				CA6AF1041BD861DB0025FC6C /* Chats+CoreDataProperties.m */,
+				CA6AF1051BD861DB0025FC6C /* Chats.h */,
+				CA6AF1061BD861DB0025FC6C /* Chats.m */,
+				CA6AF1071BD861DB0025FC6C /* Contact+CoreDataProperties.h */,
+				CA6AF1081BD861DB0025FC6C /* Contact+CoreDataProperties.m */,
+				CA6AF1091BD861DB0025FC6C /* Contact.h */,
+				CA6AF10A1BD861DB0025FC6C /* Contact.m */,
+				CA6AF10B1BD861DB0025FC6C /* Message+CoreDataProperties.h */,
+				CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */,
+				CA6AF10D1BD861DB0025FC6C /* Message.h */,
+				CA6AF10E1BD861DB0025FC6C /* Message.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -550,22 +560,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAA8F24A1BD725E1009844AC /* Contact.m in Sources */,
+				CA6AF1101BD861DB0025FC6C /* User.m in Sources */,
+				CA6AF1141BD861DB0025FC6C /* Contact.m in Sources */,
 				CA2432D61BD2F9FC0023E234 /* CMRemoteImageView.m in Sources */,
-				CACEEDA91BD5616E0086CBCF /* CMDataAccessor.m in Sources */,
+				CA6AF1151BD861DB0025FC6C /* Message+CoreDataProperties.m in Sources */,
 				CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */,
+				CA6AF1121BD861DB0025FC6C /* Chats.m in Sources */,
 				CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */,
 				CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */,
-				CACEEDAC1BD567DE0086CBCF /* User.m in Sources */,
-				CAA8F23E1BD6C8BC009844AC /* CMDataModel.m in Sources */,
 				CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */,
-				CAA8F2451BD70700009844AC /* Message.m in Sources */,
+				CA6AF1161BD861DB0025FC6C /* Message.m in Sources */,
 				CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */,
+				CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */,
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
 				CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */,
 				CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */,
-				CAA8F23B1BD6C78C009844AC /* Chats.m in Sources */,
+				CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */,
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
+				CA6AF1131BD861DB0025FC6C /* Contact+CoreDataProperties.m in Sources */,
 				CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -725,6 +737,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.cantilevered.marshmallow.Marshmallow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = "non-global";
 			};
 			name = Debug;
 		};
@@ -745,6 +758,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = org.cantilevered.marshmallow.Marshmallow;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRIP_STYLE = "non-global";
 			};
 			name = Release;
 		};
