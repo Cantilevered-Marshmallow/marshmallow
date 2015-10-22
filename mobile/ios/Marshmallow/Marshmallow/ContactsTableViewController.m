@@ -58,6 +58,9 @@
     
     self.contacts = [NSMutableArray arrayWithArray:[Contact MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
     
+    // Sorts the contacts in alphabetical order by their name property
+    [self.contacts sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+    
     [self.tableView reloadData];
 }
 

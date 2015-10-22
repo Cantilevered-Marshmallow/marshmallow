@@ -32,6 +32,11 @@
     if ([input length] > 0) {
         [self.contacts addObjectsFromArray:self.filteredContacts];
         [self.filteredContacts removeAllObjects];
+        
+        // Sorts the contacts in alphabetical order by their name property
+        [self.contacts sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
+        
+        // A predicate that sees if the is like the input. [c] being case-insensitive and [d] ignoring accent marks in case
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"name contains[cd] %@", input];
         
         for (int i = 0; i < self.contacts.count; i++) {
@@ -46,6 +51,9 @@
     } else if (self.filteredContacts.count > 0) {
         [self.contacts addObjectsFromArray:self.filteredContacts];
         [self.filteredContacts removeAllObjects];
+        
+        // Sorts the contacts in alphabetical order by their name property
+        [self.contacts sortUsingDescriptors:@[[NSSortDescriptor sortDescriptorWithKey:@"name" ascending:YES]]];
         
         [self.tableView reloadData];
     }
@@ -75,9 +83,7 @@
                 if ([[[subview class] description] isEqualToString:@"UILabel"]) {
                     UILabel *label = ((UILabel *)subview);
                     
-                    if ([[label text] isEqualToString:@"John Appleseed"]) {
-                        label.text = contact.name;
-                    }
+                    label.text = contact.name;
                 }
             }
         }
