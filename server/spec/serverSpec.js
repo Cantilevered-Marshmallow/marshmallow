@@ -82,7 +82,7 @@ describe('Sign up and log in', function () {
 
 });
 
-describe('GET and POST to /chat', function () {
+describe('GET and POST to /chat and /chat:id', function () {
 
 
   var agent1;
@@ -161,5 +161,32 @@ describe('GET and POST to /chat', function () {
       .expect(200, done);
   });
 
+  it('should accept a chat message', function (done) {
+    var msg = { text: 'Hey Peter! How\'s it going'};
+
+    // DB only has one chat room that has id: 1
+    agent1
+      .post('/chat/1')
+      .send(msg)
+      .expect(201, done);
+  });
+
+  it('shoud retrieve all messages for given a chat room id', function (done) {
+
+    agent2
+      .get('/chat/1')
+      .expect(function (res) {
+        console.log(res.body);
+      })
+      .expect(200, done);
+  });
 
 });
+
+
+
+
+
+
+
+

@@ -36,6 +36,8 @@ router.get('/chat', auth.authenticate, function (req, res) {
 });
 
 router.get('/chat/:id', auth.authenticate, function (req, res) {
+  console.log('chat router called');
+  console.log(req.params.id);
   chatController.getMessages(req.params.id)
     .then(function (messages) {
       res.status(200).send({ messages: messages });
