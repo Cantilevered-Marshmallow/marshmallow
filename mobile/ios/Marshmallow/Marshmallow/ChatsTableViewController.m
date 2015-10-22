@@ -60,7 +60,7 @@
 }
 
 - (void)createChat:(id)sender {
-    
+    [self performSegueWithIdentifier:@"startAChat" sender:self];
 }
 
 @end

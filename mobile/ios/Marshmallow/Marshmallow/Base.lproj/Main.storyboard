@@ -152,6 +152,64 @@
             </objects>
             <point key="canvasLocation" x="3862" y="-1349"/>
         </scene>
+        <!--Create Chat View Controller-->
+        <scene sceneID="ZZS-4a-Wce">
+            <objects>
+                <tableViewController id="2Yi-Ca-cS2" customClass="CreateChatViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" id="B8f-mw-q8f">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="contactCell" rowHeight="110" id="gzY-dO-BWb">
+                                <rect key="frame" x="0.0" y="92" width="600" height="110"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gzY-dO-BWb" id="rgY-h9-SXP">
+                                    <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="THO-uG-Soy" customClass="CMRemoteImageView">
+                                            <rect key="frame" x="17" y="6" width="80" height="80"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="80" id="Uoz-7V-OL1"/>
+                                            </constraints>
+                                        </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="John Appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Atn-T8-Xo5">
+                                            <rect key="frame" x="105" y="8" width="140" height="21"/>
+                                            <animations/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="140" id="NOk-FV-P1t"/>
+                                            </constraints>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <animations/>
+                                    <constraints>
+                                        <constraint firstAttribute="bottomMargin" secondItem="Atn-T8-Xo5" secondAttribute="bottom" constant="72" id="1kS-11-VOf"/>
+                                        <constraint firstItem="THO-uG-Soy" firstAttribute="top" secondItem="rgY-h9-SXP" secondAttribute="topMargin" constant="-2" id="20N-gP-pgx"/>
+                                        <constraint firstItem="THO-uG-Soy" firstAttribute="leading" secondItem="rgY-h9-SXP" secondAttribute="leadingMargin" constant="9" id="DDc-Pz-z1W"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="THO-uG-Soy" secondAttribute="bottom" constant="15" id="NEw-67-Dwa"/>
+                                        <constraint firstItem="Atn-T8-Xo5" firstAttribute="leading" secondItem="THO-uG-Soy" secondAttribute="trailing" constant="8" symbolic="YES" id="O70-QY-h3c"/>
+                                        <constraint firstItem="Atn-T8-Xo5" firstAttribute="top" secondItem="rgY-h9-SXP" secondAttribute="topMargin" id="n6j-ck-hsl"/>
+                                    </constraints>
+                                </tableViewCellContentView>
+                                <animations/>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="2Yi-Ca-cS2" id="rji-QJ-n2b"/>
+                            <outlet property="delegate" destination="2Yi-Ca-cS2" id="Lhd-Se-8DO"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="yGi-o9-jB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3637" y="-2225"/>
+        </scene>
         <!--Chats-->
         <scene sceneID="Qga-Uj-pRu">
             <objects>
@@ -186,6 +244,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="Y7T-Ey-01K" kind="show" identifier="showChat" id="CbZ-ol-NEs"/>
+                        <segue destination="2Yi-Ca-cS2" kind="show" identifier="startAChat" id="yl3-i1-d2Q"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2rf-eE-DxT" userLabel="First Responder" sceneMemberID="firstResponder"/>
