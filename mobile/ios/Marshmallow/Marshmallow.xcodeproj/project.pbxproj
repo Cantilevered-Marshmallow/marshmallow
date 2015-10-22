@@ -21,17 +21,11 @@
 		CA6AF1161BD861DB0025FC6C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10E1BD861DB0025FC6C /* Message.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F2401BD6F4E6009844AC /* CMDataModelTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F2421BD7060B009844AC /* ChatsTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2411BD7060B009844AC /* ChatsTestCase.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F2471BD709E4009844AC /* MessageTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2461BD709E4009844AC /* MessageTestCase.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F24C1BD726EC009844AC /* ContactTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24B1BD726EC009844AC /* ContactTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
 		CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		CACEEDAE1BD5A2240086CBCF /* CMDataAccessorTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CACEEDAD1BD5A2240086CBCF /* CMDataAccessorTestCase.m */; settings = {ASSET_TAGS = (); }; };
-		CAE7FD261BD5A84B005E7017 /* UserTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = CAE7FD251BD5A84B005E7017 /* UserTestCase.m */; settings = {ASSET_TAGS = (); }; };
 		CAFCBF751BD0279C00C9E28B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF741BD0279C00C9E28B /* main.m */; };
 		CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF771BD0279C00C9E28B /* AppDelegate.m */; };
 		CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF7A1BD0279C00C9E28B /* WelcomeViewController.m */; };
@@ -87,10 +81,6 @@
 		CAA8F2321BD5BECC009844AC /* HDNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDNotificationView.h; sourceTree = "<group>"; };
 		CAA8F2361BD6BF0C009844AC /* IconTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTabBarController.h; sourceTree = "<group>"; };
 		CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconTabBarController.m; sourceTree = "<group>"; };
-		CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataModelTestCase.m; sourceTree = "<group>"; };
-		CAA8F2411BD7060B009844AC /* ChatsTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTestCase.m; sourceTree = "<group>"; };
-		CAA8F2461BD709E4009844AC /* MessageTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTestCase.m; sourceTree = "<group>"; };
-		CAA8F24B1BD726EC009844AC /* ContactTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactTestCase.m; sourceTree = "<group>"; };
 		CAA8F24D1BD72BEA009844AC /* ContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewController.h; sourceTree = "<group>"; };
 		CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewController.m; sourceTree = "<group>"; };
 		CAC352251BD1C1DC00AEF3D3 /* ChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
@@ -100,8 +90,6 @@
 		CACC2FFA1BD165B8006D37F9 /* CMNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMNetworkRequest.h; sourceTree = "<group>"; };
 		CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequest.m; sourceTree = "<group>"; };
 		CACEED7F1BD55D220086CBCF /* models.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = models.xcdatamodel; sourceTree = "<group>"; };
-		CACEEDAD1BD5A2240086CBCF /* CMDataAccessorTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataAccessorTestCase.m; sourceTree = "<group>"; };
-		CAE7FD251BD5A84B005E7017 /* UserTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTestCase.m; sourceTree = "<group>"; };
 		CAFCBF701BD0279C00C9E28B /* Marshmallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marshmallow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAFCBF741BD0279C00C9E28B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CAFCBF761BD0279C00C9E28B /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -271,12 +259,6 @@
 				CAFCBF8D1BD0279C00C9E28B /* MarshmallowTests.m */,
 				CAFCBF8F1BD0279C00C9E28B /* Info.plist */,
 				CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */,
-				CACEEDAD1BD5A2240086CBCF /* CMDataAccessorTestCase.m */,
-				CAE7FD251BD5A84B005E7017 /* UserTestCase.m */,
-				CAA8F23F1BD6F4E6009844AC /* CMDataModelTestCase.m */,
-				CAA8F2411BD7060B009844AC /* ChatsTestCase.m */,
-				CAA8F2461BD709E4009844AC /* MessageTestCase.m */,
-				CAA8F24B1BD726EC009844AC /* ContactTestCase.m */,
 			);
 			path = MarshmallowTests;
 			sourceTree = "<group>";
@@ -586,14 +568,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAE7FD261BD5A84B005E7017 /* UserTestCase.m in Sources */,
-				CAA8F2471BD709E4009844AC /* MessageTestCase.m in Sources */,
-				CAA8F2421BD7060B009844AC /* ChatsTestCase.m in Sources */,
 				CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */,
-				CAA8F24C1BD726EC009844AC /* ContactTestCase.m in Sources */,
-				CACEEDAE1BD5A2240086CBCF /* CMDataAccessorTestCase.m in Sources */,
 				CAFCBF8E1BD0279C00C9E28B /* MarshmallowTests.m in Sources */,
-				CAA8F2401BD6F4E6009844AC /* CMDataModelTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
