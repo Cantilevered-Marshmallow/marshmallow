@@ -16,10 +16,8 @@ router.post('/login', auth.authFacebook, auth.login);
 router.get('/logout', auth.logout);
 
 router.post('/chat', auth.authenticate, function (req, res) {
-  console.log('CALLED');
   chatController.createChat(req.body.users)
     .then(function (chat) {
-      console.log('chat', chat);
       var jsonResponse = {chatId: chat.id};
       res.status(201).send(jsonResponse);
     })
