@@ -65,7 +65,7 @@ gulp.task('server-test', function () {
 
 gulp.task('server-integration-test', ['db:drop', 'db:create', 'set-env', 'server-test']);
 
-gulp.task('local-test', ['set-env', 'user-test', 'chat-test']);
+gulp.task('local-test', ['set-env', 'chat-test']);
 
 gulp.task('start', ['set-env', 'nodemon']);
 

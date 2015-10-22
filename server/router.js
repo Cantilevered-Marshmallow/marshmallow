@@ -43,7 +43,7 @@ router.get('/chat/:id', auth.authenticate, function (req, res) {
 });
 
 router.post('/chat/:id', auth.authenticate, function (req, res) {
-  chatController.postMessage(req.params.id, req.body)
+  chatController.postMessage(req.params.id, req.session.user.facebookId, req.body)
     .then(function () {
       res.status(201).send();
     });
