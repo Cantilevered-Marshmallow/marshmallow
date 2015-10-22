@@ -61,12 +61,9 @@ module.exports = {
   },
 
   authenticate: function (req, res, next) {
-    console.log('CALLED AUTHENTICATE');
     if (req.session.user && req.session.auth) {
-      console.log('calling next');
       next();
     } else {
-      console.log('request being rejected');
       res.status(400).send('Unauthorized use of endpoint. Please signup or login.');
     }
   },

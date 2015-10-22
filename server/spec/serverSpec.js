@@ -84,46 +84,81 @@ describe('Sign up and log in', function () {
 
 describe('GET and POST to /chat', function () {
 
+
+  var agent1;
+  var agent2;
+
   before(function (done) {
     server = require('../server');
+
+    // Brad Smith
+    agent1 = request.agent(server);
+    // Peter Parker
+    agent2 = request.agent(server);
+
     done();
   });
 
   after(function (done) {
     server.close();
-    authStub.restore();
     done();
+  });
+
+  it('should log in Brad Smith', function (done) {
+
+    // Brad Smith logs in
+    agent1
+      .post('/login')
+      .send(BradSmith)
+      .expect(200, done);
+
+  });
+
+  it('should log in Peter Parker', function (done) {
+
+    // Peter Parker logs in
+    agent2
+      .post('/login')
+      .send(PeterParker)
+      .expect(200, done);
   });
 
   it('should create a new chat room for list of users', function (done) {
 
     var users = { users: ['118724648484592', '102400480121838'] };
-    request(server).post('/chat')
-      .set('Content-Type', 'application/json')
+
+    // Brad Smith creates chat room with Peter Parker
+    agent1
+      .post('/chat')
       .send(users)
       .expect(function (res) {
-        console.log(res.body);
         if (!res.body.hasOwnProperty('chatId')) {
-          throw new Error('Failed to create new chat room');
+          throw new Error('Failed to create a new chat room');
         }
       })
       .expect(201, done);
   });
 
-  xit('should not create a new chat room for a list of less than two users', function (done) {
+  it('should not create a new chat room for a list of less than two users', function (done) {
     var users = { users: ['5253463547456458'] };
-    request(server).post('/chat')
-      .set('Content-Type', 'application/json')
+    
+    agent1
+      .post('/chat')
       .send(users)
       .expect(400, done);
+
   });
 
-  xit('should retrieve all chat room id\'s is associated with ', function (done) {
-    var users = { users: ['5253463547456458'] };
-    request(server).post('/chat')
-      .set('Content-Type', 'application/json')
-      .send(users)
-      .expect(400, done);
+  it('should retrieve all chat room id\'s is associated with a user', function (done) {
+    agent2
+      .get('/chat')
+      .expect(function (res) {
+        // Peter Parker (agent2) only belongs to one chat room, which is with Brad Smith.
+        if (!Array.isArray(res.body.chats) || res.body.chats.length !== 1) {
+          throw new Error('Failed to get chats that a specific user is in');
+        }
+      })
+      .expect(200, done);
   });
 
 
