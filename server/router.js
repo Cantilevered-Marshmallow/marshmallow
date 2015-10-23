@@ -18,7 +18,8 @@ router.get('/logout', auth.logout);
 router.post('/chat', auth.authenticate, function (req, res) {
   chatController.createChat(req.body.users)
     .then(function (chat) {
-      var jsonResponse = {chatId: chat.id};
+      var chatId = chat.id.toString();
+      var jsonResponse = {chatId: chatId};
       res.status(201).send(jsonResponse);
     })
     .catch(function (err) {
