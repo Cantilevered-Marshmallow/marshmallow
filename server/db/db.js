@@ -31,6 +31,7 @@ Message.belongsTo(Chat);
 
 sequelize.sync();
 
+
 module.exports = {
   sequelize: sequelize,
   User: User,
