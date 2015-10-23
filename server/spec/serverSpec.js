@@ -181,6 +181,18 @@ describe('GET and POST to /chat and /chat:id', function () {
       .expect(200, done);
   });
 
+  it('Each chat in the response of GET /chat should return a list of users engaged in the chat', function (done) {
+    agent2
+      .get('/chat')
+      .expect(function (res) {
+        if (res.body.chats[0].users.length !== 2) {
+          throw new Error('Wrong userlist returned');
+        }
+      })
+      .expect(200, done);
+  });
+
+
   it('should accept a chat message', function (done) {
     var msg = { text: 'Hey Peter! How\'s it going'};
 
