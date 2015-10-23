@@ -144,7 +144,16 @@
                     chats.chatTitle = [NSString stringWithFormat:@"Chat with %lu friends", facebookIds.count];
                     
                     dispatch_async(dispatch_get_main_queue(), ^{
-                        [self performSegueWithIdentifier:@"showChat" sender:self];
+                        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Chats" style:UIBarButtonItemStylePlain target:nil action:nil];
+                        self.navigationItem.backBarButtonItem = backButton;
+                        
+                        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        ChatViewController *chat = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
+                        NSArray *viewControllers = [[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0], chat, nil];
+                        
+                        [self.navigationController pushViewController:chat animated:YES];
+                        
+                        [self.navigationController setViewControllers:viewControllers animated:YES];
                     });
                 }];
             } else {

@@ -17,6 +17,7 @@
 #import "UIColor+ColorFromHexString.h"
 #import "CMNetworkRequest.h"
 #import "Chats.h"
+#import "ChatViewController.h"
 
 @interface CreateChatViewController : UITableViewController <UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate>
 
