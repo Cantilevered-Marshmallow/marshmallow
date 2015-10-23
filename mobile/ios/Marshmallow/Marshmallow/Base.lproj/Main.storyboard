@@ -25,63 +25,13 @@
                                     <constraint firstAttribute="height" constant="472" id="5cE-QK-Xd5"/>
                                 </constraints>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" rowHeight="110" id="q3v-jd-YaH">
+                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="q3v-jd-YaH" customClass="CMMessageCell">
                                         <rect key="frame" x="0.0" y="92" width="600" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q3v-jd-YaH" id="xcQ-w1-efS">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="e5H-O1-orm">
-                                                    <rect key="frame" x="17" y="6" width="50" height="50"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="50" id="QHB-JK-mVZ"/>
-                                                        <constraint firstAttribute="width" constant="50" id="ckc-bu-Wsh"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="John Appleseed" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YYh-rc-DzC">
-                                                    <rect key="frame" x="75" y="8" width="140" height="21"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="T1i-sl-Cb2"/>
-                                                        <constraint firstAttribute="width" constant="140" id="Wdo-NP-lmc"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Nov. 14, 2015" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LMx-Y0-uy2">
-                                                    <rect key="frame" x="75" y="26" width="111" height="21"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="height" constant="21" id="BGm-9N-P1G"/>
-                                                        <constraint firstAttribute="width" constant="111" id="PuR-zi-8PJ"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Lorem ipsum." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="irK-I9-t5V">
-                                                    <rect key="frame" x="379" y="8" width="213" height="93"/>
-                                                    <animations/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="213" id="or9-4C-eXn"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                </textView>
-                                            </subviews>
                                             <animations/>
-                                            <constraints>
-                                                <constraint firstItem="e5H-O1-orm" firstAttribute="leading" secondItem="xcQ-w1-efS" secondAttribute="leadingMargin" constant="9" id="4k0-Qq-dIr"/>
-                                                <constraint firstItem="irK-I9-t5V" firstAttribute="top" secondItem="xcQ-w1-efS" secondAttribute="topMargin" id="9Y8-7d-D6Z"/>
-                                                <constraint firstItem="irK-I9-t5V" firstAttribute="bottom" secondItem="xcQ-w1-efS" secondAttribute="bottomMargin" id="GfV-sS-lMe"/>
-                                                <constraint firstItem="e5H-O1-orm" firstAttribute="top" secondItem="xcQ-w1-efS" secondAttribute="topMargin" constant="-2" id="L0f-Kp-vss"/>
-                                                <constraint firstItem="irK-I9-t5V" firstAttribute="trailing" secondItem="xcQ-w1-efS" secondAttribute="trailingMargin" id="iUc-Ze-o1o"/>
-                                                <constraint firstItem="YYh-rc-DzC" firstAttribute="top" secondItem="xcQ-w1-efS" secondAttribute="topMargin" id="mVi-rG-Aw6"/>
-                                                <constraint firstItem="LMx-Y0-uy2" firstAttribute="top" secondItem="xcQ-w1-efS" secondAttribute="topMargin" constant="18" id="rxI-EU-r82"/>
-                                            </constraints>
                                         </tableViewCellContentView>
                                         <animations/>
                                     </tableViewCell>
@@ -147,6 +97,7 @@
                     <connections>
                         <outlet property="chatControls" destination="iGy-NE-xE0" id="Sio-iI-TSo"/>
                         <outlet property="messageInput" destination="yZc-5r-c26" id="4Am-2K-lT2"/>
+                        <outlet property="tableView" destination="spl-FI-N8v" id="tA4-XF-bQ2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRr-jk-1lF" userLabel="First Responder" sceneMemberID="firstResponder"/>
