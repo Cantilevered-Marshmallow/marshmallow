@@ -264,10 +264,12 @@
                         <animations/>
                     </toolbar>
                     <connections>
+                        <outlet property="delegate" destination="PMR-kp-Rj1" id="V8L-yy-ybQ"/>
                         <segue destination="pBM-Id-vmu" kind="relationship" relationship="rootViewController" id="Bsg-H1-MHI"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kiw-3T-gs1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="PMR-kp-Rj1" customClass="CMNavigationController"/>
             </objects>
             <point key="canvasLocation" x="2136" y="-1349"/>
         </scene>
