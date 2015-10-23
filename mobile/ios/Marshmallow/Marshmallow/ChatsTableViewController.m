@@ -62,8 +62,9 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [_request requestWithHttpVerb:@"GET" url:@"/chat" data:nil response:^(NSError *error, NSDictionary *response) {
             if (!error) {
-                for (NSString *chatId in response[@"chats"]) {
-                    if (![Chats MR_findFirstByAttribute:@"chatId" withValue:chatId]) {
+                for (NSNumber *numChatId in response[@"chats"]) {
+                    NSString *chatId = [NSString stringWithFormat:@"%@", numChatId];
+                    if (![Chats MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
                         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                             Chats *chats = [Chats MR_createEntityInContext:localContext];
                             
