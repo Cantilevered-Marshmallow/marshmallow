@@ -17,69 +17,68 @@
     _messageInput.layer.borderWidth = 0.25;
     _messageInput.layer.cornerRadius = 5;
     
+    _request = [[CMNetworkRequest alloc] init];
+    
     CALayer *upperBorder = [CALayer layer];
     upperBorder.backgroundColor = [[UIColor grayColor] CGColor];
     upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 0.5f);
     [_chatControls.layer addSublayer:upperBorder];
+    
+    [self.messageInput becomeFirstResponder];
+    
+    [self.navigationItem setTitle:self.chat.chatTitle];
+    
+    self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
+    
+    self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
+    
+    [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    if (!self.fetchMessagesTimer) {
+        self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:true];
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [self.fetchMessagesTimer invalidate];
+    self.fetchMessagesTimer = nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
-    FBSDKProfile *userProfile = [FBSDKProfile currentProfile];
+    CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
+    Message *message = self.messages[indexPath.row];
     
-    NSArray *subviews = [cell subviews];
-    // Ewww, why so many nested statements?
-    // Because the API forced me
-    for (UIView *view in subviews) {
-        if ([[[view class] description] isEqualToString:@"UITableViewCellContentView"]) {
-            for (UIView *subview in [view subviews]) {
-                if ([[[subview class] description] isEqualToString:@"UIImageView"]) {
-                    // Hah, found you.
-                    // Set the image in the cell to be the profile image of the user from facebook
-                    [((UIImageView *)subview) hnk_setImageFromURL:[NSURL URLWithString:
-                                                                  [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", [userProfile userID]]
-                                                                  ]];
-                }
+    [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
                 
-                if ([[[subview class] description] isEqualToString:@"UILabel"]) {
-                    UILabel *label = ((UILabel *)subview);
-                    
-                    if ([label.text isEqualToString:@"John Appleseed"]) {
-                        // Username label
-                        
-                        label.text = [NSString stringWithFormat:@"%@ %@", [userProfile firstName], [userProfile lastName]];
-                    } else if ([[label text] isEqualToString:@"Nov. 14, 2015"]) {
-                        // Date text
-                        
-                        label.text = [[NSDate dateWithTimeIntervalSinceNow:-4] timeAgoSinceNow];
-                    }
-                }
-                
-                if ([[[subview class] description] isEqualToString:@"UITextView"]) {
-                    UITextView *tv = ((UITextView *) subview);
-                    NSArray *messages = @[
-                                          @"Hey it's Marsh.",
-                                          @"Some very long text. This message has no reason for it's existence other than to annoy you right now. So apparently I need to be even longer than I was before. Hopefully I'm long enough now."
-                                        ];
-                    
-                    tv.text = messages[indexPath.row];
-                }
-            }
-        }
+    if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
+        Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
+        cell.userName.text = contact.name;
+    } else {
+        cell.userName.text = @"From You";
     }
+    cell.timestamp.text = [message.timestamp timeAgoSinceNow];
+                
+    cell.messageBody.text = message.body;
     
     return cell;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.messages.count;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *messages = @[
-                          @"Hey it's Marsh.",
-                          @"Some very long text. This message has no reason for it's existence other than to annoy you right now. So apparently I need to be even longer than I was before. Hopefully I'm long enough now."
-                          ];
+    Message *message = self.messages[indexPath.row];
     UITextView *tv = [[UITextView alloc] init];
-    tv.text = messages[indexPath.row];
+    tv.text = message.body;
     
-    int tvDefaultHeight = 94;
+    int tvDefaultHeight = 46;
     int differenceInHeight = tvDefaultHeight - [tv contentSize].height;
     if (differenceInHeight > 0) {
         return tvDefaultHeight + differenceInHeight;
@@ -87,8 +86,40 @@
     return 110;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+- (void)fetchMessages:(id)sender {
+    [self.request requestWithHttpVerb:@"GET" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:nil response:^(NSError *error, NSDictionary *response) {
+        if (!error) {
+            NSArray *fetchedMessages = response[@"messages"];
+            
+            for (NSDictionary *fetchedMessage in fetchedMessages) {
+                if (![Message MR_findFirstByAttribute:@"timestamp" withValue:[NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]] inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                        Message *message = [Message MR_createEntityInContext:localContext];
+                        message.body = fetchedMessage[@"text"];
+                        
+                        if (fetchedMessage[@"youtubeVideoId"] != (id)[NSNull null]) {
+                            message.youtubeVideoId = fetchedMessage[@"youtubeVideoId"];
+                        } else {
+                            message.youtubeVideoId = @"";
+                        }
+                        
+                        if (fetchedMessage[@"googleImageId"] != (id)[NSNull null]) {
+                            message.googleImageId = fetchedMessage[@"googleImageId"];
+                        } else {
+                            message.googleImageId = @"";
+                        }
+                        message.chatsId = [fetchedMessage[@"chatId"] stringValue];
+                        message.userId = fetchedMessage[@"userFacebookId"];
+                        message.timestamp = [NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]];
+                        
+                        [self.messages addObject:message];
+                    }];
+                }
+            }
+            
+            [self.tableView reloadData];
+        }
+    }];
 }
 
 @end

@@ -149,6 +149,7 @@
                         
                         UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                         ChatViewController *chat = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
+                        chat.chat = chats;
                         NSArray *viewControllers = [[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0], chat, nil];
                         
                         [self.navigationController pushViewController:chat animated:YES];

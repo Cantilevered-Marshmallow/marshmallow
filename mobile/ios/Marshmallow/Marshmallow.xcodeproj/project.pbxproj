@@ -26,6 +26,7 @@
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
 		CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
+		CAD3A43E1BDAFA8600B3621E /* CMMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD3A43D1BDAFA8600B3621E /* CMMessageCell.m */; settings = {ASSET_TAGS = (); }; };
 		CAD70F341BD9D34600122F7A /* UIColor+ColorFromHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD70F331BD9D34600122F7A /* UIColor+ColorFromHexString.m */; settings = {ASSET_TAGS = (); }; };
 		CAFCBF751BD0279C00C9E28B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF741BD0279C00C9E28B /* main.m */; };
 		CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF771BD0279C00C9E28B /* AppDelegate.m */; };
@@ -91,6 +92,8 @@
 		CACC2FFA1BD165B8006D37F9 /* CMNetworkRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMNetworkRequest.h; sourceTree = "<group>"; };
 		CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequest.m; sourceTree = "<group>"; };
 		CACEED7F1BD55D220086CBCF /* models.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = models.xcdatamodel; sourceTree = "<group>"; };
+		CAD3A43C1BDAFA8600B3621E /* CMMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMMessageCell.h; sourceTree = "<group>"; };
+		CAD3A43D1BDAFA8600B3621E /* CMMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMMessageCell.m; sourceTree = "<group>"; };
 		CAD70F321BD9D34600122F7A /* UIColor+ColorFromHexString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+ColorFromHexString.h"; sourceTree = "<group>"; };
 		CAD70F331BD9D34600122F7A /* UIColor+ColorFromHexString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+ColorFromHexString.m"; sourceTree = "<group>"; };
 		CAFCBF701BD0279C00C9E28B /* Marshmallow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Marshmallow.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -238,6 +241,8 @@
 				CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */,
 				CAD70F321BD9D34600122F7A /* UIColor+ColorFromHexString.h */,
 				CAD70F331BD9D34600122F7A /* UIColor+ColorFromHexString.m */,
+				CAD3A43C1BDAFA8600B3621E /* CMMessageCell.h */,
+				CAD3A43D1BDAFA8600B3621E /* CMMessageCell.m */,
 			);
 			path = Marshmallow;
 			sourceTree = "<group>";
@@ -559,6 +564,7 @@
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
 				CA6AF1131BD861DB0025FC6C /* Contact+CoreDataProperties.m in Sources */,
 				CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */,
+				CAD3A43E1BDAFA8600B3621E /* CMMessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

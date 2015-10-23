@@ -14,7 +14,7 @@
     self = [super init];
     
     if (self) {
-        _baseUrl = [NSURL URLWithString:@"http://localhost:8080"];
+        _baseUrl = [NSURL URLWithString:@"https://marshy.herokuapp.com"];
         _manager = [AFHTTPRequestOperationManager manager];
     }
     

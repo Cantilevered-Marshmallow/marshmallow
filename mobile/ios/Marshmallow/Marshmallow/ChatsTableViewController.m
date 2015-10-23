@@ -55,15 +55,15 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"showChat" sender:self];
+    [self performSegueWithIdentifier:@"showChat" sender:self.chats[indexPath.row]];
 }
 
 - (void)fetchChats:(id)sender {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [_request requestWithHttpVerb:@"GET" url:@"/chat" data:nil response:^(NSError *error, NSDictionary *response) {
             if (!error) {
-                for (NSNumber *numChatId in response[@"chats"]) {
-                    NSString *chatId = [NSString stringWithFormat:@"%@", numChatId];
+                for (NSDictionary *fetchedChat in response[@"chats"]) {
+                    NSString *chatId = [NSString stringWithFormat:@"%@", fetchedChat[@"chatId"]];
                     if (![Chats MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
                         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                             Chats *chats = [Chats MR_createEntityInContext:localContext];
@@ -90,6 +90,13 @@
             }
         }];
     });
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"showChat"]) {
+        ChatViewController *vc = segue.destinationViewController;
+        vc.chat = sender;
+    }
 }
 
 - (void)createChat:(id)sender {
