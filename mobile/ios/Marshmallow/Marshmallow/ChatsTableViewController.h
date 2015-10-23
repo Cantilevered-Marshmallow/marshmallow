@@ -7,6 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MagicalRecord/MagicalRecord.h>
+
+#import "Chats.h"
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
@@ -32,7 +35,7 @@
 
 @property CMNetworkRequest *request;
 
-@property NSArray *chats;
+@property (strong, nonatomic) NSArray<Chats *> *chats;
 
 @property NSTimer *fetchChatsTimer;
 

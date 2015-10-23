@@ -1,5 +1,5 @@
 //
-//  UIColor+colorFromHexString.h
+//  UIColor.h
 //  Marshmallow
 //
 //  Created by Brandon Borders on 10/22/15.

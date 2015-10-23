@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="spl-FI-N8v">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="spl-FI-N8v">
                                 <rect key="frame" x="0.0" y="20" width="600" height="518"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -26,7 +26,7 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" rowHeight="110" id="q3v-jd-YaH">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="110"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q3v-jd-YaH" id="xcQ-w1-efS">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
@@ -91,7 +91,7 @@
                                     <outlet property="delegate" destination="Y7T-Ey-01K" id="A7K-Az-tXG"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGy-NE-xE0">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGy-NE-xE0">
                                 <rect key="frame" x="0.0" y="546" width="600" height="54"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your message here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-5r-c26">
@@ -149,7 +149,7 @@
             </objects>
             <point key="canvasLocation" x="3862" y="-1349"/>
         </scene>
-        <!--Create Chat View Controller-->
+        <!--Create a Chat-->
         <scene sceneID="ZZS-4a-Wce">
             <objects>
                 <tableViewController id="2Yi-Ca-cS2" customClass="CreateChatViewController" sceneMemberID="viewController">
@@ -202,6 +202,13 @@
                             <outlet property="delegate" destination="2Yi-Ca-cS2" id="Lhd-Se-8DO"/>
                         </connections>
                     </tableView>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Create a Chat" id="mxd-9N-WOJ">
+                        <barButtonItem key="rightBarButtonItem" title="Create Chat" id="GJS-vm-suk"/>
+                    </navigationItem>
+                    <connections>
+                        <segue destination="Y7T-Ey-01K" kind="showDetail" identifier="showChat" id="yhq-Lh-7d2"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGi-o9-jB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -418,4 +425,7 @@
     <resources>
         <image name="iTunesArtwork" width="512" height="512"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="yhq-Lh-7d2"/>
+    </inferredMetricsTieBreakers>
 </document>

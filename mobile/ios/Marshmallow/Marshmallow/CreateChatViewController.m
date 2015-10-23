@@ -22,8 +22,14 @@
     self.definesPresentationContext = YES;
     
     self.filteredContacts = [[NSMutableArray alloc] init];
+    self.selectedPaths = [[NSMutableArray alloc] init];
     
     [self fetchContacts];
+    
+    self.tableView.allowsMultipleSelection = YES;
+    
+    self.navigationItem.rightBarButtonItem.target = self;
+    self.navigationItem.rightBarButtonItem.action = @selector(createChat:);
 }
 
 - (void)updateSearchResultsForSearchController:(UISearchController *)searchController {
@@ -103,8 +109,11 @@
         UIImageView *iv = [[UIImageView alloc] initWithImage:checkbox];
         [iv setTintColor:[UIColor colorFromHexString:@"#006400"]];
         cell.accessoryView = iv;
+        
+        [self.selectedPaths addObject:indexPath];
     } else {
         cell.accessoryView = nil;
+        [self.selectedPaths removeObject:indexPath];
     }
     
     [cell setSelected:NO animated:YES];
@@ -114,6 +123,33 @@
     self.contacts = [[NSMutableArray alloc] initWithArray:[Contact MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
     
     [self.tableView reloadData];
+}
+
+- (void)createChat:(id)sender {
+    NSMutableArray<NSString *> *facebookIds = [[NSMutableArray alloc] init];
+    
+    for (NSIndexPath *indexPath in self.selectedPaths) {
+        [facebookIds addObject:self.contacts[indexPath.row].contactId];
+    }
+    
+    [facebookIds addObject:[[FBSDKAccessToken currentAccessToken] userID]];
+    
+    CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
+    [request requestWithHttpVerb:@"POST" url:@"/chat" data:@{@"users": facebookIds} response:^(NSError *error, NSDictionary *response) {
+        if (!error) {
+            [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                Chats *chats = [Chats MR_createEntityInContext:localContext];
+                chats.chatId = response[@"chatId"];
+                chats.chatTitle = [NSString stringWithFormat:@"Chat with %lu friends", facebookIds.count];
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self performSegueWithIdentifier:@"showChat" sender:self];
+                });
+            }];
+        } else {
+            
+        }
+    }];
 }
 
 @end

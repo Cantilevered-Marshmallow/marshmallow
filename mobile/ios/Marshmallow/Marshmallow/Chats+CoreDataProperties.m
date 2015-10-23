@@ -13,7 +13,7 @@
 
 @implementation Chats (CoreDataProperties)
 
-@dynamic id;
-@dynamic title;
+@dynamic chatId;
+@dynamic chatTitle;
 
 @end

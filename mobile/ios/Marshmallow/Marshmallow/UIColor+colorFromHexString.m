@@ -1,12 +1,12 @@
 //
-//  UIColor+colorFromHexString.m
+//  UIColor.m
 //  Marshmallow
 //
 //  Created by Brandon Borders on 10/22/15.
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
 
-#import "UIColor+colorFromHexString.h"
+#import "UIColor+ColorFromHexString.h"
 
 @implementation UIColor (ColorFromHexString)
 

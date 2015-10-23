@@ -14,7 +14,7 @@
     [super viewDidLoad];
     
     _request = [[CMNetworkRequest alloc] init];
-    _chats = @[];
+    self.chats = [Chats MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]];
     
     [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Loading..." message:@"Retrieving chats" isAutoHide:NO];
     
@@ -43,14 +43,15 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] init];
+    Chats *chats = self.chats[indexPath.row];
     
-    cell.textLabel.text = _chats[indexPath.row][@"chatTitle"]; // Static cell text
+    cell.textLabel.text = chats.chatTitle; // Static cell text
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [_chats count];
+    return [self.chats count];
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -61,8 +62,20 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [_request requestWithHttpVerb:@"GET" url:@"/chat" data:nil response:^(NSError *error, NSDictionary *response) {
             if (!error) {
-                _chats = response[@"chats"];
+                for (NSNumber *numChatId in response[@"chats"]) {
+                    NSString *chatId = [NSString stringWithFormat:@"%@", numChatId];
+                    if (![Chats MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                            Chats *chats = [Chats MR_createEntityInContext:localContext];
+                            
+                            chats.chatId = chatId;
+                            chats.chatTitle = [NSString stringWithFormat:@"Chat: %@", chatId];
+                        }];
+                    }
+                }
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    self.chats = [Chats MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]];
+                    
                     [self.tableView reloadData];
                     
                     [HDNotificationView hideNotificationView];
