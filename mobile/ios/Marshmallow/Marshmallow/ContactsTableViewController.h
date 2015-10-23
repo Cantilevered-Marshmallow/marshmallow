@@ -13,6 +13,7 @@
 #import "FBSDKCoreKit/FBSDKCoreKit.h"
 
 #import "Contact.h"
+#import "CMNetworkRequest.h"
 
 @interface ContactsTableViewController : UITableViewController <UITabBarControllerDelegate, UITableViewDataSource>
 

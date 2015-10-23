@@ -73,18 +73,38 @@
                                           id result,
                                           NSError *error) {
         if (!error) {
-            NSArray *friends = result[@"data"];
+            NSMutableArray *friends = [[NSMutableArray alloc] initWithArray:result[@"data"]];
+            NSMutableArray *friendIds = [[NSMutableArray alloc] initWithCapacity:friends.count];
             for (NSDictionary *friend in friends) {
-                if (![Contact MR_findFirstByAttribute:@"name" withValue:friend[@"name"]]) {
-                    [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
-                        Contact *contact = [Contact MR_createEntityInContext:localContext];
-                        contact.name = friend[@"name"];
-                        contact.contactId = friend[@"id"];
-                    }];
-                }
+                [friendIds addObject:friend[@"id"]];
             }
             
-            [self fetchContacts];
+            CMNetworkRequest *networkRequest = [[CMNetworkRequest alloc] init];
+            
+            [networkRequest requestWithHttpVerb:@"POST" url:@"/userlist" data:@{@"users": friendIds} response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    NSArray *filteredFriends = response[@"users"];
+                    
+                    NSMutableArray *discardedFriends = [NSMutableArray array];
+                    for (NSDictionary *friend in friends) {
+                        if (![filteredFriends containsObject:friend[@"id"]]) {
+                            [discardedFriends addObject:friend];
+                        }
+                    }
+                    
+                    [friends removeObjectsInArray:discardedFriends];
+                    
+                    for (NSDictionary *friend in friends) {
+                        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                            Contact *contact = [Contact MR_createEntityInContext:localContext];
+                            contact.name = friend[@"name"];
+                            contact.contactId = friend[@"id"];
+                        }];
+                    }
+                    
+                    [self fetchContacts];
+                }
+            }];
         } else {
             NSLog(@"%@", error);
         }
