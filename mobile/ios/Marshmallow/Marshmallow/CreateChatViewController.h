@@ -11,11 +11,13 @@
 #import <Haneke/Haneke.h>
 #import "FBSDKCoreKit.h"
 #import <FontAwesomeKit/FontAwesomeKit.h>
+#import "HDNotificationView.h"
 
 #import "Contact.h"
 #import "UIColor+ColorFromHexString.h"
 #import "CMNetworkRequest.h"
 #import "Chats.h"
+#import "ChatViewController.h"
 
 @interface CreateChatViewController : UITableViewController <UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate>
 

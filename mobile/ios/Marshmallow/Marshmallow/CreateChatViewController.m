@@ -134,22 +134,35 @@
     
     [facebookIds addObject:[[FBSDKAccessToken currentAccessToken] userID]];
     
-    CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
-    [request requestWithHttpVerb:@"POST" url:@"/chat" data:@{@"users": facebookIds} response:^(NSError *error, NSDictionary *response) {
-        if (!error) {
-            [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                Chats *chats = [Chats MR_createEntityInContext:localContext];
-                chats.chatId = response[@"chatId"];
-                chats.chatTitle = [NSString stringWithFormat:@"Chat with %lu friends", facebookIds.count];
+    if (facebookIds.count >= 2) {
+        CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
+        [request requestWithHttpVerb:@"POST" url:@"/chat" data:@{@"users": facebookIds} response:^(NSError *error, NSDictionary *response) {
+            if (!error) {
+                [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                    Chats *chats = [Chats MR_createEntityInContext:localContext];
+                    chats.chatId = response[@"chatId"];
+                    chats.chatTitle = [NSString stringWithFormat:@"Chat with %lu friends", facebookIds.count];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithTitle:@"Chats" style:UIBarButtonItemStylePlain target:nil action:nil];
+                        self.navigationItem.backBarButtonItem = backButton;
+                        
+                        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                        ChatViewController *chat = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
+                        NSArray *viewControllers = [[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0], chat, nil];
+                        
+                        [self.navigationController pushViewController:chat animated:YES];
+                        
+                        [self.navigationController setViewControllers:viewControllers animated:YES];
+                    });
+                }];
+            } else {
                 
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    [self performSegueWithIdentifier:@"showChat" sender:self];
-                });
-            }];
-        } else {
-            
-        }
-    }];
+            }
+        }];
+    } else {
+        [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"You must select some friends to chat with first" message:nil];
+    }
 }
 
 @end

@@ -5,10 +5,10 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
-        <!--Item-->
+        <!--Chat-->
         <scene sceneID="qie-Ba-tbk">
             <objects>
-                <viewController id="Y7T-Ey-01K" customClass="ChatViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChatViewController" title="Chat" id="Y7T-Ey-01K" customClass="ChatViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="uKg-Dd-bZm"/>
                         <viewControllerLayoutGuide type="bottom" id="0ci-6H-6XV"/>
@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="spl-FI-N8v">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="110" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="spl-FI-N8v">
                                 <rect key="frame" x="0.0" y="20" width="600" height="518"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -26,7 +26,7 @@
                                 </constraints>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="messageCell" rowHeight="110" id="q3v-jd-YaH">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="110"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q3v-jd-YaH" id="xcQ-w1-efS">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
@@ -91,7 +91,7 @@
                                     <outlet property="delegate" destination="Y7T-Ey-01K" id="A7K-Az-tXG"/>
                                 </connections>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGy-NE-xE0">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="iGy-NE-xE0">
                                 <rect key="frame" x="0.0" y="546" width="600" height="54"/>
                                 <subviews>
                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your message here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-5r-c26">
@@ -140,6 +140,10 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="Tkf-EI-p6B"/>
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" title="Chat" id="2cp-Zc-8Mg">
+                        <barButtonItem key="backBarButtonItem" title="Chats" id="t73-DG-BYF"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="chatControls" destination="iGy-NE-xE0" id="Sio-iI-TSo"/>
                         <outlet property="messageInput" destination="yZc-5r-c26" id="4Am-2K-lT2"/>
@@ -207,7 +211,7 @@
                         <barButtonItem key="rightBarButtonItem" title="Create Chat" id="GJS-vm-suk"/>
                     </navigationItem>
                     <connections>
-                        <segue destination="Y7T-Ey-01K" kind="showDetail" identifier="showChat" id="yhq-Lh-7d2"/>
+                        <segue destination="Y7T-Ey-01K" kind="show" identifier="showChat" id="yhq-Lh-7d2"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yGi-o9-jB3" userLabel="First Responder" sceneMemberID="firstResponder"/>
