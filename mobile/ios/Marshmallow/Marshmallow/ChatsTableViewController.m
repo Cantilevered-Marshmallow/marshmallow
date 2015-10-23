@@ -55,7 +55,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [self performSegueWithIdentifier:@"showChat" sender:self];
+    [self performSegueWithIdentifier:@"showChat" sender:self.chats[indexPath.row]];
 }
 
 - (void)fetchChats:(id)sender {
@@ -90,6 +90,13 @@
             }
         }];
     });
+}
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"showChat"]) {
+        ChatViewController *vc = segue.destinationViewController;
+        vc.chat = sender;
+    }
 }
 
 - (void)createChat:(id)sender {

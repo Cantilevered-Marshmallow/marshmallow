@@ -21,11 +21,17 @@
     upperBorder.backgroundColor = [[UIColor grayColor] CGColor];
     upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 0.5f);
     [_chatControls.layer addSublayer:upperBorder];
+    
+    [self.messageInput becomeFirstResponder];
+    
+    [self.navigationItem setTitle:self.chat.chatTitle];
+    
+    self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
-    FBSDKProfile *userProfile = [FBSDKProfile currentProfile];
+    Message *message = self.messages[indexPath.row];
     
     NSArray *subviews = [cell subviews];
     // Ewww, why so many nested statements?
@@ -37,7 +43,7 @@
                     // Hah, found you.
                     // Set the image in the cell to be the profile image of the user from facebook
                     [((UIImageView *)subview) hnk_setImageFromURL:[NSURL URLWithString:
-                                                                  [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", [userProfile userID]]
+                                                                  [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]
                                                                   ]];
                 }
                 
@@ -47,22 +53,18 @@
                     if ([label.text isEqualToString:@"John Appleseed"]) {
                         // Username label
                         
-                        label.text = [NSString stringWithFormat:@"%@ %@", [userProfile firstName], [userProfile lastName]];
+                        label.text = [NSString stringWithFormat:@"%@", message.user.name];
                     } else if ([[label text] isEqualToString:@"Nov. 14, 2015"]) {
                         // Date text
                         
-                        label.text = [[NSDate dateWithTimeIntervalSinceNow:-4] timeAgoSinceNow];
+                        label.text = [message.timestamp timeAgoSinceNow];
                     }
                 }
                 
                 if ([[[subview class] description] isEqualToString:@"UITextView"]) {
                     UITextView *tv = ((UITextView *) subview);
-                    NSArray *messages = @[
-                                          @"Hey it's Marsh.",
-                                          @"Some very long text. This message has no reason for it's existence other than to annoy you right now. So apparently I need to be even longer than I was before. Hopefully I'm long enough now."
-                                        ];
                     
-                    tv.text = messages[indexPath.row];
+                    tv.text = message.body;
                 }
             }
         }
@@ -71,13 +73,14 @@
     return cell;
 }
 
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.messages.count;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSArray *messages = @[
-                          @"Hey it's Marsh.",
-                          @"Some very long text. This message has no reason for it's existence other than to annoy you right now. So apparently I need to be even longer than I was before. Hopefully I'm long enough now."
-                          ];
+    Message *message = self.messages[indexPath.row];
     UITextView *tv = [[UITextView alloc] init];
-    tv.text = messages[indexPath.row];
+    tv.text = message.body;
     
     int tvDefaultHeight = 94;
     int differenceInHeight = tvDefaultHeight - [tv contentSize].height;
@@ -85,10 +88,6 @@
         return tvDefaultHeight + differenceInHeight;
     }
     return 110;
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
 }
 
 @end
