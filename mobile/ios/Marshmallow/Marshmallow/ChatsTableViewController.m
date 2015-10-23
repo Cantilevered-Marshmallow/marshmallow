@@ -28,6 +28,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    if (!self.fetchChatsTimer) {
+        self.fetchChatsTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchChats:) userInfo:nil repeats:true];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
