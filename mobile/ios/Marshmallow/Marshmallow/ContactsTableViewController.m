@@ -95,11 +95,13 @@
                     [friends removeObjectsInArray:discardedFriends];
                     
                     for (NSDictionary *friend in friends) {
-                        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                            Contact *contact = [Contact MR_createEntityInContext:localContext];
-                            contact.name = friend[@"name"];
-                            contact.contactId = friend[@"id"];
-                        }];
+                        if (![Contact MR_findFirstByAttribute:@"contactId" withValue:friend[@"id"] inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                            [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                                Contact *contact = [Contact MR_createEntityInContext:localContext];
+                                contact.name = friend[@"name"];
+                                contact.contactId = friend[@"id"];
+                            }];
+                        }
                     }
                     
                     [self fetchContacts];
