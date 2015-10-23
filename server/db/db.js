@@ -3,7 +3,8 @@ var Sequelize = require('sequelize');
 var sequelize = new Sequelize(process.env.DB, process.env.DB_USER, process.env.DB_PASSWORD, {
   host: process.env.DB_SERVER,
   dialect: 'mysql',
-  logging: false
+  logging: false,
+  port: process.env.DB_PORT
 });
 
 
@@ -30,7 +31,6 @@ Message.belongsTo(User);
 Message.belongsTo(Chat);
 
 sequelize.sync();
-
 
 module.exports = {
   sequelize: sequelize,
