@@ -22,16 +22,21 @@ module.exports = {
   },
 
   retrieveChats: function (user) {
-    return User.findOne({ where:{
-      email: user.email,
-      facebookId: user.facebookId
-    }}).then(function (userInstance) {
-      return userInstance.getChats();
-    }).then(function (chats) {
-      return chats.map(function (chat) {
-        return chat.id;
+    return User.findOne(
+      {
+        where:{
+          email: user.email,
+          facebookId: user.facebookId
+        },
+        include: [{model: Chat, as: 'chats', include: [{model: User, as: 'users'}]}]
+      }).then(function (userInstance) {
+        return userInstance.chats.map(function (chat) {
+          var json = {chatId: chat.id, users: chat.users.map(function (userInChat) {
+            return userInChat.facebookId;
+          })};
+          return json;
+        });
       });
-    });
   },
 
   getMessages: function (chatId) {
