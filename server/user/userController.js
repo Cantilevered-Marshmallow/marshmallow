@@ -21,8 +21,8 @@ module.exports = {
       var users = returnList.map(function (user) {
         return user.facebookId;
       }).filter(function (fbid) {
-        for (var i = 0; i < list.users.length; i++) {
-          if(list.users[i] === fbid){
+        for (var i = 0; i < list.length; i++) {
+          if(list[i] === fbid){
             return true;
           }
         }
