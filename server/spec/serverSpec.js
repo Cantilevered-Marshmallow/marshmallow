@@ -123,6 +123,26 @@ describe('GET and POST to /chat and /chat:id', function () {
       .expect(200, done);
   });
 
+  it('BradSmith should have PeterParker under contacts', function (done) {
+
+    // All of Brad Smith's friends ID's.
+    // First one is Peter Parker
+    var postBody = {users: ['102400480121838', '102400480133338', '103400480121838']}
+
+    agent1
+      .post('/userlist')
+      .send(postBody)
+      .expect(function (res) {
+        if (!res.body.hasOwnProperty('users')) {
+          throw new Error('Did not get filtered list back');
+        }
+        if (!Array.isArray(res.body.users) || res.body.users.length !== 1) {
+          throw new Error('Incorrect filtered list sent back');
+        }
+      })
+      .expect(200, done);
+  });
+
   it('should create a new chat room for list of users', function (done) {
 
     var users = { users: ['118724648484592', '102400480121838'] };
@@ -176,17 +196,13 @@ describe('GET and POST to /chat and /chat:id', function () {
     agent2
       .get('/chat/1')
       .expect(function (res) {
-        console.log(res.body);
+        if (!res.body.hasOwnProperty('messages')) {
+          throw new Error('Failed to retrieve messages for a specific chat room');
+        }
       })
       .expect(200, done);
   });
 
 });
-
-
-
-
-
-
 
 

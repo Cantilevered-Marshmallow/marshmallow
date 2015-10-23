@@ -97,7 +97,7 @@ describe('User Controller', function () {
   });
 
   it('should return a list of facebookIds', function (done) {
-    var users = {users: ['213432123450987', '653496787465543', '365425430798645']};
+    var postBody = {users: ['213432123450987', '653496787465543', '365425430798645']};
     var findAllMock = sinon.stub(User, 'findAll').returns(
         new Promise(function (resolve) {
           resolve([
@@ -107,7 +107,7 @@ describe('User Controller', function () {
         })
       );
 
-    userController.userList(users).then(function (returnObject) {
+    userController.userList(postBody.users).then(function (returnObject) {
       expect(returnObject).to.deep.equal(
           {users: ['653496787465543']}
         );
