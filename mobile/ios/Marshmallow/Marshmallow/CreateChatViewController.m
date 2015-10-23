@@ -93,6 +93,23 @@
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+    
+    if (cell.accessoryView == nil) {
+        NSError *error;
+        UIImage *checkbox = [[FAKIonIcons iconWithIdentifier:@"ion-ios-checkmark-outline" size:50 error:&error] imageWithSize:CGSizeMake(50, 50)];
+        checkbox = [checkbox imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImageView *iv = [[UIImageView alloc] initWithImage:checkbox];
+        [iv setTintColor:[UIColor colorFromHexString:@"#006400"]];
+        cell.accessoryView = iv;
+    } else {
+        cell.accessoryView = nil;
+    }
+    
+    [cell setSelected:NO animated:YES];
+}
+
 - (void)fetchContacts {
     self.contacts = [[NSMutableArray alloc] initWithArray:[Contact MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
     
