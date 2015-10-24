@@ -87,7 +87,7 @@
                                 _user = [User MR_createEntityInContext:localContext];
                                 _user.name = result[@"name"];
                                 _user.email = result[@"email"];
-                                _user.token = [_facebookToken tokenString];
+                                _user.oauthToken = [_facebookToken tokenString];
                             } completion:^(BOOL contextDidSave, NSError *error) {
                                 [self getFriends];
                             }];
