@@ -33,6 +33,8 @@
     self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
     
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
+    
+    [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -78,7 +80,7 @@
     UITextView *tv = [[UITextView alloc] init];
     tv.text = message.body;
     
-    int tvDefaultHeight = 46;
+    int tvDefaultHeight = 60;
     int differenceInHeight = tvDefaultHeight - [tv contentSize].height;
     if (differenceInHeight > 0) {
         return tvDefaultHeight + differenceInHeight;
@@ -111,15 +113,30 @@
                         message.chatsId = [fetchedMessage[@"chatId"] stringValue];
                         message.userId = fetchedMessage[@"userFacebookId"];
                         message.timestamp = [NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]];
-                        
-                        [self.messages addObject:message];
+                    } completion:^(BOOL contextDidSave, NSError *error) {
+                        if (contextDidSave) {
+                            dispatch_async(dispatch_get_main_queue(), ^{
+                                self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
+                                
+                                [self.tableView reloadData];
+                            });
+                        }
                     }];
                 }
             }
-            
-            [self.tableView reloadData];
         }
     }];
+}
+
+- (void)sendMessage:(id)sender {
+    if (![self.messageInput.text isEqualToString:@"Enter your message here"]) {
+        [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} response:^(NSError *error, NSDictionary *response) {
+            if (!error) {
+                self.messageInput.text = @"Enter your message here";
+                [self fetchMessages:self];
+            }
+        }];
+    }
 }
 
 @end

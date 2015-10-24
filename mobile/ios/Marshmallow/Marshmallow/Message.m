@@ -12,6 +12,8 @@
 
 @implementation Message
 
-// Insert code here to add functionality to your managed object subclass
+- (NSString *)description {
+    return [NSString stringWithFormat:@"Message is the following: %@ from %@ in %@", self.body, self.userId, self.chatsId];
+}
 
 @end

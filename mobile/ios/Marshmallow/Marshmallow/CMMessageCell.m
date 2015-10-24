@@ -32,6 +32,9 @@
         // Setup message text view
         self.messageBody = [[UITextView alloc] initWithFrame:CGRectMake(25, 60, 200, 60)];
         
+        [self.messageBody setEditable:NO];
+        
+        // Add subviews
         [self.contentView addSubview:self.userImage];
         [self.contentView addSubview:self.userName];
         [self.contentView addSubview:self.timestamp];
