@@ -2,7 +2,6 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var session = require('express-session');
 
 var router = require('./router');
 
@@ -14,11 +13,6 @@ var app = express();
 app.set('port', process.env.PORT || 8080);
 
 app.use(bodyParser.json());
-app.use(session({
-  resave: false,
-  saveUninitialized: true,
-  secret: 'marshmallowed'
-}));
 app.use('/', router);
 
 
