@@ -97,7 +97,8 @@
                     <connections>
                         <outlet property="chatControls" destination="iGy-NE-xE0" id="Sio-iI-TSo"/>
                         <outlet property="messageInput" destination="yZc-5r-c26" id="4Am-2K-lT2"/>
-                        <outlet property="tableView" destination="spl-FI-N8v" id="tA4-XF-bQ2"/>
+                        <outlet property="sendMessageButton" destination="AdG-m8-Wqh" id="7ua-kV-iCh"/>
+                        <outlet property="tableView" destination="spl-FI-N8v" id="slv-GI-rIx"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nRr-jk-1lF" userLabel="First Responder" sceneMemberID="firstResponder"/>

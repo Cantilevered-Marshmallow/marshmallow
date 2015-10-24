@@ -21,10 +21,10 @@
 - (void)setUp {
     [super setUp];
 
-    _request = [[CMNetworkRequest alloc] initWithBaseUrl:[NSURL URLWithString:@"http://localhost:8080"]];
+    _request = [[CMNetworkRequest alloc] initWithBaseUrl:[NSURL URLWithString:@"https://marshy.herokuapp.com"]];
     
     // Remove any cookies from a previous logged in session
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://localhost:8080"]];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://marshy.herokuapp.com"]];
     for (NSHTTPCookie *cookie in cookies)
     {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
@@ -45,13 +45,13 @@
 #pragma mark - Method Behavior
 
 - (void)testInitWithBaseUrlMethod {
-    XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"http://localhost:8080"]);
+    XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"https://marshy.herokuapp.com"]);
     XCTAssertTrue(_request.manager);
 }
 
 - (void)testInitMethod {
     CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
-    XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"http://localhost:8080"]);
+    XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"https://marshy.herokuapp.com"]);
     XCTAssertTrue(_request.manager);
 }
 
@@ -60,10 +60,10 @@
     
     // Test GET request without user
     [_request requestWithHttpVerb:@"GET"
-                              url:@"/api/reviews"
+                              url:@"/"
                              data:@{}
                          response:^(NSError *error, NSDictionary *response) {
-                             if (!error) {
+                             if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Request failed: not found (404)"]) {
                                  [getException fulfill];
                              } else {
                                  NSLog(@"Callback: %@", error);

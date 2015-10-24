@@ -28,6 +28,7 @@
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *sendMessageButton;
 
 @property (strong, nonatomic) Chats *chat;
 
@@ -38,5 +39,7 @@
 @property NSTimer *fetchMessagesTimer;
 
 - (void)fetchMessages:(id)sender;
+
+- (void)sendMessage:(id)sender;
 
 @end
