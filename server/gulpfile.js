@@ -3,7 +3,12 @@ var env = require('gulp-env');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var nodemon = require('gulp-nodemon');
-var dbCredentials = require('./.env.json');
+var dbCredentials;
+if (process.env.TRAVIS) {
+  dbCredentials = process.env;
+} else {
+  dbCredentials = require('./.env.json');
+}
 var dbTask = require('gulp-db')({
   host: dbCredentials.DB_SERVER,
   user: dbCredentials.DB_USER,
