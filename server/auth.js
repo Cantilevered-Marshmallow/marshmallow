@@ -66,7 +66,14 @@ module.exports = {
   },
 
   _authToken: function (req, res, user) {
-    user.dataValues.token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
-    res.send(user);
+    user = user.toJSON();
+    var token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+    var responseObj = {
+      email: user.email,
+      facebookId: user.facebookId,
+      token: token
+    };
+    res.send(responseObj);
   }
 };
