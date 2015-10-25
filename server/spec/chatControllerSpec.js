@@ -78,14 +78,15 @@ describe('Chat Controller', function () {
       facebookId: '142363545876534'
     };
 
-    var chats = [ {id: '1'}, {id: '2'} ];
+    var chats = [
+        {id: '1',
+         users: [{facebookId: '234324535'}]},
+        {id: '2',
+         users: [{facebookId: '565475675'}]},
+      ];
 
     var userInstance = {
-      getChats: function () {
-        return new Promise (function (resolve, reject) {
-          resolve(chats);
-        });
-      }
+      chats: chats
     };
 
     var userStub;
@@ -110,10 +111,15 @@ describe('Chat Controller', function () {
       done();
     });
 
+    var resultObj = [
+      {chatId: '1', users: ['234324535']},
+      {chatId: '2', users: ['565475675']}
+    ];
+
     it('should resolve all chats', function (done) {
       chatController.retrieveChats(user)
         .then(function (resolveObj) {
-          expect(resolveObj).to.deep.equal(['1','2']);
+          expect(resolveObj).to.deep.equal(resultObj);
           done();
         });
     });
