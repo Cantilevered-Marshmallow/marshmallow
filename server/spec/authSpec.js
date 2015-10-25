@@ -85,6 +85,9 @@ describe('Auth Service', function () {
     it('should create a new user, amend session object on req, and send back user data', function (done) {
       userControllerStub = sinon.stub(userController, 'registerNewUser', function (newUser) {
         return new Promise(function (resolve, reject) {
+          newUser.toJSON = function () {
+            return this;
+          };
           resolve(newUser);
         });
       });
@@ -134,6 +137,9 @@ describe('Auth Service', function () {
 
       userControllerStub = sinon.stub(userController, 'isUser', function (user) {
         return new Promise(function (resolve, reject) {
+          user.toJSON = function () {
+            return this;
+          };
           resolve(user);
         });
       });
