@@ -60,7 +60,7 @@
 
 - (void)fetchChats:(id)sender {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [_request requestWithHttpVerb:@"GET" url:@"/chat" data:nil response:^(NSError *error, NSDictionary *response) {
+        [_request requestWithHttpVerb:@"GET" url:@"/chat" data:nil jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
             if (!error) {
                 for (NSDictionary *fetchedChat in response[@"chats"]) {
                     NSString *chatId = [NSString stringWithFormat:@"%@", fetchedChat[@"chatId"]];
@@ -82,7 +82,7 @@
                 });
             } else {
                 // Try to log back in
-                [_request requestWithHttpVerb:@"POST" url:@"/login" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"email": self.user.email, @"facebookId": [[FBSDKAccessToken currentAccessToken] userID]} response:^(NSError *error, NSDictionary *response) {
+                [_request requestWithHttpVerb:@"POST" url:@"/login" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"email": self.user.email, @"facebookId": [[FBSDKAccessToken currentAccessToken] userID]} jwt:nil response:^(NSError *error, NSDictionary *response) {
                     if (!error) {
                         [self fetchChats:self];
                     }
@@ -96,6 +96,7 @@
     if ([[segue identifier] isEqualToString:@"showChat"]) {
         ChatViewController *vc = segue.destinationViewController;
         vc.chat = sender;
+        vc.user = self.user;
     }
 }
 

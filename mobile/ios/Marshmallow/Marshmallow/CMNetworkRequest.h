@@ -20,6 +20,7 @@
 - (void)requestWithHttpVerb:(NSString *)verb
                     url:(NSString *)url
                    data:(NSDictionary *)data
+                    jwt:(NSString *)jwt
                response:(void (^)(NSError *error, NSDictionary *response))response;
 
 @end

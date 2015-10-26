@@ -32,6 +32,8 @@
 
 @property (strong, nonatomic) Chats *chat;
 
+@property (strong, nonatomic) User *user;
+
 @property (strong, nonatomic) NSMutableArray<Message *> *messages;
 
 @property (nonatomic) CMNetworkRequest *request;

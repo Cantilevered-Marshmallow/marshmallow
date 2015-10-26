@@ -39,7 +39,7 @@
 #pragma mark - Method Exists
 
 - (void)testRequestWithVerbMethodExists {
-    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:response:)]);
+    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:jwt:response:)]);
 }
 
 #pragma mark - Method Behavior
@@ -62,6 +62,7 @@
     [_request requestWithHttpVerb:@"GET"
                               url:@"/"
                              data:@{}
+                              jwt:nil
                          response:^(NSError *error, NSDictionary *response) {
                              if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Request failed: not found (404)"]) {
                                  [getException fulfill];
@@ -75,6 +76,7 @@
     [_request requestWithHttpVerb:@"POST"
                               url:@"/"
                              data:@{}
+                              jwt:nil
                          response:^(NSError *error, NSDictionary *response) {
                              if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Request failed: not found (404)"]) {
                                  [postException fulfill];

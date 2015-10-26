@@ -81,7 +81,8 @@
             
             CMNetworkRequest *networkRequest = [[CMNetworkRequest alloc] init];
             
-            [networkRequest requestWithHttpVerb:@"POST" url:@"/userlist" data:@{@"users": friendIds} response:^(NSError *error, NSDictionary *response) {
+            User *user = [User MR_findFirstByAttribute:@"oauthToken" withValue:[[FBSDKAccessToken currentAccessToken] tokenString] inContext:[NSManagedObjectContext MR_defaultContext]];
+            [networkRequest requestWithHttpVerb:@"POST" url:@"/userlist" data:@{@"users": friendIds} jwt:user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     NSArray *filteredFriends = response[@"users"];
                     
