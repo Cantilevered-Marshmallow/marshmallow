@@ -136,7 +136,9 @@
     
     if (facebookIds.count >= 2) {
         CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
-        [request requestWithHttpVerb:@"POST" url:@"/chat" data:@{@"users": facebookIds} response:^(NSError *error, NSDictionary *response) {
+        
+        User *user = [User MR_findFirstByAttribute:@"oauthToken" withValue:[[FBSDKAccessToken currentAccessToken] tokenString] inContext:[NSManagedObjectContext MR_defaultContext]];
+        [request requestWithHttpVerb:@"POST" url:@"/chat" data:@{@"users": facebookIds} jwt:user.jwt response:^(NSError *error, NSDictionary *response) {
             if (!error) {
                 [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                     Chats *chats = [Chats MR_createEntityInContext:localContext];

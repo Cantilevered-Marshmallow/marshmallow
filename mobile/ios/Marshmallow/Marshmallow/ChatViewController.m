@@ -89,7 +89,7 @@
 }
 
 - (void)fetchMessages:(id)sender {
-    [self.request requestWithHttpVerb:@"GET" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:nil response:^(NSError *error, NSDictionary *response) {
+    [self.request requestWithHttpVerb:@"GET" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:nil jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
         if (!error) {
             NSArray *fetchedMessages = response[@"messages"];
             
@@ -130,7 +130,7 @@
 
 - (void)sendMessage:(id)sender {
     if (![self.messageInput.text isEqualToString:@"Enter your message here"]) {
-        [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} response:^(NSError *error, NSDictionary *response) {
+        [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
             if (!error) {
                 self.messageInput.text = @"Enter your message here";
                 [self fetchMessages:self];
