@@ -13,6 +13,7 @@ router.post('/signup', auth.authFacebook, auth.signup);
 
 router.post('/login', auth.authFacebook, auth.login);
 
+
 router.post('/userlist', auth.authenticate, function (req, res) {
   userController.userList(req.body.users)
     .then(function (users) {
