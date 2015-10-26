@@ -9,12 +9,6 @@ router.use(function timeLog (req, res, next) {
   next();
 });
 
-router.use(function (req, res, next) {
-  console.log(req.body, req.url);
-
-  next();
-});
-
 router.post('/signup', auth.authFacebook, auth.signup);
 
 router.post('/login', auth.authFacebook, auth.login);
