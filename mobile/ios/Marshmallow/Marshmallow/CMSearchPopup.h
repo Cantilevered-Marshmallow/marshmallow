@@ -12,7 +12,7 @@
 #import "MMPopupCategory.h"
 #import <Masonry/Masonry.h>
 
-@interface SearchPopup : MMPopupView
+@interface CMSearchPopup : MMPopupView
 
 @property (nonatomic, strong) UISearchBar *searchBar;
 

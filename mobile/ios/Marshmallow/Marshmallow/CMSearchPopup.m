@@ -6,9 +6,9 @@
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
 
-#import "SearchPopup.h"
+#import "CMSearchPopup.h"
 
-@implementation SearchPopup
+@implementation CMSearchPopup
 
 - (instancetype)init {
     self = [super init];

@@ -23,7 +23,7 @@
 #import "CMNetworkRequest.h"
 #import "CMMessageCell.h"
 
-#import "SearchPopup.h"
+#import "CMSearchPopup.h"
 
 @interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 

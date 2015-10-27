@@ -144,7 +144,7 @@
 }
 
 - (void)showAttachments:(id)sender {
-    SearchPopup *pop = [[SearchPopup alloc] init];
+    CMSearchPopup *pop = [[CMSearchPopup alloc] init];
     pop.prompt = @"Search Google Images";
     pop.subview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon"]];
     [pop show];
