@@ -19,6 +19,7 @@
 		CA6AF1141BD861DB0025FC6C /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10A1BD861DB0025FC6C /* Contact.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF1151BD861DB0025FC6C /* Message+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF1161BD861DB0025FC6C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10E1BD861DB0025FC6C /* Message.m */; settings = {ASSET_TAGS = (); }; };
+		CA8A590E1BE02EDA0013D363 /* SearchPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A590D1BE02EDA0013D363 /* SearchPopup.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -79,6 +80,8 @@
 		CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Message+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CA6AF10D1BD861DB0025FC6C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		CA6AF10E1BD861DB0025FC6C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		CA8A590C1BE02EDA0013D363 /* SearchPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchPopup.h; sourceTree = "<group>"; };
+		CA8A590D1BE02EDA0013D363 /* SearchPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchPopup.m; sourceTree = "<group>"; };
 		CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationView.m; sourceTree = "<group>"; };
 		CAA8F2321BD5BECC009844AC /* HDNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDNotificationView.h; sourceTree = "<group>"; };
 		CAA8F2361BD6BF0C009844AC /* IconTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTabBarController.h; sourceTree = "<group>"; };
@@ -243,6 +246,8 @@
 				CAD70F331BD9D34600122F7A /* UIColor+ColorFromHexString.m */,
 				CAD3A43C1BDAFA8600B3621E /* CMMessageCell.h */,
 				CAD3A43D1BDAFA8600B3621E /* CMMessageCell.m */,
+				CA8A590C1BE02EDA0013D363 /* SearchPopup.h */,
+				CA8A590D1BE02EDA0013D363 /* SearchPopup.m */,
 			);
 			path = Marshmallow;
 			sourceTree = "<group>";
@@ -554,6 +559,7 @@
 				CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */,
 				CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */,
 				CA6AF1161BD861DB0025FC6C /* Message.m in Sources */,
+				CA8A590E1BE02EDA0013D363 /* SearchPopup.m in Sources */,
 				CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */,
 				CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */,
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,

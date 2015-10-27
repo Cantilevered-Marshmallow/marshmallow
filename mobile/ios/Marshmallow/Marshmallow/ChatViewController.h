@@ -23,12 +23,15 @@
 #import "CMNetworkRequest.h"
 #import "CMMessageCell.h"
 
+#import "SearchPopup.h"
+
 @interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *sendMessageButton;
+@property (weak, nonatomic) IBOutlet UIButton *attachmentButton;
 
 @property (strong, nonatomic) Chats *chat;
 
@@ -43,5 +46,7 @@
 - (void)fetchMessages:(id)sender;
 
 - (void)sendMessage:(id)sender;
+
+- (void)showAttachments:(id)sender;
 
 @end

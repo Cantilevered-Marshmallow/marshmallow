@@ -35,6 +35,7 @@
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
     
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
+    [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -140,6 +141,13 @@
             }
         }];
     }
+}
+
+- (void)showAttachments:(id)sender {
+    SearchPopup *pop = [[SearchPopup alloc] init];
+    pop.prompt = @"Search Google Images";
+    pop.subview = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon"]];
+    [pop show];
 }
 
 @end
