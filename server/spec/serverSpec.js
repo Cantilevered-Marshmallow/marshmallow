@@ -2,6 +2,7 @@ var request = require('supertest');
 var sinon = require('sinon');
 var auth = require('../auth');
 
+
 /* For reference
    http://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/
 */
@@ -23,7 +24,7 @@ var PeterParker = {
 
 describe('Sign up and log in', function () {
   before(function (done) {
-    server = require('../server');
+    server = require('../server').server;
     done();
   });
 
@@ -91,7 +92,7 @@ describe('GET and POST to /chat and /chat:id', function () {
   var agent2;
 
   before(function (done) {
-    server = require('../server');
+    server = require('../server').server;
 
     // Brad Smith
     agent1 = request.agent(server);
@@ -230,5 +231,3 @@ describe('GET and POST to /chat and /chat:id', function () {
   });
 
 });
-
-

@@ -4,6 +4,8 @@ var Message = require('../db/db').Message;
 
 module.exports = {
 
+  sockets: {},
+
   createChat: function (userList) {
     if (userList.length < 2) {
       return new Promise(function (resolve, reject) {
@@ -48,7 +50,21 @@ module.exports = {
       });
   },
 
+  broadcastMessage: function (chatId, message) {
+    Chat.findOne({
+      where: {id: chatId},
+      include: [{model: User, as: 'users'}]
+    }).then(function (chat) {
+      chat.users.forEach(function (user) {
+        if (module.exports.sockets[user.facebookId]) {
+          module.exports.sockets[user.facebookId].emit('message', message);
+        }
+      });
+    });
+  },
+
   postMessage: function (chatId, facebookId, message) {
+    this.broadcastMessage(chatId, message);
     return Message.create(message)
       .then(function (message) {
         return Promise.all([

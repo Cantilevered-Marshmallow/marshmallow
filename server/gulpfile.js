@@ -68,9 +68,16 @@ gulp.task('server-test', function () {
 });
 
 
+gulp.task('socket-test', function () {
+  return gulp.src(['spec/socketSpec.js'], {read: false})
+             .pipe(mocha({reporter: 'spec'}));
+});
+
 gulp.task('server-integration-test', ['db:drop', 'db:create', 'set-env', 'server-test']);
 
 gulp.task('local-test', ['set-env', 'user-test', 'chat-test']);
+
+gulp.task('socket-integration-test', ['db:drop', 'db:create', 'set-env', 'nodemon', 'socket-test']);
 
 gulp.task('start', ['set-env', 'nodemon']);
 
