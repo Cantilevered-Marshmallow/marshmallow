@@ -90,6 +90,8 @@ describe('GET and POST to /chat and /chat:id', function () {
   var agent1;
   var agent2;
 
+  var timeStamp;
+
   before(function (done) {
     server = require('../server');
 
@@ -225,10 +227,58 @@ describe('GET and POST to /chat and /chat:id', function () {
         if (!res.body.hasOwnProperty('messages')) {
           throw new Error('Failed to retrieve messages for a specific chat room');
         }
+        if (res.body.messages[0].chatId !== 1) {
+         throw new Error('Wrong chat room'); 
+        }
+        if (res.body.messages[0].text !== 'Hey Peter! How\'s it going') {
+          throw new Error('Wrong message retrieved'); 
+        }
       })
       .expect(200, done);
   });
 
+  it('PeterParker sends three messages to BradSmith', function (done) {
+    var msg1 = { text: 'Hey Brad. I\'m doing good' };
+    var msg2 = { text: 'How you been?' };
+    var msg3 = { text: 'Haven\'t seen you around for a while' };
+    timeStamp = new Date().toISOString;
+
+    agent2
+      .post('/chat/1')
+      .set('token', PeterParker.token)
+      .send(msg1)
+      .expect(201);
+
+    agent2
+      .post('/chat/1')
+      .set('token', PeterParker.token)
+      .send(msg2)
+      .expect(201);
+
+    agent2
+      .post('/chat/1')
+      .set('token', PeterParker.token)
+      .send(msg3)
+      .expect(201, done);
+
+  });
+
+  it('BradSmith should retrieve all messages from chat room 1', function (done) {
+
+    agent1
+      .get('/messages?timestamp=' + timeStamp)
+      .set('token', BradSmith.token)
+      .expect(function (res) {
+        if (!res.body.hasOwnProperty('messages')) {
+          throw new Error('Failed to retrieve messages given timestamp');
+        }
+        if (res.body.messages.length !== 3) {
+          throw new Error('BradSmith should receieve exactly three messages');
+        }
+      })
+      .expect(200, done);
+  });
+  
 });
 
 
