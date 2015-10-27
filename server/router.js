@@ -27,7 +27,7 @@ router.get('/messages', auth.authenticate, function (req, res) {
   }
   chatController.getMessagesByTime(req.user.facebookId, req.query.timestamp)
     .then(function (messages) {
-      res.status(200).send(messages);
+      res.status(200).send({messages: messages});
     });
 });
 

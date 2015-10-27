@@ -228,10 +228,10 @@ describe('GET and POST to /chat and /chat:id', function () {
           throw new Error('Failed to retrieve messages for a specific chat room');
         }
         if (res.body.messages[0].chatId !== 1) {
-         throw new Error('Wrong chat room'); 
+         throw new Error('Wrong chat room');
         }
         if (res.body.messages[0].text !== 'Hey Peter! How\'s it going') {
-          throw new Error('Wrong message retrieved'); 
+          throw new Error('Wrong message retrieved');
         }
       })
       .expect(200, done);
@@ -241,30 +241,31 @@ describe('GET and POST to /chat and /chat:id', function () {
     var msg1 = { text: 'Hey Brad. I\'m doing good' };
     var msg2 = { text: 'How you been?' };
     var msg3 = { text: 'Haven\'t seen you around for a while' };
-    timeStamp = new Date().toISOString;
+    timeStamp = new Date().toISOString();
+    sinon.useFakeTimers(Date.now()).tick(5000);
 
     agent2
       .post('/chat/1')
       .set('token', PeterParker.token)
       .send(msg1)
-      .expect(201);
-
-    agent2
-      .post('/chat/1')
-      .set('token', PeterParker.token)
-      .send(msg2)
-      .expect(201);
-
-    agent2
-      .post('/chat/1')
-      .set('token', PeterParker.token)
-      .send(msg3)
-      .expect(201, done);
-
+      .expect(201)
+      .end(function () {
+        agent2
+          .post('/chat/1')
+          .set('token', PeterParker.token)
+          .send(msg2)
+          .expect(201)
+          .end(function () {
+            agent2
+              .post('/chat/1')
+              .set('token', PeterParker.token)
+              .send(msg3)
+              .expect(201, done);
+          });
+      });
   });
 
   it('BradSmith should retrieve all messages from chat room 1', function (done) {
-
     agent1
       .get('/messages?timestamp=' + timeStamp)
       .set('token', BradSmith.token)
@@ -278,7 +279,7 @@ describe('GET and POST to /chat and /chat:id', function () {
       })
       .expect(200, done);
   });
-  
+
 });
 
 
