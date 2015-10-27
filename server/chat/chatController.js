@@ -58,7 +58,17 @@ module.exports = {
       });
   },
 
-  _cleanMessageInstance: function () {
+  getMessagesByTime: function (facebookId, timestamp) {
+    return User.findById(facebookId)
+      .then(function (user) {
+        return user.getChats({include: [{model: Message, as: 'messages'}]});
+      }).then(function (chats) {
+        var messages = [];
+        for (var i = 0; i < chats.length; i++) {
+          messages = messages.concat(chats[i].messages);
+        }
+        return messages;
+      });
   }
 
 };

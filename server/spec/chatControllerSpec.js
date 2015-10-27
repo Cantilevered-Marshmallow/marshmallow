@@ -187,5 +187,44 @@ describe('Chat Controller', function () {
     });
   });
 
+  describe('Get all messages by user\'s chats', function () {
+    var facebookId = '1234';
+    var timestamp = new Date().toISOString();
+
+    var messagesA = [{'message': 'object', 'is': 'here'}];
+    var messagesB = [{'another': 'message', 'object': 'here'}];
+
+    var chats = [
+      {messages: messagesA},
+      {messages: messagesB}
+    ];
+
+    var user = {
+      getChats: function () {
+        return new Promise (function (resolve, reject) {
+          resolve(chats);
+        });
+      }
+    };
+    var userStub = sinon.stub(User, 'findById', function () {
+      return new Promise (function (resolve, reject) {
+        resolve(user);
+      });
+    });
+
+    after(function (done) {
+      userStub.restore();
+      done();
+    });
+
+    it('should return all messages in one array', function (done) {
+      chatController.getMessagesByTime()
+        .then(function (messages) {
+          expect(messages).to.deep.equal(messagesA.concat(messagesB));
+          done();
+        });
+    });
+  });
+
 });
 

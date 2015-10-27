@@ -21,6 +21,16 @@ router.post('/userlist', auth.authenticate, function (req, res) {
     });
 });
 
+router.get('/messages', auth.authenticate, function (req, res) {
+  if (!req.query.timestamp){
+    res.status(400).send('No timestamp sent');
+  }
+  chatController.getMessagesByTime(req.user.facebookId, req.query.timestamp)
+    .then(function (messages) {
+      res.status(200).send(messages);
+    });
+});
+
 router.post('/chat', auth.authenticate, function (req, res) {
   chatController.createChat(req.body.users)
     .then(function (chat) {
