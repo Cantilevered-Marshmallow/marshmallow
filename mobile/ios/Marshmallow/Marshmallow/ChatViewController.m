@@ -43,6 +43,9 @@
     if (!self.fetchMessagesTimer) {
         self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:true];
     }
+    
+    // Scroll to bottom of messages table
+    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
