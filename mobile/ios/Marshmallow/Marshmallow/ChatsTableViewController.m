@@ -111,24 +111,31 @@
         NSString *date = [[NSDate date] formattedDateWithFormat:@"YYYY-MM-dd\'T\'HH:mm:ss.000\'Z\'"];
         [_request requestWithHttpVerb:@"GET" url:[NSString stringWithFormat:@"/messages?timestamp=%@", date] data:nil jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
             if (!error) {
-                for (NSDictionary *fetchedChat in response[@"chats"]) {
-                    NSString *chatId = [NSString stringWithFormat:@"%@", fetchedChat[@"chatId"]];
-                    if (![Chats MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                NSArray *fetchedMessages = response[@"messages"];
+                for (NSDictionary *fetchedMessage in fetchedMessages) {
+                    NSString *chatId = [NSString stringWithFormat:@"%@", fetchedMessage[@"chatId"]];
+                    if (![Message MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
                         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                            Chats *chats = [Chats MR_createEntityInContext:localContext];
+                            Message *message = [Message MR_createEntityInContext:localContext];
+                            message.body = fetchedMessage[@"text"];
                             
-                            chats.chatId = chatId;
-                            chats.chatTitle = [NSString stringWithFormat:@"Chat: %@", chatId];
+                            if (fetchedMessage[@"youtubeVideoId"] != (id)[NSNull null]) {
+                                message.youtubeVideoId = fetchedMessage[@"youtubeVideoId"];
+                            } else {
+                                message.youtubeVideoId = @"";
+                            }
+                            
+                            if (fetchedMessage[@"googleImageId"] != (id)[NSNull null]) {
+                                message.googleImageId = fetchedMessage[@"googleImageId"];
+                            } else {
+                                message.googleImageId = @"";
+                            }
+                            message.chatsId = [fetchedMessage[@"chatId"] stringValue];
+                            message.userId = fetchedMessage[@"userFacebookId"];
+                            message.timestamp = [NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]];
                         }];
                     }
                 }
-                dispatch_async(dispatch_get_main_queue(), ^{
-                    self.chats = [Chats MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]];
-                    
-                    [self.tableView reloadData];
-                    
-                    [HDNotificationView hideNotificationView];
-                });
             }
         }];
     });
