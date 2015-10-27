@@ -6,13 +6,16 @@ module.exports = {
 
   authFacebook: function (req, res, next) {
     var user = req.body;
+    if (!(user.oauthToken && user.facebookId)){
+      res.status(400).send('Error: empty request body.');
+    }
     request('https://graph.facebook.com/me?access_token=' + user.oauthToken,
       function (err, _, body) {
         body = JSON.parse(body);
         if (body.id === user.facebookId){
           next();
         } else {
-          res.status(400).send('Invalid Facebook access token');
+          res.status(400).send('Error: invalid Facebook access token');
         }
       });
   },

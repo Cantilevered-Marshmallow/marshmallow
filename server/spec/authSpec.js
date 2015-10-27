@@ -56,6 +56,29 @@ describe('Auth Service', function () {
       auth.authFacebook(req, res, next);
     });
 
+    it('should response to an empty request body with status code 400', function (done) {
+      var req = {
+        body: {}
+      };
+      var statusCode;
+      var res = {
+        status: function (code) {
+          statusCode = code;
+          return this;
+        },
+        send: function () {
+          expect(statusCode).to.equal(400);
+          done();
+        }
+      };
+      var next = function () {
+        done(new Error('Allowed unauthorized access'));
+      };
+
+      auth.authFacebook(req, res, next);
+    });
+
+
   });
 
   describe('signup method', function () {
