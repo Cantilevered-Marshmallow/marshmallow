@@ -77,6 +77,10 @@
                     
         cell.messageBody.text = message.body;
         
+        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
+            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
+        }
+        
         return cell;
     } else {
         CMGImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"gImageMessageCell" forIndexPath:indexPath];
@@ -92,6 +96,10 @@
         cell.timestamp.text = [message.timestamp timeAgoSinceNow];
         
         cell.messageBody.text = message.body;
+        
+        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
+            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
+        }
         
         [cell.googleImage hnk_setImageFromURL:[NSURL URLWithString:message.googleImageId]];
         
