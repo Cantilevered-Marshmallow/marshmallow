@@ -105,15 +105,26 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Message *message = self.messages[indexPath.row];
-    UITextView *tv = [[UITextView alloc] init];
+    UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(25, 60, 200, 60)];
     tv.text = message.body;
     
-    int tvDefaultHeight = 60;
-    int differenceInHeight = tvDefaultHeight - [tv contentSize].height;
-    if (differenceInHeight > 0) {
-        return tvDefaultHeight + differenceInHeight;
+    int cellDefaultHeight = 110;
+    
+    if (tv.contentSize.height > tv.frame.size.height) {
+        tv.frame = CGRectMake(tv.frame.origin.x, tv.frame.origin.y, tv.frame.size.width, tv.contentSize.height);
+        
+        if ([message.googleImageId isEqualToString:@""]) {
+            return cellDefaultHeight + tv.contentSize.height;
+        } else {
+            return cellDefaultHeight + tv.contentSize.height + 240;
+        }
+    } else {
+        if ([message.googleImageId isEqualToString:@""]) {
+            return cellDefaultHeight;
+        } else {
+            return cellDefaultHeight + 240;
+        }
     }
-    return 110;
 }
 
 - (void)fetchMessages:(id)sender {
