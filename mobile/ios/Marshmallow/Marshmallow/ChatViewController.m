@@ -111,8 +111,6 @@
     int cellDefaultHeight = 110;
     
     if (tv.contentSize.height > tv.frame.size.height) {
-        tv.frame = CGRectMake(tv.frame.origin.x, tv.frame.origin.y, tv.frame.size.width, tv.contentSize.height);
-        
         if ([message.googleImageId isEqualToString:@""]) {
             return cellDefaultHeight + tv.contentSize.height;
         } else {
