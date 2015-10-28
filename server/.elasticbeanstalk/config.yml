@@ -1,0 +1,10 @@
+branch-defaults:
+  default:
+    environment: Default-Environment
+global:
+  application_name: My First Elastic Beanstalk Application
+  default_ec2_keyname: null
+  default_platform: 64bit Amazon Linux 2015.03 v2.0.1 running Node.js
+  default_region: us-west-2
+  profile: eb-cli
+  sc: null
