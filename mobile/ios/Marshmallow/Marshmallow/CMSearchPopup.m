@@ -18,7 +18,7 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        double width = [UIScreen mainScreen].bounds.size.width - 100;
+        double width = [UIScreen mainScreen].bounds.size.width - 50;
         
         [self mas_makeConstraints:^(MASConstraintMaker *make) {
             make.width.mas_equalTo(width);
@@ -71,7 +71,7 @@
     
     [self addSubview:subview];
     [self.subview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake([UIScreen mainScreen].bounds.size.width - 100, 400));
+        make.size.mas_equalTo(CGSizeMake([UIScreen mainScreen].bounds.size.width - 50, 400));
         make.left.equalTo(self);
         make.top.mas_equalTo(50);
     }];

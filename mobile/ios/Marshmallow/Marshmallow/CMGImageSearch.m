@@ -80,9 +80,8 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     CMGImageCell *cell = (CMGImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"googleImageCell" forIndexPath:indexPath];
-    
     UIImageView *iv = (UIImageView *)cell.subviews[0];
-    [iv hnk_setImageFromURL:[NSURL URLWithString:self.images[indexPath.row]]];
+    [iv hnk_setImageFromURL:[NSURL URLWithString:self.images[indexPath.row]] placeholder:[UIImage imageNamed:@"Icon"]];
     
     return cell;
 }
