@@ -83,7 +83,6 @@
     UIImageView *iv = (UIImageView *)cell.subviews[0];
     [iv hnk_setImageFromURL:[NSURL URLWithString:self.images[indexPath.row]] placeholder:[UIImage imageNamed:@"Icon"]];
     iv.userInteractionEnabled = NO;
-    cell.imageUrl = self.images[indexPath.row];
     
     cell.subviews[1].userInteractionEnabled = NO;
     
@@ -108,6 +107,9 @@
         
         self.selectedCell = cell;
         
+        NSIndexPath *indexPath = [((UICollectionView *) cell.superview) indexPathForCell:cell];
+        self.selectedUrl = self.images[indexPath.row];
+        
         NSError *error;
         UIImage *checkbox = [[FAKIonIcons iconWithIdentifier:@"ion-ios-checkmark-outline" size:50 error:&error] imageWithSize:CGSizeMake(50, 50)];
         checkbox = [checkbox imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -117,7 +119,7 @@
 }
 
 - (void)attachSelected:(id)sender {
-    [self.delegate imageSelected:((UIImageView *)self.selectedCell.subviews[0]).image withUrl:self.selectedCell.imageUrl];
+    [self.delegate imageSelected:((UIImageView *)self.selectedCell.subviews[0]).image withUrl:self.selectedUrl];
     
     [super attachSelected:sender];
 }

@@ -31,6 +31,8 @@
 
 @property (nonatomic, weak) CMGImageCell *selectedCell;
 
+@property (nonatomic, weak) NSString *selectedUrl;
+
 - (void)cellSelected:(UITapGestureRecognizer *)sender;
 
 @end

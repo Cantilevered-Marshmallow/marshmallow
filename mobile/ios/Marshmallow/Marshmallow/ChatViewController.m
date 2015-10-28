@@ -147,7 +147,12 @@
 
 - (void)showAttachments:(id)sender {
     CMGImageSearch *pop = [[CMGImageSearch alloc] init];
+    pop.delegate = self;
     [pop show];
+}
+
+- (void)imageSelected:(UIImage *)selectedImage withUrl:(NSString *)url {
+    NSLog(@"%@", url);
 }
 
 @end
