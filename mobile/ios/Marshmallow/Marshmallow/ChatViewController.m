@@ -136,12 +136,28 @@
 
 - (void)sendMessage:(id)sender {
     if (![self.messageInput.text isEqualToString:@"Enter your message here"]) {
-        [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
-            if (!error) {
-                self.messageInput.text = @"Enter your message here";
-                [self fetchMessages:self];
-            }
-        }];
+        if (self.gImageResult != nil) {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": self.gImageResult.url} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+                    iv.image = nil;
+                    self.gImageResult = nil;
+                    
+                    self.view.subviews[1].userInteractionEnabled = NO;
+                    iv.userInteractionEnabled = NO;
+                    
+                    self.messageInput.text = @"Enter your message here";
+                    [self fetchMessages:self];
+                }
+            }];
+        } else {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    self.messageInput.text = @"Enter your message here";
+                    [self fetchMessages:self];
+                }
+            }];
+        }
     }
 }
 
@@ -151,12 +167,15 @@
     [pop show];
 }
 
-- (void)imageSelected:(UIImage *)selectedImage withUrl:(NSString *)url {
+- (void)imageSelected:(CMGImageResult *)result {
     UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
-    iv.image = selectedImage;
+    iv.image = result.image;
+
     
     self.view.subviews[1].userInteractionEnabled = YES;
     iv.userInteractionEnabled = YES;
+    
+    self.gImageResult = result;
 }
 
 @end

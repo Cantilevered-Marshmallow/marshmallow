@@ -44,6 +44,8 @@
 
 @property NSTimer *fetchMessagesTimer;
 
+@property (strong, nonatomic) CMGImageResult *gImageResult;
+
 - (void)fetchMessages:(id)sender;
 
 - (void)sendMessage:(id)sender;

@@ -8,6 +8,11 @@
 
 #import "CMGImageSearch.h"
 
+@implementation CMGImageResult
+
+
+@end
+
 @implementation CMGImageSearch
 
 - (id)init {
@@ -23,6 +28,7 @@
         self.collectionView = [[UICollectionView alloc] initWithFrame:self.subViewRect collectionViewLayout:collectionLayout];
         self.collectionView.delegate = self;
         self.collectionView.dataSource = self;
+        self.collectionView.backgroundColor = [UIColor whiteColor];
         
         [self.collectionView registerNib:[UINib nibWithNibName:@"GoogleImageCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"googleImageCell"];
         
@@ -119,7 +125,10 @@
 }
 
 - (void)attachSelected:(id)sender {
-    [self.delegate imageSelected:((UIImageView *)self.selectedCell.subviews[0]).image withUrl:self.selectedUrl];
+    CMGImageResult *result = [[CMGImageResult alloc] init];
+    result.image = ((UIImageView *)self.selectedCell.subviews[0]).image;
+    result.url = self.selectedUrl;
+    [self.delegate imageSelected:result];
     
     [super attachSelected:sender];
 }

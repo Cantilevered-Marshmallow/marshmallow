@@ -13,11 +13,19 @@
 #import <AFNetworking/AFNetworking.h>
 #import <FontAwesomeKit/FontAwesomeKit.h>
 
+@interface CMGImageResult : NSObject
+
+@property (nonatomic, strong) UIImage *image;
+
+@property (nonatomic, strong) NSString *url;
+
+@end
+
 @protocol CMGImageSearchDelegate
 
 @required
 
-- (void)imageSelected:(UIImage *)selectedImage withUrl:(NSString *)url;
+- (void)imageSelected:(CMGImageResult *)result;
 
 @end
 
