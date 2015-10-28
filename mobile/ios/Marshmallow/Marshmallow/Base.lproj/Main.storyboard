@@ -41,6 +41,24 @@
                                     <outlet property="delegate" destination="Y7T-Ey-01K" id="A7K-Az-tXG"/>
                                 </connections>
                             </tableView>
+                            <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="n28-gL-Jre">
+                                <rect key="frame" x="180" y="373" width="240" height="119"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f3d-7c-hi3">
+                                        <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="240" id="JHx-xk-8X4"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstItem="f3d-7c-hi3" firstAttribute="centerY" secondItem="n28-gL-Jre" secondAttribute="centerY" constant="4.5" id="aME-g8-jAX"/>
+                                    <constraint firstItem="f3d-7c-hi3" firstAttribute="top" secondItem="n28-gL-Jre" secondAttribute="top" id="bQP-QA-pPe"/>
+                                    <constraint firstItem="f3d-7c-hi3" firstAttribute="centerX" secondItem="n28-gL-Jre" secondAttribute="centerX" id="qlt-X3-Saf"/>
+                                </constraints>
+                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGy-NE-xE0">
                                 <rect key="frame" x="0.0" y="500" width="600" height="54"/>
                                 <subviews>
@@ -89,7 +107,11 @@
                             <constraint firstItem="iGy-NE-xE0" firstAttribute="leading" secondItem="CHh-1h-7ai" secondAttribute="leadingMargin" constant="-20" id="Iwx-S1-bQP"/>
                             <constraint firstAttribute="trailingMargin" secondItem="iGy-NE-xE0" secondAttribute="trailing" constant="-20" id="LIV-CV-7F7"/>
                             <constraint firstItem="spl-FI-N8v" firstAttribute="leading" secondItem="CHh-1h-7ai" secondAttribute="leading" id="Qx0-Ta-WQu"/>
+                            <constraint firstItem="n28-gL-Jre" firstAttribute="top" secondItem="uKg-Dd-bZm" secondAttribute="bottom" constant="309" id="S4B-M9-JDk"/>
                             <constraint firstItem="iGy-NE-xE0" firstAttribute="top" secondItem="spl-FI-N8v" secondAttribute="bottom" constant="8" id="T0b-bV-5jL"/>
+                            <constraint firstItem="n28-gL-Jre" firstAttribute="leading" secondItem="iGy-NE-xE0" secondAttribute="leading" constant="180" id="Xo6-1t-fvt"/>
+                            <constraint firstItem="iGy-NE-xE0" firstAttribute="top" secondItem="n28-gL-Jre" secondAttribute="bottom" constant="8" symbolic="YES" id="hLe-Rm-giG"/>
+                            <constraint firstItem="n28-gL-Jre" firstAttribute="trailing" secondItem="iGy-NE-xE0" secondAttribute="trailing" constant="-180" id="p82-px-CHL"/>
                             <constraint firstAttribute="trailing" secondItem="spl-FI-N8v" secondAttribute="trailing" id="pFj-oX-WYr"/>
                             <constraint firstItem="spl-FI-N8v" firstAttribute="top" secondItem="CHh-1h-7ai" secondAttribute="top" constant="20" symbolic="YES" id="tCt-pH-Jkd"/>
                         </constraints>

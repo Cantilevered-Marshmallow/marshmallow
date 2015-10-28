@@ -152,7 +152,11 @@
 }
 
 - (void)imageSelected:(UIImage *)selectedImage withUrl:(NSString *)url {
-    NSLog(@"%@", url);
+    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+    iv.image = selectedImage;
+    
+    self.view.subviews[1].userInteractionEnabled = YES;
+    iv.userInteractionEnabled = YES;
 }
 
 @end
