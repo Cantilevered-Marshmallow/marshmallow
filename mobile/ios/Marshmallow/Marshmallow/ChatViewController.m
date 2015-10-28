@@ -33,6 +33,7 @@
     self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
     
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
+    [self.tableView registerClass:[CMGImageMessageCell class] forCellReuseIdentifier:@"gImageMessageCell"];
     
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
     [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
@@ -59,22 +60,43 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
     Message *message = self.messages[indexPath.row];
     
-    [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
-                
-    if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
-        Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
-        cell.userName.text = contact.name;
+    if ([message.googleImageId isEqualToString:@""]) {
+        CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
+        
+        [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
+                    
+        if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
+            Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
+            cell.userName.text = contact.name;
+        } else {
+            cell.userName.text = @"From You";
+        }
+        cell.timestamp.text = [message.timestamp timeAgoSinceNow];
+                    
+        cell.messageBody.text = message.body;
+        
+        return cell;
     } else {
-        cell.userName.text = @"From You";
+        CMGImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"gImageMessageCell" forIndexPath:indexPath];
+        
+        [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
+        
+        if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
+            Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
+            cell.userName.text = contact.name;
+        } else {
+            cell.userName.text = @"From You";
+        }
+        cell.timestamp.text = [message.timestamp timeAgoSinceNow];
+        
+        cell.messageBody.text = message.body;
+        
+        [cell.googleImage hnk_setImageFromURL:[NSURL URLWithString:message.googleImageId]];
+        
+        return cell;
     }
-    cell.timestamp.text = [message.timestamp timeAgoSinceNow];
-                
-    cell.messageBody.text = message.body;
-    
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {

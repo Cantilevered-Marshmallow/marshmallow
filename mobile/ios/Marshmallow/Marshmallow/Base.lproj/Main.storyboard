@@ -24,18 +24,6 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="472" id="5cE-QK-Xd5"/>
                                 </constraints>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="110" id="q3v-jd-YaH" customClass="CMMessageCell">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="110"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="q3v-jd-YaH" id="xcQ-w1-efS">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <animations/>
-                                        </tableViewCellContentView>
-                                        <animations/>
-                                    </tableViewCell>
-                                </prototypes>
                                 <connections>
                                     <outlet property="dataSource" destination="Y7T-Ey-01K" id="1bx-76-7Xv"/>
                                     <outlet property="delegate" destination="Y7T-Ey-01K" id="A7K-Az-tXG"/>

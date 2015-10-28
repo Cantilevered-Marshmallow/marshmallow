@@ -23,6 +23,7 @@
 
 #import "CMNetworkRequest.h"
 #import "CMMessageCell.h"
+#import "CMGImageMessageCell.h"
 
 #import "CMGImageSearch.h"
 
