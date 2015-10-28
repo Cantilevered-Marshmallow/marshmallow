@@ -92,20 +92,6 @@
     return 110;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-    return 4;
-}
-
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    CMGImageCell *cell = (CMGImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"googleImageCell" forIndexPath:indexPath];
-    
-    UIImageView *iv = (UIImageView *)cell.subviews[0];
-    NSArray<NSString *> *urls = @[@"https://s-media-cache-ak0.pinimg.com/236x/b8/ca/44/b8ca4427b00141b9d461068770490a65.jpg", @"https://s-media-cache-ak0.pinimg.com/736x/f0/1d/8a/f01d8a9f362bdf1bc15a7ac9cb6b5a45.jpg", @"https://c1.staticflickr.com/1/38/91607831_009166aa41.jpg", @"https://apanache.files.wordpress.com/2015/06/baby-monkey1.jpg"];
-    [iv hnk_setImageFromURL:[NSURL URLWithString:urls[indexPath.row]]];
-    
-    return cell;
-}
-
 - (void)fetchMessages:(id)sender {
     [self.request requestWithHttpVerb:@"GET" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:nil jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
         if (!error) {
@@ -158,7 +144,7 @@
 }
 
 - (void)showAttachments:(id)sender {
-    CMGImageSearch *pop = [[CMGImageSearch alloc] initWithDelegate:self andDatasource:self];
+    CMGImageSearch *pop = [[CMGImageSearch alloc] init];
     [pop show];
 }
 

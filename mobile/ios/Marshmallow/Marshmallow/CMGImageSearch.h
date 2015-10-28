@@ -7,12 +7,15 @@
 //
 
 #import "CMSearchPopup.h"
+#import "CMGImageCell.h"
 #import <SFFocusViewLayout/SFFocusViewLayout.h>
+#import <Haneke/Haneke.h>
+#import <AFNetworking/AFNetworking.h>
 
-@interface CMGImageSearch : CMSearchPopup
+@interface CMGImageSearch : CMSearchPopup<UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
-- (id)initWithDelegate:(id<UICollectionViewDelegate>)delegate andDatasource:(id<UICollectionViewDataSource>)datasource;
+@property (nonatomic, strong) NSArray<NSString *> *images;
 
 @end

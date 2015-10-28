@@ -25,9 +25,8 @@
 #import "CMMessageCell.h"
 
 #import "CMGImageSearch.h"
-#import "CMGImageCell.h"
 
-@interface ChatViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
