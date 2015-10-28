@@ -1,10 +1,10 @@
 var Sequelize = require('sequelize');
 
 var sequelize = new Sequelize(process.env.DB, process.env.DB_USER, process.env.DB_PASSWORD, {
-  host: process.env.DB_SERVER,
+  host: process.env.MYSQL_PORT_3306_TCP_ADDR,
   dialect: 'mysql',
   logging: false,
-  port: process.env.DB_PORT || 3306
+  port: 3306
 });
 
 
