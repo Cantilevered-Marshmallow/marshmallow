@@ -69,14 +69,14 @@
     
     _subview = subview;
     
-    double width = [UIScreen mainScreen].bounds.size.width - 100;
-    
     [self addSubview:subview];
     [self.subview mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.size.mas_equalTo(CGSizeMake(width, 400));
+        make.size.mas_equalTo(CGSizeMake([UIScreen mainScreen].bounds.size.width - 100, 400));
         make.left.equalTo(self);
         make.top.mas_equalTo(50);
     }];
+    
+    self.subViewRect = self.subview.frame;
 }
 
 @end

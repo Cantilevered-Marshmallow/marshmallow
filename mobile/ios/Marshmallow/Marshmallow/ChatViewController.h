@@ -11,6 +11,7 @@
 #import <Haneke/Haneke.h>
 #import <MagicalRecord/MagicalRecord.h>
 #import <ISO8601/ISO8601.h>
+#import <Haneke/Haneke.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
@@ -23,9 +24,10 @@
 #import "CMNetworkRequest.h"
 #import "CMMessageCell.h"
 
-#import "CMSearchPopup.h"
+#import "CMGImageSearch.h"
+#import "CMGImageCell.h"
 
-@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;

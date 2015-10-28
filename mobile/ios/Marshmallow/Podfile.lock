@@ -65,6 +65,7 @@ PODS:
   - Masonry (0.6.3)
   - MMPopupView (1.3):
     - Masonry
+  - SFFocusViewLayout (1.1.1)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -77,6 +78,7 @@ DEPENDENCIES:
   - ISO8601
   - MagicalRecord
   - MMPopupView
+  - SFFocusViewLayout
 
 EXTERNAL SOURCES:
   FontAwesomeKit:
@@ -100,5 +102,6 @@ SPEC CHECKSUMS:
   MagicalRecord: 89eb7d7ead39fb37f01c3d010665ee94d17f8dba
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MMPopupView: 25633125d678637c28afd5d9e7fc7dd2db2903da
+  SFFocusViewLayout: 01b91154fb64cf745ca75d97bdf8f069dd62d33c
 
 COCOAPODS: 0.39.0

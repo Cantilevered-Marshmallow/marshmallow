@@ -21,6 +21,8 @@
 
 @property (nonatomic, strong) UIView *subview;
 
+@property (nonatomic) CGRect subViewRect;
+
 @property (nonatomic, weak) NSString *prompt;
 
 - (void)actionHide:(id)sender;
