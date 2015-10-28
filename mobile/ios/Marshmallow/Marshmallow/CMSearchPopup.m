@@ -34,7 +34,7 @@
         [self.btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
         [self.btnCancel setTitleColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:255/255.0] forState:UIControlStateNormal];
         
-        self.btnConfirm = [UIButton mm_buttonWithTarget:self action:@selector(actionHide:)];
+        self.btnConfirm = [UIButton mm_buttonWithTarget:self action:@selector(attachSelected:)];
         [self addSubview:self.btnConfirm];
         [self.btnConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake(80, 50));
@@ -56,6 +56,12 @@
 
 - (void)actionHide:(id)sender {
     [self hide];
+}
+
+- (void)attachSelected:(id)sender {
+    [self hide];
+    
+    // Subviews should override this
 }
 
 - (void)setPrompt:(NSString *)prompt {

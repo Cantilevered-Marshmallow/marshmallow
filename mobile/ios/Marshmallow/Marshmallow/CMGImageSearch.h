@@ -11,11 +11,26 @@
 #import <SFFocusViewLayout/SFFocusViewLayout.h>
 #import <Haneke/Haneke.h>
 #import <AFNetworking/AFNetworking.h>
+#import <FontAwesomeKit/FontAwesomeKit.h>
 
-@interface CMGImageSearch : CMSearchPopup<UICollectionViewDelegate, UICollectionViewDataSource, UISearchBarDelegate>
+@protocol CMGImageSearchDelegate
+
+@required
+
+- (void)imageSelected:(UIImage *)selectedImage withUrl:(NSString *)url;
+
+@end
+
+@interface CMGImageSearch : CMSearchPopup<UICollectionViewDelegate, UICollectionViewDataSource, UIGestureRecognizerDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
 
 @property (nonatomic, strong) NSArray<NSString *> *images;
+
+@property (nonatomic, strong) id<CMGImageSearchDelegate> delegate;
+
+@property (nonatomic, weak) CMGImageCell *selectedCell;
+
+- (void)cellSelected:(UITapGestureRecognizer *)sender;
 
 @end

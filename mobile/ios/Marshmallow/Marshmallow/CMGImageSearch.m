@@ -82,8 +82,44 @@
     CMGImageCell *cell = (CMGImageCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"googleImageCell" forIndexPath:indexPath];
     UIImageView *iv = (UIImageView *)cell.subviews[0];
     [iv hnk_setImageFromURL:[NSURL URLWithString:self.images[indexPath.row]] placeholder:[UIImage imageNamed:@"Icon"]];
+    iv.userInteractionEnabled = NO;
+    cell.imageUrl = self.images[indexPath.row];
+    
+    cell.subviews[1].userInteractionEnabled = NO;
+    
+    cell.userInteractionEnabled = YES;
+    
+    UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSelected:)];
+    
+    [cell addGestureRecognizer:tapGesture];
+    
+    tapGesture.delegate = self;
     
     return cell;
+}
+
+- (void)cellSelected:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CMGImageCell *cell = ((CMGImageCell *) sender.view);
+        
+        if (self.selectedCell) {
+            ((UIImageView *)self.selectedCell.subviews[1]).image = nil;
+        }
+        
+        self.selectedCell = cell;
+        
+        NSError *error;
+        UIImage *checkbox = [[FAKIonIcons iconWithIdentifier:@"ion-ios-checkmark-outline" size:50 error:&error] imageWithSize:CGSizeMake(50, 50)];
+        checkbox = [checkbox imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImageView *accessory = (UIImageView *)cell.subviews[1];
+        accessory.image = checkbox;
+    }
+}
+
+- (void)attachSelected:(id)sender {
+    [self.delegate imageSelected:((UIImageView *)self.selectedCell.subviews[0]).image withUrl:self.selectedCell.imageUrl];
+    
+    [super attachSelected:sender];
 }
 
 @end

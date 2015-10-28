@@ -27,4 +27,6 @@
 
 - (void)actionHide:(id)sender;
 
+- (void)attachSelected:(id)sender;
+
 @end

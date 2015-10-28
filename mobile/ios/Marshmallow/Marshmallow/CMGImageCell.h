@@ -10,6 +10,6 @@
 
 @interface CMGImageCell : UICollectionViewCell
 
-@property (strong, nonatomic) UIImageView *iv;
+@property (strong, nonatomic) NSString *imageUrl;
 
 @end
