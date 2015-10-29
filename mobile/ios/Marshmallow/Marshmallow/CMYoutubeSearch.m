@@ -8,6 +8,10 @@
 
 #import "CMYoutubeSearch.h"
 
+@implementation CMYoutubeSearchResult
+
+@end
+
 @implementation CMYoutubeSearch
 
 - (id)init {
@@ -15,6 +19,12 @@
     
     if (self) {
         self.prompt = @"Search Youtube";
+        
+        self.resultsTable = [[UITableView alloc] initWithFrame:self.subViewRect];
+        
+        self.subview = self.resultsTable;
+        
+        self.searchBar.delegate = self;
     }
     
     return self;
