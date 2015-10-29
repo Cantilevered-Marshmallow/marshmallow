@@ -34,6 +34,7 @@
     
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
     [self.tableView registerClass:[CMGImageMessageCell class] forCellReuseIdentifier:@"gImageMessageCell"];
+    [self.tableView registerClass:[CMYoutubeVideoMessageCell class] forCellReuseIdentifier:@"youtubevideoMessageCell"];
     
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
     [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
@@ -62,7 +63,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     Message *message = self.messages[indexPath.row];
     
-    if ([message.googleImageId isEqualToString:@""]) {
+    if ([message.googleImageId isEqualToString:@""] && [message.youtubeVideoId isEqualToString:@""]) {
         CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
         
         [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
@@ -82,7 +83,7 @@
         }
         
         return cell;
-    } else {
+    } else if (![message.googleImageId isEqualToString:@""]) {
         CMGImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"gImageMessageCell" forIndexPath:indexPath];
         
         [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
@@ -104,6 +105,49 @@
         [cell.googleImage hnk_setImageFromURL:[NSURL URLWithString:message.googleImageId]];
         
         return cell;
+    } else {
+        CMYoutubeVideoMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"youtubevideoMessageCell" forIndexPath:indexPath];
+        
+        [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
+        
+        if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
+            Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
+            cell.userName.text = contact.name;
+        } else {
+            cell.userName.text = @"From You";
+        }
+        cell.timestamp.text = [message.timestamp timeAgoSinceNow];
+        
+        cell.messageBody.text = message.body;
+        
+        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
+            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
+        }
+        
+        cell.thumbnail.image = [UIImage imageNamed:@"Icon"];
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
+            manager.requestSerializer = [AFJSONRequestSerializer serializer];
+            
+            NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"plist"];
+            
+            [manager GET:[NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/videos?part=snippet&maxResults=1&id=%@&key=%@", message.youtubeVideoId, [NSDictionary dictionaryWithContentsOfFile:plistPath][@"YOUTUBE_KEY"]]
+              parameters:@{}
+                 success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                     NSDictionary *video = responseObject[@"items"][0][@"snippet"];
+                     
+                     cell.title.text = video[@"title"];
+                     cell.channel.text = video[@"channelTitle"];
+                     
+                     [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:video[@"thumbnails"][@"medium"][@"url"]]];
+                 }
+                 failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                     
+                 }];
+        });
+        
+        return cell;
     }
 }
 
@@ -119,16 +163,20 @@
     int cellDefaultHeight = 110;
     
     if (tv.contentSize.height > tv.frame.size.height) {
-        if ([message.googleImageId isEqualToString:@""]) {
-            return cellDefaultHeight + tv.contentSize.height;
-        } else {
+        if (![message.googleImageId isEqualToString:@""]) {
             return cellDefaultHeight + tv.contentSize.height + 240;
+        } else if (![message.youtubeVideoId isEqualToString:@""]) {
+            return cellDefaultHeight + tv.contentSize.height + 150;
+        } else {
+            return cellDefaultHeight + tv.contentSize.height;
         }
     } else {
-        if ([message.googleImageId isEqualToString:@""]) {
-            return cellDefaultHeight;
-        } else {
+        if (![message.googleImageId isEqualToString:@""]) {
             return cellDefaultHeight + 240;
+        } else if (![message.youtubeVideoId isEqualToString:@""]) {
+            return cellDefaultHeight + 150;
+        } else {
+            return cellDefaultHeight;
         }
     }
 }
@@ -189,7 +237,25 @@
                     [self fetchMessages:self];
                 }
             }];
-        } else {
+        }
+        
+        if (self.videoResult != nil) {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": self.videoResult.videoId, @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+                    iv.image = nil;
+                    self.videoResult = nil;
+                    
+                    self.view.subviews[1].userInteractionEnabled = NO;
+                    iv.userInteractionEnabled = NO;
+                    
+                    self.messageInput.text = @"Enter your message here";
+                    [self fetchMessages:self];
+                }
+            }];
+        }
+        
+        if (self.gImageResult == nil && self.videoResult == nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     self.messageInput.text = @"Enter your message here";
