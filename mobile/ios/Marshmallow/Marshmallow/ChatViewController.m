@@ -38,6 +38,10 @@
     
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
     [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.messageInput.placeholder = self.messageInput.text;
+    self.messageInput.placeholderColor = [UIColor grayColor];
+    self.messageInput.text = @"";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -225,47 +229,45 @@
 }
 
 - (void)sendMessage:(id)sender {
-    if (![self.messageInput.text isEqualToString:@"Enter your message here"]) {
-        if (self.gImageResult != nil) {
-            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": self.gImageResult.url} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
-                if (!error) {
-                    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
-                    iv.image = nil;
-                    self.gImageResult = nil;
-                    
-                    self.view.subviews[1].userInteractionEnabled = NO;
-                    iv.userInteractionEnabled = NO;
-                    
-                    self.messageInput.text = @"Enter your message here";
-                    [self fetchMessages:self];
-                }
-            }];
-        }
-        
-        if (self.videoResult != nil) {
-            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": self.videoResult.videoId, @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
-                if (!error) {
-                    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
-                    iv.image = nil;
-                    self.videoResult = nil;
-                    
-                    self.view.subviews[1].userInteractionEnabled = NO;
-                    iv.userInteractionEnabled = NO;
-                    
-                    self.messageInput.text = @"Enter your message here";
-                    [self fetchMessages:self];
-                }
-            }];
-        }
-        
-        if (self.gImageResult == nil && self.videoResult == nil) {
-            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
-                if (!error) {
-                    self.messageInput.text = @"Enter your message here";
-                    [self fetchMessages:self];
-                }
-            }];
-        }
+    if (self.gImageResult != nil) {
+        [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": self.gImageResult.url} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+            if (!error) {
+                UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+                iv.image = nil;
+                self.gImageResult = nil;
+                
+                self.view.subviews[1].userInteractionEnabled = NO;
+                iv.userInteractionEnabled = NO;
+                
+                self.messageInput.placeholder = @"Enter your message here";
+                [self fetchMessages:self];
+            }
+        }];
+    }
+    
+    if (self.videoResult != nil) {
+        [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": self.videoResult.videoId, @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+            if (!error) {
+                UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+                iv.image = nil;
+                self.videoResult = nil;
+                
+                self.view.subviews[1].userInteractionEnabled = NO;
+                iv.userInteractionEnabled = NO;
+                
+                self.messageInput.placeholder = @"Enter your message here";
+                [self fetchMessages:self];
+            }
+        }];
+    }
+    
+    if (self.gImageResult == nil && self.videoResult == nil) {
+        [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+            if (!error) {
+                self.messageInput.placeholder = @"Enter your message here";
+                [self fetchMessages:self];
+            }
+        }];
     }
 }
 

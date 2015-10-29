@@ -11,5 +11,6 @@ pod 'ISO8601'
 pod 'MMPopupView'
 pod 'SFFocusViewLayout'
 pod 'XCDYouTubeKit'
+pod 'UITextView+Placeholder'
 
 link_with 'Marshmallow', 'MarshmallowTests', 'MarshmallowUITests'
