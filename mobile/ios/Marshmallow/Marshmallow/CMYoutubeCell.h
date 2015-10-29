@@ -18,4 +18,6 @@
 
 @property (strong, nonatomic) UIImageView *thumbnail;
 
+@property (strong, nonatomic) UIImageView *highThumbnail;
+
 @end

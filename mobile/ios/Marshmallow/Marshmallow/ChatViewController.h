@@ -28,7 +28,7 @@
 #import "CMGImageSearch.h"
 #import "CMYoutubeSearch.h"
 
-@interface ChatViewController : UIViewController <CMGImageSearchDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
@@ -47,6 +47,8 @@
 @property NSTimer *fetchMessagesTimer;
 
 @property (strong, nonatomic) CMGImageResult *gImageResult;
+
+@property (strong, nonatomic) CMYoutubeSearchResult *videoResult;
 
 - (void)fetchMessages:(id)sender;
 

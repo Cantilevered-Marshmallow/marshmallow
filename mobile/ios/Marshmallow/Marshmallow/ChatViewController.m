@@ -211,7 +211,7 @@
     
     [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Youtube" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         CMYoutubeSearch *pop = [[CMYoutubeSearch alloc] init];
-//        pop.delegate = self;
+        pop.delegate = self;
         [pop show];
     }]];
     
@@ -236,6 +236,16 @@
     iv.userInteractionEnabled = YES;
     
     self.gImageResult = result;
+}
+
+- (void)videoSelected:(CMYoutubeSearchResult *)result {
+    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+    iv.image = result.highThumbnail;
+    
+    self.view.subviews[1].userInteractionEnabled = YES;
+    iv.userInteractionEnabled = YES;
+    
+    self.videoResult = result;
 }
 
 @end

@@ -34,8 +34,15 @@
         self.runtime.textColor = [UIColor grayColor];
         self.runtime.userInteractionEnabled = NO;
         
+        // Create highthumbnail off cell
+        self.highThumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 480, 360)];
+        self.highThumbnail.hidden = YES;
+        self.highThumbnail.contentMode = UIViewContentModeScaleAspectFit;
+        self.highThumbnail.userInteractionEnabled = NO;
+        
         // Add views to the contentview
         [self.contentView addSubview:self.thumbnail];
+        [self.contentView addSubview:self.highThumbnail];
         [self.contentView addSubview:self.title];
         [self.contentView addSubview:self.channel];
         [self.contentView addSubview:self.runtime];

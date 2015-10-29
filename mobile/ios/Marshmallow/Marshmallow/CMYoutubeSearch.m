@@ -46,10 +46,12 @@
     NSDictionary *snippet = video[@"snippet"];
     
     [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:snippet[@"thumbnails"][@"medium"][@"url"]]];
+    [cell.highThumbnail hnk_setImageFromURL:[NSURL URLWithString:snippet[@"thumbnails"][@"high"][@"url"]]];
     
     cell.title.text = snippet[@"title"];
     
     cell.channel.text = snippet[@"channelTitle"];
+    
     
     UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSelected:)];
     
@@ -121,6 +123,7 @@
         result.title = self.selectedCell.title.text;
         result.channel = self.selectedCell.channel.text;
         result.thumbnail = self.selectedCell.thumbnail.image;
+        result.highThumbnail = self.selectedCell.highThumbnail.image;
         
         NSDictionary *video = self.results[[self.resultsTable indexPathForCell:self.selectedCell].row];
         result.videoId = video[@"id"];

@@ -17,6 +17,8 @@
 
 @property (strong, nonatomic) UIImage *thumbnail;
 
+@property (strong, nonatomic) UIImage *highThumbnail;
+
 @property (strong, nonatomic) NSString *title;
 
 @property (strong, nonatomic) NSString *length;
