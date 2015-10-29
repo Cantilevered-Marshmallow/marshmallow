@@ -45,11 +45,17 @@
     NSDictionary *video = self.results[indexPath.row];
     NSDictionary *snippet = video[@"snippet"];
     
-    [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:snippet[@"thumbnails"][@"default"][@"url"]]];
+    [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:snippet[@"thumbnails"][@"medium"][@"url"]]];
     
     cell.title.text = snippet[@"title"];
     
     cell.channel.text = snippet[@"channelTitle"];
+    
+    UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellSelected:)];
+    
+    [cell addGestureRecognizer:recognizer];
+    
+    recognizer.delegate = self;
     
     return cell;
 }
@@ -60,6 +66,19 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 110;
+}
+
+- (void)cellSelected:(UITapGestureRecognizer *)sender {
+    if (sender.state == UIGestureRecognizerStateEnded) {
+        CMYoutubeCell *cell = ((CMYoutubeCell *) sender.view);
+        
+        if (self.selectedCell != nil) {
+            [self.selectedCell setSelected:NO];
+        }
+        
+        [cell setSelected:YES];
+        self.selectedCell = cell;
+    }
 }
 
 - (void)searchBarTextDidEndEditing:(UISearchBar *)searchBar {

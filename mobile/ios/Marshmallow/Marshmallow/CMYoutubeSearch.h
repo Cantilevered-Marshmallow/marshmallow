@@ -23,6 +23,8 @@
 
 @property (strong, nonatomic) NSString *channel;
 
+@property (strong, nonatomic) NSString *videoId;
+
 @end
 
 @protocol CMYoutubeSearchDelegate
@@ -33,7 +35,7 @@
 
 @end
 
-@interface CMYoutubeSearch : CMSearchPopup <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface CMYoutubeSearch : CMSearchPopup <UIGestureRecognizerDelegate, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *resultsTable;
 
@@ -42,5 +44,9 @@
 @property (strong, nonatomic) NSString *apiKey;
 
 @property (strong, nonatomic) NSMutableArray<NSDictionary *> *results;
+
+@property (strong, nonatomic) CMYoutubeCell *selectedCell;
+
+- (void)cellSelected:(UITapGestureRecognizer *)sender;
 
 @end
