@@ -125,6 +125,9 @@
         }
         
         cell.thumbnail.image = [UIImage imageNamed:@"Icon"];
+        cell.videoId = message.youtubeVideoId;
+        
+        cell.viewController = self;
         
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];

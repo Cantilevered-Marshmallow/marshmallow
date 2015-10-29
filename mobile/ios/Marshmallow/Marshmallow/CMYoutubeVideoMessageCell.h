@@ -8,12 +8,21 @@
 
 #import "CMMessageCell.h"
 
-@interface CMYoutubeVideoMessageCell : CMMessageCell
+#import <XCDYouTubeKit/XCDYouTubeKit.h>
+#import "MPMoviePlayerController+BackgroundPlayback.h"
+
+@interface CMYoutubeVideoMessageCell : CMMessageCell <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIImageView *thumbnail;
 
 @property (strong, nonatomic) UILabel *title;
 
 @property (strong, nonatomic) UILabel *channel;
+
+@property (strong, nonatomic) NSString *videoId;
+
+@property (weak, nonatomic) UIViewController *viewController;
+
+- (void)showVideo:(id)sender;
 
 @end
