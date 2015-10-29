@@ -114,7 +114,7 @@
                 NSArray *fetchedMessages = response[@"messages"];
                 for (NSDictionary *fetchedMessage in fetchedMessages) {
                     NSString *chatId = [NSString stringWithFormat:@"%@", fetchedMessage[@"chatId"]];
-                    if (![Message MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                    if (![Message MR_findFirstByAttribute:@"chatsId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
                         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                             Message *message = [Message MR_createEntityInContext:localContext];
                             message.body = fetchedMessage[@"text"];

@@ -28,13 +28,15 @@
     
     [self.navigationItem setTitle:self.chat.chatTitle];
     
-    self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
+    self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
     
     self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
     
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
+    [self.tableView registerClass:[CMGImageMessageCell class] forCellReuseIdentifier:@"gImageMessageCell"];
     
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
+    [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -45,7 +47,9 @@
     }
     
     // Scroll to bottom of messages table
-    [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    if (self.messages.count > 0) {
+        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -56,22 +60,51 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
     Message *message = self.messages[indexPath.row];
     
-    [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
-                
-    if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
-        Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
-        cell.userName.text = contact.name;
+    if ([message.googleImageId isEqualToString:@""]) {
+        CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
+        
+        [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
+                    
+        if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
+            Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
+            cell.userName.text = contact.name;
+        } else {
+            cell.userName.text = @"From You";
+        }
+        cell.timestamp.text = [message.timestamp timeAgoSinceNow];
+                    
+        cell.messageBody.text = message.body;
+        
+        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
+            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
+        }
+        
+        return cell;
     } else {
-        cell.userName.text = @"From You";
+        CMGImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"gImageMessageCell" forIndexPath:indexPath];
+        
+        [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
+        
+        if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
+            Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
+            cell.userName.text = contact.name;
+        } else {
+            cell.userName.text = @"From You";
+        }
+        cell.timestamp.text = [message.timestamp timeAgoSinceNow];
+        
+        cell.messageBody.text = message.body;
+        
+        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
+            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
+        }
+        
+        [cell.googleImage hnk_setImageFromURL:[NSURL URLWithString:message.googleImageId]];
+        
+        return cell;
     }
-    cell.timestamp.text = [message.timestamp timeAgoSinceNow];
-                
-    cell.messageBody.text = message.body;
-    
-    return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -80,15 +113,24 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     Message *message = self.messages[indexPath.row];
-    UITextView *tv = [[UITextView alloc] init];
+    UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(25, 60, 200, 60)];
     tv.text = message.body;
     
-    int tvDefaultHeight = 60;
-    int differenceInHeight = tvDefaultHeight - [tv contentSize].height;
-    if (differenceInHeight > 0) {
-        return tvDefaultHeight + differenceInHeight;
+    int cellDefaultHeight = 110;
+    
+    if (tv.contentSize.height > tv.frame.size.height) {
+        if ([message.googleImageId isEqualToString:@""]) {
+            return cellDefaultHeight + tv.contentSize.height;
+        } else {
+            return cellDefaultHeight + tv.contentSize.height + 240;
+        }
+    } else {
+        if ([message.googleImageId isEqualToString:@""]) {
+            return cellDefaultHeight;
+        } else {
+            return cellDefaultHeight + 240;
+        }
     }
-    return 110;
 }
 
 - (void)fetchMessages:(id)sender {
@@ -119,7 +161,7 @@
                     } completion:^(BOOL contextDidSave, NSError *error) {
                         if (contextDidSave) {
                             dispatch_async(dispatch_get_main_queue(), ^{
-                                self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
+                                self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
                                 
                                 [self.tableView reloadData];
                             });
@@ -133,13 +175,46 @@
 
 - (void)sendMessage:(id)sender {
     if (![self.messageInput.text isEqualToString:@"Enter your message here"]) {
-        [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
-            if (!error) {
-                self.messageInput.text = @"Enter your message here";
-                [self fetchMessages:self];
-            }
-        }];
+        if (self.gImageResult != nil) {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": self.gImageResult.url} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+                    iv.image = nil;
+                    self.gImageResult = nil;
+                    
+                    self.view.subviews[1].userInteractionEnabled = NO;
+                    iv.userInteractionEnabled = NO;
+                    
+                    self.messageInput.text = @"Enter your message here";
+                    [self fetchMessages:self];
+                }
+            }];
+        } else {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    self.messageInput.text = @"Enter your message here";
+                    [self fetchMessages:self];
+                }
+            }];
+        }
     }
+}
+
+- (void)showAttachments:(id)sender {
+    CMGImageSearch *pop = [[CMGImageSearch alloc] init];
+    pop.delegate = self;
+    [pop show];
+}
+
+- (void)imageSelected:(CMGImageResult *)result {
+    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+    iv.image = result.image;
+
+    
+    self.view.subviews[1].userInteractionEnabled = YES;
+    iv.userInteractionEnabled = YES;
+    
+    self.gImageResult = result;
 }
 
 @end
