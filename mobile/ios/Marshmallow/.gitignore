@@ -2,3 +2,4 @@ Pods
 Marshmallow.xcworkspace/xcuserdata
 Marshmallow.xcodeproj/xcuserdata
 .DS_Store
+Marshmallow/keys.plist
