@@ -200,10 +200,31 @@
     }
 }
 
-- (void)showAttachments:(id)sender {
-    CMGImageSearch *pop = [[CMGImageSearch alloc] init];
-    pop.delegate = self;
-    [pop show];
+- (void)showAttachments:(UIImageView *)sender {
+    UIAlertController *attachmentsSheet = [UIAlertController alertControllerWithTitle:@"Choose Attachment" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Google Images" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CMGImageSearch *pop = [[CMGImageSearch alloc] init];
+        pop.delegate = self;
+        [pop show];
+    }]];
+    
+    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Youtube" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CMYoutubeSearch *pop = [[CMYoutubeSearch alloc] init];
+//        pop.delegate = self;
+        [pop show];
+    }]];
+    
+    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    
+    attachmentsSheet.modalPresentationStyle = UIModalPresentationPopover;
+    
+    UIPopoverPresentationController * popover = attachmentsSheet.popoverPresentationController;
+    popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    popover.sourceView = sender;
+    popover.sourceRect = sender.bounds;
+    
+    [self presentViewController:attachmentsSheet animated:YES completion:nil];
 }
 
 - (void)imageSelected:(CMGImageResult *)result {

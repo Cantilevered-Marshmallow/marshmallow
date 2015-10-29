@@ -26,6 +26,7 @@
 #import "CMGImageMessageCell.h"
 
 #import "CMGImageSearch.h"
+#import "CMYoutubeSearch.h"
 
 @interface ChatViewController : UIViewController <CMGImageSearchDelegate, UITableViewDataSource, UITableViewDelegate>
 

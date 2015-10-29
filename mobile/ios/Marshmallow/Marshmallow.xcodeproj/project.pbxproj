@@ -24,6 +24,7 @@
 		CA8A59131BE04B6F0013D363 /* GoogleImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA8A59121BE04B6F0013D363 /* GoogleImageCollectionCell.xib */; settings = {ASSET_TAGS = (); }; };
 		CA8A591B1BE04D500013D363 /* CMGImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A591A1BE04D500013D363 /* CMGImageCell.m */; settings = {ASSET_TAGS = (); }; };
 		CA94E3D51BE180F800EF4EAE /* CMGImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3D41BE180F800EF4EAE /* CMGImageMessageCell.m */; settings = {ASSET_TAGS = (); }; };
+		CA94E3D81BE19C0100EF4EAE /* CMYoutubeSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3D71BE19C0100EF4EAE /* CMYoutubeSearch.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -93,6 +94,8 @@
 		CA8A591A1BE04D500013D363 /* CMGImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGImageCell.m; sourceTree = "<group>"; };
 		CA94E3D31BE180F800EF4EAE /* CMGImageMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGImageMessageCell.h; sourceTree = "<group>"; };
 		CA94E3D41BE180F800EF4EAE /* CMGImageMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGImageMessageCell.m; sourceTree = "<group>"; };
+		CA94E3D61BE19C0100EF4EAE /* CMYoutubeSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMYoutubeSearch.h; sourceTree = "<group>"; };
+		CA94E3D71BE19C0100EF4EAE /* CMYoutubeSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMYoutubeSearch.m; sourceTree = "<group>"; };
 		CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationView.m; sourceTree = "<group>"; };
 		CAA8F2321BD5BECC009844AC /* HDNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDNotificationView.h; sourceTree = "<group>"; };
 		CAA8F2361BD6BF0C009844AC /* IconTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTabBarController.h; sourceTree = "<group>"; };
@@ -266,6 +269,8 @@
 				CA8A591A1BE04D500013D363 /* CMGImageCell.m */,
 				CA94E3D31BE180F800EF4EAE /* CMGImageMessageCell.h */,
 				CA94E3D41BE180F800EF4EAE /* CMGImageMessageCell.m */,
+				CA94E3D61BE19C0100EF4EAE /* CMYoutubeSearch.h */,
+				CA94E3D71BE19C0100EF4EAE /* CMYoutubeSearch.m */,
 			);
 			path = Marshmallow;
 			sourceTree = "<group>";
@@ -587,6 +592,7 @@
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
 				CAD70F341BD9D34600122F7A /* UIColor+ColorFromHexString.m in Sources */,
 				CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */,
+				CA94E3D81BE19C0100EF4EAE /* CMYoutubeSearch.m in Sources */,
 				CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */,
 				CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */,
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
