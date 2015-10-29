@@ -9,7 +9,6 @@
 #import "CMMessageCell.h"
 
 #import <XCDYouTubeKit/XCDYouTubeKit.h>
-#import "MPMoviePlayerController+BackgroundPlayback.h"
 
 @interface CMYoutubeVideoMessageCell : CMMessageCell <UIGestureRecognizerDelegate>
 

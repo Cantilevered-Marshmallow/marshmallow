@@ -29,7 +29,6 @@
 		CA94E3DC1BE1A7B000EF4EAE /* keys.example.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA94E3DB1BE1A7B000EF4EAE /* keys.example.plist */; settings = {ASSET_TAGS = (); }; };
 		CA94E3DF1BE1B39C00EF4EAE /* CMYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3DE1BE1B39C00EF4EAE /* CMYoutubeCell.m */; settings = {ASSET_TAGS = (); }; };
 		CA94E3E21BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3E11BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m */; settings = {ASSET_TAGS = (); }; };
-		CA94E3E51BE2CB8B00EF4EAE /* MPMoviePlayerController+BackgroundPlayback.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3E41BE2CB8B00EF4EAE /* MPMoviePlayerController+BackgroundPlayback.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -107,8 +106,6 @@
 		CA94E3DE1BE1B39C00EF4EAE /* CMYoutubeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMYoutubeCell.m; sourceTree = "<group>"; };
 		CA94E3E01BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMYoutubeVideoMessageCell.h; sourceTree = "<group>"; };
 		CA94E3E11BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMYoutubeVideoMessageCell.m; sourceTree = "<group>"; };
-		CA94E3E31BE2CB6900EF4EAE /* MPMoviePlayerController+BackgroundPlayback.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MPMoviePlayerController+BackgroundPlayback.h"; sourceTree = "<group>"; };
-		CA94E3E41BE2CB8B00EF4EAE /* MPMoviePlayerController+BackgroundPlayback.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MPMoviePlayerController+BackgroundPlayback.m"; sourceTree = "<group>"; };
 		CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationView.m; sourceTree = "<group>"; };
 		CAA8F2321BD5BECC009844AC /* HDNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDNotificationView.h; sourceTree = "<group>"; };
 		CAA8F2361BD6BF0C009844AC /* IconTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTabBarController.h; sourceTree = "<group>"; };
@@ -185,8 +182,6 @@
 			children = (
 				CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */,
 				CAA8F2321BD5BECC009844AC /* HDNotificationView.h */,
-				CA94E3E31BE2CB6900EF4EAE /* MPMoviePlayerController+BackgroundPlayback.h */,
-				CA94E3E41BE2CB8B00EF4EAE /* MPMoviePlayerController+BackgroundPlayback.m */,
 			);
 			name = ThirdParty;
 			sourceTree = "<group>";
@@ -613,7 +608,6 @@
 				CA8A590E1BE02EDA0013D363 /* CMSearchPopup.m in Sources */,
 				CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */,
 				CA8A59111BE0415D0013D363 /* CMGImageSearch.m in Sources */,
-				CA94E3E51BE2CB8B00EF4EAE /* MPMoviePlayerController+BackgroundPlayback.m in Sources */,
 				CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */,
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
 				CAD70F341BD9D34600122F7A /* UIColor+ColorFromHexString.m in Sources */,
