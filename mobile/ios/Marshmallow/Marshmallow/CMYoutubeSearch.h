@@ -6,7 +6,12 @@
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
 
+#import <AFNetworking/AFNetworking.h>
+#import <Haneke/Haneke.h>
+
 #import "CMSearchPopup.h"
+
+#import "CMYoutubeCell.h"
 
 @interface CMYoutubeSearchResult : NSObject
 
@@ -28,10 +33,14 @@
 
 @end
 
-@interface CMYoutubeSearch : CMSearchPopup <UISearchBarDelegate>
+@interface CMYoutubeSearch : CMSearchPopup <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UITableView *resultsTable;
 
 @property (strong, nonatomic) id<CMYoutubeSearchDelegate> delegate;
+
+@property (strong, nonatomic) NSString *apiKey;
+
+@property (strong, nonatomic) NSMutableArray<NSDictionary *> *results;
 
 @end
