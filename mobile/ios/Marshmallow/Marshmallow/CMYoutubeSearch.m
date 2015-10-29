@@ -115,4 +115,20 @@
     [self.searchBar resignFirstResponder];
 }
 
+- (void)attachSelected:(id)sender {
+    if (self.selectedCell != nil) {
+        CMYoutubeSearchResult *result = [[CMYoutubeSearchResult alloc] init];
+        result.title = self.selectedCell.title.text;
+        result.channel = self.selectedCell.channel.text;
+        result.thumbnail = self.selectedCell.thumbnail.image;
+        
+        NSDictionary *video = self.results[[self.resultsTable indexPathForCell:self.selectedCell].row];
+        result.videoId = video[@"id"];
+        
+        [self.delegate videoSelected:result];
+        
+        [super attachSelected:sender];
+    }
+}
+
 @end
