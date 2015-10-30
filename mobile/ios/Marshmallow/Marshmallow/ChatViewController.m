@@ -13,43 +13,53 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Initialize message input
     _messageInput.layer.borderColor = [[UIColor grayColor] CGColor];
     _messageInput.layer.borderWidth = 0.25;
     _messageInput.layer.cornerRadius = 5;
-    
-    _request = [[CMNetworkRequest alloc] init];
-    
-    CALayer *upperBorder = [CALayer layer];
-    upperBorder.backgroundColor = [[UIColor grayColor] CGColor];
-    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 0.5f);
-    [_chatControls.layer addSublayer:upperBorder];
-    
-    [self.messageInput becomeFirstResponder];
-    
-    [self.navigationItem setTitle:self.chat.chatTitle];
-    
-    self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
-    
-    self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
-    
-    [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
-    [self.tableView registerClass:[CMGImageMessageCell class] forCellReuseIdentifier:@"gImageMessageCell"];
-    [self.tableView registerClass:[CMYoutubeVideoMessageCell class] forCellReuseIdentifier:@"youtubevideoMessageCell"];
-    
-    [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
-    [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
-    [self.clearAttachmentButton addTarget:self action:@selector(clearAttachment:) forControlEvents:UIControlEventTouchUpInside];
     
     self.messageInput.placeholder = self.messageInput.text;
     self.messageInput.placeholderColor = [UIColor grayColor];
     self.messageInput.text = @"";
     
+    [self.messageInput becomeFirstResponder];
+    
+    // Initialize HTTP helper
+    _request = [[CMNetworkRequest alloc] init];
+    
+    // Add a border to divide the message controls from the messages table
+    CALayer *upperBorder = [CALayer layer];
+    upperBorder.backgroundColor = [[UIColor grayColor] CGColor];
+    upperBorder.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), 0.5f);
+    [_chatControls.layer addSublayer:upperBorder];
+    
+    // Set the title of the view to the title of the chat room
+    [self.navigationItem setTitle:self.chat.chatTitle];
+    
+    // Retrieve all the messages to display sorted by their timestamp
+    self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
+    
+    // Set interval for fetching of new messages
+    self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
+    
+    // Register message cells for use later
+    [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
+    [self.tableView registerClass:[CMGImageMessageCell class] forCellReuseIdentifier:@"gImageMessageCell"];
+    [self.tableView registerClass:[CMYoutubeVideoMessageCell class] forCellReuseIdentifier:@"youtubevideoMessageCell"];
+    
+    // Bind the message control buttons
+    [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
+    [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
+    [self.clearAttachmentButton addTarget:self action:@selector(clearAttachment:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // Set flag for detecting if we just opened the view
     self.firstLoad = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    // Check to see if we don't have timer already; Prevents the same action from being performed twice
     if (!self.fetchMessagesTimer) {
         self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:true];
     }
@@ -63,6 +73,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    // Stop the timer
     [self.fetchMessagesTimer invalidate];
     self.fetchMessagesTimer = nil;
 }
@@ -70,6 +81,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     Message *message = self.messages[indexPath.row];
     
+    // Default message cell
     if ([message.googleImageId isEqualToString:@""] && [message.youtubeVideoId isEqualToString:@""]) {
         CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
         
@@ -88,6 +100,8 @@
         cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
         return cell;
+        
+    // Google Image message cell
     } else if (![message.googleImageId isEqualToString:@""]) {
         CMGImageMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"gImageMessageCell" forIndexPath:indexPath];
         
@@ -108,6 +122,8 @@
         [cell.googleImage hnk_setImageFromURL:[NSURL URLWithString:message.googleImageId]];
         
         return cell;
+        
+    // Youtube video message cell
     } else {
         CMYoutubeVideoMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"youtubevideoMessageCell" forIndexPath:indexPath];
         
@@ -125,11 +141,13 @@
         
         cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
+        // Set placeholder for thumbnail
         cell.thumbnail.image = [UIImage imageNamed:@"Icon"];
         cell.videoId = message.youtubeVideoId;
         
         cell.viewController = self;
         
+        // In order to get the metadata for the video we need to send an API call to Youtube
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             AFHTTPRequestOperationManager *manager = [[AFHTTPRequestOperationManager alloc] init];
             manager.requestSerializer = [AFJSONRequestSerializer serializer];
@@ -166,6 +184,7 @@
     
     int cellDefaultHeight = 110;
     
+    // The message body is larger than the default height of the text view
     if (tv.contentSize.height > tv.frame.size.height) {
         if (![message.googleImageId isEqualToString:@""]) {
             return cellDefaultHeight + tv.contentSize.height + 240;
@@ -174,6 +193,8 @@
         } else {
             return cellDefaultHeight + tv.contentSize.height;
         }
+    
+    // The message is shorter or equal to the height of the text view
     } else {
         if (![message.googleImageId isEqualToString:@""]) {
             return cellDefaultHeight + 240;
@@ -186,12 +207,15 @@
 }
 
 - (void)fetchMessages:(id)sender {
+    // Fetch all the new messages
     [self.request requestWithHttpVerb:@"GET" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:nil jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
         if (!error) {
             NSArray *fetchedMessages = response[@"messages"];
             
             for (NSDictionary *fetchedMessage in fetchedMessages) {
+                // Does the message already exist locally?
                 if (![Message MR_findFirstByAttribute:@"timestamp" withValue:[NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]] inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                    // Save the message locally
                     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                         Message *message = [Message MR_createEntityInContext:localContext];
                         message.body = fetchedMessage[@"text"];
@@ -213,6 +237,7 @@
                     } completion:^(BOOL contextDidSave, NSError *error) {
                         if (contextDidSave) {
                             dispatch_async(dispatch_get_main_queue(), ^{
+                                // Reload the table to display the new messages
                                 self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
                                 
                                 [self.tableView reloadData];
@@ -235,7 +260,9 @@
 }
 
 - (void)sendMessage:(id)sender {
+    // Is the message more than just whitespace?
     if (![[self.messageInput.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
+        // Message has a Google Image attachment
         if (self.gImageResult != nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": self.gImageResult.url} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
@@ -257,6 +284,7 @@
             }];
         }
         
+        // Message has a Youtube video attachment
         if (self.videoResult != nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": self.videoResult.videoId, @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
@@ -278,6 +306,7 @@
             }];
         }
         
+        // Default message
         if (self.gImageResult == nil && self.videoResult == nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
@@ -295,22 +324,29 @@
 }
 
 - (void)showAttachments:(UIImageView *)sender {
+    // Action handler for click on attachment button
+    
+    // Create the popup sheet for displaying options on which attachment to use
     UIAlertController *attachmentsSheet = [UIAlertController alertControllerWithTitle:@"Choose Attachment" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
     
+    // Google Image search option
     [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Google Images" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         CMGImageSearch *pop = [[CMGImageSearch alloc] init];
         pop.delegate = self;
         [pop show];
     }]];
     
+    // Youtube video option
     [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Youtube" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
         CMYoutubeSearch *pop = [[CMYoutubeSearch alloc] init];
         pop.delegate = self;
         [pop show];
     }]];
     
+    // Cancel option
     [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
     
+    // Style the sheet
     attachmentsSheet.modalPresentationStyle = UIModalPresentationPopover;
     
     UIPopoverPresentationController * popover = attachmentsSheet.popoverPresentationController;
@@ -318,48 +354,62 @@
     popover.sourceView = sender;
     popover.sourceRect = sender.bounds;
     
+    // Display the sheet
     [self presentViewController:attachmentsSheet animated:YES completion:nil];
 }
 
 - (void)imageSelected:(CMGImageResult *)result {
+    // A Google Image has been selected
+    
+    // Set the preview to the selected image
     UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
     iv.image = result.image;
 
-    
+    // Prevent user from interacting with messages table when tapping the preview
     self.view.subviews[1].userInteractionEnabled = YES;
     iv.userInteractionEnabled = YES;
     
     self.gImageResult = result;
     
+    // Toggle the attachment action button
     [self toggleAttachmentAction];
 }
 
 - (void)videoSelected:(CMYoutubeSearchResult *)result {
+    // A Youtube video was selected
+    
+    // Set the preview to the thumbnail of the video
     UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
     iv.image = result.highThumbnail;
     
+    // Prevent user from interacting with messages table when tapping the preview
     self.view.subviews[1].userInteractionEnabled = YES;
     iv.userInteractionEnabled = YES;
     
     self.videoResult = result;
     
+    // Toggle the attachment action
     [self toggleAttachmentAction];
 }
 
 - (void)clearAttachment:(id)sender {
+    // Remove the preview for the attachment
     UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
     iv.image = nil;
     
+    // Allow user to interact with the messages table in the area of the preview
     self.view.subviews[1].userInteractionEnabled = NO;
     iv.userInteractionEnabled = NO;
     
     self.videoResult = nil;
     self.gImageResult = nil;
     
+    // Toggle the attachment option
     [self toggleAttachmentAction];
 }
 
 - (void)toggleAttachmentAction {
+    // Who doesn't like binary?
     BOOL isAttach = !self.attachmentButton.hidden;
     
     self.attachmentButton.hidden = isAttach;
@@ -367,6 +417,7 @@
     
     self.clearAttachmentButton.hidden = !isAttach;
     self.clearAttachmentButton.userInteractionEnabled = isAttach;
+    // Anyone?
 }
 
 - (void)resetMessageInput {
