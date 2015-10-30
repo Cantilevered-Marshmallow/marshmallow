@@ -8,8 +8,12 @@
 
 #import "CMMessageCell.h"
 
-@interface CMGImageMessageCell : CMMessageCell
+#import "CMImagePopup.h"
+
+@interface CMGImageMessageCell : CMMessageCell <UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) UIImageView *googleImage;
+
+- (void)handleTapOnImage:(id)sender;
 
 @end
