@@ -15,7 +15,9 @@
     
     if (self) {
         // Setup google image view
-        self.googleImage = [[UIImageView alloc] initWithFrame:CGRectMake(25, 140, 200, 200)];
+        double screenWidth = [UIScreen mainScreen].bounds.size.width;
+        // Center formula 50% screen width - 50% image width
+        self.googleImage = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth / 2 - 100, 140, 200, 200)];
         
         // Add subviews
         [self.contentView addSubview:self.googleImage];
