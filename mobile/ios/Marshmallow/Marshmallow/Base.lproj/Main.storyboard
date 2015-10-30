@@ -73,6 +73,11 @@
                                         <animations/>
                                         <state key="normal" title="Attach"/>
                                     </button>
+                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NVT-WD-Hmj">
+                                        <rect key="frame" x="13" y="16" width="73" height="30"/>
+                                        <animations/>
+                                        <state key="normal" title="Cancel"/>
+                                    </button>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -112,6 +117,7 @@
                     <connections>
                         <outlet property="attachmentButton" destination="ZCM-lf-9aL" id="O1Y-h8-PuL"/>
                         <outlet property="chatControls" destination="iGy-NE-xE0" id="Sio-iI-TSo"/>
+                        <outlet property="clearAttachmentButton" destination="NVT-WD-Hmj" id="XRh-it-lwt"/>
                         <outlet property="messageInput" destination="yZc-5r-c26" id="4Am-2K-lT2"/>
                         <outlet property="sendMessageButton" destination="AdG-m8-Wqh" id="7ua-kV-iCh"/>
                         <outlet property="tableView" destination="spl-FI-N8v" id="slv-GI-rIx"/>

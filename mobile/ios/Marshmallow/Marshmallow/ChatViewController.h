@@ -37,6 +37,7 @@
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *sendMessageButton;
 @property (weak, nonatomic) IBOutlet UIButton *attachmentButton;
+@property (weak, nonatomic) IBOutlet UIButton *clearAttachmentButton;
 
 @property (strong, nonatomic) Chats *chat;
 
@@ -59,5 +60,9 @@
 - (void)sendMessage:(id)sender;
 
 - (void)showAttachments:(id)sender;
+
+- (void)clearAttachment:(id)sender;
+
+- (void)toggleAttachmentAction;
 
 @end
