@@ -38,10 +38,13 @@
     
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
     [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
+    [self.clearAttachmentButton addTarget:self action:@selector(clearAttachment:) forControlEvents:UIControlEventTouchUpInside];
     
     self.messageInput.placeholder = self.messageInput.text;
     self.messageInput.placeholderColor = [UIColor grayColor];
     self.messageInput.text = @"";
+    
+    self.firstLoad = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -213,6 +216,15 @@
                                 self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
                                 
                                 [self.tableView reloadData];
+                                
+                                if (self.firstLoad) {
+                                    self.firstLoad = NO;
+                                    
+                                    // Scroll to bottom of messages table
+                                    if (self.messages.count > 0) {
+                                        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                    }
+                                }
                             });
                         }
                     }];
@@ -234,7 +246,7 @@
                     self.view.subviews[1].userInteractionEnabled = NO;
                     iv.userInteractionEnabled = NO;
                     
-                    self.messageInput.placeholder = @"Enter your message here";
+                    [self resetMessageInput];
                     [self fetchMessages:self];
                 }
             }];
@@ -250,7 +262,7 @@
                     self.view.subviews[1].userInteractionEnabled = NO;
                     iv.userInteractionEnabled = NO;
                     
-                    self.messageInput.placeholder = @"Enter your message here";
+                    [self resetMessageInput];
                     [self fetchMessages:self];
                 }
             }];
@@ -259,7 +271,7 @@
         if (self.gImageResult == nil && self.videoResult == nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
-                    self.messageInput.placeholder = @"Enter your message here";
+                    [self resetMessageInput];
                     [self fetchMessages:self];
                 }
             }];
@@ -303,6 +315,8 @@
     iv.userInteractionEnabled = YES;
     
     self.gImageResult = result;
+    
+    [self toggleAttachmentAction];
 }
 
 - (void)videoSelected:(CMYoutubeSearchResult *)result {
@@ -313,6 +327,36 @@
     iv.userInteractionEnabled = YES;
     
     self.videoResult = result;
+    
+    [self toggleAttachmentAction];
+}
+
+- (void)clearAttachment:(id)sender {
+    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+    iv.image = nil;
+    
+    self.view.subviews[1].userInteractionEnabled = NO;
+    iv.userInteractionEnabled = NO;
+    
+    self.videoResult = nil;
+    self.gImageResult = nil;
+    
+    [self toggleAttachmentAction];
+}
+
+- (void)toggleAttachmentAction {
+    BOOL isAttach = !self.attachmentButton.hidden;
+    
+    self.attachmentButton.hidden = isAttach;
+    self.attachmentButton.userInteractionEnabled = !isAttach;
+    
+    self.clearAttachmentButton.hidden = !isAttach;
+    self.clearAttachmentButton.userInteractionEnabled = isAttach;
+}
+
+- (void)resetMessageInput {
+    self.messageInput.placeholder = @"Enter your message here";
+    self.messageInput.text = @"";
 }
 
 @end

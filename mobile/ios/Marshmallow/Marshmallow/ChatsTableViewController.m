@@ -67,7 +67,7 @@
                 for (NSDictionary *fetchedChat in response[@"chats"]) {
                     NSString *chatId = [NSString stringWithFormat:@"%@", fetchedChat[@"chatId"]];
                     if (![Chats MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
-                        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+                        [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                             Chats *chats = [Chats MR_createEntityInContext:localContext];
                             
                             chats.chatId = chatId;
