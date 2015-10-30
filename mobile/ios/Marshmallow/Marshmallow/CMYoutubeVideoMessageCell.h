@@ -12,6 +12,8 @@
 
 @interface CMYoutubeVideoMessageCell : CMMessageCell <UIGestureRecognizerDelegate>
 
+@property (strong, nonatomic) UIView *videoContianer;
+
 @property (strong, nonatomic) UIImageView *thumbnail;
 
 @property (strong, nonatomic) UILabel *title;
