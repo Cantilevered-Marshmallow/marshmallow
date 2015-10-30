@@ -1,17 +1,21 @@
 var userController = require('./user/userController');
 var request = require('request');
+var jwt = require('jsonwebtoken');
 
 module.exports = {
 
   authFacebook: function (req, res, next) {
     var user = req.body;
+    if (!(user.oauthToken && user.facebookId)){
+      res.status(400).send('Error: empty request body.');
+    }
     request('https://graph.facebook.com/me?access_token=' + user.oauthToken,
       function (err, _, body) {
         body = JSON.parse(body);
         if (body.id === user.facebookId){
           next();
         } else {
-          res.status(400).send('Invalid Facebook access token');
+          res.status(400).send('Error: invalid Facebook access token');
         }
       });
   },
@@ -25,7 +29,7 @@ module.exports = {
     userController.registerNewUser(user)
       .then(function (user) {
         res.status(201);
-        module.exports._authSession(req, res, user);
+        module.exports._authToken(req, res, user);
       })
       .catch(function (err) {
         console.log(err);
@@ -44,7 +48,7 @@ module.exports = {
     userController.isUser(user)
       .then(function (user) {
         res.status(200);
-        module.exports._authSession(req, res, user);
+        module.exports._authToken(req, res, user);
       })
       .catch(function (err) {
         if (err) {
@@ -53,24 +57,26 @@ module.exports = {
       });
   },
 
-  logout: function (req, res) {
-    if (req.session.auth) {
-      req.session.auth = false;
-    }
-    res.status(200).end();
-  },
-
   authenticate: function (req, res, next) {
-    if (req.session.user && req.session.auth) {
-      next();
-    } else {
-      res.status(400).send('Unauthorized use of endpoint. Please signup or login.');
-    }
+    jwt.verify(req.get('token'), process.env.JWT_SECRET, function (err, user) {
+      if (err){
+        res.status(400).send('Unauthorized use of endpoint. Please signup or login.');
+      } else {
+        req.user = user;
+        next();
+      }
+    });
   },
 
-  _authSession: function (req, res, user) {
-    req.session.user = user;
-    req.session.auth = true;
-    res.send(user);
+  _authToken: function (req, res, user) {
+    user = user.toJSON();
+    var token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
+
+    var responseObj = {
+      email: user.email,
+      facebookId: user.facebookId,
+      token: token
+    };
+    res.send(responseObj);
   }
 };

@@ -15,7 +15,8 @@
 
 @dynamic email;
 @dynamic name;
-@dynamic token;
+@dynamic oauthToken;
+@dynamic jwt;
 @dynamic chatParticipation;
 
 @end

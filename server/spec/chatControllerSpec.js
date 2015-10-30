@@ -78,14 +78,15 @@ describe('Chat Controller', function () {
       facebookId: '142363545876534'
     };
 
-    var chats = [ {id: '1'}, {id: '2'} ];
+    var chats = [
+        {id: '1',
+         users: [{facebookId: '234324535'}]},
+        {id: '2',
+         users: [{facebookId: '565475675'}]},
+      ];
 
     var userInstance = {
-      getChats: function () {
-        return new Promise (function (resolve, reject) {
-          resolve(chats);
-        });
-      }
+      chats: chats
     };
 
     var userStub;
@@ -110,10 +111,15 @@ describe('Chat Controller', function () {
       done();
     });
 
+    var resultObj = [
+      {chatId: '1', users: ['234324535']},
+      {chatId: '2', users: ['565475675']}
+    ];
+
     it('should resolve all chats', function (done) {
       chatController.retrieveChats(user)
         .then(function (resolveObj) {
-          expect(resolveObj).to.deep.equal(['1','2']);
+          expect(resolveObj).to.deep.equal(resultObj);
           done();
         });
     });
@@ -176,6 +182,45 @@ describe('Chat Controller', function () {
           expect(setChat).to.equal(true);
           expect(setUser).to.equal(true);
           expect(message).to.deep.equal(inputMessage);
+          done();
+        });
+    });
+  });
+
+  describe('Get all messages by user\'s chats', function () {
+    var facebookId = '1234';
+    var timestamp = new Date().toISOString();
+
+    var messagesA = [{'message': 'object', 'is': 'here'}];
+    var messagesB = [{'another': 'message', 'object': 'here'}];
+
+    var chats = [
+      {messages: messagesA},
+      {messages: messagesB}
+    ];
+
+    var user = {
+      getChats: function () {
+        return new Promise (function (resolve, reject) {
+          resolve(chats);
+        });
+      }
+    };
+    var userStub = sinon.stub(User, 'findById', function () {
+      return new Promise (function (resolve, reject) {
+        resolve(user);
+      });
+    });
+
+    after(function (done) {
+      userStub.restore();
+      done();
+    });
+
+    it('should return all messages in one array', function (done) {
+      chatController.getMessagesByTime()
+        .then(function (messages) {
+          expect(messages).to.deep.equal(messagesA.concat(messagesB));
           done();
         });
     });

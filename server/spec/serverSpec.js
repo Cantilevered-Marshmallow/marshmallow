@@ -40,6 +40,7 @@ describe('Sign up and log in', function () {
         if (typeof res.body !== 'object') {
           throw new Error("Missing response body");
         }
+        BradSmith.token = res.body.token;
       })
       .expect(201, done);
   });
@@ -52,6 +53,7 @@ describe('Sign up and log in', function () {
         if (typeof res.body !== 'object') {
           throw new Error("Missing response body");
         }
+        PeterParker.token = res.body.token;
       })
       .expect(201, done);
   });
@@ -88,6 +90,8 @@ describe('GET and POST to /chat and /chat:id', function () {
   var agent1;
   var agent2;
 
+  var timeStamp;
+
   before(function (done) {
     server = require('../server');
 
@@ -110,8 +114,10 @@ describe('GET and POST to /chat and /chat:id', function () {
     agent1
       .post('/login')
       .send(BradSmith)
+      .expect(function (res) {
+        BradSmith.token = res.body.token;
+      })
       .expect(200, done);
-
   });
 
   it('should log in Peter Parker', function (done) {
@@ -120,6 +126,9 @@ describe('GET and POST to /chat and /chat:id', function () {
     agent2
       .post('/login')
       .send(PeterParker)
+      .expect(function (res) {
+        PeterParker.token = res.body.token;
+      })
       .expect(200, done);
   });
 
@@ -127,10 +136,11 @@ describe('GET and POST to /chat and /chat:id', function () {
 
     // All of Brad Smith's friends ID's.
     // First one is Peter Parker
-    var postBody = {users: ['102400480121838', '102400480133338', '103400480121838']}
+    var postBody = {users: ['102400480121838', '102400480133338', '103400480121838']};
 
     agent1
       .post('/userlist')
+      .set({token: BradSmith.token})
       .send(postBody)
       .expect(function (res) {
         if (!res.body.hasOwnProperty('users')) {
@@ -150,6 +160,7 @@ describe('GET and POST to /chat and /chat:id', function () {
     // Brad Smith creates chat room with Peter Parker
     agent1
       .post('/chat')
+      .set({token: BradSmith.token})
       .send(users)
       .expect(function (res) {
         if (!res.body.hasOwnProperty('chatId')) {
@@ -161,9 +172,10 @@ describe('GET and POST to /chat and /chat:id', function () {
 
   it('should not create a new chat room for a list of less than two users', function (done) {
     var users = { users: ['5253463547456458'] };
-    
+
     agent1
       .post('/chat')
+      .set({token: BradSmith.token})
       .send(users)
       .expect(400, done);
 
@@ -172,6 +184,7 @@ describe('GET and POST to /chat and /chat:id', function () {
   it('should retrieve all chat room id\'s is associated with a user', function (done) {
     agent2
       .get('/chat')
+      .set('token', PeterParker.token)
       .expect(function (res) {
         // Peter Parker (agent2) only belongs to one chat room, which is with Brad Smith.
         if (!Array.isArray(res.body.chats) || res.body.chats.length !== 1) {
@@ -184,6 +197,7 @@ describe('GET and POST to /chat and /chat:id', function () {
   it('Each chat in the response of GET /chat should return a list of users engaged in the chat', function (done) {
     agent2
       .get('/chat')
+      .set('token', PeterParker.token)
       .expect(function (res) {
         if (res.body.chats[0].users.length !== 2) {
           throw new Error('Wrong userlist returned');
@@ -199,6 +213,7 @@ describe('GET and POST to /chat and /chat:id', function () {
     // DB only has one chat room that has id: 1
     agent1
       .post('/chat/1')
+      .set({token: BradSmith.token})
       .send(msg)
       .expect(201, done);
   });
@@ -207,9 +222,59 @@ describe('GET and POST to /chat and /chat:id', function () {
 
     agent2
       .get('/chat/1')
+      .set('token', PeterParker.token)
       .expect(function (res) {
         if (!res.body.hasOwnProperty('messages')) {
           throw new Error('Failed to retrieve messages for a specific chat room');
+        }
+        if (res.body.messages[0].chatId !== 1) {
+         throw new Error('Wrong chat room');
+        }
+        if (res.body.messages[0].text !== 'Hey Peter! How\'s it going') {
+          throw new Error('Wrong message retrieved');
+        }
+      })
+      .expect(200, done);
+  });
+
+  it('PeterParker sends three messages to BradSmith', function (done) {
+    var msg1 = { text: 'Hey Brad. I\'m doing good' };
+    var msg2 = { text: 'How you been?' };
+    var msg3 = { text: 'Haven\'t seen you around for a while' };
+    timeStamp = new Date().toISOString();
+    sinon.useFakeTimers(Date.now()).tick(5000);
+
+    agent2
+      .post('/chat/1')
+      .set('token', PeterParker.token)
+      .send(msg1)
+      .expect(201)
+      .end(function () {
+        agent2
+          .post('/chat/1')
+          .set('token', PeterParker.token)
+          .send(msg2)
+          .expect(201)
+          .end(function () {
+            agent2
+              .post('/chat/1')
+              .set('token', PeterParker.token)
+              .send(msg3)
+              .expect(201, done);
+          });
+      });
+  });
+
+  it('BradSmith should retrieve all messages from chat room 1', function (done) {
+    agent1
+      .get('/messages?timestamp=' + timeStamp)
+      .set('token', BradSmith.token)
+      .expect(function (res) {
+        if (!res.body.hasOwnProperty('messages')) {
+          throw new Error('Failed to retrieve messages given timestamp');
+        }
+        if (res.body.messages.length !== 3) {
+          throw new Error('BradSmith should receieve exactly three messages');
         }
       })
       .expect(200, done);

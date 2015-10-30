@@ -2,6 +2,7 @@ var expect = require('chai').expect;
 var sinon = require('sinon');
 var auth = require('../auth');
 var userController = require('../user/userController');
+var jwt = require('jsonwebtoken');
 
 var UserA = {
               email: "cantilevered.marshmallow@gmail.com",
@@ -55,6 +56,29 @@ describe('Auth Service', function () {
       auth.authFacebook(req, res, next);
     });
 
+    it('should response to an empty request body with status code 400', function (done) {
+      var req = {
+        body: {}
+      };
+      var statusCode;
+      var res = {
+        status: function (code) {
+          statusCode = code;
+          return this;
+        },
+        send: function () {
+          expect(statusCode).to.equal(400);
+          done();
+        }
+      };
+      var next = function () {
+        done(new Error('Allowed unauthorized access'));
+      };
+
+      auth.authFacebook(req, res, next);
+    });
+
+
   });
 
   describe('signup method', function () {
@@ -71,9 +95,7 @@ describe('Auth Service', function () {
         send: function () {},
         statusCode: 0
       };
-      req = {
-        session: {}
-      };
+      req = {};
 
       done();
     });
@@ -86,6 +108,9 @@ describe('Auth Service', function () {
     it('should create a new user, amend session object on req, and send back user data', function (done) {
       userControllerStub = sinon.stub(userController, 'registerNewUser', function (newUser) {
         return new Promise(function (resolve, reject) {
+          newUser.toJSON = function () {
+            return this;
+          };
           resolve(newUser);
         });
       });
@@ -117,7 +142,9 @@ describe('Auth Service', function () {
         statusCode: null
       };
       req = {
-        session: {}
+        get: function () {
+          return jwt.sign(UserA, process.env.JWT_SECRET);
+        }
       };
 
       done();
@@ -133,6 +160,9 @@ describe('Auth Service', function () {
 
       userControllerStub = sinon.stub(userController, 'isUser', function (user) {
         return new Promise(function (resolve, reject) {
+          user.toJSON = function () {
+            return this;
+          };
           resolve(user);
         });
       });
@@ -143,7 +173,6 @@ describe('Auth Service', function () {
         expect(res.statusCode).to.equal(200);
         expect(data.email).to.equal(UserA.email);
         expect(data.facebookId).to.equal(UserA.facebookId);
-        expect(req.session.auth).to.equal(true);
         done();
       };
 
@@ -158,7 +187,9 @@ describe('Auth Service', function () {
 
     beforeEach(function (done) {
       req = {
-        session: {}
+        get: function () {
+          return jwt.sign(UserA, process.env.JWT_SECRET);
+        }
       };
       res = {
         status: function (statusCode) {
@@ -171,8 +202,6 @@ describe('Auth Service', function () {
     });
 
     it('should authenticate logged in user', function (done) {
-      req.session.user = UserA;
-      req.session.auth = true;
 
       var next = function () {
         expect(res.send.called).to.equal(false);
@@ -183,6 +212,9 @@ describe('Auth Service', function () {
     });
 
     it('should reject unauthenticated user', function (done) {
+      req.get = function () {
+        return 'afdasfadsfasdfasdfsafa';
+      };
       var next = sinon.spy();
       res.send = function () {
         expect(res.statusCode).to.equal(400);
@@ -193,37 +225,6 @@ describe('Auth Service', function () {
       auth.authenticate(req, res, next);
     });
 
-  });
-
-  describe('Logout', function () {
-
-    var req = {};
-    var res;
-
-    beforeEach(function (done) {
-      req.session = {};
-      res = {
-        status: function (code) {
-            this.statusCode = code;
-            return this;
-          },
-        statusCode: null
-      };
-      done();
-    });
-
-    it('should remove authenticated status from logged in user\'s session', function (done) {
-      req.session.user = UserA;
-      req.session.auth = true;
-
-      res.end = function () {
-        expect(req.session.auth).to.not.equal(true);
-        expect(res.statusCode).to.equal(200);
-        done();
-      };
-
-      auth.logout(req, res);
-    });
   });
 
 });

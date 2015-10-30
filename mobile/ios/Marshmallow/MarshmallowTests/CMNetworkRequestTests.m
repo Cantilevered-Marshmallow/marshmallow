@@ -21,10 +21,10 @@
 - (void)setUp {
     [super setUp];
 
-    _request = [[CMNetworkRequest alloc] initWithBaseUrl:[NSURL URLWithString:@"https://marshy.herokuapp.com"]];
+    _request = [[CMNetworkRequest alloc] initWithBaseUrl:[NSURL URLWithString:@"http://159.203.90.131:8080"]];
     
     // Remove any cookies from a previous logged in session
-    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"https://marshy.herokuapp.com"]];
+    NSArray *cookies = [[NSHTTPCookieStorage sharedHTTPCookieStorage] cookiesForURL:[NSURL URLWithString:@"http://159.203.90.131:8080"]];
     for (NSHTTPCookie *cookie in cookies)
     {
         [[NSHTTPCookieStorage sharedHTTPCookieStorage] deleteCookie:cookie];
@@ -39,19 +39,19 @@
 #pragma mark - Method Exists
 
 - (void)testRequestWithVerbMethodExists {
-    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:response:)]);
+    XCTAssertTrue([CMNetworkRequest instancesRespondToSelector:@selector(requestWithHttpVerb:url:data:jwt:response:)]);
 }
 
 #pragma mark - Method Behavior
 
 - (void)testInitWithBaseUrlMethod {
-    XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"https://marshy.herokuapp.com"]);
+    XCTAssertTrue([[_request.baseUrl absoluteString] isEqualToString:@"http://159.203.90.131:8080"]);
     XCTAssertTrue(_request.manager);
 }
 
 - (void)testInitMethod {
     CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
-    XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"https://marshy.herokuapp.com"]);
+    XCTAssertTrue([[request.baseUrl absoluteString] isEqualToString:@"http://159.203.90.131:8080"]);
     XCTAssertTrue(_request.manager);
 }
 
@@ -62,6 +62,7 @@
     [_request requestWithHttpVerb:@"GET"
                               url:@"/"
                              data:@{}
+                              jwt:nil
                          response:^(NSError *error, NSDictionary *response) {
                              if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Request failed: not found (404)"]) {
                                  [getException fulfill];
@@ -75,6 +76,7 @@
     [_request requestWithHttpVerb:@"POST"
                               url:@"/"
                              data:@{}
+                              jwt:nil
                          response:^(NSError *error, NSDictionary *response) {
                              if ([error.userInfo[@"NSLocalizedDescription"] isEqualToString:@"Request failed: not found (404)"]) {
                                  [postException fulfill];

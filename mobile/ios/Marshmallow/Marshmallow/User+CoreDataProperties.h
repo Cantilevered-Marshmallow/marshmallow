@@ -17,7 +17,8 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nullable, nonatomic, retain) NSString *email;
 @property (nullable, nonatomic, retain) NSString *name;
-@property (nullable, nonatomic, retain) NSString *token;
+@property (nullable, nonatomic, retain) NSString *oauthToken;
+@property (nullable, nonatomic, retain) NSString *jwt;
 @property (nullable, nonatomic, retain) NSManagedObject *chatParticipation;
 
 @end

@@ -13,13 +13,21 @@ router.post('/signup', auth.authFacebook, auth.signup);
 
 router.post('/login', auth.authFacebook, auth.login);
 
-router.get('/logout', auth.logout);
-
 
 router.post('/userlist', auth.authenticate, function (req, res) {
   userController.userList(req.body.users)
     .then(function (users) {
       res.status(200).send(users);
+    });
+});
+
+router.get('/messages', auth.authenticate, function (req, res) {
+  if (!req.query.timestamp){
+    res.status(400).send('No timestamp sent');
+  }
+  chatController.getMessagesByTime(req.user.facebookId, req.query.timestamp)
+    .then(function (messages) {
+      res.status(200).send({messages: messages});
     });
 });
 
@@ -37,7 +45,7 @@ router.post('/chat', auth.authenticate, function (req, res) {
 });
 
 router.get('/chat', auth.authenticate, function (req, res) {
-  chatController.retrieveChats(req.session.user)
+  chatController.retrieveChats(req.user)
     .then(function (chats) {
       var jsonResponse = {chats: chats};
       res.status(200).send(jsonResponse);
@@ -52,7 +60,7 @@ router.get('/chat/:id', auth.authenticate, function (req, res) {
 });
 
 router.post('/chat/:id', auth.authenticate, function (req, res) {
-  chatController.postMessage(req.params.id, req.session.user.facebookId, req.body)
+  chatController.postMessage(req.params.id, req.user.facebookId, req.body)
     .then(function () {
       res.status(201).send();
     });

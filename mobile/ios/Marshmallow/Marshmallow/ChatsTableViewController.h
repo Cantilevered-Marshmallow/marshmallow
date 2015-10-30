@@ -43,4 +43,6 @@
 
 - (void)createChat:(id)sender;
 
+- (void)fetchMessagesSinceLast;
+
 @end

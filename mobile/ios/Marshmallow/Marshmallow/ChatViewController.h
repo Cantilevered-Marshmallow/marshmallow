@@ -11,6 +11,8 @@
 #import <Haneke/Haneke.h>
 #import <MagicalRecord/MagicalRecord.h>
 #import <ISO8601/ISO8601.h>
+#import <Haneke/Haneke.h>
+#import <UITextView+Placeholder/UITextView+Placeholder.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
@@ -22,15 +24,24 @@
 
 #import "CMNetworkRequest.h"
 #import "CMMessageCell.h"
+#import "CMGImageMessageCell.h"
+#import "CMYoutubeVideoMessageCell.h"
 
-@interface ChatViewController : UIViewController <UITableViewDataSource, UITableViewDelegate>
+#import "CMGImageSearch.h"
+#import "CMYoutubeSearch.h"
+
+@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UITextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *sendMessageButton;
+@property (weak, nonatomic) IBOutlet UIButton *attachmentButton;
+@property (weak, nonatomic) IBOutlet UIButton *clearAttachmentButton;
 
 @property (strong, nonatomic) Chats *chat;
+
+@property (strong, nonatomic) User *user;
 
 @property (strong, nonatomic) NSMutableArray<Message *> *messages;
 
@@ -38,8 +49,22 @@
 
 @property NSTimer *fetchMessagesTimer;
 
+@property (strong, nonatomic) CMGImageResult *gImageResult;
+
+@property (strong, nonatomic) CMYoutubeSearchResult *videoResult;
+
+@property (nonatomic) BOOL firstLoad;
+
 - (void)fetchMessages:(id)sender;
 
 - (void)sendMessage:(id)sender;
+
+- (void)showAttachments:(id)sender;
+
+- (void)clearAttachment:(id)sender;
+
+- (void)toggleAttachmentAction;
+
+- (void)resetMessageInput;
 
 @end

@@ -14,7 +14,7 @@
     self = [super init];
     
     if (self) {
-        _baseUrl = [NSURL URLWithString:@"https://marshy.herokuapp.com"];
+        _baseUrl = [NSURL URLWithString:@"http://159.203.90.131:8080"];
         _manager = [AFHTTPRequestOperationManager manager];
     }
     
@@ -33,9 +33,15 @@
 }
 
 - (void)requestWithHttpVerb:(NSString *)verb
-                    url:(NSString *)url
-                   data:(NSDictionary *)data
-               response:(void (^)(NSError  * _Nullable error, NSDictionary  * _Nullable response))response {
+                        url:(NSString *)url
+                       data:(NSDictionary *)data
+                        jwt:(NSString *)jwt
+                   response:(void (^)(NSError *error, NSDictionary *response))response {
+    _manager.requestSerializer = [AFJSONRequestSerializer serializer]; // Reassign the request serializer to use JSON
+    [_manager.requestSerializer setValue:jwt forHTTPHeaderField:@"token"];
+    
+    NSLog(@"Data: %@", data);
+    
     if ([verb isEqualToString:@"GET"]) {
         [_manager GET:[[_baseUrl absoluteString] stringByAppendingString:url]
            parameters:data
@@ -48,13 +54,14 @@
                   response(error, nil);
               }];
     } else if ([verb isEqualToString:@"POST"]) {
-        _manager.requestSerializer = [AFJSONRequestSerializer serializer];
         [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:url]
             parameters:data
                success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                    response(nil, responseObject);
+                   NSLog(@"Success");
                }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                   NSLog(@"Error: %@", error);
                    response(error, nil);
                }];
     }

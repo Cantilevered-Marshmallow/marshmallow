@@ -19,6 +19,17 @@
 		CA6AF1141BD861DB0025FC6C /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10A1BD861DB0025FC6C /* Contact.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF1151BD861DB0025FC6C /* Message+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF1161BD861DB0025FC6C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10E1BD861DB0025FC6C /* Message.m */; settings = {ASSET_TAGS = (); }; };
+		CA8A590E1BE02EDA0013D363 /* CMSearchPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A590D1BE02EDA0013D363 /* CMSearchPopup.m */; settings = {ASSET_TAGS = (); }; };
+		CA8A59111BE0415D0013D363 /* CMGImageSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A59101BE0415D0013D363 /* CMGImageSearch.m */; settings = {ASSET_TAGS = (); }; };
+		CA8A59131BE04B6F0013D363 /* GoogleImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA8A59121BE04B6F0013D363 /* GoogleImageCollectionCell.xib */; settings = {ASSET_TAGS = (); }; };
+		CA8A591B1BE04D500013D363 /* CMGImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A591A1BE04D500013D363 /* CMGImageCell.m */; settings = {ASSET_TAGS = (); }; };
+		CA94E3D51BE180F800EF4EAE /* CMGImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3D41BE180F800EF4EAE /* CMGImageMessageCell.m */; settings = {ASSET_TAGS = (); }; };
+		CA94E3D81BE19C0100EF4EAE /* CMYoutubeSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3D71BE19C0100EF4EAE /* CMYoutubeSearch.m */; settings = {ASSET_TAGS = (); }; };
+		CA94E3DA1BE1A7A100EF4EAE /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA94E3D91BE1A7A100EF4EAE /* keys.plist */; settings = {ASSET_TAGS = (); }; };
+		CA94E3DC1BE1A7B000EF4EAE /* keys.example.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA94E3DB1BE1A7B000EF4EAE /* keys.example.plist */; settings = {ASSET_TAGS = (); }; };
+		CA94E3DF1BE1B39C00EF4EAE /* CMYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3DE1BE1B39C00EF4EAE /* CMYoutubeCell.m */; settings = {ASSET_TAGS = (); }; };
+		CA94E3E21BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3E11BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m */; settings = {ASSET_TAGS = (); }; };
+		CA94E3E81BE3DBCB00EF4EAE /* CMImagePopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3E71BE3DBCB00EF4EAE /* CMImagePopup.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
@@ -79,6 +90,25 @@
 		CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "Message+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CA6AF10D1BD861DB0025FC6C /* Message.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Message.h; sourceTree = "<group>"; };
 		CA6AF10E1BD861DB0025FC6C /* Message.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Message.m; sourceTree = "<group>"; };
+		CA8A590C1BE02EDA0013D363 /* CMSearchPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMSearchPopup.h; sourceTree = "<group>"; };
+		CA8A590D1BE02EDA0013D363 /* CMSearchPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMSearchPopup.m; sourceTree = "<group>"; };
+		CA8A590F1BE0415D0013D363 /* CMGImageSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGImageSearch.h; sourceTree = "<group>"; };
+		CA8A59101BE0415D0013D363 /* CMGImageSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGImageSearch.m; sourceTree = "<group>"; };
+		CA8A59121BE04B6F0013D363 /* GoogleImageCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = GoogleImageCollectionCell.xib; sourceTree = "<group>"; };
+		CA8A59191BE04D500013D363 /* CMGImageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGImageCell.h; sourceTree = "<group>"; };
+		CA8A591A1BE04D500013D363 /* CMGImageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGImageCell.m; sourceTree = "<group>"; };
+		CA94E3D31BE180F800EF4EAE /* CMGImageMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMGImageMessageCell.h; sourceTree = "<group>"; };
+		CA94E3D41BE180F800EF4EAE /* CMGImageMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMGImageMessageCell.m; sourceTree = "<group>"; };
+		CA94E3D61BE19C0100EF4EAE /* CMYoutubeSearch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMYoutubeSearch.h; sourceTree = "<group>"; };
+		CA94E3D71BE19C0100EF4EAE /* CMYoutubeSearch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMYoutubeSearch.m; sourceTree = "<group>"; };
+		CA94E3D91BE1A7A100EF4EAE /* keys.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = keys.plist; sourceTree = "<group>"; };
+		CA94E3DB1BE1A7B000EF4EAE /* keys.example.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = keys.example.plist; path = ../keys.example.plist; sourceTree = "<group>"; };
+		CA94E3DD1BE1B39C00EF4EAE /* CMYoutubeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMYoutubeCell.h; sourceTree = "<group>"; };
+		CA94E3DE1BE1B39C00EF4EAE /* CMYoutubeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMYoutubeCell.m; sourceTree = "<group>"; };
+		CA94E3E01BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMYoutubeVideoMessageCell.h; sourceTree = "<group>"; };
+		CA94E3E11BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMYoutubeVideoMessageCell.m; sourceTree = "<group>"; };
+		CA94E3E61BE3DBCB00EF4EAE /* CMImagePopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMImagePopup.h; sourceTree = "<group>"; };
+		CA94E3E71BE3DBCB00EF4EAE /* CMImagePopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMImagePopup.m; sourceTree = "<group>"; };
 		CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HDNotificationView.m; sourceTree = "<group>"; };
 		CAA8F2321BD5BECC009844AC /* HDNotificationView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HDNotificationView.h; sourceTree = "<group>"; };
 		CAA8F2361BD6BF0C009844AC /* IconTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IconTabBarController.h; sourceTree = "<group>"; };
@@ -216,6 +246,7 @@
 		CAFCBF721BD0279C00C9E28B /* Marshmallow */ = {
 			isa = PBXGroup;
 			children = (
+				CA94E3DB1BE1A7B000EF4EAE /* keys.example.plist */,
 				CAA8F22F1BD5BE7B009844AC /* ThirdParty */,
 				CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */,
 				CACEED7D1BD55D080086CBCF /* Models */,
@@ -243,6 +274,24 @@
 				CAD70F331BD9D34600122F7A /* UIColor+ColorFromHexString.m */,
 				CAD3A43C1BDAFA8600B3621E /* CMMessageCell.h */,
 				CAD3A43D1BDAFA8600B3621E /* CMMessageCell.m */,
+				CA8A590C1BE02EDA0013D363 /* CMSearchPopup.h */,
+				CA8A590D1BE02EDA0013D363 /* CMSearchPopup.m */,
+				CA8A590F1BE0415D0013D363 /* CMGImageSearch.h */,
+				CA8A59101BE0415D0013D363 /* CMGImageSearch.m */,
+				CA8A59121BE04B6F0013D363 /* GoogleImageCollectionCell.xib */,
+				CA8A59191BE04D500013D363 /* CMGImageCell.h */,
+				CA8A591A1BE04D500013D363 /* CMGImageCell.m */,
+				CA94E3D31BE180F800EF4EAE /* CMGImageMessageCell.h */,
+				CA94E3D41BE180F800EF4EAE /* CMGImageMessageCell.m */,
+				CA94E3D61BE19C0100EF4EAE /* CMYoutubeSearch.h */,
+				CA94E3D71BE19C0100EF4EAE /* CMYoutubeSearch.m */,
+				CA94E3D91BE1A7A100EF4EAE /* keys.plist */,
+				CA94E3DD1BE1B39C00EF4EAE /* CMYoutubeCell.h */,
+				CA94E3DE1BE1B39C00EF4EAE /* CMYoutubeCell.m */,
+				CA94E3E01BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.h */,
+				CA94E3E11BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m */,
+				CA94E3E61BE3DBCB00EF4EAE /* CMImagePopup.h */,
+				CA94E3E71BE3DBCB00EF4EAE /* CMImagePopup.m */,
 			);
 			path = Marshmallow;
 			sourceTree = "<group>";
@@ -394,8 +443,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA94E3DA1BE1A7A100EF4EAE /* keys.plist in Resources */,
 				CAFCBF831BD0279C00C9E28B /* LaunchScreen.storyboard in Resources */,
+				CA94E3DC1BE1A7B000EF4EAE /* keys.example.plist in Resources */,
 				CAFCBF801BD0279C00C9E28B /* Assets.xcassets in Resources */,
+				CA8A59131BE04B6F0013D363 /* GoogleImageCollectionCell.xib in Resources */,
 				CAFCBF7E1BD0279C00C9E28B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -547,23 +599,31 @@
 				CA05B40F1BD95F64002FD8D6 /* CreateChatViewController.m in Sources */,
 				CA6AF1101BD861DB0025FC6C /* User.m in Sources */,
 				CA6AF1141BD861DB0025FC6C /* Contact.m in Sources */,
+				CA8A591B1BE04D500013D363 /* CMGImageCell.m in Sources */,
 				CA6AF1151BD861DB0025FC6C /* Message+CoreDataProperties.m in Sources */,
 				CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */,
 				CA6AF1121BD861DB0025FC6C /* Chats.m in Sources */,
+				CA94E3E21BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m in Sources */,
 				CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */,
 				CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */,
 				CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */,
+				CA94E3DF1BE1B39C00EF4EAE /* CMYoutubeCell.m in Sources */,
 				CA6AF1161BD861DB0025FC6C /* Message.m in Sources */,
+				CA94E3D51BE180F800EF4EAE /* CMGImageMessageCell.m in Sources */,
+				CA8A590E1BE02EDA0013D363 /* CMSearchPopup.m in Sources */,
 				CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */,
+				CA8A59111BE0415D0013D363 /* CMGImageSearch.m in Sources */,
 				CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */,
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
 				CAD70F341BD9D34600122F7A /* UIColor+ColorFromHexString.m in Sources */,
 				CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */,
+				CA94E3D81BE19C0100EF4EAE /* CMYoutubeSearch.m in Sources */,
 				CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */,
 				CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */,
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
 				CA6AF1131BD861DB0025FC6C /* Contact+CoreDataProperties.m in Sources */,
 				CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */,
+				CA94E3E81BE3DBCB00EF4EAE /* CMImagePopup.m in Sources */,
 				CAD3A43E1BDAFA8600B3621E /* CMMessageCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

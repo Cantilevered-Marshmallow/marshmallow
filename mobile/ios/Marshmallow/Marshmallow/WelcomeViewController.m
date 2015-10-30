@@ -75,19 +75,19 @@
             
             FBSDKGraphRequest *graphRequest = [[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:@{@"fields": @"id,name,email"}];
             
-            // Send a http request to facebook to ge the user's email
+            // Send a http request to facebook to get the user's email
             [graphRequest startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
                 if (!error) {
                     CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
                     // Send a http request to our serverfor signup and login of the user
-                    [request requestWithHttpVerb:@"POST" url:@"/signup" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"facebookId": [[FBSDKProfile currentProfile] userID], @"email": result[@"email"]} response:^(NSError * _Nullable error, NSDictionary * _Nullable response) {
+                    [request requestWithHttpVerb:@"POST" url:@"/signup" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"facebookId": [[FBSDKProfile currentProfile] userID], @"email": result[@"email"]} jwt:nil response:^(NSError * _Nullable error, NSDictionary * _Nullable response) {
                         if (!error) {
-                            
                             [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                                _user = [User MR_createEntityInContext:localContext];
-                                _user.name = result[@"name"];
-                                _user.email = result[@"email"];
-                                _user.token = [_facebookToken tokenString];
+                                self.user = [User MR_createEntityInContext:localContext];
+                                self.user.name = result[@"name"];
+                                self.user.email = result[@"email"];
+                                self.user.oauthToken = [_facebookToken tokenString];
+                                self.user.jwt = response[@"token"];
                             } completion:^(BOOL contextDidSave, NSError *error) {
                                 [self getFriends];
                             }];
@@ -118,6 +118,10 @@
 }
 
 - (void)getFriends {
+    if (self.user.name == nil) {
+        self.user = [User MR_findFirstByAttribute:@"oauthToken" withValue:[self.facebookToken tokenString] inContext:[NSManagedObjectContext MR_defaultContext]];
+    }
+    
     FBSDKGraphRequest *request = [[FBSDKGraphRequest alloc]
                                   initWithGraphPath:@"/me/friends"
                                   parameters:@{}
@@ -133,8 +137,7 @@
             }
             
             CMNetworkRequest *networkRequest = [[CMNetworkRequest alloc] init];
-            
-            [networkRequest requestWithHttpVerb:@"POST" url:@"/userlist" data:@{@"users": friendIds} response:^(NSError *error, NSDictionary *response) {
+            [networkRequest requestWithHttpVerb:@"POST" url:@"/userlist" data:@{@"users": friendIds} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     NSArray *filteredFriends = response[@"users"];
                     
