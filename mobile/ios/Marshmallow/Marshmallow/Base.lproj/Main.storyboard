@@ -243,7 +243,6 @@
                         <animations/>
                     </toolbar>
                     <connections>
-                        <outlet property="delegate" destination="PMR-kp-Rj1" id="V8L-yy-ybQ"/>
                         <segue destination="pBM-Id-vmu" kind="relationship" relationship="rootViewController" id="Bsg-H1-MHI"/>
                     </connections>
                 </navigationController>
