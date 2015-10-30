@@ -18,12 +18,25 @@
         double screenWidth = [UIScreen mainScreen].bounds.size.width;
         // Center formula 50% screen width - 50% image width
         self.googleImage = [[UIImageView alloc] initWithFrame:CGRectMake(screenWidth / 2 - 100, 140, 200, 200)];
+        self.googleImage.userInteractionEnabled = YES;
+        
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(handleTapOnImage:)];
+        recognizer.numberOfTapsRequired = 2;
+        [self.googleImage addGestureRecognizer:recognizer];
+        recognizer.delegate = self;
         
         // Add subviews
         [self.contentView addSubview:self.googleImage];
     }
     
     return self;
+}
+
+- (void)handleTapOnImage:(id)sender {
+    CMImagePopup *pop = [[CMImagePopup alloc] init];
+    [pop.iv setImage:self.googleImage.image];
+    
+    [pop show];
 }
 
 @end
