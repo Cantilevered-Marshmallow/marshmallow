@@ -52,6 +52,8 @@
 
 @property (strong, nonatomic) CMYoutubeSearchResult *videoResult;
 
+@property (nonatomic) BOOL firstLoad;
+
 - (void)fetchMessages:(id)sender;
 
 - (void)sendMessage:(id)sender;

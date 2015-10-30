@@ -42,6 +42,8 @@
     self.messageInput.placeholder = self.messageInput.text;
     self.messageInput.placeholderColor = [UIColor grayColor];
     self.messageInput.text = @"";
+    
+    self.firstLoad = YES;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -213,6 +215,15 @@
                                 self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
                                 
                                 [self.tableView reloadData];
+                                
+                                if (self.firstLoad) {
+                                    self.firstLoad = NO;
+                                    
+                                    // Scroll to bottom of messages table
+                                    if (self.messages.count > 0) {
+                                        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                    }
+                                }
                             });
                         }
                     }];
