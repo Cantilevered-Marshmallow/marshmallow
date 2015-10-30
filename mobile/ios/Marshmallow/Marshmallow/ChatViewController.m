@@ -38,6 +38,10 @@
     
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
     [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.messageInput.placeholder = self.messageInput.text;
+    self.messageInput.placeholderColor = [UIColor grayColor];
+    self.messageInput.text = @"";
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -78,9 +82,7 @@
                     
         cell.messageBody.text = message.body;
         
-        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
-            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
-        }
+        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
         return cell;
     } else if (![message.googleImageId isEqualToString:@""]) {
@@ -98,9 +100,7 @@
         
         cell.messageBody.text = message.body;
         
-        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
-            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
-        }
+        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
         [cell.googleImage hnk_setImageFromURL:[NSURL URLWithString:message.googleImageId]];
         
@@ -120,9 +120,7 @@
         
         cell.messageBody.text = message.body;
         
-        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
-            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
-        }
+        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
         cell.thumbnail.image = [UIImage imageNamed:@"Icon"];
         cell.videoId = message.youtubeVideoId;
@@ -225,7 +223,7 @@
 }
 
 - (void)sendMessage:(id)sender {
-    if (![self.messageInput.text isEqualToString:@"Enter your message here"]) {
+    if (![[self.messageInput.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
         if (self.gImageResult != nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": self.gImageResult.url} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
@@ -236,7 +234,7 @@
                     self.view.subviews[1].userInteractionEnabled = NO;
                     iv.userInteractionEnabled = NO;
                     
-                    self.messageInput.text = @"Enter your message here";
+                    self.messageInput.placeholder = @"Enter your message here";
                     [self fetchMessages:self];
                 }
             }];
@@ -252,7 +250,7 @@
                     self.view.subviews[1].userInteractionEnabled = NO;
                     iv.userInteractionEnabled = NO;
                     
-                    self.messageInput.text = @"Enter your message here";
+                    self.messageInput.placeholder = @"Enter your message here";
                     [self fetchMessages:self];
                 }
             }];
@@ -261,7 +259,7 @@
         if (self.gImageResult == nil && self.videoResult == nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
-                    self.messageInput.text = @"Enter your message here";
+                    self.messageInput.placeholder = @"Enter your message here";
                     [self fetchMessages:self];
                 }
             }];
