@@ -248,7 +248,6 @@
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Kiw-3T-gs1" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="PMR-kp-Rj1" customClass="CMNavigationController"/>
             </objects>
             <point key="canvasLocation" x="2136" y="-1349"/>
         </scene>

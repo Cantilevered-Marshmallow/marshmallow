@@ -21,8 +21,6 @@
     
     [MagicalRecord setupCoreDataStack];
     
-    NSLog(@"%@", [MagicalRecord defaultStoreName]);
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     if ([FBSDKAccessToken currentAccessToken]) { // Are we logged in?
