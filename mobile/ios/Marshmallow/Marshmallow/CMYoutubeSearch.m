@@ -96,6 +96,10 @@
                  dispatch_async(dispatch_get_main_queue(), ^{
                      NSArray *results = responseObject[@"items"];
                      
+                     if (self.results.count > 0) {
+                         [self.results removeAllObjects];
+                     }
+                     
                      for (NSDictionary *item in results) {
                          NSDictionary *snippet = item[@"snippet"];
                          NSString *videoId = item[@"id"][@"videoId"];
