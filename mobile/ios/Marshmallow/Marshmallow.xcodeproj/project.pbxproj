@@ -33,6 +33,7 @@
 		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
 		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
+		CAAECA431BE42DEA009D430A /* CMFormattedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAECA421BE42DEA009D430A /* CMFormattedTextView.m */; settings = {ASSET_TAGS = (); }; };
 		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
@@ -115,6 +116,8 @@
 		CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IconTabBarController.m; sourceTree = "<group>"; };
 		CAA8F24D1BD72BEA009844AC /* ContactsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ContactsTableViewController.h; sourceTree = "<group>"; };
 		CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ContactsTableViewController.m; sourceTree = "<group>"; };
+		CAAECA411BE42DEA009D430A /* CMFormattedTextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CMFormattedTextView.h; path = ../CMFormattedTextView.h; sourceTree = "<group>"; };
+		CAAECA421BE42DEA009D430A /* CMFormattedTextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CMFormattedTextView.m; path = ../CMFormattedTextView.m; sourceTree = "<group>"; };
 		CAC352251BD1C1DC00AEF3D3 /* ChatsTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatsTableViewController.h; sourceTree = "<group>"; };
 		CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChatsTableViewController.m; sourceTree = "<group>"; };
 		CAC352281BD1EAA000AEF3D3 /* ChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChatViewController.h; sourceTree = "<group>"; };
@@ -246,6 +249,8 @@
 		CAFCBF721BD0279C00C9E28B /* Marshmallow */ = {
 			isa = PBXGroup;
 			children = (
+				CAAECA411BE42DEA009D430A /* CMFormattedTextView.h */,
+				CAAECA421BE42DEA009D430A /* CMFormattedTextView.m */,
 				CA94E3DB1BE1A7B000EF4EAE /* keys.example.plist */,
 				CAA8F22F1BD5BE7B009844AC /* ThirdParty */,
 				CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */,
@@ -618,6 +623,7 @@
 				CAD70F341BD9D34600122F7A /* UIColor+ColorFromHexString.m in Sources */,
 				CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */,
 				CA94E3D81BE19C0100EF4EAE /* CMYoutubeSearch.m in Sources */,
+				CAAECA431BE42DEA009D430A /* CMFormattedTextView.m in Sources */,
 				CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */,
 				CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */,
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,

@@ -12,5 +12,6 @@ pod 'MMPopupView'
 pod 'SFFocusViewLayout'
 pod 'XCDYouTubeKit'
 pod 'UITextView+Placeholder'
+pod 'NSStringEmojize'
 
 link_with 'Marshmallow', 'MarshmallowTests', 'MarshmallowUITests'
