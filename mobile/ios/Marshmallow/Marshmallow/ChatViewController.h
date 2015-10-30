@@ -65,4 +65,6 @@
 
 - (void)toggleAttachmentAction;
 
+- (void)resetMessageInput;
+
 @end

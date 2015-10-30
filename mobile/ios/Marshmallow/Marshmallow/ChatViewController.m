@@ -246,7 +246,7 @@
                     self.view.subviews[1].userInteractionEnabled = NO;
                     iv.userInteractionEnabled = NO;
                     
-                    self.messageInput.placeholder = @"Enter your message here";
+                    [self resetMessageInput];
                     [self fetchMessages:self];
                 }
             }];
@@ -262,7 +262,7 @@
                     self.view.subviews[1].userInteractionEnabled = NO;
                     iv.userInteractionEnabled = NO;
                     
-                    self.messageInput.placeholder = @"Enter your message here";
+                    [self resetMessageInput];
                     [self fetchMessages:self];
                 }
             }];
@@ -271,7 +271,7 @@
         if (self.gImageResult == nil && self.videoResult == nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.text, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
-                    self.messageInput.placeholder = @"Enter your message here";
+                    [self resetMessageInput];
                     [self fetchMessages:self];
                 }
             }];
@@ -352,6 +352,11 @@
     
     self.clearAttachmentButton.hidden = !isAttach;
     self.clearAttachmentButton.userInteractionEnabled = isAttach;
+}
+
+- (void)resetMessageInput {
+    self.messageInput.placeholder = @"Enter your message here";
+    self.messageInput.text = @"";
 }
 
 @end
