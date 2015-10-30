@@ -154,6 +154,7 @@
                                 UIStoryboard *sb = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
                                 ChatViewController *chatViewController = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
                                 chatViewController.chat = [Chats MR_findFirstByAttribute:@"chatId" withValue:response[@"chatId"] inContext:[NSManagedObjectContext MR_defaultContext]];
+                                chatViewController.user = [User MR_findFirstByAttribute:@"oauthToken" withValue:[[FBSDKAccessToken currentAccessToken] tokenString] inContext:[NSManagedObjectContext MR_defaultContext]];
                                 NSArray *viewControllers = [[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0], chatViewController, nil];
                                 
                                 [self.navigationController pushViewController:chatViewController animated:YES];
