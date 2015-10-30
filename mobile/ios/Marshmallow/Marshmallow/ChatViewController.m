@@ -248,6 +248,11 @@
                     
                     [self resetMessageInput];
                     [self fetchMessages:self];
+                    
+                    BOOL isAttach = !self.attachmentButton.hidden;
+                    if (!isAttach) {
+                        [self toggleAttachmentAction];
+                    }
                 }
             }];
         }
@@ -264,6 +269,11 @@
                     
                     [self resetMessageInput];
                     [self fetchMessages:self];
+                    
+                    BOOL isAttach = !self.attachmentButton.hidden;
+                    if (!isAttach) {
+                        [self toggleAttachmentAction];
+                    }
                 }
             }];
         }
@@ -273,6 +283,11 @@
                 if (!error) {
                     [self resetMessageInput];
                     [self fetchMessages:self];
+                    
+                    BOOL isAttach = !self.attachmentButton.hidden;
+                    if (!isAttach) {
+                        [self toggleAttachmentAction];
+                    }
                 }
             }];
         }
