@@ -82,9 +82,7 @@
                     
         cell.messageBody.text = message.body;
         
-        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
-            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
-        }
+        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
         return cell;
     } else if (![message.googleImageId isEqualToString:@""]) {
@@ -102,9 +100,7 @@
         
         cell.messageBody.text = message.body;
         
-        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
-            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
-        }
+        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
         [cell.googleImage hnk_setImageFromURL:[NSURL URLWithString:message.googleImageId]];
         
@@ -124,9 +120,7 @@
         
         cell.messageBody.text = message.body;
         
-        if (cell.messageBody.contentSize.height > cell.messageBody.frame.size.height) {
-            cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
-        }
+        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
         cell.thumbnail.image = [UIImage imageNamed:@"Icon"];
         cell.videoId = message.youtubeVideoId;
