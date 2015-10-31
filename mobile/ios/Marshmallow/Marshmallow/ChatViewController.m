@@ -248,7 +248,7 @@
                                 
                                 [self.tableView reloadData];
                                 
-                                // Scroll to bottom of messages if the previus newest message is visible
+                                // Scroll to bottom of messages if the previous newest message is visible
                                 NSArray<NSIndexPath *> *visibleRows = [self.tableView indexPathsForVisibleRows];
                                 for (NSIndexPath *indexPath in visibleRows) {
                                     if (indexPath.row == self.messages.count - 1) {
