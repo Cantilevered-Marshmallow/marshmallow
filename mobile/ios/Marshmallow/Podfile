@@ -12,6 +12,6 @@ pod 'MMPopupView'
 pod 'SFFocusViewLayout'
 pod 'XCDYouTubeKit'
 pod 'UITextView+Placeholder'
-pod 'NSStringEmojize'
+pod 'ZWEmoji', :git => 'https://github.com/zachwaugh/ZWEmoji.git', :commit => 'a3718f9bcdd482c8d3e06015cd8a7c592807954f'
 
 link_with 'Marshmallow', 'MarshmallowTests', 'MarshmallowUITests'

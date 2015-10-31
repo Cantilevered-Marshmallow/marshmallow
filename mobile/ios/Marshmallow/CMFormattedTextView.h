@@ -7,12 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <NSStringEmojize/NSString+Emojize.h>
+#import <ZWEmoji/ZWEmoji.h>
 
 @interface CMFormattedTextView : UITextView <UITextViewDelegate>
-
-@property (strong, nonatomic) NSString *formattedText;
-
-@property (strong, nonatomic) NSString *unformattedText;
 
 @end

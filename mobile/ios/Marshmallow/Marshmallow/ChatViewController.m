@@ -95,7 +95,7 @@
         }
         cell.timestamp.text = [message.timestamp timeAgoSinceNow];
                     
-        cell.messageBody.text = [message.body emojizedString];
+        cell.messageBody.text = [ZWEmoji emojify:message.body];
         
         cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
@@ -115,7 +115,7 @@
         }
         cell.timestamp.text = [message.timestamp timeAgoSinceNow];
         
-        cell.messageBody.text = [message.body emojizedString];
+        cell.messageBody.text = [ZWEmoji emojify:message.body];
         
         cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
@@ -137,7 +137,7 @@
         }
         cell.timestamp.text = [message.timestamp timeAgoSinceNow];
         
-        cell.messageBody.text = [message.body emojizedString];
+        cell.messageBody.text = [ZWEmoji emojify:message.body];
         
         cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
         
@@ -265,7 +265,7 @@
         NSLog(@"Pass");
         // Message has a Google Image attachment
         if (self.gImageResult != nil) {
-            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.unformattedText, @"youtubeVideoId": @"", @"googleImageId": self.gImageResult.url} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": [ZWEmoji unemojify:self.messageInput.text], @"youtubeVideoId": @"", @"googleImageId": self.gImageResult.url} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
                     iv.image = nil;
@@ -287,7 +287,7 @@
         
         // Message has a Youtube video attachment
         if (self.videoResult != nil) {
-            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.unformattedText, @"youtubeVideoId": self.videoResult.videoId, @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": [ZWEmoji unemojify:self.messageInput.text], @"youtubeVideoId": self.videoResult.videoId, @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
                     iv.image = nil;
@@ -309,7 +309,7 @@
         
         // Default message
         if (self.gImageResult == nil && self.videoResult == nil) {
-            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": self.messageInput.unformattedText, @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": [ZWEmoji unemojify:self.messageInput.text], @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     NSLog(@"Response");
                     [self resetMessageInput];

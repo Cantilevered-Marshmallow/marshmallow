@@ -17,14 +17,7 @@
 }
 
 - (void)textViewDidChange:(UITextView *)textView {
-    self.formattedText = [self.text emojizedString];
-    
-    if (![self.formattedText isEqualToString:self.text]) {
-        self.unformattedText = self.text;
-        self.text = self.formattedText;
-    } else {
-        self.unformattedText = self.text;
-    }
+    self.text = [ZWEmoji emojify:self.text];
 }
 
 @end

@@ -13,7 +13,7 @@
 #import <ISO8601/ISO8601.h>
 #import <Haneke/Haneke.h>
 #import <UITextView+Placeholder/UITextView+Placeholder.h>
-#import <NSStringEmojize/NSString+Emojize.h>
+#import <ZWEmoji/ZWEmoji.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
