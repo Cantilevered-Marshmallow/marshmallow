@@ -42,7 +42,7 @@
     self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
     
     // Set interval for fetching of new messages
-    self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
+    self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:2.5 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
     
     // Register message cells for use later
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
@@ -63,7 +63,7 @@
     
     // Check to see if we don't have timer already; Prevents the same action from being performed twice
     if (!self.fetchMessagesTimer) {
-        self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:true];
+        self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:2.5 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:true];
     }
     
     // Scroll to bottom of messages table
@@ -248,7 +248,7 @@
                                 
                                 [self.tableView reloadData];
                                 
-                                // Scroll to bottom of messages if the previus newest message is visible
+                                // Scroll to bottom of messages if the previous newest message is visible
                                 NSArray<NSIndexPath *> *visibleRows = [self.tableView indexPathsForVisibleRows];
                                 for (NSIndexPath *indexPath in visibleRows) {
                                     if (indexPath.row == self.messages.count - 1) {
