@@ -1,4 +1,5 @@
 var router = require('express').Router();
+var request = require('request');
 
 var auth = require('./auth');
 var userController = require('./user/userController');
@@ -64,6 +65,13 @@ router.post('/chat/:id', auth.authenticate, function (req, res) {
     .then(function () {
       res.status(201).send();
     });
+});
+
+
+router.get('/trends', auth.authenticate, function (req, res) {
+  request('someURL', function (error, response, body) {
+    res.status(200).send(body);
+  });
 });
 
 // router.get('/youtube', );
