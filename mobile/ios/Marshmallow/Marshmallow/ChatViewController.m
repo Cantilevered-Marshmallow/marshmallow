@@ -248,6 +248,14 @@
                                 
                                 [self.tableView reloadData];
                                 
+                                // Scroll to bottom of messages if the previus newest message is visible
+                                NSArray<NSIndexPath *> *visibleRows = [self.tableView indexPathsForVisibleRows];
+                                for (NSIndexPath *indexPath in visibleRows) {
+                                    if (indexPath.row == self.messages.count - 1) {
+                                        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                                    }
+                                }
+                                
                                 if (self.firstLoad) {
                                     self.firstLoad = NO;
                                     
