@@ -101,7 +101,11 @@
                     
         cell.messageBody.text = [ZWEmoji emojify:message.body];
         
-        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
+        CGFloat fixedWidth = cell.messageBody.frame.size.width;
+        CGSize newSize = [cell.messageBody sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+        CGRect newFrame = cell.messageBody.frame;
+        newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+        cell.messageBody.frame = newFrame;
         
         return cell;
         
@@ -121,7 +125,11 @@
         
         cell.messageBody.text = [ZWEmoji emojify:message.body];
         
-        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
+        CGFloat fixedWidth = cell.messageBody.frame.size.width;
+        CGSize newSize = [cell.messageBody sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+        CGRect newFrame = cell.messageBody.frame;
+        newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+        cell.messageBody.frame = newFrame;
         
         [cell.googleImage hnk_setImageFromURL:[NSURL URLWithString:message.googleImageId]];
         
@@ -143,7 +151,11 @@
         
         cell.messageBody.text = [ZWEmoji emojify:message.body];
         
-        cell.messageBody.frame = CGRectMake(cell.messageBody.frame.origin.x, cell.messageBody.frame.origin.y, cell.messageBody.frame.size.width, cell.messageBody.contentSize.height);
+        CGFloat fixedWidth = cell.messageBody.frame.size.width;
+        CGSize newSize = [cell.messageBody sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+        CGRect newFrame = cell.messageBody.frame;
+        newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+        cell.messageBody.frame = newFrame;
         
         // Set placeholder for thumbnail
         cell.thumbnail.image = [UIImage imageNamed:@"Icon"];
@@ -186,7 +198,7 @@
     UITextView *tv = [[UITextView alloc] initWithFrame:CGRectMake(25, 60, 200, 60)];
     tv.text = message.body;
     
-    int cellDefaultHeight = 110;
+    int cellDefaultHeight = 120;
     
     // The message body is larger than the default height of the text view
     if (tv.contentSize.height > tv.frame.size.height) {
