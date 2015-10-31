@@ -68,6 +68,7 @@ PODS:
   - SFFocusViewLayout (1.1.1)
   - UITextView+Placeholder (1.1.0)
   - XCDYouTubeKit (2.3.2)
+  - ZWEmoji (0.4.0)
 
 DEPENDENCIES:
   - AFNetworking (~> 2.0)
@@ -83,16 +84,23 @@ DEPENDENCIES:
   - SFFocusViewLayout
   - UITextView+Placeholder
   - XCDYouTubeKit
+  - ZWEmoji (from `https://github.com/zachwaugh/ZWEmoji.git`, commit `a3718f9bcdd482c8d3e06015cd8a7c592807954f`)
 
 EXTERNAL SOURCES:
   FontAwesomeKit:
     :commit: 1bdb8de41294ec30f2d56858c5c2742c14933ad7
     :git: https://github.com/PrideChung/FontAwesomeKit.git
+  ZWEmoji:
+    :commit: a3718f9bcdd482c8d3e06015cd8a7c592807954f
+    :git: https://github.com/zachwaugh/ZWEmoji.git
 
 CHECKOUT OPTIONS:
   FontAwesomeKit:
     :commit: 1bdb8de41294ec30f2d56858c5c2742c14933ad7
     :git: https://github.com/PrideChung/FontAwesomeKit.git
+  ZWEmoji:
+    :commit: a3718f9bcdd482c8d3e06015cd8a7c592807954f
+    :git: https://github.com/zachwaugh/ZWEmoji.git
 
 SPEC CHECKSUMS:
   AFNetworking: 8e4e60500beb8bec644cf575beee72990a76d399
@@ -109,5 +117,6 @@ SPEC CHECKSUMS:
   SFFocusViewLayout: 01b91154fb64cf745ca75d97bdf8f069dd62d33c
   UITextView+Placeholder: 672ce543356b5b5787f354415bc3b132d47f0362
   XCDYouTubeKit: 6aff378bcbbf06d058f2c2d2df655c376970ee03
+  ZWEmoji: e25e17bfa70b17b3d7f3aea6b932fb4135e9e432
 
 COCOAPODS: 0.39.0

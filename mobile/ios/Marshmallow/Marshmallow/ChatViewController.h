@@ -13,6 +13,7 @@
 #import <ISO8601/ISO8601.h>
 #import <Haneke/Haneke.h>
 #import <UITextView+Placeholder/UITextView+Placeholder.h>
+#import <ZWEmoji/ZWEmoji.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
@@ -30,9 +31,11 @@
 #import "CMGImageSearch.h"
 #import "CMYoutubeSearch.h"
 
+#import "CMFormattedTextView.h"
+
 @interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, UITableViewDataSource, UITableViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UITextView *messageInput;
+@property (weak, nonatomic) IBOutlet CMFormattedTextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIButton *sendMessageButton;
