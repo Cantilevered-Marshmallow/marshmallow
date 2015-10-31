@@ -10,6 +10,8 @@
 
 @implementation ChatViewController
 
+#pragma mark - controller life cycle
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -77,6 +79,8 @@
     [self.fetchMessagesTimer invalidate];
     self.fetchMessagesTimer = nil;
 }
+
+#pragma mark - table view handlers
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     Message *message = self.messages[indexPath.row];
@@ -206,6 +210,8 @@
     }
 }
 
+#pragma mark - Handlers
+
 - (void)fetchMessages:(id)sender {
     // Fetch all the new messages
     [self.request requestWithHttpVerb:@"GET" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:nil jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
@@ -327,40 +333,7 @@
     }
 }
 
-- (void)showAttachments:(UIImageView *)sender {
-    // Action handler for click on attachment button
-    
-    // Create the popup sheet for displaying options on which attachment to use
-    UIAlertController *attachmentsSheet = [UIAlertController alertControllerWithTitle:@"Choose Attachment" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
-    
-    // Google Image search option
-    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Google Images" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        CMGImageSearch *pop = [[CMGImageSearch alloc] init];
-        pop.delegate = self;
-        [pop show];
-    }]];
-    
-    // Youtube video option
-    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Youtube" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
-        CMYoutubeSearch *pop = [[CMYoutubeSearch alloc] init];
-        pop.delegate = self;
-        [pop show];
-    }]];
-    
-    // Cancel option
-    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
-    
-    // Style the sheet
-    attachmentsSheet.modalPresentationStyle = UIModalPresentationPopover;
-    
-    UIPopoverPresentationController * popover = attachmentsSheet.popoverPresentationController;
-    popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
-    popover.sourceView = sender;
-    popover.sourceRect = sender.bounds;
-    
-    // Display the sheet
-    [self presentViewController:attachmentsSheet animated:YES completion:nil];
-}
+#pragma mark - Handle attachments
 
 - (void)imageSelected:(CMGImageResult *)result {
     // A Google Image has been selected
@@ -396,6 +369,8 @@
     [self toggleAttachmentAction];
 }
 
+#pragma mark - Helpers
+
 - (void)clearAttachment:(id)sender {
     // Remove the preview for the attachment
     UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
@@ -428,5 +403,41 @@
     self.messageInput.placeholder = @"Enter your message here";
     self.messageInput.text = @"";
 }
+
+- (void)showAttachments:(UIImageView *)sender {
+    // Action handler for click on attachment button
+    
+    // Create the popup sheet for displaying options on which attachment to use
+    UIAlertController *attachmentsSheet = [UIAlertController alertControllerWithTitle:@"Choose Attachment" message:nil preferredStyle:UIAlertControllerStyleActionSheet];
+    
+    // Google Image search option
+    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Google Images" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CMGImageSearch *pop = [[CMGImageSearch alloc] init];
+        pop.delegate = self;
+        [pop show];
+    }]];
+    
+    // Youtube video option
+    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Youtube" style:UIAlertActionStyleDefault handler:^(UIAlertAction * _Nonnull action) {
+        CMYoutubeSearch *pop = [[CMYoutubeSearch alloc] init];
+        pop.delegate = self;
+        [pop show];
+    }]];
+    
+    // Cancel option
+    [attachmentsSheet addAction:[UIAlertAction actionWithTitle:@"Cancel" style:UIAlertActionStyleCancel handler:nil]];
+    
+    // Style the sheet
+    attachmentsSheet.modalPresentationStyle = UIModalPresentationPopover;
+    
+    UIPopoverPresentationController * popover = attachmentsSheet.popoverPresentationController;
+    popover.permittedArrowDirections = UIPopoverArrowDirectionUp;
+    popover.sourceView = sender;
+    popover.sourceRect = sender.bounds;
+    
+    // Display the sheet
+    [self presentViewController:attachmentsSheet animated:YES completion:nil];
+}
+
 
 @end
