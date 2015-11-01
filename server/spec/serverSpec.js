@@ -280,6 +280,20 @@ describe('GET and POST to /chat and /chat:id', function () {
       .expect(200, done);
   });
 
+  it('Client should get back a list of trendy reddit posts', function (done) {
+    agent1
+      .get('/trends')
+      .set('token', BradSmith.token)
+      .expect(200)
+      .expect(function (res) {
+        if (!res.body.hasOwnProperty('links')) {
+          throw new Error('No links received')
+        }
+        if (!Array.isArray(res.body.links)) {
+          throw new Error('Did not receive array')
+        }
+      }, done);
+  });
 });
 
 
