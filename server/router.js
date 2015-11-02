@@ -1,19 +1,13 @@
 var router = require('express').Router();
-var request = require('request');
 
 var auth = require('./auth');
 var userController = require('./user/userController');
 var chatController = require('./chat/chatController');
-
-router.use(function timeLog (req, res, next) {
-  console.log('Time :', Date.now());
-  next();
-});
+var trendsController = require('./trends/trendsController');
 
 router.post('/signup', auth.authFacebook, auth.signup);
 
 router.post('/login', auth.authFacebook, auth.login);
-
 
 router.post('/userlist', auth.authenticate, function (req, res) {
   userController.userList(req.body.users)
@@ -67,15 +61,14 @@ router.post('/chat/:id', auth.authenticate, function (req, res) {
     });
 });
 
-
 router.get('/trends', auth.authenticate, function (req, res) {
-  request('someURL', function (error, response, body) {
-    res.status(200).send(body);
-  });
+  trendsController.getTrends()
+    .then(function (links) {
+      res.status(200).send({links: links});
+    })
+    .catch(function (err) {
+      res.status(500).send("Error getting trends: ", err);
+    });
 });
-
-// router.get('/youtube', );
-
-// router.get('/gimages', );
 
 module.exports = router;
