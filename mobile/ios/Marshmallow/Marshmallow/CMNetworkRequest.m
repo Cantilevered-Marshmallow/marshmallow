@@ -51,7 +51,13 @@
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Error: %@", error);
-                  response(error, nil);
+                  
+                  if (operation.response.statusCode == 401) {
+                      // Attempt to reauth the user
+                      [self reauthUser:jwt httpVerb:verb url:url data:data response:response];
+                  } else {
+                      response(error, nil);
+                  }
               }];
     } else if ([verb isEqualToString:@"POST"]) {
         [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:url]
@@ -62,9 +68,65 @@
                }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                    NSLog(@"Error: %@", error);
-                   response(error, nil);
+                   
+                   if (operation.response.statusCode == 401) {
+                       // Attempt to reauth the user
+                       [self reauthUser:jwt httpVerb:verb url:url data:data response:response];
+                   } else {
+                       response(error, nil);
+                   }
                }];
     }
+}
+
+- (void)reauthUser:(NSString *)jwt httpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data response:(void (^)(NSError *, NSDictionary *))response {
+    User *user = [User MR_findFirstByAttribute:@"jwt" withValue:jwt inContext:[NSManagedObjectContext MR_defaultContext]];
+    if ([verb isEqualToString:@"GET"]) {
+        [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:@"/login"]
+           parameters:@{@"facebookId": [[FBSDKAccessToken currentAccessToken] userID], @"email": user.email, @"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString]}
+              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                  [self updateJwt:responseObject[@"token"] givenOldJwt:jwt];
+                  [_manager GET:[[_baseUrl absoluteString] stringByAppendingString:url]
+                     parameters:data
+                        success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                            NSLog(@"Success");
+                            response(nil, responseObject);
+                        }
+                        failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                            NSLog(@"Error: %@", error);
+                            response(error, nil);
+                        }];
+              }
+              failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                  NSLog(@"Unable to log back in");
+              }];
+    } else if([verb isEqualToString:@"POST"]) {
+        [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:@"/login"]
+           parameters:@{@"facebookId": [[FBSDKAccessToken currentAccessToken] userID], @"email": user.email, @"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString]}
+              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                  [self updateJwt:responseObject[@"token"] givenOldJwt:jwt];
+                  [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:url]
+                     parameters:data
+                        success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                            NSLog(@"Success");
+                            response(nil, responseObject);
+                        }
+                        failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                            NSLog(@"Error: %@", error);
+                            response(error, nil);
+                        }];
+              }
+              failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                  NSLog(@"Unable to log back in");
+              }];
+    }
+}
+
+- (void)updateJwt:(NSString *)newJwt givenOldJwt:(NSString *)oldJwt {
+    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+        User *user = [User MR_findFirstByAttribute:@"jwt" withValue:oldJwt inContext:localContext];
+        user.jwt = newJwt;
+    }];
 }
 
 @end
