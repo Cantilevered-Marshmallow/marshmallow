@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/Cantilevered-Marshmallow/marshmallow.svg)](https://travis-ci.org/Cantilevered-Marshmallow/marshmallow)
 
 # Marshmallow
-  
+
 ![marshmallow](http://i.imgur.com/Ms6GvgR.png)
 
 > An iOS chat app made for easy sharing of news, videos and images with your friends.
@@ -36,7 +36,20 @@
 ## Usage
 
 #### Client
-{instructions on how to run client on local machine}
+
+This is all done in the `mobile/ios/Marshmallow` directory:
+
+1. Installing Dependencies
+  ```sh
+  pod install
+  ```
+
+2. Open `Marshmallow.xcworkspace` in Xcode
+
+3. In Xcode open the file `keys.example.plist`, where it says `KEY_HERE` replace it with your Youtube API Key
+
+4. Now you can click build in Xcode and start using the app in the simulator
+
 #### Server
 Before attempting to start the server, make sure you have the trends package in your Go workspace. Find the repo [here](https://github.com/Cantilevered-Marshmallow/trends).
 
@@ -44,7 +57,7 @@ Before attempting to start the server, make sure you have the trends package in 
 2. Fill out environment variables in `docker-compose.yml.example`
 3. Rename file `docker-compose.yml.example` to `docker-compose.yml`
 4. Activate docker machine
-4. Run `docker-compose up` 
+4. Run `docker-compose up`
 
 ## Requirements
 
@@ -54,18 +67,6 @@ Before attempting to start the server, make sure you have the trends package in 
 - `Docker`
 - `mysql`
 - `Go`
-
-## Development
-
-### Client
-
-#### Installing Dependencies
-
-From within the `mobile/ios/Marshmallow` directory:
-
-```sh
-pod install
-```
 
 ### Server
 #### API Endpoints
@@ -238,7 +239,7 @@ Authentication Required: Yes
 #### Database Schema
 ![database schema](http://i.imgur.com/A2puG7v.png)
 
-#### Installing Server Dependencies 
+#### Installing Server Dependencies
 From within the `server` directory:
 
 ```sh
