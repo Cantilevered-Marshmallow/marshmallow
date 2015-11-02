@@ -7,7 +7,7 @@ module.exports = {
   authFacebook: function (req, res, next) {
     var user = req.body;
     if (!(user.oauthToken && user.facebookId)){
-      res.status(400).send('Error: empty request body.');
+      res.status(401).send('Error: empty request body.');
     }
     request('https://graph.facebook.com/me?access_token=' + user.oauthToken,
       function (err, _, body) {
@@ -15,7 +15,7 @@ module.exports = {
         if (body.id === user.facebookId){
           next();
         } else {
-          res.status(400).send('Error: invalid Facebook access token');
+          res.status(401).send('Error: invalid Facebook access token');
         }
       });
   },
@@ -52,7 +52,7 @@ module.exports = {
       })
       .catch(function (err) {
         if (err) {
-          res.status(400).send('User does not exist');
+          res.status(401).send('User does not exist');
         }
       });
   },
@@ -60,7 +60,7 @@ module.exports = {
   authenticate: function (req, res, next) {
     jwt.verify(req.get('token'), process.env.JWT_SECRET, function (err, user) {
       if (err){
-        res.status(400).send('Unauthorized use of endpoint. Please signup or login.');
+        res.status(401).send('Unauthorized use of endpoint. Please signup or login.');
       } else {
         req.user = user;
         next();
