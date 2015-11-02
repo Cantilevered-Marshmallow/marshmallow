@@ -53,6 +53,8 @@
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
     [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
     [self.clearAttachmentButton addTarget:self action:@selector(clearAttachment:) forControlEvents:UIControlEventTouchUpInside];
+    self.trendsButton.target = self;
+    self.trendsButton.action = @selector(trendsClicked:);
     
     // Set flag for detecting if we just opened the view
     self.firstLoad = YES;
@@ -351,6 +353,12 @@
             }];
         }
     }
+}
+
+- (void)trendsClicked:(id)sender {
+    CMTrendsPopup *pop = [[CMTrendsPopup alloc] init];
+    
+    [pop show];
 }
 
 #pragma mark - Handle attachments
