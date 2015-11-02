@@ -16,6 +16,20 @@
     if (self) {
         self.type = MMPopupTypeAlert;
         
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
+            
+            [request requestWithHttpVerb:@"GET" url:@"/trends" data:@{} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.trends = [NSArray arrayWithArray:response[@"links"]];
+                        
+                        [self.trendsTable reloadData];
+                    });
+                }
+            }];
+        });
+        
         self.backgroundColor = [UIColor whiteColor];
         
         double width = [UIScreen mainScreen].bounds.size.width - 50;
@@ -44,6 +58,11 @@
         [self.btnConfirm setTitleColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:255/255.0] forState:UIControlStateNormal];
         
         self.trendsTable = [[UITableView alloc] init];
+        self.trendsTable.dataSource = self;
+        self.trendsTable.delegate = self;
+        
+        [self.trendsTable registerClass:[CMTrendCell class] forCellReuseIdentifier:@"trendCell"];
+        
         [self addSubview:self.trendsTable];
         [self.trendsTable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake([UIScreen mainScreen].bounds.size.width - 50, 400));
@@ -52,6 +71,20 @@
     }
     
     return self;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    CMTrendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trendCell"];
+    NSDictionary *trend = self.trends[indexPath.row];
+    
+    [cell.imageView hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]]];
+    cell.title.text = trend[@"title"];
+    
+    return cell;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.trends.count;
 }
 
 - (void)actionHide:(id)sender {

@@ -12,6 +12,7 @@
 		CA05B40F1BD95F64002FD8D6 /* CreateChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */; settings = {ASSET_TAGS = (); }; };
 		CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */; settings = {ASSET_TAGS = (); }; };
 		CA58035C1BE7E7AB004697C2 /* CMTrendsPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58035B1BE7E7AB004697C2 /* CMTrendsPopup.m */; settings = {ASSET_TAGS = (); }; };
+		CA58035F1BE7F2D8004697C2 /* CMTrendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58035E1BE7F2D8004697C2 /* CMTrendCell.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF1101BD861DB0025FC6C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1021BD861DB0025FC6C /* User.m */; settings = {ASSET_TAGS = (); }; };
 		CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1041BD861DB0025FC6C /* Chats+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
@@ -78,6 +79,8 @@
 		CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequestTests.m; sourceTree = "<group>"; };
 		CA58035A1BE7E7AB004697C2 /* CMTrendsPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTrendsPopup.h; sourceTree = "<group>"; };
 		CA58035B1BE7E7AB004697C2 /* CMTrendsPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTrendsPopup.m; sourceTree = "<group>"; };
+		CA58035D1BE7F2D8004697C2 /* CMTrendCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTrendCell.h; sourceTree = "<group>"; };
+		CA58035E1BE7F2D8004697C2 /* CMTrendCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTrendCell.m; sourceTree = "<group>"; };
 		CA6AF0FF1BD861DB0025FC6C /* User+CoreDataProperties.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "User+CoreDataProperties.h"; sourceTree = "<group>"; };
 		CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "User+CoreDataProperties.m"; sourceTree = "<group>"; };
 		CA6AF1011BD861DB0025FC6C /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
@@ -302,6 +305,8 @@
 				CA94E3E71BE3DBCB00EF4EAE /* CMImagePopup.m */,
 				CA58035A1BE7E7AB004697C2 /* CMTrendsPopup.h */,
 				CA58035B1BE7E7AB004697C2 /* CMTrendsPopup.m */,
+				CA58035D1BE7F2D8004697C2 /* CMTrendCell.h */,
+				CA58035E1BE7F2D8004697C2 /* CMTrendCell.m */,
 			);
 			path = Marshmallow;
 			sourceTree = "<group>";
@@ -627,6 +632,7 @@
 				CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */,
 				CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */,
 				CAD70F341BD9D34600122F7A /* UIColor+ColorFromHexString.m in Sources */,
+				CA58035F1BE7F2D8004697C2 /* CMTrendCell.m in Sources */,
 				CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */,
 				CA94E3D81BE19C0100EF4EAE /* CMYoutubeSearch.m in Sources */,
 				CAAECA431BE42DEA009D430A /* CMFormattedTextView.m in Sources */,

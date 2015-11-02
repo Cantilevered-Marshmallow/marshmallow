@@ -10,13 +10,23 @@
 #import "MMPopupDefine.h"
 #import "MMPopupCategory.h"
 #import <Masonry/Masonry.h>
+#import <Haneke/Haneke.h>
 
-@interface CMTrendsPopup : MMPopupView
+#import "CMNetworkRequest.h"
+#import "CMTrendCell.h"
+
+#import "User.h"
+
+@interface CMTrendsPopup : MMPopupView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIButton *btnCancel;
 @property (nonatomic, strong) UIButton *btnConfirm;
 
 @property (nonatomic, strong) UITableView *trendsTable;
+
+@property (nonatomic, strong) NSArray *trends;
+
+@property (nonatomic, strong) User *user;
 
 - (void)actionHide:(id)sender;
 - (void)trendSelected:(id)sender;
