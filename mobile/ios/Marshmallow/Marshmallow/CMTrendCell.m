@@ -15,9 +15,11 @@
     
     if (self) {
         
-        self.thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 100, 50)];
+        self.thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(10, 10, 130, 150)];
+        self.thumbnail.contentMode = UIViewContentModeScaleAspectFit;
         
-        self.trendTitle = [[UILabel alloc] initWithFrame:CGRectMake(120, 30, 100, 20)];
+        self.trendTitle = [[UILabel alloc] initWithFrame:CGRectMake(150, 55, 170, 60)];
+        self.trendTitle.numberOfLines = 0;
         self.trendTitle.font = [UIFont fontWithName:self.trendTitle.font.fontName size:20];
         
         [self.contentView addSubview:self.thumbnail];
