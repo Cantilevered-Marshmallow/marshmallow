@@ -3,6 +3,8 @@ var env = require('gulp-env');
 var mocha = require('gulp-mocha');
 var jshint = require('gulp-jshint');
 var nodemon = require('gulp-nodemon');
+var istanbul = require('gulp-istanbul');
+
 var dbCredentials;
 if (process.env.TRAVIS) {
   dbCredentials = process.env;
@@ -39,7 +41,7 @@ gulp.task('set-env', function () {
 });
 
 gulp.task('user-test', function () {
-  return gulp.src(['spec/userControllerSpec.js','spec/authSpec.js'], {read: false})
+  return gulp.src(['spec/userControllerSpec.js','spec/authSpec.js','spec/userModelSpec.js'], {read: false})
              .pipe(mocha({reporter: 'spec'}));
 });
 
@@ -48,19 +50,23 @@ gulp.task('chat-test', function () {
              .pipe(mocha({reporter: 'spec'}));
 });
 
+gulp.task('pre-test', ['db:drop', 'db:create'], function () {
+  return gulp.src(['*/**/*.js', '*.js', '!spec/**/*', '!node_modules/**/*', '!coverage/**/*', '!gulpfile.js'])
+    .pipe(istanbul())
+    .pipe(istanbul.hookRequire());
+});
+
+gulp.task('test', ['pre-test', 'set-env'], function () {
+  return gulp.src(['spec/chatControllerSpec.js','spec/authSpec.js','spec/userModelSpec.js','spec/chatControllerSpec.js'], {read: false})
+    .pipe(mocha({reporter: 'spec'}))
+    .pipe(istanbul.writeReports())
+    // Enforce a coverage of at least 90%
+    .pipe(istanbul.enforceThresholds({ thresholds: { global: 90 } }));
+});
+
 gulp.task('db:drop', dbTask.drop(dbCredentials.DB));
 
 gulp.task('db:create', dbTask.create(dbCredentials.DB));
-
-// gulp.task('db:drop', function (cb) {
-//   dbTask.drop(dbCredentials.DB);
-//   cb();
-// });
-
-// gulp.task('db:create', ['db:drop'], function (cb) {
-//   dbTask.create(dbCredentials.DB);
-//   cb();
-// });
 
 gulp.task('server-test', function () {
   return gulp.src(['spec/serverSpec.js'], {read: false})
