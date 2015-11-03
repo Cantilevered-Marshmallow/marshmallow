@@ -9,39 +9,40 @@
 /* Begin PBXBuildFile section */
 		47940B7E8F7189086CF25927 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
 		A73E2D89A0532F3CB964A5DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
-		CA05B40F1BD95F64002FD8D6 /* CreateChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */; settings = {ASSET_TAGS = (); }; };
-		CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */; settings = {ASSET_TAGS = (); }; };
-		CA58035C1BE7E7AB004697C2 /* CMTrendsPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58035B1BE7E7AB004697C2 /* CMTrendsPopup.m */; settings = {ASSET_TAGS = (); }; };
-		CA58035F1BE7F2D8004697C2 /* CMTrendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58035E1BE7F2D8004697C2 /* CMTrendCell.m */; settings = {ASSET_TAGS = (); }; };
-		CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		CA6AF1101BD861DB0025FC6C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1021BD861DB0025FC6C /* User.m */; settings = {ASSET_TAGS = (); }; };
-		CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1041BD861DB0025FC6C /* Chats+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		CA6AF1121BD861DB0025FC6C /* Chats.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1061BD861DB0025FC6C /* Chats.m */; settings = {ASSET_TAGS = (); }; };
-		CA6AF1131BD861DB0025FC6C /* Contact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1081BD861DB0025FC6C /* Contact+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		CA6AF1141BD861DB0025FC6C /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10A1BD861DB0025FC6C /* Contact.m */; settings = {ASSET_TAGS = (); }; };
-		CA6AF1151BD861DB0025FC6C /* Message+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */; settings = {ASSET_TAGS = (); }; };
-		CA6AF1161BD861DB0025FC6C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10E1BD861DB0025FC6C /* Message.m */; settings = {ASSET_TAGS = (); }; };
-		CA8A590E1BE02EDA0013D363 /* CMSearchPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A590D1BE02EDA0013D363 /* CMSearchPopup.m */; settings = {ASSET_TAGS = (); }; };
-		CA8A59111BE0415D0013D363 /* CMGImageSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A59101BE0415D0013D363 /* CMGImageSearch.m */; settings = {ASSET_TAGS = (); }; };
-		CA8A59131BE04B6F0013D363 /* GoogleImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA8A59121BE04B6F0013D363 /* GoogleImageCollectionCell.xib */; settings = {ASSET_TAGS = (); }; };
-		CA8A591B1BE04D500013D363 /* CMGImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A591A1BE04D500013D363 /* CMGImageCell.m */; settings = {ASSET_TAGS = (); }; };
-		CA94E3D51BE180F800EF4EAE /* CMGImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3D41BE180F800EF4EAE /* CMGImageMessageCell.m */; settings = {ASSET_TAGS = (); }; };
-		CA94E3D81BE19C0100EF4EAE /* CMYoutubeSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3D71BE19C0100EF4EAE /* CMYoutubeSearch.m */; settings = {ASSET_TAGS = (); }; };
-		CA94E3DA1BE1A7A100EF4EAE /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA94E3D91BE1A7A100EF4EAE /* keys.plist */; settings = {ASSET_TAGS = (); }; };
-		CA94E3DC1BE1A7B000EF4EAE /* keys.example.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA94E3DB1BE1A7B000EF4EAE /* keys.example.plist */; settings = {ASSET_TAGS = (); }; };
-		CA94E3DF1BE1B39C00EF4EAE /* CMYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3DE1BE1B39C00EF4EAE /* CMYoutubeCell.m */; settings = {ASSET_TAGS = (); }; };
-		CA94E3E21BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3E11BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m */; settings = {ASSET_TAGS = (); }; };
-		CA94E3E81BE3DBCB00EF4EAE /* CMImagePopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3E71BE3DBCB00EF4EAE /* CMImagePopup.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; settings = {ASSET_TAGS = (); }; };
-		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		CAAECA431BE42DEA009D430A /* CMFormattedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAECA421BE42DEA009D430A /* CMFormattedTextView.m */; settings = {ASSET_TAGS = (); }; };
-		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; settings = {ASSET_TAGS = (); }; };
-		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; settings = {ASSET_TAGS = (); }; };
-		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; settings = {ASSET_TAGS = (); }; };
-		CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */; settings = {ASSET_TAGS = (); }; };
-		CAD3A43E1BDAFA8600B3621E /* CMMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD3A43D1BDAFA8600B3621E /* CMMessageCell.m */; settings = {ASSET_TAGS = (); }; };
-		CAD70F341BD9D34600122F7A /* UIColor+ColorFromHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD70F331BD9D34600122F7A /* UIColor+ColorFromHexString.m */; settings = {ASSET_TAGS = (); }; };
+		CA05B40F1BD95F64002FD8D6 /* CreateChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */; };
+		CA12389C1BE9475700AF3BD5 /* CMTrendMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA12389B1BE9475700AF3BD5 /* CMTrendMessageCell.m */; };
+		CA1D29E21BD1690C00A6D2D5 /* CMNetworkRequestTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */; };
+		CA58035C1BE7E7AB004697C2 /* CMTrendsPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58035B1BE7E7AB004697C2 /* CMTrendsPopup.m */; };
+		CA58035F1BE7F2D8004697C2 /* CMTrendCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA58035E1BE7F2D8004697C2 /* CMTrendCell.m */; };
+		CA6AF10F1BD861DB0025FC6C /* User+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1001BD861DB0025FC6C /* User+CoreDataProperties.m */; };
+		CA6AF1101BD861DB0025FC6C /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1021BD861DB0025FC6C /* User.m */; };
+		CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1041BD861DB0025FC6C /* Chats+CoreDataProperties.m */; };
+		CA6AF1121BD861DB0025FC6C /* Chats.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1061BD861DB0025FC6C /* Chats.m */; };
+		CA6AF1131BD861DB0025FC6C /* Contact+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF1081BD861DB0025FC6C /* Contact+CoreDataProperties.m */; };
+		CA6AF1141BD861DB0025FC6C /* Contact.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10A1BD861DB0025FC6C /* Contact.m */; };
+		CA6AF1151BD861DB0025FC6C /* Message+CoreDataProperties.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10C1BD861DB0025FC6C /* Message+CoreDataProperties.m */; };
+		CA6AF1161BD861DB0025FC6C /* Message.m in Sources */ = {isa = PBXBuildFile; fileRef = CA6AF10E1BD861DB0025FC6C /* Message.m */; };
+		CA8A590E1BE02EDA0013D363 /* CMSearchPopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A590D1BE02EDA0013D363 /* CMSearchPopup.m */; };
+		CA8A59111BE0415D0013D363 /* CMGImageSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A59101BE0415D0013D363 /* CMGImageSearch.m */; };
+		CA8A59131BE04B6F0013D363 /* GoogleImageCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = CA8A59121BE04B6F0013D363 /* GoogleImageCollectionCell.xib */; };
+		CA8A591B1BE04D500013D363 /* CMGImageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA8A591A1BE04D500013D363 /* CMGImageCell.m */; };
+		CA94E3D51BE180F800EF4EAE /* CMGImageMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3D41BE180F800EF4EAE /* CMGImageMessageCell.m */; };
+		CA94E3D81BE19C0100EF4EAE /* CMYoutubeSearch.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3D71BE19C0100EF4EAE /* CMYoutubeSearch.m */; };
+		CA94E3DA1BE1A7A100EF4EAE /* keys.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA94E3D91BE1A7A100EF4EAE /* keys.plist */; };
+		CA94E3DC1BE1A7B000EF4EAE /* keys.example.plist in Resources */ = {isa = PBXBuildFile; fileRef = CA94E3DB1BE1A7B000EF4EAE /* keys.example.plist */; };
+		CA94E3DF1BE1B39C00EF4EAE /* CMYoutubeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3DE1BE1B39C00EF4EAE /* CMYoutubeCell.m */; };
+		CA94E3E21BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3E11BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m */; };
+		CA94E3E81BE3DBCB00EF4EAE /* CMImagePopup.m in Sources */ = {isa = PBXBuildFile; fileRef = CA94E3E71BE3DBCB00EF4EAE /* CMImagePopup.m */; };
+		CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2301BD5BE9E009844AC /* HDNotificationView.m */; };
+		CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F2371BD6BF0C009844AC /* IconTabBarController.m */; };
+		CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAA8F24E1BD72BEA009844AC /* ContactsTableViewController.m */; };
+		CAAECA431BE42DEA009D430A /* CMFormattedTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = CAAECA421BE42DEA009D430A /* CMFormattedTextView.m */; };
+		CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352261BD1C1DC00AEF3D3 /* ChatsTableViewController.m */; };
+		CAC3522A1BD1EAA000AEF3D3 /* ChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAC352291BD1EAA000AEF3D3 /* ChatViewController.m */; };
+		CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = CACC2FFB1BD165B8006D37F9 /* CMNetworkRequest.m */; };
+		CACEED801BD55D220086CBCF /* models.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = CACEED7E1BD55D220086CBCF /* models.xcdatamodeld */; };
+		CAD3A43E1BDAFA8600B3621E /* CMMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD3A43D1BDAFA8600B3621E /* CMMessageCell.m */; };
+		CAD70F341BD9D34600122F7A /* UIColor+ColorFromHexString.m in Sources */ = {isa = PBXBuildFile; fileRef = CAD70F331BD9D34600122F7A /* UIColor+ColorFromHexString.m */; };
 		CAFCBF751BD0279C00C9E28B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF741BD0279C00C9E28B /* main.m */; };
 		CAFCBF781BD0279C00C9E28B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF771BD0279C00C9E28B /* AppDelegate.m */; };
 		CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF7A1BD0279C00C9E28B /* WelcomeViewController.m */; };
@@ -76,6 +77,8 @@
 		90F487F126BFF4BF85174A4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CA05B40D1BD95F64002FD8D6 /* CreateChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateChatViewController.h; sourceTree = "<group>"; };
 		CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateChatViewController.m; sourceTree = "<group>"; };
+		CA12389A1BE9475700AF3BD5 /* CMTrendMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTrendMessageCell.h; sourceTree = "<group>"; };
+		CA12389B1BE9475700AF3BD5 /* CMTrendMessageCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTrendMessageCell.m; sourceTree = "<group>"; };
 		CA1D29E11BD1690C00A6D2D5 /* CMNetworkRequestTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMNetworkRequestTests.m; sourceTree = "<group>"; };
 		CA58035A1BE7E7AB004697C2 /* CMTrendsPopup.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTrendsPopup.h; sourceTree = "<group>"; };
 		CA58035B1BE7E7AB004697C2 /* CMTrendsPopup.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMTrendsPopup.m; sourceTree = "<group>"; };
@@ -307,6 +310,8 @@
 				CA58035B1BE7E7AB004697C2 /* CMTrendsPopup.m */,
 				CA58035D1BE7F2D8004697C2 /* CMTrendCell.h */,
 				CA58035E1BE7F2D8004697C2 /* CMTrendCell.m */,
+				CA12389A1BE9475700AF3BD5 /* CMTrendMessageCell.h */,
+				CA12389B1BE9475700AF3BD5 /* CMTrendMessageCell.m */,
 			);
 			path = Marshmallow;
 			sourceTree = "<group>";
@@ -619,6 +624,7 @@
 				CAA8F2381BD6BF0C009844AC /* IconTabBarController.m in Sources */,
 				CA6AF1121BD861DB0025FC6C /* Chats.m in Sources */,
 				CA94E3E21BE2A8EB00EF4EAE /* CMYoutubeVideoMessageCell.m in Sources */,
+				CA12389C1BE9475700AF3BD5 /* CMTrendMessageCell.m in Sources */,
 				CACC2FFC1BD165B8006D37F9 /* CMNetworkRequest.m in Sources */,
 				CAA8F24F1BD72BEA009844AC /* ContactsTableViewController.m in Sources */,
 				CAFCBF7B1BD0279C00C9E28B /* WelcomeViewController.m in Sources */,

@@ -48,6 +48,7 @@
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
     [self.tableView registerClass:[CMGImageMessageCell class] forCellReuseIdentifier:@"gImageMessageCell"];
     [self.tableView registerClass:[CMYoutubeVideoMessageCell class] forCellReuseIdentifier:@"youtubevideoMessageCell"];
+    [self.tableView registerClass:[CMTrendMessageCell class] forCellReuseIdentifier:@"trendMessageCell"];
     
     // Bind the message control buttons
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
@@ -138,7 +139,7 @@
         return cell;
         
     // Youtube video message cell
-    } else {
+    } else if (![message.youtubeVideoId isEqualToString:@""]) {
         CMYoutubeVideoMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"youtubevideoMessageCell" forIndexPath:indexPath];
         
         [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
@@ -186,6 +187,34 @@
                      
                  }];
         });
+        
+        return cell;
+    } else {
+        CMTrendMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trendMessagecell"];
+        
+        [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
+        
+        if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
+            Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
+            cell.userName.text = contact.name;
+        } else {
+            cell.userName.text = @"From You";
+        }
+        cell.timestamp.text = [message.timestamp timeAgoSinceNow];
+        
+        cell.messageBody.text = [ZWEmoji emojify:message.body];
+        
+        CGFloat fixedWidth = cell.messageBody.frame.size.width;
+        CGSize newSize = [cell.messageBody sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+        CGRect newFrame = cell.messageBody.frame;
+        newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+        cell.messageBody.frame = newFrame;
+        
+        NSDictionary *trend = [message fetchTrend];
+        
+        cell.trendTitle.text = trend[@"title"];
+        [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]]];
+        cell.url = trend[@"url"];
         
         return cell;
     }
@@ -251,6 +280,13 @@
                         } else {
                             message.googleImageId = @"";
                         }
+                        
+                        if (fetchedMessage[@"redditAttachment"] != (id)[NSNull null]) {
+                            [message storeTrend:fetchedMessage[@"redditAttachment"]];
+                        } else {
+                            [message storeTrend:@{}];
+                        }
+                        
                         message.chatsId = [fetchedMessage[@"chatId"] stringValue];
                         message.userId = fetchedMessage[@"userFacebookId"];
                         message.timestamp = [NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]];

@@ -17,6 +17,9 @@ NS_ASSUME_NONNULL_BEGIN
 
 // Insert code here to declare functionality of your managed object subclass
 
+- (void)storeTrend:(NSDictionary *)trend;
+- (NSDictionary *)fetchTrend;
+
 @end
 
 NS_ASSUME_NONNULL_END

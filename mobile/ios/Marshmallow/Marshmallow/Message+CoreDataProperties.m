@@ -17,6 +17,7 @@
 @dynamic chatsId;
 @dynamic googleImageId;
 @dynamic timestamp;
+@dynamic trend;
 @dynamic userId;
 @dynamic youtubeVideoId;
 @dynamic chats;

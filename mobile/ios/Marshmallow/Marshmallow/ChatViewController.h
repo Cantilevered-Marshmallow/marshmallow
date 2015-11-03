@@ -27,6 +27,7 @@
 #import "CMMessageCell.h"
 #import "CMGImageMessageCell.h"
 #import "CMYoutubeVideoMessageCell.h"
+#import "CMTrendMessageCell.h"
 
 #import "CMGImageSearch.h"
 #import "CMYoutubeSearch.h"
