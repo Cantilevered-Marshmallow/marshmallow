@@ -357,6 +357,7 @@
 
 - (void)trendsClicked:(id)sender {
     CMTrendsPopup *pop = [[CMTrendsPopup alloc] initWithJwt:self.user.jwt];
+    pop.vc = self;
     
     [pop show];
 }

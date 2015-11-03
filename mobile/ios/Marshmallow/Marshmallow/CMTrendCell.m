@@ -24,9 +24,20 @@
         
         [self.contentView addSubview:self.thumbnail];
         [self.contentView addSubview:self.trendTitle];
+        
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
+        recognizer.numberOfTapsRequired = 2;
+        
+        [self addGestureRecognizer:recognizer];
     }
     
     return self;
+}
+
+- (void)cellTapped:(UITapGestureRecognizer *)sender {
+    SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:self.url] entersReaderIfAvailable:NO];
+    safariViewController.delegate = self.delegate;
+    [self.delegate showViewController:safariViewController];
 }
 
 @end

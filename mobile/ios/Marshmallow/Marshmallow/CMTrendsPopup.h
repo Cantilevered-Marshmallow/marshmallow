@@ -15,7 +15,9 @@
 #import "CMNetworkRequest.h"
 #import "CMTrendCell.h"
 
-@interface CMTrendsPopup : MMPopupView <UITableViewDataSource, UITableViewDelegate>
+@import SafariServices;
+
+@interface CMTrendsPopup : MMPopupView <CMOpenUrl, SFSafariViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIButton *btnCancel;
 @property (nonatomic, strong) UIButton *btnConfirm;
@@ -23,6 +25,8 @@
 @property (nonatomic, strong) UITableView *trendsTable;
 
 @property (nonatomic, strong) NSArray *trends;
+
+@property (nonatomic, strong) UIViewController *vc;
 
 - (CMTrendsPopup *)initWithJwt:(NSString *)jwt;
 

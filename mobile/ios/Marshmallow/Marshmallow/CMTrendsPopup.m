@@ -91,6 +91,10 @@
     }
     cell.trendTitle.text = trend[@"title"];
     
+    cell.url = trend[@"url"];
+    
+    cell.delegate = self;
+    
     return cell;
 }
 
@@ -108,6 +112,15 @@
 
 - (void)trendSelected:(id)sender {
     
+}
+
+- (void)showViewController:(UIViewController *)controller {
+    [super hide];
+    [self.vc presentViewController:controller animated:YES completion:nil];
+}
+
+- (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
+    [super show];
 }
 
 @end
