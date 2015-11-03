@@ -14,7 +14,7 @@
 
 @required
 
-- (void)showViewController:(UIViewController *)controller;
+- (void)showViewController:(SFSafariViewController *)controller;
 
 @end
 

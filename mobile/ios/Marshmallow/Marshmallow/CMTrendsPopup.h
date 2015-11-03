@@ -18,6 +18,16 @@
 
 #import "UIColor+ColorFromHexString.h"
 
+@protocol CMTrendsDelegate
+
+@required
+
+- (void)trendSelected:(NSDictionary *)trend;
+
+- (void)displayTrend:(SFSafariViewController *)safariController;
+
+@end
+
 @import SafariServices;
 
 @interface CMTrendsPopup : MMPopupView <CMOpenUrl, SFSafariViewControllerDelegate, UITableViewDataSource, UITableViewDelegate>
@@ -31,10 +41,14 @@
 
 @property (nonatomic, strong) UIViewController *vc;
 
+@property (nonatomic, strong) UIViewController<CMTrendsDelegate> *delegate;
+
 @property (nonatomic, strong) CMTrendCell *selectedTrend;
 
 - (CMTrendsPopup *)initWithJwt:(NSString *)jwt;
 
 - (void)actionHide:(id)sender;
+
+- (void)trendSelected:(id)sender;
 
 @end

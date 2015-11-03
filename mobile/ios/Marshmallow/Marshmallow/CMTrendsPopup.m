@@ -130,13 +130,19 @@
     [super hide];
 }
 
-- (void)showViewController:(UIViewController *)controller {
+- (void)showViewController:(SFSafariViewController *)controller {
     [super hide];
-    [self.vc presentViewController:controller animated:YES completion:nil];
+    [self.delegate displayTrend:controller];
 }
 
 - (void)safariViewControllerDidFinish:(SFSafariViewController *)controller {
     [super show];
+}
+
+- (void)trendSelected:(id)sender {
+    [self.delegate trendSelected:self.trends[[self.trendsTable indexPathForCell:self.selectedTrend].row]];
+    
+    [super hide];
 }
 
 @end
