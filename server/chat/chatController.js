@@ -72,8 +72,8 @@ module.exports = {
     return User.findById(facebookId)
       .then(function (user) {
         return user.getChats({include: [
-            {model: Message, as: 'messages', where: {createdAt: {$gt: timestamp} } },
-            {model: RedditAttachment, as: 'redditAttachment'}
+            {model: Message, as: 'messages', where: {createdAt: {$gt: timestamp} },
+              include: [{model: RedditAttachment, as: 'redditAttachment'}] }
           ]});
       }).then(function (chats) {
         var messages = [];
