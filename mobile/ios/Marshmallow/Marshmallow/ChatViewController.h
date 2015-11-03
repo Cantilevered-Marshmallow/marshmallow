@@ -35,7 +35,7 @@
 
 #import "CMFormattedTextView.h"
 
-@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, CMTrendsDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CMFormattedTextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
@@ -58,6 +58,8 @@
 @property (strong, nonatomic) CMGImageResult *gImageResult;
 
 @property (strong, nonatomic) CMYoutubeSearchResult *videoResult;
+
+@property (strong, nonatomic) NSDictionary *trendResult;
 
 @property (nonatomic) BOOL firstLoad;
 

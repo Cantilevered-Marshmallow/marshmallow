@@ -39,8 +39,6 @@
 
 @property (nonatomic, strong) NSArray *trends;
 
-@property (nonatomic, strong) UIViewController *vc;
-
 @property (nonatomic, strong) UIViewController<CMTrendsDelegate> *delegate;
 
 @property (nonatomic, strong) CMTrendCell *selectedTrend;

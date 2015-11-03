@@ -357,7 +357,7 @@
 
 - (void)trendsClicked:(id)sender {
     CMTrendsPopup *pop = [[CMTrendsPopup alloc] initWithJwt:self.user.jwt];
-    pop.vc = self;
+    pop.delegate = self;
     
     [pop show];
 }
@@ -396,6 +396,27 @@
     
     // Toggle the attachment action
     [self toggleAttachmentAction];
+}
+
+- (void)trendSelected:(NSDictionary *)trend {
+    // A trend was selected
+    
+    // Set the preview to the thumbnail of the video
+    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+    [iv hnk_setImageFromURL:[NSURL URLWithString:trend[@"url"]]];
+    
+    // Prevent user from interacting with messages table when tapping the preview
+    self.view.subviews[1].userInteractionEnabled = YES;
+    iv.userInteractionEnabled = YES;
+    
+    self.trendResult = trend;
+    
+    // Toggle the attachment action
+    [self toggleAttachmentAction];
+}
+
+- (void)displayTrend:(SFSafariViewController *)safariController {
+    [self presentViewController:safariController animated:YES completion:nil];
 }
 
 #pragma mark - Helpers
