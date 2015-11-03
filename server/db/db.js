@@ -35,7 +35,7 @@ User.belongsToMany(Chat, {through: UserChat });
 Chat.hasMany(Message);
 Message.belongsTo(User);
 Message.belongsTo(Chat);
-Message.hasOne(RedditAttachment);
+Message.belongsTo(RedditAttachment);
 
 sequelize.sync();
 
