@@ -89,7 +89,7 @@
     Message *message = self.messages[indexPath.row];
     
     // Default message cell
-    if ([message.googleImageId isEqualToString:@""] && [message.youtubeVideoId isEqualToString:@""]) {
+    if ([message.googleImageId isEqualToString:@""] && [message.youtubeVideoId isEqualToString:@""] && [message fetchTrend].count == 0) {
         CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
         
         [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
@@ -190,7 +190,7 @@
         
         return cell;
     } else {
-        CMTrendMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trendMessagecell"];
+        CMTrendMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trendMessageCell"];
         
         [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
         
@@ -211,6 +211,7 @@
         cell.messageBody.frame = newFrame;
         
         NSDictionary *trend = [message fetchTrend];
+        NSLog(@"Trend: %@", trend);
         
         cell.trendTitle.text = trend[@"title"];
         [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]]];
@@ -237,6 +238,8 @@
             return cellDefaultHeight + tv.contentSize.height + 240;
         } else if (![message.youtubeVideoId isEqualToString:@""]) {
             return cellDefaultHeight + tv.contentSize.height + 150;
+        } else if ([message fetchTrend].count > 0) {
+            return cellDefaultHeight + tv.contentSize.height + 160;
         } else {
             return cellDefaultHeight + tv.contentSize.height;
         }
@@ -247,6 +250,8 @@
             return cellDefaultHeight + 240;
         } else if (![message.youtubeVideoId isEqualToString:@""]) {
             return cellDefaultHeight + 150;
+        }  else if ([message fetchTrend].count > 0) {
+            return cellDefaultHeight + 160;
         } else {
             return cellDefaultHeight;
         }
