@@ -110,10 +110,6 @@
     [super hide];
 }
 
-- (void)trendSelected:(id)sender {
-    
-}
-
 - (void)showViewController:(UIViewController *)controller {
     [super hide];
     [self.vc presentViewController:controller animated:YES completion:nil];

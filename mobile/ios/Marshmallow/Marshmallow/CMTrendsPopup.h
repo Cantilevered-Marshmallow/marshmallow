@@ -31,6 +31,5 @@
 - (CMTrendsPopup *)initWithJwt:(NSString *)jwt;
 
 - (void)actionHide:(id)sender;
-- (void)trendSelected:(id)sender;
 
 @end
