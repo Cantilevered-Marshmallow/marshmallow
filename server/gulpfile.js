@@ -40,16 +40,6 @@ gulp.task('set-env', function () {
   }
 });
 
-gulp.task('user-test', function () {
-  return gulp.src(['spec/userControllerSpec.js','spec/authSpec.js','spec/userModelSpec.js'], {read: false})
-             .pipe(mocha({reporter: 'spec'}));
-});
-
-gulp.task('chat-test', function () {
-  return gulp.src(['spec/chatControllerSpec.js'], {read: false})
-             .pipe(mocha({reporter: 'spec'}));
-});
-
 gulp.task('pre-test', ['db:drop', 'db:create'], function () {
   return gulp.src(['*/**/*.js', '*.js', '!spec/**/*', '!node_modules/**/*', '!coverage/**/*', '!gulpfile.js'])
     .pipe(istanbul())
@@ -57,7 +47,7 @@ gulp.task('pre-test', ['db:drop', 'db:create'], function () {
 });
 
 gulp.task('test', ['pre-test', 'set-env'], function () {
-  return gulp.src(['spec/chatControllerSpec.js','spec/authSpec.js','spec/userModelSpec.js','spec/chatControllerSpec.js'], {read: false})
+  return gulp.src(['spec/*.js','!spec/serverSpec.js'], {read: false})
     .pipe(mocha({reporter: 'spec'}))
     .pipe(istanbul.writeReports())
     // Enforce a coverage of at least 90%
@@ -75,8 +65,6 @@ gulp.task('server-test', function () {
 
 
 gulp.task('server-integration-test', ['db:drop', 'db:create', 'set-env', 'server-test']);
-
-gulp.task('local-test', ['set-env', 'user-test', 'chat-test']);
 
 gulp.task('start', ['set-env', 'nodemon']);
 
