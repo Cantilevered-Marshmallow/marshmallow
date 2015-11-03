@@ -64,8 +64,6 @@
     self = [self init];
     
     if (self) {
-        NSLog(@"%@", jwt);
-        
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
             
