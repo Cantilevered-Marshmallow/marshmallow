@@ -43,7 +43,7 @@ module.exports = {
   getMessages: function (chatId) {
     return Chat.findOne({
       where: {id: parseInt(chatId)},
-      include: [{model: Message, as: 'messages', 
+      include: [{model: Message, as: 'messages',
                 include: [{model: User, as: 'user'},
                           {model: RedditAttachment, as: 'redditAttachment'}]}]
     }).then(function (chat) {
@@ -57,7 +57,7 @@ module.exports = {
         if (message.hasOwnProperty('redditAttachment')) {
           return messageInstance.createRedditAttachment(message.redditAttachment);
         } else {
-          return messageInstance
+          return messageInstance;
         }
       })
       .then(function (messageInstance) {
