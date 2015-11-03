@@ -211,11 +211,12 @@
         cell.messageBody.frame = newFrame;
         
         NSDictionary *trend = [message fetchTrend];
-        NSLog(@"Trend: %@", trend);
         
         cell.trendTitle.text = trend[@"title"];
         [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]]];
         cell.url = trend[@"url"];
+        
+        cell.delegate = self;
         
         return cell;
     }

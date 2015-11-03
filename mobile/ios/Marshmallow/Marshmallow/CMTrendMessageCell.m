@@ -24,10 +24,10 @@
         [self.contentView addSubview:self.thumbnail];
         [self.contentView addSubview:self.trendTitle];
         
-        UITapGestureRecognizer *doubleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
-        doubleRecognizer.numberOfTapsRequired = 2;
+        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
+        recognizer.numberOfTapsRequired = 1;
         
-        [self addGestureRecognizer:doubleRecognizer];
+        [self addGestureRecognizer:recognizer];
     }
     
     return self;
