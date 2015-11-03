@@ -403,7 +403,7 @@
     
     // Set the preview to the thumbnail of the video
     UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
-    [iv hnk_setImageFromURL:[NSURL URLWithString:trend[@"url"]]];
+    [iv hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]]];
     
     // Prevent user from interacting with messages table when tapping the preview
     self.view.subviews[1].userInteractionEnabled = YES;
