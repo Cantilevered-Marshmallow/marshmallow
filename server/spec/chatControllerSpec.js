@@ -149,18 +149,33 @@ describe('Chat Controller', function () {
   describe('Post messages', function () {
     var facebookId = '1234';
     var chatId = '5678';
-    var message = {
+    var messageA = {
       text: 'hello world'
     };
+    var messageB = {
+      text: 'test number two',
+      redditAttachment: {
+        url: 'http://www.google.com',
+        thumbnail: 'http://www.photos.com/image.jpg',
+        title: 'Google Website'
+      }
+    };
+    var setChat = false;
+    var setUser = false;
+    var attached = false;
+    var inputMessage;
+    var messageStub;
 
-    it('should post a message with correct information', function (done) {
-      var setChat = false;
-      var setUser = false;
-      var inputMessage;
-
-      var messageStub = sinon.stub(Message, 'create', function (messageObj) {
+    beforeEach(function (done) {
+      messageStub = sinon.stub(Message, 'create', function (messageObj) {
         inputMessage = messageObj;
         return new Promise (function (resolve, reject) {
+          messageObj.createRedditAttachment = function (attachmentObj) {
+            attached = true;
+            return new Promise (function (resolve, reject) {
+              resolve(messageObj);
+            });
+          };
           messageObj.setChat = function (chatId) {
             setChat = true;
             return new Promise (function (resolve, reject) {
@@ -176,12 +191,35 @@ describe('Chat Controller', function () {
           resolve(messageObj);
         });
       });
+      done();
+    });
 
-      chatController.postMessage(chatId, facebookId, message)
+    afterEach(function (done) {
+      setChat = false;
+      setUser = false;
+      attached = false;
+      inputMessage = {};
+      messageStub.restore();
+      done();
+    });
+
+    it('should post a message with correct information', function (done) {
+      chatController.postMessage(chatId, facebookId, messageA)
         .then(function () {
           expect(setChat).to.equal(true);
           expect(setUser).to.equal(true);
-          expect(message).to.deep.equal(inputMessage);
+          expect(messageA).to.deep.equal(inputMessage);
+          done();
+        });
+    });
+
+    it('should post a message with a reddit attachment', function (done) {
+      chatController.postMessage(chatId, facebookId, messageB)
+        .then(function () {
+          expect(setChat).to.equal(true);
+          expect(setUser).to.equal(true);
+          expect(attached).to.equal(true);
+          expect(messageB).to.deep.equal(inputMessage);
           done();
         });
     });
