@@ -34,7 +34,7 @@ describe('Auth Service', function () {
       auth.authFacebook(req, res, next);
     });
 
-    it('should response to an invalid request with status code 400', function (done) {
+    it('should response to an invalid request with status code 401', function (done) {
       var req = {
         body: falseUserA
       };
@@ -45,7 +45,7 @@ describe('Auth Service', function () {
           return this;
         },
         send: function () {
-          expect(statusCode).to.equal(400);
+          expect(statusCode).to.equal(401);
           done();
         }
       };
@@ -56,7 +56,7 @@ describe('Auth Service', function () {
       auth.authFacebook(req, res, next);
     });
 
-    it('should response to an empty request body with status code 400', function (done) {
+    it('should response to an empty request body with status code 401', function (done) {
       var req = {
         body: {}
       };
@@ -67,7 +67,7 @@ describe('Auth Service', function () {
           return this;
         },
         send: function () {
-          expect(statusCode).to.equal(400);
+          expect(statusCode).to.equal(401);
           done();
         }
       };
@@ -217,7 +217,7 @@ describe('Auth Service', function () {
       };
       var next = sinon.spy();
       res.send = function () {
-        expect(res.statusCode).to.equal(400);
+        expect(res.statusCode).to.equal(401);
         expect(next.called).to.equal(false);
         done();
       };

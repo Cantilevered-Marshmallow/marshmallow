@@ -15,7 +15,7 @@ router.post('/userlist', auth.authenticate, function (req, res) {
       res.status(200).send(users);
     })
     .catch(function (err) {
-      res.status(500).send('Error filtering user list: ', err);
+      res.status(500).send('Error filtering user list: ' + err);
     });
 });
 
@@ -28,7 +28,7 @@ router.get('/messages', auth.authenticate, function (req, res) {
       res.status(200).send({messages: messages});
     })
     .catch(function (err) {
-      res.status(500).send('Error getting all messages: ', err);
+      res.status(500).send('Error getting all messages: ' + err);
     });
 });
 
@@ -40,7 +40,7 @@ router.post('/chat', auth.authenticate, function (req, res) {
       res.status(201).send(jsonResponse);
     })
     .catch(function (err) {
-      res.status(500).send('Error creating chat: ', err);
+      res.status(400).send('Error creating chat: ' + err);
     });
 });
 
@@ -51,7 +51,7 @@ router.get('/chat', auth.authenticate, function (req, res) {
       res.status(200).send(jsonResponse);
     })
     .catch(function (err) {
-      res.status(500).send('Error fetching chats: ', err);
+      res.status(500).send('Error fetching chats: ' + err);
     });
 });
 
@@ -61,7 +61,7 @@ router.get('/chat/:id', auth.authenticate, function (req, res) {
       res.status(200).send({ messages: messages });
     })
     .catch(function (err) {
-      res.status(500).send('Error finding the chat room: ', err);
+      res.status(500).send('Error finding the chat room: ' + err);
     });
 });
 
@@ -71,7 +71,7 @@ router.post('/chat/:id', auth.authenticate, function (req, res) {
       res.status(201).send();
     })
     .catch(function (err) {
-      res.status(500).send('Error posting chat message: ', err);
+      res.status(500).send('Error posting chat message: ' + err);
     });
 });
 
@@ -81,7 +81,7 @@ router.get('/trends', auth.authenticate, function (req, res) {
       res.status(200).send({links: links});
     })
     .catch(function (err) {
-      res.status(500).send("Error getting trends: ", err);
+      res.status(500).send("Error getting trends: " + err);
     });
 });
 

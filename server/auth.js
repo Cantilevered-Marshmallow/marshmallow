@@ -7,17 +7,22 @@ module.exports = {
   authFacebook: function (req, res, next) {
     var user = req.body;
     if (!(user.oauthToken && user.facebookId)){
+
       res.status(401).send('Error: empty request body.');
+
+    } else {
+
+      request('https://graph.facebook.com/me?access_token=' + user.oauthToken,
+        function (err, _, body) {
+          body = JSON.parse(body);
+          if (body.id === user.facebookId){
+            next();
+          } else {
+            res.status(401).send('Error: invalid Facebook access token');
+          }
+        });
+
     }
-    request('https://graph.facebook.com/me?access_token=' + user.oauthToken,
-      function (err, _, body) {
-        body = JSON.parse(body);
-        if (body.id === user.facebookId){
-          next();
-        } else {
-          res.status(401).send('Error: invalid Facebook access token');
-        }
-      });
   },
 
   signup: function (req, res) {
