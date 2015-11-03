@@ -9,8 +9,8 @@ var UserA = {
               facebookId: "118724648484592",
               oauthToken: "CAABlq42VOg0BAPDz6Yw5Kc68CMXHSArMiIJfrO2U5czOZC8yFxbdUYfOaXjiX0ZB1TziPpuKjK4AmNboilObJfvijODZAYw6xsabYRB5WBxTfdddm5okDreDDk2nTvMhEZCQqHtbK3snPbyDbSTA9lzpC8g6PMOGDcR4aGEzzVTkDo0uonIzKwZCDpvsjhE2wI9BLNkHaZCPS40PCxZAo9vNjKjWSBUqrMALo5eZBoWZBkgZDZD",
             };
-var falseUserA = { email: 'test@testing.com', facebookId: '118724648484592'};
-var falseUserB = { email: 'test@testing.com'};
+var falseUserA = { email: 'test@testing.com', facebookId: '42424234242', oauthToken: "CAABlq42VOg0BAPDz6Yw5Kc68CMXHSArMiIJfrO2U5czOZC8yFxbdUYfOaXjiX0ZB1TziPpuKjK4AmNboilObJfvijODZAYw6xsabYRB5WBxTfdddm5okDreDDk2nTvMhEZCQqHtbK3snPbyDbSTA9lzpC8g6PMOGDcR4aGEzzVTkDo0uonIzKwZCDpvsjhE2wI9BLNkHaZCPS40PCxZAo9vNjKjWSBUqrMALo5eZBoWZBkgZDZD",};
+var falseUserB = { email: 'test@testing.com', facebookId: '118724648484592'};
 
 describe('Auth Service', function () {
 
@@ -86,6 +86,7 @@ describe('Auth Service', function () {
     var res = {};
     var req = {};
     var userControllerStub;
+    var loginStub;
 
     beforeEach(function (done) {
       res = {
@@ -102,7 +103,28 @@ describe('Auth Service', function () {
 
     afterEach(function (done) {
       userControllerStub.restore();
+      loginStub.restore();
       done();
+    });
+
+    it('should forward already created user to login', function (done) {
+      userControllerStub = sinon.stub(userController, 'registerNewUser', function (newUser) {
+        return new Promise(function (resolve, reject) {
+          newUser.toJSON = function () {
+            return this;
+          };
+          reject(newUser);
+        });
+      });
+
+      loginStub = sinon.stub(auth, 'login', function (req, res) {
+        expect(req.body).to.deep.equal(UserA);
+        done();
+      });
+
+      req.body = UserA;
+
+      auth.signup(req, res);
     });
 
     it('should create a new user, amend session object on req, and send back user data', function (done) {
@@ -173,6 +195,27 @@ describe('Auth Service', function () {
         expect(res.statusCode).to.equal(200);
         expect(data.email).to.equal(UserA.email);
         expect(data.facebookId).to.equal(UserA.facebookId);
+        done();
+      };
+
+      auth.login(req, res);
+    });
+
+    it('should notify users of server/database error with a 500', function (done) {
+
+      userControllerStub = sinon.stub(userController, 'isUser', function (user) {
+        return new Promise(function (resolve, reject) {
+          user.toJSON = function () {
+            return this;
+          };
+          reject('Error: cannot find user');
+        });
+      });
+
+      req.body = UserA;
+
+      res.send = function (data) {
+        expect(res.statusCode).to.equal(500);
         done();
       };
 

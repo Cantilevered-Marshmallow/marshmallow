@@ -37,10 +37,7 @@ module.exports = {
         module.exports._authToken(req, res, user);
       })
       .catch(function (err) {
-        console.log(err);
-        if (err) {
-          module.exports.login(req, res);
-        }
+        module.exports.login(req, res);
       });
   },
 
@@ -56,9 +53,7 @@ module.exports = {
         module.exports._authToken(req, res, user);
       })
       .catch(function (err) {
-        if (err) {
-          res.status(401).send('User does not exist');
-        }
+        res.status(500).send('Error: database error when trying to find user');
       });
   },
 
