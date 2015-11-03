@@ -279,6 +279,43 @@ describe('GET and POST to /chat and /chat:id', function () {
       })
       .expect(200, done);
   });
+
+  it('BradSmith posts a messages that has reddit attachment', function (done) {
+
+    var msg = {text: 'peter check out this reddit post!',
+               redditAttachment: {
+                title: 'sample title',
+                url: 'http://www.someurl.com',
+                thumbnail: 'http://www.thumbnail.com'
+               }
+              };
+
+    agent1
+      .post('/chat/1')
+      .set('token', BradSmith.token)
+      .send(msg)
+      .expect(201, done);
+  });
+
+  it('PeterParker should receive reddit\'s link', function (done) {
+
+    agent2
+      .get('/chat/1')
+      .set('token', PeterParker.token)
+      .expect(function (res) {
+        if (!res.body.hasOwnProperty('messages')) {
+          throw new Error('Failed to retrieve messages for a specific chat room');
+        }
+        if (res.body.messages[0].chatId !== 1) {
+         throw new Error('Wrong chat room');
+        }
+        if (!res.body.messages[0].hasOwnProperty('redditAttachment')) {
+          throw new Error('No reddit attachment received');
+        }
+      })
+      .expect(200, done);
+    
+  });
 });
 
 
