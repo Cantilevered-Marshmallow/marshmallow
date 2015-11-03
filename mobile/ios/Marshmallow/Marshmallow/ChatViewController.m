@@ -335,8 +335,29 @@
             }];
         }
         
+        if (self.trendResult != nil) {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": [ZWEmoji unemojify:self.messageInput.text], @"youtubeVideoId": @"", @"googleImageId": @"", @"redditAttachment": self.trendResult} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+                    iv.image = nil;
+                    self.videoResult = nil;
+                    
+                    self.view.subviews[1].userInteractionEnabled = NO;
+                    iv.userInteractionEnabled = NO;
+                    
+                    [self resetMessageInput];
+                    [self fetchMessages:self];
+                    
+                    BOOL isAttach = !self.attachmentButton.hidden;
+                    if (!isAttach) {
+                        [self toggleAttachmentAction];
+                    }
+                }
+            }];
+        }
+        
         // Default message
-        if (self.gImageResult == nil && self.videoResult == nil) {
+        if (self.gImageResult == nil && self.videoResult == nil && self.trendResult == nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": [ZWEmoji unemojify:self.messageInput.text], @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     NSLog(@"Response");
