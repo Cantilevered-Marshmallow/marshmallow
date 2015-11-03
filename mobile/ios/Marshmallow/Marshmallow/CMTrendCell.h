@@ -11,6 +11,6 @@
 @interface CMTrendCell : UITableViewCell
 
 @property (nonatomic, strong) UIImageView *thumbnail;
-@property (nonatomic, strong) UILabel *title;
+@property (nonatomic, strong) UILabel *trendTitle;
 
 @end

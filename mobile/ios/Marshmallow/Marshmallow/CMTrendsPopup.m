@@ -16,20 +16,6 @@
     if (self) {
         self.type = MMPopupTypeAlert;
         
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
-            
-            [request requestWithHttpVerb:@"GET" url:@"/trends" data:@{} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
-                if (!error) {
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        self.trends = [NSArray arrayWithArray:response[@"links"]];
-                        
-                        [self.trendsTable reloadData];
-                    });
-                }
-            }];
-        });
-        
         self.backgroundColor = [UIColor whiteColor];
         
         double width = [UIScreen mainScreen].bounds.size.width - 50;
@@ -67,24 +53,55 @@
         [self.trendsTable mas_makeConstraints:^(MASConstraintMaker *make) {
             make.size.mas_equalTo(CGSizeMake([UIScreen mainScreen].bounds.size.width - 50, 400));
             make.left.equalTo(self);
+            make.top.mas_equalTo(0);
         }];
     }
     
     return self;
 }
 
+- (CMTrendsPopup *)initWithJwt:(NSString *)jwt {
+    self = [self init];
+    
+    if (self) {
+        NSLog(@"%@", jwt);
+        
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
+            
+            [request requestWithHttpVerb:@"GET" url:@"/trends" data:@{} jwt:jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        self.trends = [NSArray arrayWithArray:response[@"links"]];
+                        
+                        [self.trendsTable reloadData];
+                    });
+                }
+            }];
+        });
+    }
+    
+    return self;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    CMTrendCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trendCell"];
+    CMTrendCell *cell = [self.trendsTable dequeueReusableCellWithIdentifier:@"trendCell"];
     NSDictionary *trend = self.trends[indexPath.row];
     
-    [cell.imageView hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]]];
-    cell.title.text = trend[@"title"];
+    if ([((NSString *)trend[@"thumbnail"]) hasPrefix:@"http://"] || [((NSString *)trend[@"thumbnail"]) hasPrefix:@"https://"]) {
+        [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]] placeholder:[UIImage imageNamed:@"Icon"]];
+    }
+    cell.trendTitle.text = trend[@"title"];
     
     return cell;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.trends.count;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 110;
 }
 
 - (void)actionHide:(id)sender {

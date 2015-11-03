@@ -15,8 +15,6 @@
 #import "CMNetworkRequest.h"
 #import "CMTrendCell.h"
 
-#import "User.h"
-
 @interface CMTrendsPopup : MMPopupView <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) UIButton *btnCancel;
@@ -26,7 +24,7 @@
 
 @property (nonatomic, strong) NSArray *trends;
 
-@property (nonatomic, strong) User *user;
+- (CMTrendsPopup *)initWithJwt:(NSString *)jwt;
 
 - (void)actionHide:(id)sender;
 - (void)trendSelected:(id)sender;
