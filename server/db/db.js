@@ -21,6 +21,12 @@ var Message = sequelize.define('message', {
   googleImageId: Sequelize.STRING
 });
 
+var RedditAttachment = sequelize.define('redditAttachment', {
+  title: Sequelize.STRING,
+  url: Sequelize.STRING,
+  thumbnail: Sequelize.STRING
+});
+
 var UserChat = sequelize.define('user_chat', {});
 
 Chat.belongsToMany(User, {through: UserChat });
@@ -29,6 +35,7 @@ User.belongsToMany(Chat, {through: UserChat });
 Chat.hasMany(Message);
 Message.belongsTo(User);
 Message.belongsTo(Chat);
+Message.hasOne(RedditAttachment);
 
 sequelize.sync();
 
@@ -36,5 +43,6 @@ module.exports = {
   sequelize: sequelize,
   User: User,
   Chat: Chat,
-  Message: Message
+  Message: Message,
+  RedditAttachment: RedditAttachment
 };

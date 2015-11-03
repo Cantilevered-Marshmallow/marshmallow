@@ -1,6 +1,7 @@
 var Chat = require('../db/db').Chat;
 var User = require('../db/db').User;
 var Message = require('../db/db').Message;
+var RedditAttachment = require('../db/db').RedditAttachment;
 
 module.exports = {
 
@@ -42,7 +43,9 @@ module.exports = {
   getMessages: function (chatId) {
     return Chat.findOne({
       where: {id: parseInt(chatId)},
-      include: [{model: Message, as: 'messages', include: [{model: User, as: 'user'}]}]
+      include: [{model: Message, as: 'messages', 
+                include: [{model: User, as: 'user'},
+                          {model: RedditAttachment, as: 'redditAttachment'}]}]
     }).then(function (chat) {
         return chat.messages;
       });
@@ -50,10 +53,17 @@ module.exports = {
 
   postMessage: function (chatId, facebookId, message) {
     return Message.create(message)
-      .then(function (message) {
+      .then(function (messageInstance) {
+        if (message.hasOwnProperty('redditAttachment')) {
+          return messageInstance.createRedditAttachment(message.redditAttachment);
+        } else {
+          return messageInstance
+        }
+      })
+      .then(function (messageInstance) {
         return Promise.all([
-            message.setChat(chatId),
-            message.setUser(facebookId)
+            messageInstance.setChat(chatId),
+            messageInstance.setUser(facebookId)
           ]);
       });
   },
@@ -70,5 +80,4 @@ module.exports = {
         return messages;
       });
   }
-
 };
