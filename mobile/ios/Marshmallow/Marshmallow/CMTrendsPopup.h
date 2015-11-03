@@ -11,9 +11,12 @@
 #import "MMPopupCategory.h"
 #import <Masonry/Masonry.h>
 #import <Haneke/Haneke.h>
+#import <FontAwesomeKit/FontAwesomeKit.h>
 
 #import "CMNetworkRequest.h"
 #import "CMTrendCell.h"
+
+#import "UIColor+ColorFromHexString.h"
 
 @import SafariServices;
 
@@ -27,6 +30,8 @@
 @property (nonatomic, strong) NSArray *trends;
 
 @property (nonatomic, strong) UIViewController *vc;
+
+@property (nonatomic, strong) CMTrendCell *selectedTrend;
 
 - (CMTrendsPopup *)initWithJwt:(NSString *)jwt;
 

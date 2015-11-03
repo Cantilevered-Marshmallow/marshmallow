@@ -25,10 +25,19 @@
         [self.contentView addSubview:self.thumbnail];
         [self.contentView addSubview:self.trendTitle];
         
-        UITapGestureRecognizer *recognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
-        recognizer.numberOfTapsRequired = 2;
+        UITapGestureRecognizer *singleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:nil];
+        singleRecognizer.numberOfTapsRequired = 1;
         
-        [self addGestureRecognizer:recognizer];
+        singleRecognizer.cancelsTouchesInView = NO;
+        
+        [self addGestureRecognizer:singleRecognizer];
+        
+        UITapGestureRecognizer *doubleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(cellTapped:)];
+        doubleRecognizer.numberOfTapsRequired = 2;
+        
+        [self addGestureRecognizer:doubleRecognizer];
+        
+        [singleRecognizer requireGestureRecognizerToFail:doubleRecognizer];
     }
     
     return self;
@@ -38,6 +47,8 @@
     SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:self.url] entersReaderIfAvailable:NO];
     safariViewController.delegate = self.delegate;
     [self.delegate showViewController:safariViewController];
+    
+    self.accessoryView = nil;
 }
 
 @end

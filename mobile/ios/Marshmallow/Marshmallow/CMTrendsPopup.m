@@ -106,6 +106,26 @@
     return 170;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    CMTrendCell *cell = [self.trendsTable cellForRowAtIndexPath:indexPath];
+    
+    if (self.selectedTrend != nil) {
+        self.selectedTrend.accessoryView = nil;
+    }
+    
+    if (cell.accessoryView == nil) {
+        NSError *error;
+        UIImage *checkbox = [[FAKIonIcons iconWithIdentifier:@"ion-ios-checkmark-outline" size:50 error:&error] imageWithSize:CGSizeMake(50, 50)];
+        checkbox = [checkbox imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
+        UIImageView *iv = [[UIImageView alloc] initWithImage:checkbox];
+        [iv setTintColor:[UIColor colorFromHexString:@"#006400"]];
+        cell.accessoryView = iv;
+        self.selectedTrend = cell;
+    } else {
+        cell.accessoryView = nil;
+    }
+}
+
 - (void)actionHide:(id)sender {
     [super hide];
 }
