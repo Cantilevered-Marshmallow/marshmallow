@@ -125,7 +125,7 @@
     self.firstLoad = YES;
     
     // Setup navigation title
-    self.navigationItem.titleView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 100, 20)];
+    self.navigationItem.titleView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
     UITextView *titleLabel = ((UITextView *)self.navigationItem.titleView);
     titleLabel.text = self.chat.chatTitle;
     titleLabel.editable = NO;
@@ -134,6 +134,8 @@
     titleLabel.font = [UIFont systemFontOfSize:16];
     titleLabel.textContainer.maximumNumberOfLines = 1;
     titleLabel.delegate = self;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.contentSize = CGSizeMake(titleLabel.contentSize.width, titleLabel.contentSize.height - 10);
     
     UITapGestureRecognizer *titleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editTitle:)];
     titleRecognizer.numberOfTapsRequired = 2;
