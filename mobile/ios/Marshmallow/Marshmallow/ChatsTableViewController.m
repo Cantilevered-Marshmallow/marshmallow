@@ -26,6 +26,14 @@
     self.navigationItem.rightBarButtonItem.action = @selector(createChat:);
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // Handle possible change in a chat title
+    self.chats = [Chats MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]];
+    [self.tableView reloadData];
+}
+
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
