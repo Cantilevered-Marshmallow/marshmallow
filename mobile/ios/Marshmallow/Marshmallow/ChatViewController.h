@@ -27,13 +27,16 @@
 #import "CMMessageCell.h"
 #import "CMGImageMessageCell.h"
 #import "CMYoutubeVideoMessageCell.h"
+#import "CMTrendMessageCell.h"
 
 #import "CMGImageSearch.h"
 #import "CMYoutubeSearch.h"
 
+#import "CMTrendsPopup.h"
+
 #import "CMFormattedTextView.h"
 
-@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, CMTrendsDelegate, UITableViewDataSource, UITableViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CMFormattedTextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
@@ -41,6 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *sendMessageButton;
 @property (weak, nonatomic) IBOutlet UIButton *attachmentButton;
 @property (weak, nonatomic) IBOutlet UIButton *clearAttachmentButton;
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *trendsButton;
 
 @property (strong, nonatomic) Chats *chat;
 
@@ -56,6 +60,8 @@
 
 @property (strong, nonatomic) CMYoutubeSearchResult *videoResult;
 
+@property (strong, nonatomic) NSDictionary *trendResult;
+
 @property (nonatomic) BOOL firstLoad;
 
 - (void)fetchMessages:(id)sender;
@@ -65,6 +71,8 @@
 - (void)showAttachments:(id)sender;
 
 - (void)clearAttachment:(id)sender;
+
+- (void)trendsClicked:(id)sender;
 
 - (void)toggleAttachmentAction;
 

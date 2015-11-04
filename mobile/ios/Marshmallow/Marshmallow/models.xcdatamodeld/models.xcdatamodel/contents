@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="8195" systemVersion="15A284" minimumToolsVersion="Xcode 7.0">
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="9057" systemVersion="15B42" minimumToolsVersion="Xcode 7.0">
     <entity name="Chats" representedClassName="Chats" syncable="YES">
         <attribute name="chatId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="chatTitle" optional="YES" attributeType="String" syncable="YES"/>
@@ -13,6 +13,7 @@
         <attribute name="chatsId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="googleImageId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timestamp" optional="YES" attributeType="Date" syncable="YES"/>
+        <attribute name="trend" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="userId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="youtubeVideoId" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="chats" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chats" syncable="YES"/>
@@ -32,9 +33,9 @@
         <relationship name="chatParticipation" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Chats" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Chats" positionX="81" positionY="-216" width="128" height="75"/>
-        <element name="Contact" positionX="306" positionY="-360" width="128" height="75"/>
-        <element name="Message" positionX="225" positionY="-534" width="126" height="163"/>
+        <element name="Chats" positionX="81" positionY="-216" width="128" height="73"/>
+        <element name="Contact" positionX="414" positionY="-513" width="128" height="75"/>
+        <element name="Message" positionX="225" positionY="-534" width="126" height="178"/>
         <element name="TestUser" positionX="583" positionY="-360" width="128" height="103"/>
         <element name="User" positionX="286" positionY="-216" width="128" height="120"/>
     </elements>

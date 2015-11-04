@@ -48,11 +48,14 @@
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
     [self.tableView registerClass:[CMGImageMessageCell class] forCellReuseIdentifier:@"gImageMessageCell"];
     [self.tableView registerClass:[CMYoutubeVideoMessageCell class] forCellReuseIdentifier:@"youtubevideoMessageCell"];
+    [self.tableView registerClass:[CMTrendMessageCell class] forCellReuseIdentifier:@"trendMessageCell"];
     
     // Bind the message control buttons
     [self.sendMessageButton addTarget:self action:@selector(sendMessage:) forControlEvents:UIControlEventTouchUpInside];
     [self.attachmentButton addTarget:self action:@selector(showAttachments:) forControlEvents:UIControlEventTouchUpInside];
     [self.clearAttachmentButton addTarget:self action:@selector(clearAttachment:) forControlEvents:UIControlEventTouchUpInside];
+    self.trendsButton.target = self;
+    self.trendsButton.action = @selector(trendsClicked:);
     
     // Set flag for detecting if we just opened the view
     self.firstLoad = YES;
@@ -86,7 +89,7 @@
     Message *message = self.messages[indexPath.row];
     
     // Default message cell
-    if ([message.googleImageId isEqualToString:@""] && [message.youtubeVideoId isEqualToString:@""]) {
+    if ([message.googleImageId isEqualToString:@""] && [message.youtubeVideoId isEqualToString:@""] && [message fetchTrend].count == 0) {
         CMMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"messageCell" forIndexPath:indexPath];
         
         [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
@@ -136,7 +139,7 @@
         return cell;
         
     // Youtube video message cell
-    } else {
+    } else if (![message.youtubeVideoId isEqualToString:@""]) {
         CMYoutubeVideoMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"youtubevideoMessageCell" forIndexPath:indexPath];
         
         [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
@@ -186,6 +189,36 @@
         });
         
         return cell;
+    } else {
+        CMTrendMessageCell *cell = [tableView dequeueReusableCellWithIdentifier:@"trendMessageCell"];
+        
+        [cell.userImage hnk_setImageFromURL:[NSURL URLWithString:[NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?width=150&height=150", message.userId]]];
+        
+        if (![message.userId isEqualToString:[[FBSDKAccessToken currentAccessToken] userID]]) {
+            Contact *contact = [Contact MR_findFirstByAttribute:@"contactId" withValue:message.userId inContext:[NSManagedObjectContext MR_defaultContext]];
+            cell.userName.text = contact.name;
+        } else {
+            cell.userName.text = @"From You";
+        }
+        cell.timestamp.text = [message.timestamp timeAgoSinceNow];
+        
+        cell.messageBody.text = [ZWEmoji emojify:message.body];
+        
+        CGFloat fixedWidth = cell.messageBody.frame.size.width;
+        CGSize newSize = [cell.messageBody sizeThatFits:CGSizeMake(fixedWidth, MAXFLOAT)];
+        CGRect newFrame = cell.messageBody.frame;
+        newFrame.size = CGSizeMake(fmaxf(newSize.width, fixedWidth), newSize.height);
+        cell.messageBody.frame = newFrame;
+        
+        NSDictionary *trend = [message fetchTrend];
+        
+        cell.trendTitle.text = trend[@"title"];
+        [cell.thumbnail hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]]];
+        cell.url = trend[@"url"];
+        
+        cell.delegate = self;
+        
+        return cell;
     }
 }
 
@@ -206,6 +239,8 @@
             return cellDefaultHeight + tv.contentSize.height + 240;
         } else if (![message.youtubeVideoId isEqualToString:@""]) {
             return cellDefaultHeight + tv.contentSize.height + 150;
+        } else if ([message fetchTrend].count > 0) {
+            return cellDefaultHeight + tv.contentSize.height + 160;
         } else {
             return cellDefaultHeight + tv.contentSize.height;
         }
@@ -216,6 +251,8 @@
             return cellDefaultHeight + 240;
         } else if (![message.youtubeVideoId isEqualToString:@""]) {
             return cellDefaultHeight + 150;
+        }  else if ([message fetchTrend].count > 0) {
+            return cellDefaultHeight + 160;
         } else {
             return cellDefaultHeight;
         }
@@ -249,6 +286,13 @@
                         } else {
                             message.googleImageId = @"";
                         }
+                        
+                        if (fetchedMessage[@"redditAttachment"] != (id)[NSNull null]) {
+                            [message storeTrend:fetchedMessage[@"redditAttachment"]];
+                        } else {
+                            [message storeTrend:@{}];
+                        }
+                        
                         message.chatsId = [fetchedMessage[@"chatId"] stringValue];
                         message.userId = fetchedMessage[@"userFacebookId"];
                         message.timestamp = [NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]];
@@ -333,8 +377,29 @@
             }];
         }
         
+        if (self.trendResult != nil) {
+            [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": [ZWEmoji unemojify:self.messageInput.text], @"youtubeVideoId": @"", @"googleImageId": @"", @"redditAttachment": self.trendResult} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
+                if (!error) {
+                    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+                    iv.image = nil;
+                    self.videoResult = nil;
+                    
+                    self.view.subviews[1].userInteractionEnabled = NO;
+                    iv.userInteractionEnabled = NO;
+                    
+                    [self resetMessageInput];
+                    [self fetchMessages:self];
+                    
+                    BOOL isAttach = !self.attachmentButton.hidden;
+                    if (!isAttach) {
+                        [self toggleAttachmentAction];
+                    }
+                }
+            }];
+        }
+        
         // Default message
-        if (self.gImageResult == nil && self.videoResult == nil) {
+        if (self.gImageResult == nil && self.videoResult == nil && self.trendResult == nil) {
             [self.request requestWithHttpVerb:@"POST" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:@{@"text": [ZWEmoji unemojify:self.messageInput.text], @"youtubeVideoId": @"", @"googleImageId": @""} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     NSLog(@"Response");
@@ -351,6 +416,13 @@
             }];
         }
     }
+}
+
+- (void)trendsClicked:(id)sender {
+    CMTrendsPopup *pop = [[CMTrendsPopup alloc] initWithJwt:self.user.jwt];
+    pop.delegate = self;
+    
+    [pop show];
 }
 
 #pragma mark - Handle attachments
@@ -387,6 +459,27 @@
     
     // Toggle the attachment action
     [self toggleAttachmentAction];
+}
+
+- (void)trendSelected:(NSDictionary *)trend {
+    // A trend was selected
+    
+    // Set the preview to the thumbnail of the video
+    UIImageView *iv = ((UIImageView *)self.view.subviews[1].subviews[0]);
+    [iv hnk_setImageFromURL:[NSURL URLWithString:trend[@"thumbnail"]]];
+    
+    // Prevent user from interacting with messages table when tapping the preview
+    self.view.subviews[1].userInteractionEnabled = YES;
+    iv.userInteractionEnabled = YES;
+    
+    self.trendResult = trend;
+    
+    // Toggle the attachment action
+    [self toggleAttachmentAction];
+}
+
+- (void)displayTrend:(SFSafariViewController *)safariController {
+    [self presentViewController:safariController animated:YES completion:nil];
 }
 
 #pragma mark - Helpers

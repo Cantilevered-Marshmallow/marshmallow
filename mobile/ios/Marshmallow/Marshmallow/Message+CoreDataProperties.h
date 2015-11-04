@@ -19,6 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nullable, nonatomic, retain) NSString *chatsId;
 @property (nullable, nonatomic, retain) NSString *googleImageId;
 @property (nullable, nonatomic, retain) NSDate *timestamp;
+@property (nullable, nonatomic, retain) NSData *trend;
 @property (nullable, nonatomic, retain) NSString *userId;
 @property (nullable, nonatomic, retain) NSString *youtubeVideoId;
 @property (nullable, nonatomic, retain) Chats *chats;

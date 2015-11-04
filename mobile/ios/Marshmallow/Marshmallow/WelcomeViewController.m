@@ -84,12 +84,18 @@
                         if (!error) {
                             [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                                 self.user = [User MR_createEntityInContext:localContext];
-                                self.user.name = result[@"name"];
-                                self.user.email = result[@"email"];
-                                self.user.oauthToken = [_facebookToken tokenString];
-                                self.user.jwt = response[@"token"];
+                                if (self.user) {
+                                    self.user.name = result[@"name"];
+                                    self.user.email = result[@"email"];
+                                    self.user.oauthToken = [_facebookToken tokenString];
+                                    self.user.jwt = response[@"token"];
+                                }
                             } completion:^(BOOL contextDidSave, NSError *error) {
-                                [self getFriends];
+                                if (!error && contextDidSave) {
+                                    [self getFriends];
+                                } else {
+                                    NSLog(@"Error: %@", error);
+                                }
                             }];
                         } else {
                             NSLog(@"%@", error);

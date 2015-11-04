@@ -16,4 +16,12 @@
     return [NSString stringWithFormat:@"Message is the following: %@ from %@ in %@", self.body, self.userId, self.chatsId];
 }
 
+- (void)storeTrend:(NSDictionary *)trend {
+    self.trend = [NSKeyedArchiver archivedDataWithRootObject:trend];
+}
+
+- (NSDictionary *)fetchTrend {
+    return (NSDictionary *) [NSKeyedUnarchiver unarchiveObjectWithData:self.trend];
+}
+
 @end
