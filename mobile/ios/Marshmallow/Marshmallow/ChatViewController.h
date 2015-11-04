@@ -37,7 +37,7 @@
 
 #import "CMFormattedTextView.h"
 
-@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, CMTrendsDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, CMTrendsDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CMFormattedTextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
@@ -72,6 +72,8 @@
 - (void)clearAttachment:(id)sender;
 
 - (void)trendsClicked:(id)sender;
+
+- (void)editTitle:(id)sender;
 
 - (void)toggleAttachmentAction;
 

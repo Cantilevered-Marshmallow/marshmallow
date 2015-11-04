@@ -123,6 +123,24 @@
     
     // Set flag for detecting if we just opened the view
     self.firstLoad = YES;
+    
+    // Setup navigation title
+    self.navigationItem.titleView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
+    UITextView *titleLabel = ((UITextView *)self.navigationItem.titleView);
+    titleLabel.text = self.chat.chatTitle;
+    titleLabel.editable = NO;
+    titleLabel.selectable = NO;
+    [titleLabel setBackgroundColor:[UIColor clearColor]];
+    titleLabel.font = [UIFont systemFontOfSize:16];
+    titleLabel.textContainer.maximumNumberOfLines = 1;
+    titleLabel.delegate = self;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.contentSize = CGSizeMake(titleLabel.contentSize.width, titleLabel.contentSize.height - 10);
+    
+    UITapGestureRecognizer *titleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editTitle:)];
+    titleRecognizer.numberOfTapsRequired = 2;
+    
+    [self.navigationItem.titleView addGestureRecognizer:titleRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -412,6 +430,35 @@
     pop.delegate = self;
     
     [pop show];
+}
+
+- (void)editTitle:(id)sender {
+    UITextView *titleLabel = ((UITextView *)self.navigationItem.titleView);
+    titleLabel.editable = YES;
+    titleLabel.selectable = YES;
+    [titleLabel selectAll:nil];
+    [titleLabel becomeFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text  isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        textView.editable = NO;
+        textView.selectable = NO;
+        
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            Chats *chat = [Chats MR_findFirstByAttribute:@"chatId" withValue:self.chat.chatId inContext:localContext];
+            chat.chatTitle = textView.text;
+        } completion:^(BOOL contextDidSave, NSError *error) {
+            if (contextDidSave) {
+                self.chat = [Chats MR_findFirstByAttribute:@"chatId" withValue:self.chat.chatId inContext:[NSManagedObjectContext MR_defaultContext]];
+            }
+        }];
+        
+        return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark - Handle attachments
