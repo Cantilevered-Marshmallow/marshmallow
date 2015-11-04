@@ -12,7 +12,7 @@
 #import <MagicalRecord/MagicalRecord.h>
 #import <ISO8601/ISO8601.h>
 #import <Haneke/Haneke.h>
-#import <UITextView+Placeholder/UITextView+Placeholder.h>
+#import <UITextView_Placeholder/UITextView+Placeholder.h>
 #import <ZWEmoji/ZWEmoji.h>
 
 #import "FBSDKCoreKit.h"

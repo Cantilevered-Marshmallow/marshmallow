@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		47940B7E8F7189086CF25927 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
-		A73E2D89A0532F3CB964A5DA /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
+		364657F77767A455F3CBCE88 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023EE8426BB42A69D623412D /* Pods.framework */; };
+		A73E2D89A0532F3CB964A5DA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		CA05B40F1BD95F64002FD8D6 /* CreateChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */; };
 		CA12389C1BE9475700AF3BD5 /* CMTrendMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA12389B1BE9475700AF3BD5 /* CMTrendMessageCell.m */; };
 		CA12389F1BE9891700AF3BD5 /* NSString+ChatTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = CA12389E1BE9891700AF3BD5 /* NSString+ChatTitle.m */; };
@@ -52,7 +52,9 @@
 		CAFCBF831BD0279C00C9E28B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAFCBF811BD0279C00C9E28B /* LaunchScreen.storyboard */; };
 		CAFCBF8E1BD0279C00C9E28B /* MarshmallowTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF8D1BD0279C00C9E28B /* MarshmallowTests.m */; };
 		CAFCBF991BD0279C00C9E28B /* MarshmallowUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = CAFCBF981BD0279C00C9E28B /* MarshmallowUITests.m */; };
-		DEE1FD9EDA99C2F00A7C3BEE /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 44F5354FD6707387425ED089 /* libPods.a */; };
+		DEE1FD9EDA99C2F00A7C3BEE /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		F05C5058A30287EC2105BA46 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023EE8426BB42A69D623412D /* Pods.framework */; };
+		F2C96C2A1AB0022B8235E390 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023EE8426BB42A69D623412D /* Pods.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,8 +75,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		023EE8426BB42A69D623412D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F55AAEA840E95876E77E0F5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
-		44F5354FD6707387425ED089 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		90F487F126BFF4BF85174A4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		CA05B40D1BD95F64002FD8D6 /* CreateChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateChatViewController.h; sourceTree = "<group>"; };
 		CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateChatViewController.m; sourceTree = "<group>"; };
@@ -164,7 +166,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47940B7E8F7189086CF25927 /* libPods.a in Frameworks */,
+				F2C96C2A1AB0022B8235E390 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -172,7 +174,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A73E2D89A0532F3CB964A5DA /* libPods.a in Frameworks */,
+				A73E2D89A0532F3CB964A5DA /* (null) in Frameworks */,
+				364657F77767A455F3CBCE88 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,7 +183,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEE1FD9EDA99C2F00A7C3BEE /* libPods.a in Frameworks */,
+				DEE1FD9EDA99C2F00A7C3BEE /* (null) in Frameworks */,
+				F05C5058A30287EC2105BA46 /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -190,7 +194,7 @@
 		C1C6D9C2DE271B4A32812EA7 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				44F5354FD6707387425ED089 /* libPods.a */,
+				023EE8426BB42A69D623412D /* Pods.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
