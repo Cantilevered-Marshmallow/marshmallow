@@ -14,6 +14,7 @@
 #import <Haneke/Haneke.h>
 #import <UITextView_Placeholder/UITextView+Placeholder.h>
 #import <ZWEmoji/ZWEmoji.h>
+#import <Socket_IO_Client_Swift/Socket_IO_Client_Swift-Swift.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
@@ -64,7 +65,7 @@
 
 @property (nonatomic) BOOL firstLoad;
 
-- (void)fetchMessages:(id)sender;
+@property (strong, nonatomic) SocketIOClient *socket;
 
 - (void)sendMessage:(id)sender;
 
