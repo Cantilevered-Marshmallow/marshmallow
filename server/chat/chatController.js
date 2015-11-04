@@ -2,6 +2,7 @@ var Chat = require('../db/db').Chat;
 var User = require('../db/db').User;
 var Message = require('../db/db').Message;
 var RedditAttachment = require('../db/db').RedditAttachment;
+var sockets = require('../sockets');
 
 module.exports = {
 
@@ -51,7 +52,21 @@ module.exports = {
       });
   },
 
+  broadcastMessage: function (chatId, message) {
+    Chat.findOne({
+      where: {id: chatId},
+      include: [{model: User, as: 'users'}]
+    }).then(function (chat) {
+      chat.users.forEach(function (user) {
+        if (sockets[user.facebookId]) {
+          sockets[user.facebookId].emit('message', message);
+        }
+      });
+    });
+  },
+
   postMessage: function (chatId, facebookId, message) {
+    this.broadcastMessage(chatId, message);
     return Message.create(message)
       .then(function (messageInstance) {
         if (message.hasOwnProperty('redditAttachment')) {
@@ -72,8 +87,8 @@ module.exports = {
     return User.findById(facebookId)
       .then(function (user) {
         return user.getChats({include: [
-            {model: Message, as: 'messages', where: {createdAt: {$gt: timestamp} } },
-            {model: RedditAttachment, as: 'redditAttachment'}
+            {model: Message, as: 'messages', where: {createdAt: {$gt: timestamp} },
+              include: [{model: RedditAttachment, as: 'redditAttachment'}] }
           ]});
       }).then(function (chats) {
         var messages = [];
