@@ -67,11 +67,23 @@
                 for (NSDictionary *fetchedChat in response[@"chats"]) {
                     NSString *chatId = [NSString stringWithFormat:@"%@", fetchedChat[@"chatId"]];
                     if (![Chats MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                        NSMutableArray<Contact *> *contacts = [NSMutableArray arrayWithArray:[Contact MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
+
+                        NSArray *friendIds = fetchedChat[@"users"];
+                        
+                        NSMutableArray<Contact *> *friends = [[NSMutableArray alloc] init];
+                        
+                        for (Contact *contact in contacts) {
+                            if ([friendIds containsObject:contact.contactId]) {
+                                [friends addObject:contact];
+                            }
+                        }
+                        
                         [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                             Chats *chats = [Chats MR_createEntityInContext:localContext];
                             
                             chats.chatId = chatId;
-                            chats.chatTitle = [NSString stringWithFormat:@"Chat: %@", chatId];
+                            chats.chatTitle = [NSString titleForFriends:friends];
                         }];
                     }
                 }

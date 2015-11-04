@@ -127,9 +127,14 @@
 
 - (void)createChat:(id)sender {
     NSMutableArray<NSString *> *facebookIds = [[NSMutableArray alloc] init];
+    NSMutableArray<Contact *> *friends = [[NSMutableArray alloc] init];
     
     for (NSIndexPath *indexPath in self.selectedPaths) {
         [facebookIds addObject:self.contacts[indexPath.row].contactId];
+    }
+    
+    for (NSString *facebookId in facebookIds) {
+        [friends addObject:[Contact MR_findFirstByAttribute:@"contactId" withValue:facebookId inContext:[NSManagedObjectContext MR_defaultContext]]];
     }
     
     [facebookIds addObject:[[FBSDKAccessToken currentAccessToken] userID]];
@@ -144,7 +149,7 @@
                         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                             Chats *chats = [Chats MR_createEntityInContext:localContext];
                             chats.chatId = response[@"chatId"];
-                            chats.chatTitle = [NSString stringWithFormat:@"Chat with %lu friends", facebookIds.count];
+                            chats.chatTitle = [NSString titleForFriends:friends];
                         }
                         completion:^(BOOL contextDidSave, NSError *error) {
                             if (contextDidSave) {
