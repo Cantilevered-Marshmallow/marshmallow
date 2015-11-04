@@ -135,7 +135,7 @@
     titleLabel.textContainer.maximumNumberOfLines = 1;
     titleLabel.delegate = self;
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.contentSize = CGSizeMake(titleLabel.contentSize.width, titleLabel.contentSize.height - 10);
+    titleLabel.contentSize = CGSizeMake(200, titleLabel.contentSize.height - 10);
     
     UITapGestureRecognizer *titleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editTitle:)];
     titleRecognizer.numberOfTapsRequired = 2;
