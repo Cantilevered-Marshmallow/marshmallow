@@ -140,10 +140,6 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    // Stop the timer
-    [self.fetchMessagesTimer invalidate];
-    self.fetchMessagesTimer = nil;
-    
     // Have the socket disconnect
     [self.socket disconnect];
 }

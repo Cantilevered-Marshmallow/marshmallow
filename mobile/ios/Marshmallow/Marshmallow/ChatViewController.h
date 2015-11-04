@@ -55,8 +55,6 @@
 
 @property (nonatomic) CMNetworkRequest *request;
 
-@property NSTimer *fetchMessagesTimer;
-
 @property (strong, nonatomic) CMGImageResult *gImageResult;
 
 @property (strong, nonatomic) CMYoutubeSearchResult *videoResult;
