@@ -41,8 +41,72 @@
     // Retrieve all the messages to display sorted by their timestamp
     self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
     
-    // Set interval for fetching of new messages
-    self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:2.5 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:YES];
+    // Set up sockets for messages
+    self.socket = [[SocketIOClient alloc] initWithSocketURL:@"http://159.203.90.131:8080" options:@{@"log": @YES, @"connectParams": @{@"token": self.user.jwt}}];
+    
+    [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"Socket connected");
+    }];
+    
+    [self.socket on:@"error" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"Scoket Error: %@", data);
+    }];
+    
+    [self.socket on:@"message" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSDictionary *fetchedMessage = (NSDictionary *)data[0];
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            Message *message = [Message MR_createEntityInContext:localContext];
+            message.body = fetchedMessage[@"text"];
+            
+            if (fetchedMessage[@"youtubeVideoId"] != (id)[NSNull null]) {
+                message.youtubeVideoId = fetchedMessage[@"youtubeVideoId"];
+            } else {
+                message.youtubeVideoId = @"";
+            }
+            
+            if (fetchedMessage[@"googleImageId"] != (id)[NSNull null]) {
+                message.googleImageId = fetchedMessage[@"googleImageId"];
+            } else {
+                message.googleImageId = @"";
+            }
+            
+            if (fetchedMessage[@"redditAttachment"] != (id)[NSNull null]) {
+                [message storeTrend:fetchedMessage[@"redditAttachment"]];
+            } else {
+                [message storeTrend:@{}];
+            }
+
+            message.chatsId = fetchedMessage[@"chatId"];
+            message.userId = fetchedMessage[@"userFacebookId"];
+            message.timestamp = [NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]];
+        } completion:^(BOOL contextDidSave, NSError *error) {
+            if (contextDidSave) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    // Reload the table to display the new messages
+                    self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
+                    
+                    [self.tableView reloadData];
+                    
+                    // Scroll to bottom of messages if the previous newest message is visible
+                    NSArray<NSIndexPath *> *visibleRows = [self.tableView indexPathsForVisibleRows];
+                    for (NSIndexPath *indexPath in visibleRows) {
+                        if (indexPath.row == self.messages.count - 1) {
+                            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                        }
+                    }
+                    
+                    if (self.firstLoad) {
+                        self.firstLoad = NO;
+                        
+                        // Scroll to bottom of messages table
+                        if (self.messages.count > 0) {
+                            [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
+                        }
+                    }
+                });
+            }
+        }];
+    }];
     
     // Register message cells for use later
     [self.tableView registerClass:[CMMessageCell class] forCellReuseIdentifier:@"messageCell"];
@@ -59,28 +123,43 @@
     
     // Set flag for detecting if we just opened the view
     self.firstLoad = YES;
+    
+    // Setup navigation title
+    self.navigationItem.titleView = [[UITextView alloc] initWithFrame:CGRectMake(0, 0, 100, 35)];
+    UITextView *titleLabel = ((UITextView *)self.navigationItem.titleView);
+    titleLabel.text = self.chat.chatTitle;
+    titleLabel.editable = NO;
+    titleLabel.selectable = NO;
+    [titleLabel setBackgroundColor:[UIColor clearColor]];
+    titleLabel.font = [UIFont systemFontOfSize:16];
+    titleLabel.textContainer.maximumNumberOfLines = 1;
+    titleLabel.delegate = self;
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.contentSize = CGSizeMake(titleLabel.contentSize.width, titleLabel.contentSize.height - 10);
+    
+    UITapGestureRecognizer *titleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editTitle:)];
+    titleRecognizer.numberOfTapsRequired = 2;
+    
+    [self.navigationItem.titleView addGestureRecognizer:titleRecognizer];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    // Check to see if we don't have timer already; Prevents the same action from being performed twice
-    if (!self.fetchMessagesTimer) {
-        self.fetchMessagesTimer = [NSTimer scheduledTimerWithTimeInterval:2.5 target:self selector:@selector(fetchMessages:) userInfo:nil repeats:true];
-    }
-    
     // Scroll to bottom of messages table
     if (self.messages.count > 0) {
         [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
     }
+    
+    // Have the socket connect
+    [self.socket connect];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
-    // Stop the timer
-    [self.fetchMessagesTimer invalidate];
-    self.fetchMessagesTimer = nil;
+    // Have the socket disconnect
+    [self.socket disconnect];
 }
 
 #pragma mark - table view handlers
@@ -261,74 +340,6 @@
 
 #pragma mark - Handlers
 
-- (void)fetchMessages:(id)sender {
-    // Fetch all the new messages
-    [self.request requestWithHttpVerb:@"GET" url:[NSString stringWithFormat:@"/chat/%@", self.chat.chatId] data:nil jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
-        if (!error) {
-            NSArray *fetchedMessages = response[@"messages"];
-            
-            for (NSDictionary *fetchedMessage in fetchedMessages) {
-                // Does the message already exist locally?
-                if (![Message MR_findFirstByAttribute:@"timestamp" withValue:[NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]] inContext:[NSManagedObjectContext MR_defaultContext]]) {
-                    // Save the message locally
-                    [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
-                        Message *message = [Message MR_createEntityInContext:localContext];
-                        message.body = fetchedMessage[@"text"];
-                        
-                        if (fetchedMessage[@"youtubeVideoId"] != (id)[NSNull null]) {
-                            message.youtubeVideoId = fetchedMessage[@"youtubeVideoId"];
-                        } else {
-                            message.youtubeVideoId = @"";
-                        }
-                        
-                        if (fetchedMessage[@"googleImageId"] != (id)[NSNull null]) {
-                            message.googleImageId = fetchedMessage[@"googleImageId"];
-                        } else {
-                            message.googleImageId = @"";
-                        }
-                        
-                        if (fetchedMessage[@"redditAttachment"] != (id)[NSNull null]) {
-                            [message storeTrend:fetchedMessage[@"redditAttachment"]];
-                        } else {
-                            [message storeTrend:@{}];
-                        }
-                        
-                        message.chatsId = [fetchedMessage[@"chatId"] stringValue];
-                        message.userId = fetchedMessage[@"userFacebookId"];
-                        message.timestamp = [NSDate dateWithISO8601String:fetchedMessage[@"createdAt"]];
-                    } completion:^(BOOL contextDidSave, NSError *error) {
-                        if (contextDidSave) {
-                            dispatch_async(dispatch_get_main_queue(), ^{
-                                // Reload the table to display the new messages
-                                self.messages = [NSMutableArray arrayWithArray:[Message MR_findAllSortedBy:@"timestamp:YES" ascending:YES withPredicate:[NSPredicate predicateWithFormat:@"chatsId == %@", self.chat.chatId] inContext:[NSManagedObjectContext MR_defaultContext]]];
-                                
-                                [self.tableView reloadData];
-                                
-                                // Scroll to bottom of messages if the previous newest message is visible
-                                NSArray<NSIndexPath *> *visibleRows = [self.tableView indexPathsForVisibleRows];
-                                for (NSIndexPath *indexPath in visibleRows) {
-                                    if (indexPath.row == self.messages.count - 1) {
-                                        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-                                    }
-                                }
-                                
-                                if (self.firstLoad) {
-                                    self.firstLoad = NO;
-                                    
-                                    // Scroll to bottom of messages table
-                                    if (self.messages.count > 0) {
-                                        [self.tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForItem:self.messages.count - 1 inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:YES];
-                                    }
-                                }
-                            });
-                        }
-                    }];
-                }
-            }
-        }
-    }];
-}
-
 - (void)sendMessage:(id)sender {
     // Is the message more than just whitespace?
     if (![[self.messageInput.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] isEqualToString:@""]) {
@@ -345,7 +356,6 @@
                     iv.userInteractionEnabled = NO;
                     
                     [self resetMessageInput];
-                    [self fetchMessages:self];
                     
                     BOOL isAttach = !self.attachmentButton.hidden;
                     if (!isAttach) {
@@ -367,7 +377,6 @@
                     iv.userInteractionEnabled = NO;
                     
                     [self resetMessageInput];
-                    [self fetchMessages:self];
                     
                     BOOL isAttach = !self.attachmentButton.hidden;
                     if (!isAttach) {
@@ -388,7 +397,6 @@
                     iv.userInteractionEnabled = NO;
                     
                     [self resetMessageInput];
-                    [self fetchMessages:self];
                     
                     BOOL isAttach = !self.attachmentButton.hidden;
                     if (!isAttach) {
@@ -404,7 +412,6 @@
                 if (!error) {
                     NSLog(@"Response");
                     [self resetMessageInput];
-                    [self fetchMessages:self];
                     
                     BOOL isAttach = !self.attachmentButton.hidden;
                     if (!isAttach) {
@@ -423,6 +430,35 @@
     pop.delegate = self;
     
     [pop show];
+}
+
+- (void)editTitle:(id)sender {
+    UITextView *titleLabel = ((UITextView *)self.navigationItem.titleView);
+    titleLabel.editable = YES;
+    titleLabel.selectable = YES;
+    [titleLabel selectAll:nil];
+    [titleLabel becomeFirstResponder];
+}
+
+- (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    if ([text  isEqualToString:@"\n"]) {
+        [textView resignFirstResponder];
+        textView.editable = NO;
+        textView.selectable = NO;
+        
+        [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
+            Chats *chat = [Chats MR_findFirstByAttribute:@"chatId" withValue:self.chat.chatId inContext:localContext];
+            chat.chatTitle = textView.text;
+        } completion:^(BOOL contextDidSave, NSError *error) {
+            if (contextDidSave) {
+                self.chat = [Chats MR_findFirstByAttribute:@"chatId" withValue:self.chat.chatId inContext:[NSManagedObjectContext MR_defaultContext]];
+            }
+        }];
+        
+        return NO;
+    }
+    
+    return YES;
 }
 
 #pragma mark - Handle attachments

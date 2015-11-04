@@ -66,6 +66,7 @@ PODS:
   - MMPopupView (1.3):
     - Masonry
   - SFFocusViewLayout (1.1.1)
+  - Socket.IO-Client-Swift (4.1.1)
   - UITextView+Placeholder (1.1.0)
   - XCDYouTubeKit (2.3.2)
   - ZWEmoji (0.4.0)
@@ -82,6 +83,7 @@ DEPENDENCIES:
   - MagicalRecord
   - MMPopupView
   - SFFocusViewLayout
+  - Socket.IO-Client-Swift
   - UITextView+Placeholder
   - XCDYouTubeKit
   - ZWEmoji (from `https://github.com/zachwaugh/ZWEmoji.git`, commit `a3718f9bcdd482c8d3e06015cd8a7c592807954f`)
@@ -115,6 +117,7 @@ SPEC CHECKSUMS:
   Masonry: ff105a956abcd19a618b2028b121cb638d7a8e2f
   MMPopupView: 25633125d678637c28afd5d9e7fc7dd2db2903da
   SFFocusViewLayout: 01b91154fb64cf745ca75d97bdf8f069dd62d33c
+  Socket.IO-Client-Swift: 2620dbb779edbbd0bc0cac96c053ca7c35aba652
   UITextView+Placeholder: 672ce543356b5b5787f354415bc3b132d47f0362
   XCDYouTubeKit: 6aff378bcbbf06d058f2c2d2df655c376970ee03
   ZWEmoji: e25e17bfa70b17b3d7f3aea6b932fb4135e9e432

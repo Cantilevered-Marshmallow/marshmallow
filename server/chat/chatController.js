@@ -2,6 +2,7 @@ var Chat = require('../db/db').Chat;
 var User = require('../db/db').User;
 var Message = require('../db/db').Message;
 var RedditAttachment = require('../db/db').RedditAttachment;
+var sockets = require('../sockets');
 
 module.exports = {
 
@@ -51,6 +52,19 @@ module.exports = {
       });
   },
 
+  broadcastMessage: function (chatId, message) {
+    Chat.findOne({
+      where: {id: chatId},
+      include: [{model: User, as: 'users'}]
+    }).then(function (chat) {
+      chat.users.forEach(function (user) {
+        if (sockets[user.facebookId]) {
+          sockets[user.facebookId].emit('message', message);
+        }
+      });
+    });
+  },
+
   postMessage: function (chatId, facebookId, message) {
     return Message.create(message)
       .then(function (messageInstance) {
@@ -61,19 +75,22 @@ module.exports = {
         }
       })
       .then(function (messageInstance) {
+        var bcMessage = messageInstance.toJSON();
+        bcMessage.redditAttachment = message.redditAttachment || {};
+        this.broadcastMessage(chatId, bcMessage);
         return Promise.all([
             messageInstance.setChat(chatId),
             messageInstance.setUser(facebookId)
           ]);
-      });
+      }.bind(this));
   },
 
   getMessagesByTime: function (facebookId, timestamp) {
     return User.findById(facebookId)
       .then(function (user) {
         return user.getChats({include: [
-            {model: Message, as: 'messages', where: {createdAt: {$gt: timestamp} } },
-            {model: RedditAttachment, as: 'redditAttachment'}
+            {model: Message, as: 'messages', where: {createdAt: {$gt: timestamp} },
+              include: [{model: RedditAttachment, as: 'redditAttachment'}] }
           ]});
       }).then(function (chats) {
         var messages = [];

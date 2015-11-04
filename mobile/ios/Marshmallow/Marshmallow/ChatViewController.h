@@ -12,8 +12,9 @@
 #import <MagicalRecord/MagicalRecord.h>
 #import <ISO8601/ISO8601.h>
 #import <Haneke/Haneke.h>
-#import <UITextView+Placeholder/UITextView+Placeholder.h>
+#import <UITextView_Placeholder/UITextView+Placeholder.h>
 #import <ZWEmoji/ZWEmoji.h>
+#import <Socket_IO_Client_Swift/Socket_IO_Client_Swift-Swift.h>
 
 #import "FBSDKCoreKit.h"
 #import "FBSDKLoginKit.h"
@@ -36,7 +37,7 @@
 
 #import "CMFormattedTextView.h"
 
-@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, CMTrendsDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, CMTrendsDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CMFormattedTextView *messageInput;
 @property (weak, nonatomic) IBOutlet UIView *chatControls;
@@ -54,8 +55,6 @@
 
 @property (nonatomic) CMNetworkRequest *request;
 
-@property NSTimer *fetchMessagesTimer;
-
 @property (strong, nonatomic) CMGImageResult *gImageResult;
 
 @property (strong, nonatomic) CMYoutubeSearchResult *videoResult;
@@ -64,7 +63,7 @@
 
 @property (nonatomic) BOOL firstLoad;
 
-- (void)fetchMessages:(id)sender;
+@property (strong, nonatomic) SocketIOClient *socket;
 
 - (void)sendMessage:(id)sender;
 
@@ -73,6 +72,8 @@
 - (void)clearAttachment:(id)sender;
 
 - (void)trendsClicked:(id)sender;
+
+- (void)editTitle:(id)sender;
 
 - (void)toggleAttachmentAction;
 

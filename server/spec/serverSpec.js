@@ -23,7 +23,7 @@ var PeterParker = {
 
 describe('Sign up and log in', function () {
   before(function (done) {
-    server = require('../server');
+    server = require('../server').server;
     done();
   });
 
@@ -93,7 +93,7 @@ describe('GET and POST to /chat and /chat:id', function () {
   var timeStamp;
 
   before(function (done) {
-    server = require('../server');
+    server = require('../server').server;
 
     // Brad Smith
     agent1 = request.agent(server);
@@ -314,7 +314,7 @@ describe('GET and POST to /chat and /chat:id', function () {
         }
       })
       .expect(200, done);
-    
+
   });
 });
 

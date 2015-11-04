@@ -4,6 +4,7 @@ var sinon = require('sinon');
 var Chat = require('../db/db').Chat;
 var User = require('../db/db').User;
 var Message = require('../db/db').Message;
+var sockets = require('../sockets');
 
 describe('Chat Controller', function () {
 
@@ -131,10 +132,19 @@ describe('Chat Controller', function () {
       1234: {id: chatId, messages: []},
       5678: {id: 5678, messages: []}
     };
-    var userStub = sinon.stub(Chat, 'findOne', function (query) {
-      return new Promise (function (resolve, reject) {
-        resolve(chats[query.where.id]);
+    var userStub;
+    beforeEach(function (done) {
+      chatStub= sinon.stub(Chat, 'findOne', function (query) {
+        return new Promise (function (resolve, reject) {
+          resolve(chats[query.where.id]);
+        });
       });
+      done();
+    });
+
+    afterEach(function (done) {
+      chatStub.restore();
+      done();
     });
 
     it('should retrieve all messages in the chat', function (done) {
@@ -165,6 +175,7 @@ describe('Chat Controller', function () {
     var attached = false;
     var inputMessage;
     var messageStub;
+    var broadcastStub;
 
     beforeEach(function (done) {
       messageStub = sinon.stub(Message, 'create', function (messageObj) {
@@ -188,9 +199,17 @@ describe('Chat Controller', function () {
               resolve(messageObj);
             });
           };
+          messageObj.toJSON = function () {
+            return this;
+          };
           resolve(messageObj);
         });
       });
+
+      broadcastStub = sinon.stub(chatController, 'broadcastMessage', function () {
+        void 0;
+      });
+
       done();
     });
 
@@ -200,6 +219,7 @@ describe('Chat Controller', function () {
       attached = false;
       inputMessage = {};
       messageStub.restore();
+      broadcastStub.restore();
       done();
     });
 
@@ -222,6 +242,35 @@ describe('Chat Controller', function () {
           expect(messageB).to.deep.equal(inputMessage);
           done();
         });
+    });
+  });
+
+  describe('Broadcast Messages to each socket', function () {
+    var chatId = 123;
+    var facebookId = '9876';
+    var message = {text: 'hello world'};
+    var chatStub;
+
+    beforeEach(function (done) {
+      sockets[facebookId] = {
+        emit: function () { void 0; }
+      };
+      chatStub = sinon.stub(Chat, 'findOne', function () {
+        return new Promise (function (resolve, reject) {
+          resolve({users: [{facebookId: facebookId}, {facebookId: 'non-existant'}]});
+        });
+      });
+      done();
+    });
+
+    afterEach(function (done) {
+      chatStub.restore();
+      done();
+    });
+
+    it('should emit messages to the relevant sockets', function (done) {
+      chatController.broadcastMessage(chatId, message);
+      done();
     });
   });
 
