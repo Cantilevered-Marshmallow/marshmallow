@@ -21,6 +21,8 @@
 #import "ChatViewController.h"
 #import "User.h"
 
+#import "NSString+ChatTitle.h"
+
 @interface ChatsTableViewController : UITableViewController <UITableViewDelegate, UITableViewDataSource>
 
 # pragma mark - Facebook Properties

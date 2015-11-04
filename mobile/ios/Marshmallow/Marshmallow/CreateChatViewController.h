@@ -19,6 +19,8 @@
 #import "Chats.h"
 #import "ChatViewController.h"
 
+#import "NSString+ChatTitle.h"
+
 @interface CreateChatViewController : UITableViewController <UISearchResultsUpdating, UITableViewDataSource, UITableViewDelegate>
 
 @property (strong, nonatomic) UISearchController *searchController;
