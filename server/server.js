@@ -31,8 +31,10 @@ io.use(function (socket, next) {
 });
 
 io.on('connection', function (socket) {
+  console.log('Socket connected: '+socket.id);
   sockets[socket.token.facebookId] = socket;
   socket.on('disconnect', function () {
+    console.log('Socket disconnected: '+ socket.id);
     delete sockets[socket.token.facebookId];
   });
 });

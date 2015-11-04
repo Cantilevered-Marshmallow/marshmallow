@@ -66,7 +66,6 @@ module.exports = {
   },
 
   postMessage: function (chatId, facebookId, message) {
-    this.broadcastMessage(chatId, message);
     return Message.create(message)
       .then(function (messageInstance) {
         if (message.hasOwnProperty('redditAttachment')) {
@@ -76,11 +75,14 @@ module.exports = {
         }
       })
       .then(function (messageInstance) {
+        var bcMessage = messageInstance.toJSON();
+        bcMessage.redditAttachment = message.redditAttachment || {};
+        this.broadcastMessage(chatId, bcMessage);
         return Promise.all([
             messageInstance.setChat(chatId),
             messageInstance.setUser(facebookId)
           ]);
-      });
+      }.bind(this));
   },
 
   getMessagesByTime: function (facebookId, timestamp) {
