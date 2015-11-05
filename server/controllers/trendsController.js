@@ -2,6 +2,9 @@ var request = require('request');
 
 module.exports = {
 
+  /** 
+   * Fetch data from reddit service
+   */
   getTrends: function () {
     return new Promise (function (resolve, reject) {
       request('http://' + process.env.TRENDS_PORT_5555_TCP_ADDR + ':5555/trends', function (err, _, body) {
