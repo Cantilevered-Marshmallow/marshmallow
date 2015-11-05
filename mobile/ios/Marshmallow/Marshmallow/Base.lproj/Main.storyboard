@@ -50,7 +50,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iGy-NE-xE0">
                                 <rect key="frame" x="0.0" y="500" width="600" height="54"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your message here" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-5r-c26" customClass="CMFormattedTextView">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Enter your message" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="yZc-5r-c26" customClass="CMFormattedTextView">
                                         <rect key="frame" x="107" y="10" width="385" height="41"/>
                                         <animations/>
                                         <constraints>

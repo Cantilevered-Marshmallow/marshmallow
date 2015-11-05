@@ -549,7 +549,7 @@
 }
 
 - (void)resetMessageInput {
-    self.messageInput.placeholder = @"Enter your message here";
+    self.messageInput.placeholder = @"Enter your message";
     self.messageInput.text = @"";
 }
 
