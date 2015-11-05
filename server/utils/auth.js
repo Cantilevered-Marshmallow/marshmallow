@@ -4,6 +4,13 @@ var jwt = require('jsonwebtoken');
 
 module.exports = {
 
+  /**
+   * Middleware for authenticating using user's Facebook access token
+   *
+   * @param {object} req - Express request object
+   * @param {object} res - Express response object
+   * @param {function} next - Express next callback function
+   */
   authFacebook: function (req, res, next) {
     var user = req.body;
     if (!(user.oauthToken && user.facebookId)){
@@ -25,6 +32,13 @@ module.exports = {
     }
   },
 
+  /**
+   * Creates a user - forward to login if user already exists
+   *   otherwise, forwards on to _authToken method once created
+   *
+   * @param {object} req - Express request object
+   * @param {object} res - Express response object
+   */
   signup: function (req, res) {
     var user = {
       email:      req.body.email,
@@ -41,6 +55,12 @@ module.exports = {
       });
   },
 
+  /**
+   * Checks whether user exists then forwards to _authToken method
+   *
+   * @param {object} req - Express request object
+   * @param {object} res - Express response object
+   */
   login: function (req, res) {
     var user = {
       email:      req.body.email,
@@ -57,6 +77,14 @@ module.exports = {
       });
   },
 
+  /**
+   * Middleware for authenticating users by verifying their JWT on the
+   * 'token' HTTP header value
+   *
+   * @param {object} req - Express request object
+   * @param {object} res - Express response object
+   * @param {function} next - Express next function
+   */
   authenticate: function (req, res, next) {
     jwt.verify(req.get('token'), process.env.JWT_SECRET, function (err, user) {
       if (err){
@@ -68,6 +96,13 @@ module.exports = {
     });
   },
 
+  /**
+   * Creates a new JWT using user credentials and sends it back to the client
+   *
+   * @param {object} req - Express request object
+   * @param {object} res - Express response object
+   * @param {object} user - User object
+   */
   _authToken: function (req, res, user) {
     user = user.toJSON();
     var token = jwt.sign(user, process.env.JWT_SECRET, { expiresIn: '1d' });
