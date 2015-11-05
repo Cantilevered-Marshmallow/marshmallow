@@ -1,6 +1,6 @@
 var expect = require('chai').expect;
-var sequelize = require('../controllers/db').sequelize;
-var User = require('../controllers/db').User;
+var sequelize = require('../utils/db').sequelize;
+var User = require('../utils/db').User;
 
 describe('User Model', function () {
 

@@ -7,8 +7,8 @@ var app = express();
 var httpServer = require('http').Server(app);
 var io = require('socket.io')(httpServer);
 
-var router = require('./router');
-var sockets = require('./controllers/sockets');
+var router = require('./utils/router');
+var sockets = require('./utils/sockets');
 
 // Mount middleware
 

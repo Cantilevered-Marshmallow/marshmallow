@@ -1,4 +1,4 @@
-var userController = require('./userController');
+var userController = require('../controllers/userController');
 var request = require('request');
 var jwt = require('jsonwebtoken');
 
