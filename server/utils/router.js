@@ -5,10 +5,17 @@ var userController = require('../controllers/userController');
 var chatController = require('../controllers/chatController');
 var trendsController = require('../controllers/trendsController');
 
+/* Handle user signup */
 router.post('/signup', auth.authFacebook, auth.signup);
 
+/* Handle user login */
 router.post('/login', auth.authFacebook, auth.login);
 
+/**
+ * Handle POST to /userlist
+ * Request to the route filters a client's facebook freinds that are not 
+ * signed up with marshmallow
+ */
 router.post('/userlist', auth.authenticate, function (req, res) {
   userController.userList(req.body.users)
     .then(function (users) {
@@ -19,6 +26,7 @@ router.post('/userlist', auth.authenticate, function (req, res) {
     });
 });
 
+/* Handle GET to /messages */
 router.get('/messages', auth.authenticate, function (req, res) {
   if (!req.query.timestamp){
     res.status(400).send('No timestamp sent');
@@ -32,6 +40,10 @@ router.get('/messages', auth.authenticate, function (req, res) {
     });
 });
 
+/**
+ * Handle POST to /chat 
+ * Request to this route creates a new chat room between list of users
+ */
 router.post('/chat', auth.authenticate, function (req, res) {
   chatController.createChat(req.body.users)
     .then(function (chat) {
@@ -44,6 +56,10 @@ router.post('/chat', auth.authenticate, function (req, res) {
     });
 });
 
+/**
+ * Handle GET to /chat
+ * Respond with list of chat rooms a particular client is in
+ */
 router.get('/chat', auth.authenticate, function (req, res) {
   chatController.retrieveChats(req.user)
     .then(function (chats) {
@@ -55,6 +71,10 @@ router.get('/chat', auth.authenticate, function (req, res) {
     });
 });
 
+/**
+ * Handle GET to /chat/:id
+ * Respond with all messages in a particular chat
+ */
 router.get('/chat/:id', auth.authenticate, function (req, res) {
   chatController.getMessages(req.params.id)
     .then(function (messages) {
@@ -65,6 +85,10 @@ router.get('/chat/:id', auth.authenticate, function (req, res) {
     });
 });
 
+/**
+ * Handle POST to /chat/:id
+ * Posts a message to a particular chat room
+ */
 router.post('/chat/:id', auth.authenticate, function (req, res) {
   chatController.postMessage(req.params.id, req.user.facebookId, req.body)
     .then(function () {
@@ -75,6 +99,7 @@ router.post('/chat/:id', auth.authenticate, function (req, res) {
     });
 });
 
+/* Handle GET to /trends */
 router.get('/trends', auth.authenticate, function (req, res) {
   trendsController.getTrends()
     .then(function (links) {
