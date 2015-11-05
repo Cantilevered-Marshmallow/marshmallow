@@ -15,14 +15,17 @@
     
     _contacts = [[NSMutableArray alloc] init];
     
+    // Load the contacts data
     [self fetchContacts];
     
+    // Setup for long polling of contacts
     self.fetchContactsTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(checkForNewFriends:) userInfo:nil repeats:YES];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
     [super viewDidDisappear:animated];
     
+    // Invalidate long polling
     [self.fetchContactsTimer invalidate];
     self.fetchContactsTimer = nil;
 }
@@ -62,7 +65,6 @@
 }
 
 - (void)fetchContacts {
-    
     self.contacts = [NSMutableArray arrayWithArray:[Contact MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
     
     // Sorts the contacts in alphabetical order by their name property
@@ -80,6 +82,7 @@
                                           id result,
                                           NSError *error) {
         if (!error) {
+            // Capture the ids into an array
             NSMutableArray *friends = [[NSMutableArray alloc] initWithArray:result[@"data"]];
             NSMutableArray *friendIds = [[NSMutableArray alloc] initWithCapacity:friends.count];
             for (NSDictionary *friend in friends) {
@@ -91,6 +94,7 @@
             User *user = [User MR_findFirstByAttribute:@"oauthToken" withValue:[[FBSDKAccessToken currentAccessToken] tokenString] inContext:[NSManagedObjectContext MR_defaultContext]];
             [networkRequest requestWithHttpVerb:@"POST" url:@"/userlist" data:@{@"users": friendIds} jwt:user.jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
+                    // Filter the respone to only have the contacts that are using our service
                     NSArray *filteredFriends = response[@"users"];
                     
                     NSMutableArray *discardedFriends = [NSMutableArray array];
@@ -103,7 +107,9 @@
                     [friends removeObjectsInArray:discardedFriends];
                     
                     for (NSDictionary *friend in friends) {
+                        // Has the contact been saved yet?
                         if (![Contact MR_findFirstByAttribute:@"contactId" withValue:friend[@"id"] inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                            // Save the contact
                             [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                                 Contact *contact = [Contact MR_createEntityInContext:localContext];
                                 contact.name = friend[@"name"];

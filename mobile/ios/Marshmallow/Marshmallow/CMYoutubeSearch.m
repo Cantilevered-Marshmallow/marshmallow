@@ -18,10 +18,13 @@
     self = [super init];
     
     if (self) {
+        // Set the prompt of the search bar
         self.prompt = @"Search Youtube";
         
+        // Initialize data
         self.results = [NSMutableArray array];
         
+        // Intiialize table view
         self.resultsTable = [[UITableView alloc] initWithFrame:self.subViewRect];
         self.resultsTable.delegate = self;
         self.resultsTable.dataSource = self;
@@ -30,8 +33,10 @@
         
         self.subview = self.resultsTable;
         
+        // Assign delegate of search bar
         self.searchBar.delegate = self;
         
+        // Find the API key for youtube
         NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"keys" ofType:@"plist"];
         self.apiKey = [NSDictionary dictionaryWithContentsOfFile:plistPath][@"YOUTUBE_KEY"];
     }
@@ -74,10 +79,11 @@
     if (sender.state == UIGestureRecognizerStateEnded) {
         CMYoutubeCell *cell = ((CMYoutubeCell *) sender.view);
         
-        if (self.selectedCell != nil) {
+        if (self.selectedCell != nil) { // Deselect the previously selected cell
             [self.selectedCell setSelected:NO];
         }
         
+        // Select the cell
         [cell setSelected:YES];
         self.selectedCell = cell;
     }
@@ -90,16 +96,18 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
+        // Query the Youtube API
         [manager GET:[NSString stringWithFormat:@"https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&key=%@&q=%@", self.apiKey, text]
           parameters:nil
              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                  dispatch_async(dispatch_get_main_queue(), ^{
                      NSArray *results = responseObject[@"items"];
                      
-                     if (self.results.count > 0) {
+                     if (self.results.count > 0) { // Did we already have some results?
                          [self.results removeAllObjects];
                      }
                      
+                     // Parse the response
                      for (NSDictionary *item in results) {
                          NSDictionary *snippet = item[@"snippet"];
                          NSString *videoId = item[@"id"][@"videoId"];
@@ -107,6 +115,7 @@
                          [self.results addObject:@{@"id": videoId, @"snippet": snippet}];
                      }
                      
+                     // Reload the data
                      [self.resultsTable reloadData];
                  });
              }
@@ -123,6 +132,7 @@
 
 - (void)attachSelected:(id)sender {
     if (self.selectedCell != nil) {
+        // Prepare the result
         CMYoutubeSearchResult *result = [[CMYoutubeSearchResult alloc] init];
         result.title = self.selectedCell.title.text;
         result.channel = self.selectedCell.channel.text;
@@ -132,8 +142,10 @@
         NSDictionary *video = self.results[[self.resultsTable indexPathForCell:self.selectedCell].row];
         result.videoId = video[@"id"];
         
+        // Send the result to the delegate
         [self.delegate videoSelected:result];
         
+        // Invoke super
         [super attachSelected:sender];
     }
 }

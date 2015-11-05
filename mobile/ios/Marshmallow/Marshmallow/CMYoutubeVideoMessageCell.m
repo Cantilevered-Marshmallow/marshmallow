@@ -45,6 +45,7 @@
 }
 
 - (void)showVideo:(id)sender {
+    // Play the video when selected
     XCDYouTubeVideoPlayerViewController *videoPlayerController = [[XCDYouTubeVideoPlayerViewController alloc] initWithVideoIdentifier:self.videoId];
     [self.viewController presentMoviePlayerViewControllerAnimated:videoPlayerController];
 }

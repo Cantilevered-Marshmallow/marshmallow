@@ -5,6 +5,7 @@
 //  Created by Brandon Borders on 10/30/15.
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
+//  Basically it detects when the input changes and converts campfire codes to emojis
 
 #import "CMFormattedTextView.h"
 

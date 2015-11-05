@@ -138,7 +138,7 @@
         if (!error) {
             NSMutableArray *friends = [[NSMutableArray alloc] initWithArray:result[@"data"]];
             NSMutableArray *friendIds = [[NSMutableArray alloc] initWithCapacity:friends.count];
-            for (NSDictionary *friend in friends) {
+            for (NSDictionary *friend in friends) { // Create an array of the facebookIds
                 [friendIds addObject:friend[@"id"]];
             }
             
@@ -147,6 +147,7 @@
                 if (!error) {
                     NSArray *filteredFriends = response[@"users"];
                     
+                    // Filter the response from facebook with our server data
                     NSMutableArray *discardedFriends = [NSMutableArray array];
                     for (NSDictionary *friend in friends) {
                         if (![filteredFriends containsObject:friend[@"id"]]) {
@@ -156,6 +157,7 @@
                     
                     [friends removeObjectsInArray:discardedFriends];
                     
+                    // Save each contact
                     for (NSDictionary *friend in friends) {
                         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                             Contact *contact = [Contact MR_createEntityInContext:localContext];

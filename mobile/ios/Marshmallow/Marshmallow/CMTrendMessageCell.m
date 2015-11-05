@@ -14,9 +14,11 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
+        // Initialize the thumbnail
         self.thumbnail = [[UIImageView alloc] initWithFrame:CGRectMake(10, 130, 150, 140)];
         self.thumbnail.contentMode = UIViewContentModeScaleAspectFit;
         
+        // Initialize the title
         self.trendTitle = [[UILabel alloc] initWithFrame:CGRectMake(170, 165, 200, 60)];
         self.trendTitle.numberOfLines = 0;
         self.trendTitle.font = [UIFont fontWithName:self.trendTitle.font.fontName size:16];
@@ -35,6 +37,7 @@
 
 - (void)cellTapped:(id)sender {
     SFSafariViewController *safariViewController = [[SFSafariViewController alloc] initWithURL:[NSURL URLWithString:self.url] entersReaderIfAvailable:NO];
+    // Tell the delegate to display the web page
     [self.delegate displayTrend:safariViewController];
 }
 

@@ -33,6 +33,7 @@
 }
 
 - (void)handleTapOnImage:(id)sender {
+    // Popup for larger version of image
     CMImagePopup *pop = [[CMImagePopup alloc] init];
     [pop.iv setImage:self.googleImage.image];
     
