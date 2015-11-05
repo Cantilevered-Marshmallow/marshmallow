@@ -13,6 +13,8 @@
 
 #import "User.h"
 
+#import "HDNotificationView.h"
+
 @interface CMNetworkRequest : NSObject
 
 @property NSURL *baseUrl;

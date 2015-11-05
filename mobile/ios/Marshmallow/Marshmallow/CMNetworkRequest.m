@@ -51,6 +51,7 @@
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Error: %@", error);
+                  [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                   
                   if (operation.response.statusCode == 401) {
                       // Attempt to reauth the user
@@ -68,6 +69,7 @@
                }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                    NSLog(@"Error: %@", error);
+                   [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                    
                    if (operation.response.statusCode == 401) {
                        // Attempt to reauth the user
@@ -94,11 +96,14 @@
                         }
                         failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                             NSLog(@"Error: %@", error);
+                            [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
+                            
                             response(error, nil);
                         }];
               }
               failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                   NSLog(@"Unable to log back in");
+                  [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Authentication Error" message:@"Your session has expired. Restart the app in a few minutes" isAutoHide:YES];
               }];
     } else if([verb isEqualToString:@"POST"]) {
         [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:@"/login"]
@@ -113,11 +118,14 @@
                         }
                         failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                             NSLog(@"Error: %@", error);
+                            [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
+                            
                             response(error, nil);
                         }];
               }
               failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                   NSLog(@"Unable to log back in");
+                  [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Authentication Error" message:@"Your session has expired. Restart the app in a few minutes" isAutoHide:YES];
               }];
     }
 }

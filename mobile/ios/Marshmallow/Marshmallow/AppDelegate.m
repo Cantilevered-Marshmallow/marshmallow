@@ -25,6 +25,7 @@
     
     if ([FBSDKAccessToken currentAccessToken]) { // Are we logged in?
         UITabBarController *tb = [storyboard instantiateViewControllerWithIdentifier:@"TabsController"];
+        tb.delegate = self;
         UINavigationController *nc = [tb viewControllers][0];
         ChatsTableViewController *chatsVC = [nc viewControllers][0];
         chatsVC.user = [User MR_findFirstByAttribute:@"name" withValue:[[FBSDKProfile currentProfile] name]];
@@ -59,6 +60,14 @@
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     [MagicalRecord cleanUp];
+}
+
+- (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    for (UIViewController *vc in tabBarController.viewControllers) {
+        if (![vc isEqual:viewController]) {
+            [vc viewDidDisappear:NO];
+        }
+    }
 }
 
 #pragma mark - Facebook SDK

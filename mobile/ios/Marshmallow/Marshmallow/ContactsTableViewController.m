@@ -17,7 +17,14 @@
     
     [self fetchContacts];
     
-    [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(checkForNewFriends:) userInfo:nil repeats:YES];
+    self.fetchContactsTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(checkForNewFriends:) userInfo:nil repeats:YES];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self.fetchContactsTimer invalidate];
+    self.fetchContactsTimer = nil;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
