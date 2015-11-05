@@ -13,7 +13,7 @@ router.post('/login', auth.authFacebook, auth.login);
 
 /**
  * Handle POST to /userlist
- * This route supports filtering a client's facebook freinds that are not 
+ * Request to the route filters a client's facebook freinds that are not 
  * signed up with marshmallow
  */
 router.post('/userlist', auth.authenticate, function (req, res) {
@@ -42,7 +42,7 @@ router.get('/messages', auth.authenticate, function (req, res) {
 
 /**
  * Handle POST to /chat 
- * Creates a new chat room between list of users
+ * Request to this route creates a new chat room between list of users
  */
 router.post('/chat', auth.authenticate, function (req, res) {
   chatController.createChat(req.body.users)
