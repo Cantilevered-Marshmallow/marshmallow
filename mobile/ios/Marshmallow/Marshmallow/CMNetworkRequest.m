@@ -5,16 +5,21 @@
 //  Created by Brandon Borders on 10/16/15.
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
+//  Welcome to hell :)
+//  Or the beautiful world of networking and authorization management.
 
 #import "CMNetworkRequest.h"
 
 @implementation CMNetworkRequest
+
+// Oh and it may or may not be filled with unicorns
 
 - (id)init {
     self = [super init];
     
     if (self) {
         _baseUrl = [NSURL URLWithString:@"http://159.203.90.131:8080"];
+        // Assign the base url to be our server
         _manager = [AFHTTPRequestOperationManager manager];
     }
     
@@ -42,15 +47,20 @@
     
     NSLog(@"Data: %@", data);
     
-    if ([verb isEqualToString:@"GET"]) {
+    if ([verb isEqualToString:@"GET"]) { // Is it going to be a GET request?
         [_manager GET:[[_baseUrl absoluteString] stringByAppendingString:url]
            parameters:data
               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                   NSLog(@"Success");
+                  // Yay it worked
                   response(nil, responseObject);
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Error: %@", error);
+                  
+                  // Wwwwhhyy???
+                  
+                  // Notify the user
                   [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                   
                   if (operation.response.statusCode == 401) {
@@ -60,7 +70,7 @@
                       response(error, nil);
                   }
               }];
-    } else if ([verb isEqualToString:@"POST"]) {
+    } else if ([verb isEqualToString:@"POST"]) { // Or is it going to be a POST request?
         [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:url]
             parameters:data
                success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
@@ -69,6 +79,10 @@
                }
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                    NSLog(@"Error: %@", error);
+                   
+                   // Wwwwhhyy???
+                   
+                   // Notify the user
                    [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                    
                    if (operation.response.statusCode == 401) {
@@ -82,12 +96,17 @@
 }
 
 - (void)reauthUser:(NSString *)jwt httpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data response:(void (^)(NSError *, NSDictionary *))response {
+    // Take step back and take a gander at the beauty below.
+    
+    // Get the user object for use later
     User *user = [User MR_findFirstByAttribute:@"jwt" withValue:jwt inContext:[NSManagedObjectContext MR_defaultContext]];
-    if ([verb isEqualToString:@"GET"]) {
+    if ([verb isEqualToString:@"GET"]) { // Is it going to be a GET request?
         [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:@"/login"]
            parameters:@{@"facebookId": [[FBSDKAccessToken currentAccessToken] userID], @"email": user.email, @"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString]}
               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                  // Update the user with the new jwt
                   [self updateJwt:responseObject[@"token"] givenOldJwt:jwt];
+                  
                   [_manager GET:[[_baseUrl absoluteString] stringByAppendingString:url]
                      parameters:data
                         success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -96,6 +115,9 @@
                         }
                         failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                             NSLog(@"Error: %@", error);
+                            
+                            // Shoot, seems like the server might really be broken.
+                            
                             [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                             
                             response(error, nil);
@@ -103,13 +125,18 @@
               }
               failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                   NSLog(@"Unable to log back in");
+                  
+                  // Well that's odd...
+                  
                   [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Authentication Error" message:@"Your session has expired. Restart the app in a few minutes" isAutoHide:YES];
               }];
-    } else if([verb isEqualToString:@"POST"]) {
+    } else if([verb isEqualToString:@"POST"]) { // Or is it going to be a POST request?
         [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:@"/login"]
            parameters:@{@"facebookId": [[FBSDKAccessToken currentAccessToken] userID], @"email": user.email, @"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString]}
               success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                  // Update the user with the new jwt
                   [self updateJwt:responseObject[@"token"] givenOldJwt:jwt];
+                  
                   [_manager POST:[[_baseUrl absoluteString] stringByAppendingString:url]
                      parameters:data
                         success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -118,6 +145,9 @@
                         }
                         failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                             NSLog(@"Error: %@", error);
+                            
+                            // Shoot, seems like the server might really be broken.
+                            
                             [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                             
                             response(error, nil);
@@ -125,12 +155,16 @@
               }
               failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                   NSLog(@"Unable to log back in");
+                  
+                  // Well that's odd...
+                  
                   [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Authentication Error" message:@"Your session has expired. Restart the app in a few minutes" isAutoHide:YES];
               }];
     }
 }
 
 - (void)updateJwt:(NSString *)newJwt givenOldJwt:(NSString *)oldJwt {
+    // Save the new jwt
     [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
         User *user = [User MR_findFirstByAttribute:@"jwt" withValue:oldJwt inContext:localContext];
         user.jwt = newJwt;

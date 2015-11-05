@@ -13,15 +13,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Initialize data
     _request = [[CMNetworkRequest alloc] init];
     self.chats = [Chats MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]];
     
     [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Loading..." message:@"Retrieving chats" isAutoHide:NO];
     
+    // Fetch the chats first
     [self fetchChats:self];
     
+    // Setup long polling of chats
     self.fetchChatsTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchChats:) userInfo:nil repeats:true];
     
+    // Bind teh create chat button
     self.navigationItem.rightBarButtonItem.target = self;
     self.navigationItem.rightBarButtonItem.action = @selector(createChat:);
 }
@@ -37,6 +41,7 @@
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
+    // Setup long polling again if it was invalidated
     if (!self.fetchChatsTimer) {
         self.fetchChatsTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(fetchChats:) userInfo:nil repeats:true];
     }
@@ -47,6 +52,7 @@
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
     
+    // Invalidate the long polling
     [self.fetchChatsTimer invalidate];
     self.fetchChatsTimer = nil;
 }
@@ -74,7 +80,10 @@
             if (!error) {
                 for (NSDictionary *fetchedChat in response[@"chats"]) {
                     NSString *chatId = [NSString stringWithFormat:@"%@", fetchedChat[@"chatId"]];
+                    
+                    // Does the chat already exist?
                     if (![Chats MR_findFirstByAttribute:@"chatId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                        // Filter contacts with the ones participating in the chat
                         NSMutableArray<Contact *> *contacts = [NSMutableArray arrayWithArray:[Contact MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]]];
 
                         NSArray *friendIds = fetchedChat[@"users"];
@@ -87,6 +96,7 @@
                             }
                         }
                         
+                        // Save the new chat
                         [MagicalRecord saveWithBlockAndWait:^(NSManagedObjectContext *localContext) {
                             Chats *chats = [Chats MR_createEntityInContext:localContext];
                             
@@ -96,19 +106,13 @@
                     }
                 }
                 dispatch_async(dispatch_get_main_queue(), ^{
+                    // Reload the data
                     self.chats = [Chats MR_findAllInContext:[NSManagedObjectContext MR_defaultContext]];
                     
                     [self.tableView reloadData];
                     
                     [HDNotificationView hideNotificationView];
                 });
-            } else {
-                // Try to log back in
-                [_request requestWithHttpVerb:@"POST" url:@"/login" data:@{@"oauthToken": [[FBSDKAccessToken currentAccessToken] tokenString], @"email": self.user.email, @"facebookId": [[FBSDKAccessToken currentAccessToken] userID]} jwt:nil response:^(NSError *error, NSDictionary *response) {
-                    if (!error) {
-                        [self fetchChats:self];
-                    }
-                }];
             }
         }];
     });
@@ -117,6 +121,8 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     if ([[segue identifier] isEqualToString:@"showChat"]) {
         ChatViewController *vc = segue.destinationViewController;
+        
+        // Pass the appropiate data to the chat view controller
         vc.chat = sender;
         vc.user = self.user;
     }
@@ -134,7 +140,10 @@
                 NSArray *fetchedMessages = response[@"messages"];
                 for (NSDictionary *fetchedMessage in fetchedMessages) {
                     NSString *chatId = [NSString stringWithFormat:@"%@", fetchedMessage[@"chatId"]];
+                    
+                    // Does the message already exist?
                     if (![Message MR_findFirstByAttribute:@"chatsId" withValue:chatId inContext:[NSManagedObjectContext MR_defaultContext]]) {
+                        // Save the new message
                         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
                             Message *message = [Message MR_createEntityInContext:localContext];
                             message.body = fetchedMessage[@"text"];

@@ -19,8 +19,10 @@
     self = [super init];
     
     if (self) {
+        // Set the prompt of the search bar
         self.prompt = @"Search Google Images";
         
+        // Initialize subview for google image searches
         SFFocusViewLayout *collectionLayout = [[SFFocusViewLayout alloc] init];
         collectionLayout.standardHeight = 100.f;
         collectionLayout.focusedHeight = 300.f;
@@ -30,10 +32,13 @@
         self.collectionView.dataSource = self;
         self.collectionView.backgroundColor = [UIColor whiteColor];
         
+        // Register cell for collection view
         [self.collectionView registerNib:[UINib nibWithNibName:@"GoogleImageCollectionCell" bundle:nil] forCellWithReuseIdentifier:@"googleImageCell"];
         
+        // Add the subview to the hierarchy
         self.subview = self.collectionView;
         
+        // Assign the delegate of the search bar
         self.searchBar.delegate = self;
     }
     
@@ -49,12 +54,14 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         manager.requestSerializer = [AFJSONRequestSerializer serializer];
         
+        // Query Google Images API
         [manager GET:[NSString
                       stringWithFormat:@"https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=%@&rsz=5", text]
                             parameters:nil
                                success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                                    NSArray *results = responseObject[@"responseData"][@"results"];
                                    
+                                   // Parse the urls
                                    NSMutableArray *urls = [NSMutableArray array];
                                    for (NSDictionary *result in results) {
                                        NSURL *url = [NSURL URLWithString:result[@"url"]];
@@ -65,6 +72,7 @@
                                    self.images = [NSArray arrayWithArray:urls];
                                    
                                    dispatch_async(dispatch_get_main_queue(), ^{
+                                       // Reload the data
                                        [self.collectionView reloadData];
                                    });
                                }
@@ -107,15 +115,17 @@
     if (sender.state == UIGestureRecognizerStateEnded) {
         CMGImageCell *cell = ((CMGImageCell *) sender.view);
         
-        if (self.selectedCell) {
+        if (self.selectedCell) { // Deselect the previous selected cell
             ((UIImageView *)self.selectedCell.subviews[1]).image = nil;
         }
         
+        // Select the cell
         self.selectedCell = cell;
         
         NSIndexPath *indexPath = [((UICollectionView *) cell.superview) indexPathForCell:cell];
         self.selectedUrl = self.images[indexPath.row];
         
+        // Create checkmark image for cell
         NSError *error;
         UIImage *checkbox = [[FAKIonIcons iconWithIdentifier:@"ion-ios-checkmark-outline" size:50 error:&error] imageWithSize:CGSizeMake(50, 50)];
         checkbox = [checkbox imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -125,11 +135,15 @@
 }
 
 - (void)attachSelected:(id)sender {
+    // Prepare the result object
     CMGImageResult *result = [[CMGImageResult alloc] init];
     result.image = ((UIImageView *)self.selectedCell.subviews[0]).image;
     result.url = self.selectedUrl;
+    
+    // Send the result to the delegate
     [self.delegate imageSelected:result];
     
+    // Invoke super
     [super attachSelected:sender];
 }
 

@@ -44,6 +44,7 @@
     // Set up sockets for messages
     self.socket = [[SocketIOClient alloc] initWithSocketURL:@"http://159.203.90.131:8080" options:@{@"log": @YES, @"connectParams": @{@"token": self.user.jwt}}];
     
+    // Log helpers for state of socket
     [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"Socket connected");
     }];
@@ -52,8 +53,11 @@
         NSLog(@"Scoket Error: %@", data);
     }];
     
+    // Event listener for new messages
     [self.socket on:@"message" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSDictionary *fetchedMessage = (NSDictionary *)data[0];
+        
+        // Save the new message
         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
             Message *message = [Message MR_createEntityInContext:localContext];
             message.body = fetchedMessage[@"text"];
@@ -135,8 +139,9 @@
     titleLabel.textContainer.maximumNumberOfLines = 1;
     titleLabel.delegate = self;
     titleLabel.textAlignment = NSTextAlignmentCenter;
-    titleLabel.contentSize = CGSizeMake(200, titleLabel.contentSize.height - 10);
+    titleLabel.contentSize = CGSizeMake(200, titleLabel.contentSize.height - 10); // Try to prevent scrolling of the text view
     
+    // Recognizer for the title view
     UITapGestureRecognizer *titleRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(editTitle:)];
     titleRecognizer.numberOfTapsRequired = 2;
     
@@ -434,6 +439,8 @@
 
 - (void)editTitle:(id)sender {
     UITextView *titleLabel = ((UITextView *)self.navigationItem.titleView);
+    
+    // Enable editing of the title view
     titleLabel.editable = YES;
     titleLabel.selectable = YES;
     [titleLabel selectAll:nil];
@@ -441,11 +448,13 @@
 }
 
 - (BOOL)textView:(UITextView *)textView shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    if ([text  isEqualToString:@"\n"]) {
+    if ([text  isEqualToString:@"\n"]) { // Hacky way, check to see if the enter key was pressed
+        // Disable editing of the title view
         [textView resignFirstResponder];
         textView.editable = NO;
         textView.selectable = NO;
         
+        // Update the chat room with the new title
         [MagicalRecord saveWithBlock:^(NSManagedObjectContext *localContext) {
             Chats *chat = [Chats MR_findFirstByAttribute:@"chatId" withValue:self.chat.chatId inContext:localContext];
             chat.chatTitle = textView.text;
@@ -549,7 +558,7 @@
 }
 
 - (void)resetMessageInput {
-    self.messageInput.placeholder = @"Enter your message here";
+    self.messageInput.placeholder = @"Enter your message";
     self.messageInput.text = @"";
 }
 

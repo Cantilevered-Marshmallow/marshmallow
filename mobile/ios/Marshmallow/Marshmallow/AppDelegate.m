@@ -24,6 +24,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     if ([FBSDKAccessToken currentAccessToken]) { // Are we logged in?
+        // Then display the chats view controller
         UITabBarController *tb = [storyboard instantiateViewControllerWithIdentifier:@"TabsController"];
         tb.delegate = self;
         UINavigationController *nc = [tb viewControllers][0];
@@ -31,6 +32,7 @@
         chatsVC.user = [User MR_findFirstByAttribute:@"name" withValue:[[FBSDKProfile currentProfile] name]];
         [[self window] setRootViewController:tb];
     } else {
+        // Or else show them the welcome wagon
         WelcomeViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"WelcomeViewController"];
         [[self window] setRootViewController:vc];
     }
@@ -63,6 +65,7 @@
 }
 
 - (void)tabBarController:(UITabBarController *)tabBarController didSelectViewController:(UIViewController *)viewController {
+    // Proper handling of view life cycle in tab bar controller
     for (UIViewController *vc in tabBarController.viewControllers) {
         if (![vc isEqual:viewController]) {
             [vc viewDidDisappear:NO];

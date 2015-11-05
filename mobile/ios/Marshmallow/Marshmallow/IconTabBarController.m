@@ -16,6 +16,7 @@
     NSError *error;
     NSArray *items = self.tabBar.items;
     
+    // Customize the icons of the tbar bar items
     for (UITabBarItem *item in items) {
         if ([item.title isEqualToString:@"Chats"]) {
             item.image = [[FAKIonIcons iconWithIdentifier:@"ion-ios-chatboxes-outline" size:35 error:&error] imageWithSize:CGSizeMake(35, 35)];

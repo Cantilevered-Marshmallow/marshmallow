@@ -14,10 +14,13 @@
     self = [super init];
     
     if (self) {
+        // Set the type of the popup
         self.type = MMPopupTypeAlert;
         
+        // Sert the background color of the popup
         self.backgroundColor = [UIColor whiteColor];
         
+        // Set the constraints of the view
         double width = [UIScreen mainScreen].bounds.size.width - 50;
         
         [self mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -25,6 +28,7 @@
             make.height.mas_equalTo(500);
         }];
         
+        // Add a cancel button
         self.btnCancel = [UIButton mm_buttonWithTarget:self action:@selector(actionHide:)];
         [self addSubview:self.btnCancel];
         [self.btnCancel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -34,6 +38,7 @@
         [self.btnCancel setTitle:@"Cancel" forState:UIControlStateNormal];
         [self.btnCancel setTitleColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:255/255.0] forState:UIControlStateNormal];
         
+        // Add a confirm button
         self.btnConfirm = [UIButton mm_buttonWithTarget:self action:@selector(trendSelected:)];
         [self addSubview:self.btnConfirm];
         [self.btnConfirm mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -43,6 +48,7 @@
         [self.btnConfirm setTitle:@"Attach" forState:UIControlStateNormal];
         [self.btnConfirm setTitleColor:[UIColor colorWithRed:0/255.0 green:122/255.0 blue:255/255.0 alpha:255/255.0] forState:UIControlStateNormal];
         
+        // Add the table view
         self.trendsTable = [[UITableView alloc] init];
         self.trendsTable.dataSource = self;
         self.trendsTable.delegate = self;
@@ -60,6 +66,7 @@
     return self;
 }
 
+// Preferred initializer
 - (CMTrendsPopup *)initWithJwt:(NSString *)jwt {
     self = [self init];
     
@@ -67,6 +74,7 @@
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
             
+            // Fetch the trends
             [request requestWithHttpVerb:@"GET" url:@"/trends" data:@{} jwt:jwt response:^(NSError *error, NSDictionary *response) {
                 if (!error) {
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -109,11 +117,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     CMTrendCell *cell = [self.trendsTable cellForRowAtIndexPath:indexPath];
     
-    if (self.selectedTrend != nil) {
+    if (self.selectedTrend != nil) { // Deselect the previously selected trend
         self.selectedTrend.accessoryView = nil;
     }
     
     if (cell.accessoryView == nil) {
+        // Add a checkmark to the cell
         NSError *error;
         UIImage *checkbox = [[FAKIonIcons iconWithIdentifier:@"ion-ios-checkmark-outline" size:50 error:&error] imageWithSize:CGSizeMake(50, 50)];
         checkbox = [checkbox imageWithRenderingMode:UIImageRenderingModeAlwaysTemplate];
@@ -132,6 +141,7 @@
 
 - (void)showViewController:(SFSafariViewController *)controller {
     [super hide];
+    // Have the delegate display the web view
     [self.delegate displayTrend:controller];
 }
 
@@ -140,6 +150,7 @@
 }
 
 - (void)trendSelected:(id)sender {
+    // Send the selected trend to the delegate
     [self.delegate trendSelected:self.trends[[self.trendsTable indexPathForCell:self.selectedTrend].row]];
     
     [super hide];
