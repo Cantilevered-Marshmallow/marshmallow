@@ -20,7 +20,7 @@ var dbTask = require('gulp-db')({
 
 
 gulp.task('linter', function() {
-  return gulp.src(['controllers/*.js'])
+  return gulp.src(['controllers/*.js', 'utils/*.js'])
              .pipe(jshint())
              .pipe(jshint.reporter('default'))
              .pipe(jshint.reporter('fail'));

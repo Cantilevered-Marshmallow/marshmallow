@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
 var jwt = require('jsonwebtoken');
-var auth = require('../controllers/auth');
+var auth = require('../utils/auth');
 var userController = require('../controllers/userController');
 
 var UserA = {
