@@ -1,4 +1,4 @@
-var User = require('../db/db').User;
+var User = require('./db').User;
 
 module.exports = {
 

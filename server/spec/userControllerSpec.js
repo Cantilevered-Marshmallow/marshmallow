@@ -1,7 +1,7 @@
 var expect = require('chai').expect;
-var userController = require('../user/userController');
 var sinon = require('sinon');
-var User = require('../db/db').User;
+var User = require('../controllers/db').User;
+var userController = require('../controllers/userController');
 
 // User.create
 // User.findOne

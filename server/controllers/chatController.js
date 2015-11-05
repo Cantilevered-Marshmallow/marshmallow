@@ -1,8 +1,8 @@
-var Chat = require('../db/db').Chat;
-var User = require('../db/db').User;
-var Message = require('../db/db').Message;
-var RedditAttachment = require('../db/db').RedditAttachment;
-var sockets = require('../sockets');
+var Chat = require('./db').Chat;
+var User = require('./db').User;
+var Message = require('./db').Message;
+var RedditAttachment = require('./db').RedditAttachment;
+var sockets = require('./sockets');
 
 module.exports = {
 
