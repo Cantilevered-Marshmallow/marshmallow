@@ -20,6 +20,8 @@
 
 @property NSMutableArray<Contact *> *contacts;
 
+@property (nonatomic, strong) NSTimer *fetchContactsTimer;
+
 - (void)checkForNewFriends:(NSTimer *)timer;
 
 - (void)fetchContacts;
