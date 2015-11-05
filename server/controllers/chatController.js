@@ -6,6 +6,12 @@ var sockets = require('../utils/sockets');
 
 module.exports = {
 
+  /**
+   * Creates a chat with list of users provided
+   *
+   * @param {array} userList - List of user facebookIds
+   * @return {Promise <object>} - Chat instance object
+   */
   createChat: function (userList) {
     if (userList.length < 2) {
       return new Promise(function (resolve, reject) {
@@ -23,6 +29,12 @@ module.exports = {
     });
   },
 
+  /**
+   * Retrieves chats that the user belongs to
+   *
+   * @param {object} user - User object with email and facebookId properties
+   * @return {Promise <array>} - Array of chat objects
+   */
   retrieveChats: function (user) {
     return User.findOne(
       {
@@ -41,6 +53,12 @@ module.exports = {
       });
   },
 
+  /**
+   * Retrieves messages for a single chat
+   *
+   * @param {string} chatId - ID of the chat you want messages of
+   * @return {Promise <array>} - Array of message objects
+   */
   getMessages: function (chatId) {
     return Chat.findOne({
       where: {id: parseInt(chatId)},
@@ -52,6 +70,12 @@ module.exports = {
       });
   },
 
+  /**
+   * Broadcasts message using socket.io to all users in the chat
+   *
+   * @param {string} chatId - ID of the chat you want to broadcast to
+   * @param {object} message - Message object to be broadcasted
+   */
   broadcastMessage: function (chatId, message) {
     Chat.findOne({
       where: {id: chatId},
@@ -65,6 +89,14 @@ module.exports = {
     });
   },
 
+  /**
+   * Posts a message to a chat by a single user
+   *
+   * @param {string} chatId - ID of the chat that will receive the message
+   * @param {string} facebookId - Facebook ID of the poster
+   * @param {object} message - Message object to be posted
+   * @return {Promise <array>} - Array of message instance objects
+   */
   postMessage: function (chatId, facebookId, message) {
     return Message.create(message)
       .then(function (messageInstance) {
@@ -85,6 +117,13 @@ module.exports = {
       }.bind(this));
   },
 
+  /**
+   * Retrieves all relevant messages for a user filtered by a cut-off timestamp
+   *
+   * @param {string} facebookId - Facebook ID of the relevant user
+   * @param {string} timestamp - ISO-8601 time from which messages are required
+   * @return {Promise <array>} - Array of message objects
+   */
   getMessagesByTime: function (facebookId, timestamp) {
     return User.findById(facebookId)
       .then(function (user) {

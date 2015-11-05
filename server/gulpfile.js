@@ -18,7 +18,6 @@ var dbTask = require('gulp-db')({
   dialect: 'mysql'
 });
 
-
 gulp.task('linter', function() {
   return gulp.src(['controllers/*.js', 'utils/*.js'])
              .pipe(jshint())
