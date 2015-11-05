@@ -1,10 +1,10 @@
 var expect = require('chai').expect;
-var chatController = require('../chat/chatController');
 var sinon = require('sinon');
-var Chat = require('../db/db').Chat;
-var User = require('../db/db').User;
-var Message = require('../db/db').Message;
-var sockets = require('../sockets');
+var chatController = require('../controllers/chatController');
+var Chat = require('../controllers/db').Chat;
+var User = require('../controllers/db').User;
+var Message = require('../controllers/db').Message;
+var sockets = require('../controllers/sockets');
 
 describe('Chat Controller', function () {
 

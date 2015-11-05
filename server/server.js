@@ -8,7 +8,7 @@ var httpServer = require('http').Server(app);
 var io = require('socket.io')(httpServer);
 
 var router = require('./router');
-var sockets = require('./sockets');
+var sockets = require('./controllers/sockets');
 
 // Mount middleware
 

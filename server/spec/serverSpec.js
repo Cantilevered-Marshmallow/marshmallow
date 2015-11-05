@@ -1,6 +1,6 @@
 var request = require('supertest');
 var sinon = require('sinon');
-var auth = require('../auth');
+var auth = require('../controllers/auth');
 
 /* For reference
    http://glebbahmutov.com/blog/how-to-correctly-unit-test-express-server/

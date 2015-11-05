@@ -1,9 +1,9 @@
 var router = require('express').Router();
 
-var auth = require('./auth');
-var userController = require('./user/userController');
-var chatController = require('./chat/chatController');
-var trendsController = require('./trends/trendsController');
+var auth = require('./controllers/auth');
+var userController = require('./controllers/userController');
+var chatController = require('./controllers/chatController');
+var trendsController = require('./controllers/trendsController');
 
 router.post('/signup', auth.authFacebook, auth.signup);
 

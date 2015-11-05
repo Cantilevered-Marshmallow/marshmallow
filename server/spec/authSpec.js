@@ -1,8 +1,8 @@
 var expect = require('chai').expect;
 var sinon = require('sinon');
-var auth = require('../auth');
-var userController = require('../user/userController');
 var jwt = require('jsonwebtoken');
+var auth = require('../controllers/auth');
+var userController = require('../controllers/userController');
 
 var UserA = {
               email: "cantilevered.marshmallow@gmail.com",
