@@ -5,14 +5,10 @@
 //  Created by Brandon Borders on 10/16/15.
 //  Copyright © 2015 Cantilevered Marshmallow. All rights reserved.
 //
-//  Welcome to hell :)
-//  Or the beautiful world of networking and authorization management.
 
 #import "CMNetworkRequest.h"
 
 @implementation CMNetworkRequest
-
-// Oh and it may or may not be filled with unicorns
 
 - (id)init {
     self = [super init];
@@ -52,13 +48,10 @@
            parameters:data
               success:^(AFHTTPRequestOperation *operation, NSDictionary *responseObject) {
                   NSLog(@"Success");
-                  // Yay it worked
                   response(nil, responseObject);
               }
               failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                   NSLog(@"Error: %@", error);
-                  
-                  // Wwwwhhyy???
                   
                   // Notify the user
                   [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
@@ -80,8 +73,6 @@
                failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                    NSLog(@"Error: %@", error);
                    
-                   // Wwwwhhyy???
-                   
                    // Notify the user
                    [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                    
@@ -96,8 +87,6 @@
 }
 
 - (void)reauthUser:(NSString *)jwt httpVerb:(NSString *)verb url:(NSString *)url data:(NSDictionary *)data response:(void (^)(NSError *, NSDictionary *))response {
-    // Take step back and take a gander at the beauty below.
-    
     // Get the user object for use later
     User *user = [User MR_findFirstByAttribute:@"jwt" withValue:jwt inContext:[NSManagedObjectContext MR_defaultContext]];
     if ([verb isEqualToString:@"GET"]) { // Is it going to be a GET request?
@@ -116,8 +105,7 @@
                         failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                             NSLog(@"Error: %@", error);
                             
-                            // Shoot, seems like the server might really be broken.
-                            
+                            // Notify the user
                             [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                             
                             response(error, nil);
@@ -126,8 +114,7 @@
               failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                   NSLog(@"Unable to log back in");
                   
-                  // Well that's odd...
-                  
+                  // Notify the user
                   [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Authentication Error" message:@"Your session has expired. Restart the app in a few minutes" isAutoHide:YES];
               }];
     } else if([verb isEqualToString:@"POST"]) { // Or is it going to be a POST request?
@@ -146,8 +133,7 @@
                         failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                             NSLog(@"Error: %@", error);
                             
-                            // Shoot, seems like the server might really be broken.
-                            
+                            // Notify the user
                             [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Network Error" message:@"An error occured trying to communicate with our server" isAutoHide:YES];
                             
                             response(error, nil);
@@ -156,8 +142,7 @@
               failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                   NSLog(@"Unable to log back in");
                   
-                  // Well that's odd...
-                  
+                  // Notify the user
                   [HDNotificationView showNotificationViewWithImage:[UIImage imageNamed:@"Icon"] title:@"Authentication Error" message:@"Your session has expired. Restart the app in a few minutes" isAutoHide:YES];
               }];
     }
