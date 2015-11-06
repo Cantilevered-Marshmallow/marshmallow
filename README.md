@@ -72,7 +72,7 @@ Before attempting to start the server, make sure you have the trends package in 
 #### API Endpoints
 -------------------------------------------------------------------------------
 ##### POST /signup
-**Description**: Creates a new user
+**Description**: Creates a new user<br />
 **Authentication Required**: No
 ```
 /* Request Body */
@@ -91,7 +91,7 @@ Before attempting to start the server, make sure you have the trends package in 
 ```
 -------------------------------------------------------------------------------
 ##### POST /login
-**Description**: Authenticates a client by generating a token
+**Description**: Authenticates a client by generating a token<br />
 **Authentication Required**: No
 ```
 /* Request Body */
@@ -103,7 +103,7 @@ Before attempting to start the server, make sure you have the trends package in 
 ```
 -------------------------------------------------------------------------------
 ##### POST /userlist
-**Description**: Given a list of facebook users, filter out the ones that are not signed up with marshamallow and return the list
+**Description**: Given a list of facebook users, filter out the ones that are not signed up with marshamallow and return the list<br />
 **Authentication Required**: Yes
 ```
 /* Request Body */
@@ -123,8 +123,8 @@ Before attempting to start the server, make sure you have the trends package in 
 ```
 -------------------------------------------------------------------------------
 ##### POST /chat
-**Description**: Creates a new chatroom for the given users. *Needs at least two users in the users array*
-Authentication Required: Yes
+**Description**: Creates a new chatroom for the given users. *Needs at least two users in the users array*<br />
+**Authentication Required**: Yes
 ```
 /* Request Body */
 {
@@ -141,8 +141,8 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### GET /chat
-**Description**: Retrieves list of chats the user is in
-Authentication Required: Yes
+**Description**: Retrieves list of chats the user is in<br />
+**Authentication Required**: Yes
 ```
 /* Response Body */
 {
@@ -157,8 +157,8 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### POST /chat/:id
-**Description**: Post a message to a chat
-Authentication Required: Yes
+**Description**: Post a message to a chat<br />
+**Authentication Required**: Yes
 ```
 /* Request Body */
 {
@@ -169,7 +169,7 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### GET /chat/:id
-**Description**: Retrieve messages in a chat
+**Description**: Retrieve messages in a chat<br />
 **Authentication Required**: Yes
 ```
 /* Response Body */
@@ -193,7 +193,7 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### GET /messages?timestamp=<ISO8601 time>
-**Description**: Retrieve messages in all chats since time x (the `timestamp` param)
+**Description**: Retrieve messages in all chats since time x (the `timestamp` param)<br />
 **Authentication Required**: Yes
 ```
 /* Response Body */
@@ -217,7 +217,7 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### GET /trends
-**Description**: Retrieve trending links (from reddit)
+**Description**: Retrieve trending links (from reddit)<br />
 **Authentication Required**: Yes
 ```
 /* Response Body */
@@ -267,3 +267,4 @@ gulp server-integration-test
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
+
