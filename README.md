@@ -4,7 +4,7 @@
 
 # Marshmallow
   
-![marshmallow](https://ieicecreamwrites.files.wordpress.com/2009/12/img_2878.jpg)
+![marshmallow](http://i.imgur.com/Ms6GvgR.png)
 
 > An iOS chat app made for easy sharing of news, videos and images with your friends.
 
@@ -26,6 +26,8 @@
         * [Tasks](#tasks)
     * [Server](#server-development)
         * [API Endpoints](#api-endpoints)
+        * [Backend Structure Diagram](#backend-structure-diagram)
+        * [Database Schema](#databae-schema)
         * [Installing Server Dependencies](#installing-server-dependencies)
         * [Running tests](#running-server-side-tests)
 4. [Team](#team)
@@ -229,6 +231,12 @@ Authentication Required: Yes
 }
 ```
 -------------------------------------------------------------------------------
+
+#### Backend Structure Diagram
+![backend structure diagram](http://i.imgur.com/egLb2Q2.png)
+
+#### Database Schema
+![database schema](http://i.imgur.com/A2puG7v.png)
 
 #### Installing Server Dependencies 
 From within the `server` directory:
