@@ -20,6 +20,11 @@
     [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
     
     [MagicalRecord setupCoreDataStack];
+
+// Uncomment for seeding of local data
+//#ifdef DEBUG
+//    [CMDataSeeder run];
+//#endif
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
