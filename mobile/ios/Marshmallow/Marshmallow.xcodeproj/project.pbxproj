@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		364657F77767A455F3CBCE88 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 023EE8426BB42A69D623412D /* Pods.framework */; };
 		A73E2D89A0532F3CB964A5DA /* (null) in Frameworks */ = {isa = PBXBuildFile; };
+		CA02D5511BED2D5500AA4128 /* CMDataSeeder.m in Sources */ = {isa = PBXBuildFile; fileRef = CA02D5501BED2D5500AA4128 /* CMDataSeeder.m */; };
 		CA05B40F1BD95F64002FD8D6 /* CreateChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */; };
 		CA12389C1BE9475700AF3BD5 /* CMTrendMessageCell.m in Sources */ = {isa = PBXBuildFile; fileRef = CA12389B1BE9475700AF3BD5 /* CMTrendMessageCell.m */; };
 		CA12389F1BE9891700AF3BD5 /* NSString+ChatTitle.m in Sources */ = {isa = PBXBuildFile; fileRef = CA12389E1BE9891700AF3BD5 /* NSString+ChatTitle.m */; };
@@ -78,6 +79,8 @@
 		023EE8426BB42A69D623412D /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		0F55AAEA840E95876E77E0F5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		90F487F126BFF4BF85174A4D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		CA02D54F1BED2D5500AA4128 /* CMDataSeeder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMDataSeeder.h; sourceTree = "<group>"; };
+		CA02D5501BED2D5500AA4128 /* CMDataSeeder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CMDataSeeder.m; sourceTree = "<group>"; };
 		CA05B40D1BD95F64002FD8D6 /* CreateChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateChatViewController.h; sourceTree = "<group>"; };
 		CA05B40E1BD95F64002FD8D6 /* CreateChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateChatViewController.m; sourceTree = "<group>"; };
 		CA12389A1BE9475700AF3BD5 /* CMTrendMessageCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CMTrendMessageCell.h; sourceTree = "<group>"; };
@@ -321,6 +324,8 @@
 				CA12389B1BE9475700AF3BD5 /* CMTrendMessageCell.m */,
 				CA12389D1BE9891700AF3BD5 /* NSString+ChatTitle.h */,
 				CA12389E1BE9891700AF3BD5 /* NSString+ChatTitle.m */,
+				CA02D54F1BED2D5500AA4128 /* CMDataSeeder.h */,
+				CA02D5501BED2D5500AA4128 /* CMDataSeeder.m */,
 			);
 			path = Marshmallow;
 			sourceTree = "<group>";
@@ -655,6 +660,7 @@
 				CAA8F2311BD5BE9E009844AC /* HDNotificationView.m in Sources */,
 				CA6AF1111BD861DB0025FC6C /* Chats+CoreDataProperties.m in Sources */,
 				CAFCBF751BD0279C00C9E28B /* main.m in Sources */,
+				CA02D5511BED2D5500AA4128 /* CMDataSeeder.m in Sources */,
 				CA6AF1131BD861DB0025FC6C /* Contact+CoreDataProperties.m in Sources */,
 				CAC352271BD1C1DC00AEF3D3 /* ChatsTableViewController.m in Sources */,
 				CA94E3E81BE3DBCB00EF4EAE /* CMImagePopup.m in Sources */,
