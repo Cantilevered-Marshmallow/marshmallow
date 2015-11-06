@@ -36,10 +36,11 @@
     Contact *contact = self.contacts[indexPath.row];
     
     NSArray *subviews = [cell subviews];
-    // Ewww, why so many nested statements?
-    // Because the API forced me
+    
+    // Loop to find the content view of the cell
     for (UIView *view in subviews) {
         if ([[[view class] description] isEqualToString:@"UITableViewCellContentView"]) {
+            // Loop through each subview of the content view
             for (UIView *subview in [view subviews]) {
                 if ([[[subview class] description] isEqualToString:@"UIImageView"]) {
                     UIImageView *iv = ((UIImageView *)subview);
