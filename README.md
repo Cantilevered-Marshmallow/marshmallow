@@ -74,39 +74,39 @@ Authentication Required: No
 ```
 /* Request Body */
 {
-  “email”: String,
-  “oauthToken”: String,
-  “facebookId”: String
+  “email”: STRING,
+  “oauthToken”: STRING,
+  “facebookId”: STRING
 }
 ```
 ```
 /* Response Body */
 {
-  "email": String,
-  "facebookId": String
+  "email": STRING,
+  "facebookId": STRING
 }
 ```
 -------------------------------------------------------------------------------
 ##### POST /login
-Description: Authenticates a client
+Description: Authenticates a client by generating a token
 Authentication Required: No
 ```
 /* Request Body */
 {
-  “email”: String,
-  “oauthToken”: String,
-  “facebookId”: String
+  “email”: STRING,
+  “oauthToken”: STRING,
+  “facebookId”: STRING
 }
 ```
 -------------------------------------------------------------------------------
 ##### POST /userlist
-Description: Filters list of users by intersection with list of users on the service
+Description: Given a list of facebook users, filter out the ones that are not signed up with marshamallow and return the list
 Authentication Required: Yes
 ```
 /* Request Body */
 {
   “users”: [
-    facebookIds (Strings)
+    facebookIds (STRING) ...
   ]
 }
 ```
@@ -114,38 +114,38 @@ Authentication Required: Yes
 /* Response Body */
 {
   “users: [
-    facebookIds (Strings)
+    facebookIds (STRING) ...
   ]
 }
 ```
 -------------------------------------------------------------------------------
 ##### POST /chat
-Description: Creates a new chatroom for the given users. *Needs at least two users*
+Description: Creates a new chatroom for the given users. *Needs at least two users in the users array*
 Authentication Required: Yes
 ```
 /* Request Body */
 {
   “users”: [
-    facebookIds (Strings)
+    facebookIds (STRING)
   ]
 }
 ```
 ```
 /* Response Body */
 {
-  “chatId”: String
+  “chatId”: STRING
 }
 ```
 -------------------------------------------------------------------------------
 ##### GET /chat
-Description: Retrieves list of chats the user is a part of
+Description: Retrieves list of chats the user is in
 Authentication Required: Yes
 ```
 /* Response Body */
 {
   “chats”:[
     {
-      chatId: String,
+      chatId: STRING,
       users: [facebookIds, ..]
     },
     ...
@@ -159,9 +159,9 @@ Authentication Required: Yes
 ```
 /* Request Body */
 {
-  “text”: String,
-  “youtubeVideoId”: String,
-  “googleImageId”: String
+  “text”: STRING,
+  “youtubeVideoId”: STRING,
+  “googleImageId”: STRING
 }
 ```
 -------------------------------------------------------------------------------
@@ -221,9 +221,9 @@ Authentication Required: Yes
 {
   “links”: [
     {
-      “url”: String,
-      “thumbnail”: String,
-      “title”: String
+      “url”: STRING,
+      “thumbnail”: STRING,
+      “title”: STRING
     }, ...
   ]
 }
