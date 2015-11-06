@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.org/Cantilevered-Marshmallow/marshmallow.svg)](https://travis-ci.org/Cantilevered-Marshmallow/marshmallow)
 
 # Marshmallow
-  
+
 ![marshmallow](http://i.imgur.com/Ms6GvgR.png)
 
 > An iOS chat app made for easy sharing of news, videos and images with your friends.
@@ -16,10 +16,10 @@
 
 ## Table of Contents
 
-1. [Usage](#Usage)
+1. [Requirements](#requirements)
+2. [Usage](#Usage)
     * [Client](#client)
     * [Server](#server)
-2. [Requirements](#requirements)
 3. [Development](#development)
     * [Client](#client-development)
         * [Installing Client Dependencies](#installing-client-dependencies)
@@ -33,19 +33,6 @@
 4. [Team](#team)
 5. [Contributing](#contributing)
 
-## Usage
-
-#### Client
-{instructions on how to run client on local machine}
-#### Server
-Before attempting to start the server, make sure you have the trends package in your Go workspace. Find the repo [here](https://github.com/Cantilevered-Marshmallow/trends).
-
-1. Go to the the server directory
-2. Fill out environment variables in `docker-compose.yml.example`
-3. Rename file `docker-compose.yml.example` to `docker-compose.yml`
-4. Activate docker machine
-4. Run `docker-compose up` 
-
 ## Requirements
 
 - `Node 0.10.x`
@@ -55,24 +42,38 @@ Before attempting to start the server, make sure you have the trends package in 
 - `mysql`
 - `Go`
 
-## Development
+## Usage
 
-### Client
+#### Client
 
-#### Installing Dependencies
+This is all done in the `mobile/ios/Marshmallow` directory:
 
-From within the `mobile/ios/Marshmallow` directory:
+1. Installing Dependencies
+  ```sh
+  pod install
+  ```
 
-```sh
-pod install
-```
+2. Open `Marshmallow.xcworkspace` in Xcode
+
+3. In Xcode open the file `keys.example.plist`, where it says `KEY_HERE` replace it with your Youtube API Key
+
+4. Now you can click build in Xcode and start using the app in the simulator
+
+#### Server
+Before attempting to start the server, make sure you have the trends package in your Go workspace. Find the repo [here](https://github.com/Cantilevered-Marshmallow/trends).
+
+1. Go to the the server directory
+2. Fill out environment variables in `docker-compose.yml.example`
+3. Rename file `docker-compose.yml.example` to `docker-compose.yml`
+4. Activate docker machine
+4. Run `docker-compose up`
 
 ### Server
 #### API Endpoints
 -------------------------------------------------------------------------------
 ##### POST /signup
-Description: Creates a new user
-Authentication Required: No
+**Description**: Creates a new user
+**Authentication Required**: No
 ```
 /* Request Body */
 {
@@ -90,8 +91,8 @@ Authentication Required: No
 ```
 -------------------------------------------------------------------------------
 ##### POST /login
-Description: Authenticates a client by generating a token
-Authentication Required: No
+**Description**: Authenticates a client by generating a token
+**Authentication Required**: No
 ```
 /* Request Body */
 {
@@ -102,8 +103,8 @@ Authentication Required: No
 ```
 -------------------------------------------------------------------------------
 ##### POST /userlist
-Description: Given a list of facebook users, filter out the ones that are not signed up with marshamallow and return the list
-Authentication Required: Yes
+**Description**: Given a list of facebook users, filter out the ones that are not signed up with marshamallow and return the list
+**Authentication Required**: Yes
 ```
 /* Request Body */
 {
@@ -122,7 +123,7 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### POST /chat
-Description: Creates a new chatroom for the given users. *Needs at least two users in the users array*
+**Description**: Creates a new chatroom for the given users. *Needs at least two users in the users array*
 Authentication Required: Yes
 ```
 /* Request Body */
@@ -140,7 +141,7 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### GET /chat
-Description: Retrieves list of chats the user is in
+**Description**: Retrieves list of chats the user is in
 Authentication Required: Yes
 ```
 /* Response Body */
@@ -156,7 +157,7 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### POST /chat/:id
-Description: Post a message to a chat
+**Description**: Post a message to a chat
 Authentication Required: Yes
 ```
 /* Request Body */
@@ -168,8 +169,8 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### GET /chat/:id
-Description: Retrieve messages in a chat
-Authentication Required: Yes
+**Description**: Retrieve messages in a chat
+**Authentication Required**: Yes
 ```
 /* Response Body */
 {
@@ -192,8 +193,8 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### GET /messages?timestamp=<ISO8601 time>
-Description: Retrieve messages in all chats since time x (the `timestamp` param)
-Authentication Required: Yes
+**Description**: Retrieve messages in all chats since time x (the `timestamp` param)
+**Authentication Required**: Yes
 ```
 /* Response Body */
 {
@@ -216,8 +217,8 @@ Authentication Required: Yes
 ```
 -------------------------------------------------------------------------------
 ##### GET /trends
-Description: Retrieve trending links (from reddit)
-Authentication Required: Yes
+**Description**: Retrieve trending links (from reddit)
+**Authentication Required**: Yes
 ```
 /* Response Body */
 {
@@ -238,7 +239,7 @@ Authentication Required: Yes
 #### Database Schema
 ![database schema](http://i.imgur.com/A2puG7v.png)
 
-#### Installing Server Dependencies 
+#### Installing Server Dependencies
 From within the `server` directory:
 
 ```sh
