@@ -149,8 +149,7 @@
     if (facebookIds.count >= 2) { // Must have selected at least one person
         CMNetworkRequest *request = [[CMNetworkRequest alloc] init];
         
-        User *user = [User MR_findFirstByAttribute:@"oauthToken" withValue:[[FBSDKAccessToken currentAccessToken] tokenString] inContext:[NSManagedObjectContext MR_defaultContext]];
-        [request requestWithHttpVerb:@"POST" url:@"/chat" data:@{@"users": facebookIds} jwt:user.jwt response:^(NSError *error, NSDictionary *response) {
+        [request requestWithHttpVerb:@"POST" url:@"/chat" data:@{@"users": facebookIds} jwt:self.user.jwt response:^(NSError *error, NSDictionary *response) {
             if (!error) {
                     dispatch_async(dispatch_get_main_queue(), ^{
                         // Save the new chat
@@ -170,7 +169,7 @@
                                 // Pass data to the chat view controller
                                 ChatViewController *chatViewController = [sb instantiateViewControllerWithIdentifier:@"ChatViewController"];
                                 chatViewController.chat = [Chats MR_findFirstByAttribute:@"chatId" withValue:response[@"chatId"] inContext:[NSManagedObjectContext MR_defaultContext]];
-                                chatViewController.user = [User MR_findFirstByAttribute:@"oauthToken" withValue:[[FBSDKAccessToken currentAccessToken] tokenString] inContext:[NSManagedObjectContext MR_defaultContext]];
+                                chatViewController.user = self.user;
                                 
                                 // Mangle the navigation controller's stack to not have this view controller in it
                                 NSArray *viewControllers = [[NSArray alloc] initWithObjects:[self.navigationController.viewControllers objectAtIndex:0], chatViewController, nil];

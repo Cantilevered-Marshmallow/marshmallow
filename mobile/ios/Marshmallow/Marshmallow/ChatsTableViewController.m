@@ -125,6 +125,10 @@
         // Pass the appropiate data to the chat view controller
         vc.chat = sender;
         vc.user = self.user;
+    } else if([[segue identifier] isEqualToString:@"startAChat"]) {
+        CreateChatViewController *vc = segue.destinationViewController;
+        
+        vc.user = self.user;
     }
 }
 
