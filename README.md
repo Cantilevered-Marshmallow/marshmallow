@@ -255,7 +255,7 @@ $ gulp test
 
 To run server integration tests, from within `server` directory:
 ```sh
-gulp server-integration-test
+$ gulp server-integration-test
 ```
 
 
