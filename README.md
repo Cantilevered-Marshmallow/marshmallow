@@ -8,32 +8,27 @@
 
 > An iOS chat app made for easy sharing of news, videos and images with your friends.
 
-## Team
+# Team
 
-  - __Product Owner__: Daniel O'Leary
-  - __Scrum Master__: Brian Leung
-  - __Development Team Members__: Daniel O'Leary, Brian Leung, Brandon Borders
+  - __Product Owner__: [Daniel O'Leary](https://github.com/dkoleary88)
+  - __Scrum Master__: [Brian Leung](https://github.com/brianleungwh)
+  - __Development Team Members__: [Daniel O'Leary](https://github.com/dkoleary88), [Brian Leung](https://github.com/brianleungwh), [Brandon Borders](https://github.com/camelCaseD)
 
-## Table of Contents
+# Table of Contents
 
 1. [Requirements](#requirements)
 2. [Usage](#Usage)
     * [Client](#client)
     * [Server](#server)
-3. [Development](#development)
-    * [Client](#client-development)
-        * [Installing Client Dependencies](#installing-client-dependencies)
-        * [Tasks](#tasks)
-    * [Server](#server-development)
-        * [API Endpoints](#api-endpoints)
-        * [Backend Structure Diagram](#backend-structure-diagram)
-        * [Database Schema](#databae-schema)
-        * [Installing Server Dependencies](#installing-server-dependencies)
-        * [Running tests](#running-server-side-tests)
-4. [Team](#team)
-5. [Contributing](#contributing)
+3. [Backend Development](#backend-development)
+    * [API Endpoints](#api-endpoints)
+    * [Backend Architecture](#backend-architecture)
+    * [Database Schema](#databae-schema)
+    * [Installing Server Dependencies](#installing-server-dependencies)
+    * [Running Server tests](#running-server-side-tests)
+4. [Contributing](#contributing)
 
-## Requirements
+# Requirements
 
 - `Node 0.10.x`
 - `Xcode 7`
@@ -42,9 +37,9 @@
 - `mysql`
 - `Go`
 
-## Usage
+# Usage
 
-#### Client
+### Client
 
 This is all done in the `mobile/ios/Marshmallow` directory:
 
@@ -59,7 +54,7 @@ This is all done in the `mobile/ios/Marshmallow` directory:
 
 4. Now you can click build in Xcode and start using the app in the simulator
 
-#### Server
+### Server
 Before attempting to start the server, make sure you have the trends package in your Go workspace. Find the repo [here](https://github.com/Cantilevered-Marshmallow/trends).
 
 1. Go to the the server directory
@@ -68,8 +63,9 @@ Before attempting to start the server, make sure you have the trends package in 
 4. Activate docker machine
 4. Run `docker-compose up`
 
-### Server
-#### API Endpoints
+
+# Backend Development
+### API Endpoints
 -------------------------------------------------------------------------------
 ##### POST /signup
 **Description**: Creates a new user<br />
@@ -233,28 +229,28 @@ Before attempting to start the server, make sure you have the trends package in 
 ```
 -------------------------------------------------------------------------------
 
-#### Backend Structure Diagram
+### Backend Architecture
 ![backend structure diagram](http://i.imgur.com/egLb2Q2.png)
 
-#### Database Schema
+### Database Schema
 ![database schema](http://i.imgur.com/A2puG7v.png)
 
-#### Installing Server Dependencies
+### Installing Server Dependencies
 From within the `server` directory:
 
-```sh
-npm install
+```
+$ npm install
 ```
 
-#### Running Server-Side Tests
+### Running Server-Side Tests
 Before running any tests:
-1. Start the `mysql` server on your local machine
-2. Fill out the environment variables in `env.json.example`. `JWT_SECRET` can be any string.
-3. Rename the file `.env.json.example` to `.env.json`
+1. Start the `mysql` server on your local machine<br />
+2. Fill out the environment variables in `env.json.example`. `JWT_SECRET` can be any string.<br />
+3. Rename the file `.env.json.example` to `.env.json`<br />
 
 To run unit tests, from within the `server` directory:
-```sh
-gulp test
+```
+$ gulp test
 ```
 
 To run server integration tests, from within `server` directory:
