@@ -243,7 +243,7 @@ $ npm install
 ```
 
 ### Running Server-Side Tests
-Before running any tests:
+Before running any tests:<br />
 1. Start the `mysql` server on your local machine<br />
 2. Fill out the environment variables in `env.json.example`. `JWT_SECRET` can be any string.<br />
 3. Rename the file `.env.json.example` to `.env.json`<br />
