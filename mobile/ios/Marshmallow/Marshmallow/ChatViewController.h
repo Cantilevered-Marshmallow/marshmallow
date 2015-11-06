@@ -37,6 +37,8 @@
 
 #import "CMFormattedTextView.h"
 
+#define CGRectSetPos( r, x, y ) CGRectMake( x, y, r.size.width, r.size.height )
+
 @interface ChatViewController : UIViewController <CMGImageSearchDelegate, CMYoutubeSearchDelegate, CMTrendsDelegate, UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 
 @property (weak, nonatomic) IBOutlet CMFormattedTextView *messageInput;
@@ -78,5 +80,8 @@
 - (void)toggleAttachmentAction;
 
 - (void)resetMessageInput;
+
+- (void)keyboardDidShow:(NSNotification *)notification;
+- (void)keyboardDidHide:(NSNotification *)notification;
 
 @end

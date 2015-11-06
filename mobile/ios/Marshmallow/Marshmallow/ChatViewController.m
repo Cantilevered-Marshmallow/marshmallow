@@ -24,8 +24,6 @@
     self.messageInput.placeholderColor = [UIColor grayColor];
     self.messageInput.text = @"";
     
-    [self.messageInput becomeFirstResponder];
-    
     // Initialize HTTP helper
     _request = [[CMNetworkRequest alloc] init];
     
@@ -146,6 +144,9 @@
     titleRecognizer.numberOfTapsRequired = 2;
     
     [self.navigationItem.titleView addGestureRecognizer:titleRecognizer];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardDidShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardDidHideNotification object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -158,6 +159,8 @@
     
     // Have the socket connect
     [self.socket connect];
+    
+    [self.messageInput becomeFirstResponder];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -468,6 +471,18 @@
     }
     
     return YES;
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification {
+    CGSize keyboardSize = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue].size;
+    double height = [UIScreen mainScreen].bounds.size.height;
+    // Assign new frame to your view
+    self.chatControls.frame = CGRectSetPos(self.chatControls.frame, self.chatControls.frame.origin.x, height - self.tabBarController.tabBar.frame.size.height - 5 - keyboardSize.height);
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification {
+    double height = [UIScreen mainScreen].bounds.size.height;
+    self.chatControls.frame = CGRectSetPos(self.chatControls.frame, self.chatControls.frame.origin.x, height - self.tabBarController.tabBar.frame.size.height - 54);
 }
 
 #pragma mark - Handle attachments

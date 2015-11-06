@@ -31,6 +31,8 @@
 
 @property (strong, nonatomic) NSMutableArray<NSIndexPath *> *selectedPaths;
 
+@property (strong, nonatomic) User *user;
+
 - (void)fetchContacts;
 
 - (void)createChat:(id)sender;

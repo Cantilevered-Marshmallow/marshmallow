@@ -19,6 +19,7 @@
 #import "CMNetworkRequest.h"
 
 #import "ChatViewController.h"
+#import "CreateChatViewController.h"
 #import "User.h"
 
 #import "NSString+ChatTitle.h"

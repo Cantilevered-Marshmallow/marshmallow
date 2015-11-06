@@ -68,7 +68,7 @@
                                         </constraints>
                                         <state key="normal" title="Send"/>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZCM-lf-9aL">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZCM-lf-9aL">
                                         <rect key="frame" x="26" y="15" width="46" height="30"/>
                                         <animations/>
                                         <state key="normal" title="Attach"/>
@@ -82,20 +82,20 @@
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="yZc-5r-c26" firstAttribute="leading" secondItem="ZCM-lf-9aL" secondAttribute="trailing" constant="35" id="6fg-nm-off"/>
                                     <constraint firstItem="yZc-5r-c26" firstAttribute="top" secondItem="iGy-NE-xE0" secondAttribute="top" constant="10" id="83x-H5-i7D"/>
                                     <constraint firstItem="AdG-m8-Wqh" firstAttribute="centerY" secondItem="yZc-5r-c26" secondAttribute="centerY" id="BWo-VM-pey"/>
-                                    <constraint firstItem="ZCM-lf-9aL" firstAttribute="top" secondItem="iGy-NE-xE0" secondAttribute="top" constant="15" id="Ep0-eb-OES"/>
                                     <constraint firstItem="yZc-5r-c26" firstAttribute="leading" secondItem="iGy-NE-xE0" secondAttribute="leading" constant="107" id="HwM-cQ-0eg"/>
                                     <constraint firstAttribute="bottom" secondItem="yZc-5r-c26" secondAttribute="bottom" constant="3" id="Qps-hz-zge"/>
                                     <constraint firstItem="AdG-m8-Wqh" firstAttribute="leading" secondItem="yZc-5r-c26" secondAttribute="trailing" constant="8" symbolic="YES" id="U39-ng-vD6"/>
-                                    <constraint firstAttribute="bottom" secondItem="ZCM-lf-9aL" secondAttribute="bottom" constant="9" id="ZCc-KP-bLz"/>
+                                    <constraint firstItem="ZCM-lf-9aL" firstAttribute="centerX" secondItem="NVT-WD-Hmj" secondAttribute="centerX" id="XL1-lo-m7C"/>
                                     <constraint firstItem="NVT-WD-Hmj" firstAttribute="leading" secondItem="iGy-NE-xE0" secondAttribute="leading" constant="13" id="iuj-t8-VvL"/>
                                     <constraint firstItem="yZc-5r-c26" firstAttribute="centerX" secondItem="iGy-NE-xE0" secondAttribute="centerX" id="jDH-BZ-n6n"/>
+                                    <constraint firstItem="ZCM-lf-9aL" firstAttribute="baseline" secondItem="AdG-m8-Wqh" secondAttribute="baseline" id="lmU-4z-DJp"/>
                                     <constraint firstItem="NVT-WD-Hmj" firstAttribute="centerY" secondItem="yZc-5r-c26" secondAttribute="centerY" id="q2F-e3-bdE"/>
                                     <constraint firstAttribute="width" constant="600" id="qrz-Z6-UZy"/>
                                     <constraint firstAttribute="height" constant="54" id="rIx-yB-zD2"/>
                                     <constraint firstItem="yZc-5r-c26" firstAttribute="leading" secondItem="NVT-WD-Hmj" secondAttribute="trailing" constant="21" id="v5P-JJ-phF"/>
-                                    <constraint firstItem="NVT-WD-Hmj" firstAttribute="centerX" secondItem="ZCM-lf-9aL" secondAttribute="centerX" id="y3N-zh-KTd"/>
                                 </constraints>
                             </view>
                         </subviews>
