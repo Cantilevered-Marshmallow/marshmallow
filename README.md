@@ -31,10 +31,11 @@
 # Requirements
 
 - `Node 0.10.x`
+- `NPM`
 - `Xcode 7`
 - `Cocoapods`
 - `Docker`
-- `mysql`
+- `MySQL`
 - `Go`
 
 # Usage
